@@ -40,24 +40,14 @@ public class FirstPersonLook : MonoBehaviour
             transform.localRotation = Quaternion.AngleAxis(-velocity.y, Vector3.right);
             character.localRotation = Quaternion.AngleAxis(velocity.x, Vector3.up);
         }
-
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            if (free)
-            {
-                FreeViewOff();
-            }
-            else
-            {
-                FreeViewOn();
-            }
-        }
     }
 
     public void FreeViewOff()
     {
         free = false;
         Cursor.lockState = CursorLockMode.Locked;
+        transform.localRotation = Quaternion.AngleAxis(0, Vector3.zero);
+        character.localRotation = Quaternion.AngleAxis(0, Vector3.zero);
     }
 
     public void FreeViewOn()

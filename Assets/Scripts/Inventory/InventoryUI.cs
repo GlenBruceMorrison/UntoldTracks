@@ -12,11 +12,19 @@ public class InventoryUI : MonoBehaviour
     public GameObject containerWindow;
     public List<ContainerUI> containers = new List<ContainerUI>();
 
+    public UnityAction onInventoryClosed;
+
     public Button onClose;
 
     private void Start()
     {
-        onClose.onClick.AddListener(() => this.gameObject.SetActive(false));
+        onClose.onClick.AddListener(HandleInventoryClosed);
+    }
+
+    public void HandleInventoryClosed()
+    {
+        this.gameObject.SetActive(false);
+        onInventoryClosed?.Invoke();
     }
 
     public void LinkInventory(Inventory targetInventory)

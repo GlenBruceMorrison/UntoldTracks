@@ -13,7 +13,7 @@ public class PlayerInventoryController : MonoBehaviour
 
     public InventoryUI inventoryUIPrefab;
 
-    private void Start()
+    private void Awake()
     {
         var canvas = GameObject.Find("Main");
         var invent = Instantiate(inventoryUIPrefab, canvas.transform.position, Quaternion.identity);
@@ -24,6 +24,11 @@ public class PlayerInventoryController : MonoBehaviour
         inventoryUI.LinkInventory(inventory);
 
         inventoryUI.gameObject.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        inventoryUI.onInventoryClosed += HideInventory;
     }
 
     public void HandleItemPickupFromWorld(ItemContainerWorldObject containerWorldObject)
@@ -45,15 +50,16 @@ public class PlayerInventoryController : MonoBehaviour
     public void ShowIntenvtory()
     {
         playerManager.controlController.LoseControl();
-        playerManager.controlController.FreeViewOff();
+        playerManager.controlController.FreeViewOn();
         inventoryUI.gameObject.SetActive(true);
     }
 
     public void HideInventory()
     {
         playerManager.controlController.GainControl();
-        playerManager.controlController.FreeViewOn();
+        playerManager.controlController.FreeViewOff();
         inventoryUI.gameObject.SetActive(false);
+        Debug.Log("closed");
     }
 
     private void Update()
