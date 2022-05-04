@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GenericInventoryControler : MonoBehaviour
+public class GenericInventoryController : MonoBehaviour
 {
     public Inventory inventory;
     [HideInInspector]
@@ -38,10 +38,7 @@ public class GenericInventoryControler : MonoBehaviour
 
         ShowInventory();
         accessedBy = playerInventory;
-        accessedBy.inventoryUI.onInventoryClosed += () =>
-        {
-            HideInventory();
-        };
+        accessedBy.inventoryUI.onInventoryClosed += HideInventory;
     }
 
     public void ShowInventory()
@@ -52,6 +49,12 @@ public class GenericInventoryControler : MonoBehaviour
     public void HideInventory()
     {
         inventoryUI.gameObject.SetActive(false);
+
+        if (accessedBy != null)
+        {
+            accessedBy.inventoryUI.onInventoryClosed -= HideInventory;
+        }
+
         accessedBy = null;
     }
 }

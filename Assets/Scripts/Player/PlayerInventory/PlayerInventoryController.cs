@@ -13,6 +13,8 @@ public class PlayerInventoryController : MonoBehaviour
 
     public InventoryUI inventoryUIPrefab;
 
+    public GenericInventoryController accessing;
+
     private void Awake()
     {
         var canvas = GameObject.Find("Main");
@@ -47,7 +49,14 @@ public class PlayerInventoryController : MonoBehaviour
         GameObject.Destroy(containerWorldObject.gameObject);
     }
 
-    public void ShowIntenvtory()
+    internal void AccessInventory(GenericInventoryController inventoryController)
+    {
+        accessing = inventoryController;
+        accessing.Access(playerManager.inventoryController);
+        playerManager.inventoryController.ShowInventory();
+    }
+
+    public void ShowInventory()
     {
         playerManager.FirstPersonController.Movement.LoseControl();
         playerManager.FirstPersonController.Look.UnlockPointer();
@@ -70,10 +79,15 @@ public class PlayerInventoryController : MonoBehaviour
             if (inventoryUI.gameObject.activeSelf)
             {
                 HideInventory();
+                if (accessing != null)
+                {
+                    accessing.HideInventory();
+                    accessing = null;
+                }
             }
             else
             {
-                ShowIntenvtory();
+                ShowInventory();
             }
         }
     }

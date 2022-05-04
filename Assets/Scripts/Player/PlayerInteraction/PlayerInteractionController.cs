@@ -26,10 +26,9 @@ public class PlayerInteractionController : MonoBehaviour
                 {
                     playerManager.inventoryController.HandleItemPickupFromWorld(itemContainerWorldObject);
                 }
-                else if (hit.collider.TryGetComponent(out GenericInventoryControler genericInventoryController))
+                else if (hit.collider.TryGetComponent(out GenericInventoryController genericInventoryController))
                 {
-                    genericInventoryController.Access(playerManager.inventoryController);
-                    playerManager.inventoryController.ShowIntenvtory();
+                    playerManager.inventoryController.AccessInventory(genericInventoryController);
                 }
             }
         }
