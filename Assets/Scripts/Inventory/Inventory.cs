@@ -9,6 +9,8 @@ public class Inventory
 {
     public List<ItemContainer> containers = new List<ItemContainer>();
 
+    public string name = "Inventory";
+
     [HideInInspector]
     public UnityEvent onModified;
 

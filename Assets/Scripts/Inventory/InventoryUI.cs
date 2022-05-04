@@ -15,6 +15,7 @@ public class InventoryUI : MonoBehaviour
     public UnityAction onInventoryClosed;
 
     public Button onClose;
+    public TMP_Text inventoryName;
 
     private void Start()
     {
@@ -23,7 +24,7 @@ public class InventoryUI : MonoBehaviour
 
     public void HandleInventoryClosed()
     {
-        this.gameObject.SetActive(false);
+        gameObject.SetActive(false);
         onInventoryClosed?.Invoke();
     }
 
@@ -33,6 +34,8 @@ public class InventoryUI : MonoBehaviour
         {
             throw new System.Exception("Trying to link to another inventory when already linked");
         }
+
+        inventoryName.text = targetInventory.name;
 
         _inventory = targetInventory;
         _inventory.onModified.AddListener(Render);

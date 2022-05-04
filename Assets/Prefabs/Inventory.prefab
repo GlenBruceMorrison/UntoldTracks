@@ -589,3 +589,4 @@ MonoBehaviour:
   containerWindow: {fileID: 1693859592036438303}
   containers: []
   onClose: {fileID: 1693859592862649928}
+  inventoryName: {fileID: 1693859592856063617}
