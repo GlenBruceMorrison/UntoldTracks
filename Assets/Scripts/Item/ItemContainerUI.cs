@@ -72,7 +72,7 @@ public class ItemContainerUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             return;
         }
 
-        contents.transform.parent = this.transform.parent.parent.parent.parent;
+        contents.transform.parent = GameObject.Find("Canvas").transform;
         contents.transform.SetAsLastSibling();
         preDragPosition = contents.transform.position;
         onDragBegin?.Invoke(this);

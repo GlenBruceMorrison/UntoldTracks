@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerInventoryController : MonoBehaviour, IInventoryController
 {
+    public static readonly int INVENTORY_BAR_SIZE = 8;
+
     [HideInInspector]
     public PlayerManager playerManager;
 
@@ -56,7 +58,7 @@ public class PlayerInventoryController : MonoBehaviour, IInventoryController
         var canvas = GameObject.Find("Main");
         var invent = Instantiate(inventoryUIPrefab, canvas.transform.position, Quaternion.identity);
 
-        invent.inventoryStartFromIndex = 10;
+        invent.inventoryStartFromIndex = INVENTORY_BAR_SIZE;
 
         invent.transform.parent = canvas.transform;
 
