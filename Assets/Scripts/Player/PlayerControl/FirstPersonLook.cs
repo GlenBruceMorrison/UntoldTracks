@@ -46,6 +46,7 @@ public class FirstPersonLook : MonoBehaviour
     {
         free = false;
         Cursor.lockState = CursorLockMode.Locked;
+        velocity = Vector3.zero;
         transform.localRotation = Quaternion.AngleAxis(0, Vector3.zero);
         character.localRotation = Quaternion.AngleAxis(0, Vector3.zero);
     }

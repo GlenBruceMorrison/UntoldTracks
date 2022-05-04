@@ -14,6 +14,7 @@ public class PlayerControlController : MonoBehaviour, IPlayerControlController
 
     public bool IsFreeViewOn()
     {
+        move.rigidbody.angularVelocity = Vector3.zero;
         return look.free;
     }
 
