@@ -52,7 +52,7 @@ public class PlayerInventoryController : MonoBehaviour
     internal void AccessInventory(GenericInventoryController inventoryController)
     {
         accessing = inventoryController;
-        accessing.Access(playerManager.inventoryController);
+        //accessing.Access(playerManager);
         playerManager.inventoryController.ShowInventory();
     }
 

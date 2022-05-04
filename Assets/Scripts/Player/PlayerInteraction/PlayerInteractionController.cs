@@ -22,15 +22,16 @@ public class PlayerInteractionController : MonoBehaviour
 
             if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, interactionDistance))
             {
-                if (hit.collider.TryGetComponent(out ItemContainerWorldObject itemContainerWorldObject))
+                if (hit.collider.gameObject.TryGetComponent(out IInteractable interactable))
                 {
-                    playerManager.inventoryController.HandleItemPickupFromWorld(itemContainerWorldObject);
-                }
-                else if (hit.collider.TryGetComponent(out GenericInventoryController genericInventoryController))
-                {
-                    playerManager.inventoryController.AccessInventory(genericInventoryController);
+                    Interact(interactable);
                 }
             }
         }
+    }
+
+    private void Interact(IInteractable interactable)
+    {
+        interactable.HandleInteraction(playerManager);
     }
 }

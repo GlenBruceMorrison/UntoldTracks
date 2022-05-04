@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemContainerWorldObject : MonoBehaviour
+public class ItemContainerWorldObject : MonoBehaviour, IInteractable
 {
     [SerializeField]
     private ItemContainer _container = new ItemContainer();
@@ -19,7 +19,6 @@ public class ItemContainerWorldObject : MonoBehaviour
         }
     }
 
-
     public void SetItemContainer(ItemContainer newContainer)
     {
         Container = newContainer;
@@ -28,5 +27,10 @@ public class ItemContainerWorldObject : MonoBehaviour
     public ItemContainer GetContainerValue()
     {
         return _container;
+    }
+
+    public void HandleInteraction(PlayerManager player)
+    {
+        player.inventoryController.HandleItemPickupFromWorld(this);
     }
 }

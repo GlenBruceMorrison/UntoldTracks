@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GenericInventoryController : MonoBehaviour
+public class GenericInventoryController : MonoBehaviour, IInteractable
 {
     public Inventory inventory;
     [HideInInspector]
@@ -28,16 +28,16 @@ public class GenericInventoryController : MonoBehaviour
         HideInventory();
     }
 
-    public void Access(PlayerInventoryController playerInventory)
+    public void Access(PlayerManager player)
     {
         if (accessedBy != null)
         {
             // being accessed by something else...
             return;
         }
-
+        player.inventoryController.AccessInventory(this);
         ShowInventory();
-        accessedBy = playerInventory;
+        accessedBy = player.inventoryController;
         accessedBy.inventoryUI.onInventoryClosed += HideInventory;
     }
 
@@ -56,5 +56,10 @@ public class GenericInventoryController : MonoBehaviour
         }
 
         accessedBy = null;
+    }
+
+    public void HandleInteraction(PlayerManager player)
+    {
+        Access(player);
     }
 }
