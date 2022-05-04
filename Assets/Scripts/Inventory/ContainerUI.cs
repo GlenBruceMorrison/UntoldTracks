@@ -14,20 +14,20 @@ public class ContainerUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IPoin
 
     public GameObject contents;
 
-    public Inventory Inventory { get; private set; }
+    public IInventoryController InventoryController { get; private set; }
     public int SlotIndex { get; private set; }
 
     public UnityAction<ContainerUI> onDragBegin, onDrag, onDrop;
 
-    public ItemContainer Slot => Inventory.containers[SlotIndex];
+    public ItemContainer Slot => InventoryController.Inventory.containers[SlotIndex];
 
     public bool beingDragged;
     public Vector2 preDragPosition;
 
 
-    public void LinkToInventory(Inventory targetInventory, int targetSlotIndex)
+    public void LinkToInventory(IInventoryController targetInventory, int targetSlotIndex)
     {
-        Inventory = targetInventory;
+        InventoryController = targetInventory;
         SlotIndex = targetSlotIndex;
         Render();
     }
@@ -49,7 +49,7 @@ public class ContainerUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IPoin
             return;
         }
 
-        countText.text = Slot.count.ToString();
+        countText.text = !Slot.item.stackable ? "" : Slot.count.ToString();
         displayImage.sprite = Slot.item.sprite;
         displayImage.enabled = true;
     }
@@ -79,33 +79,43 @@ public class ContainerUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IPoin
         contents.transform.position = new Vector3(eventData.position.x, eventData.position.y, 100);
     }
 
+    public void SwapWithAnotherContainer(ContainerUI targetContainer)
+    {
+        var origionalItem = targetContainer.Slot.item;
+        var origionalCount = targetContainer.Slot.count;
+
+        targetContainer.SetItem(Slot.item, Slot.count);
+        SetItem(origionalItem, origionalCount);
+    }
+
     public void HandleDropOnContainer(ContainerUI container)
     {
         // swap with another item
         if (container.Slot.item != null && container.Slot.item != Slot.item)
         {
-            var origionalItem = container.Slot.item;
-            var origionalCount = container.Slot.count;
-
-            container.SetItem(Slot.item, Slot.count);
-            SetItem(origionalItem, origionalCount);
+            SwapWithAnotherContainer(container);
         }
 
         // fill another container that has this same item
         else if (container.Slot.item == Slot.item || container.Slot.item == null)
         {
-            var remaining = container.Slot.AddAndReturnDifference(Slot.item, Slot.count);
-            container.Render();
+            TransferToAnotherContainer(container);
+        }
+    }
 
-            if (remaining == 0)
-            {
-                Empty();
-            }
-            else if (remaining > 0)
-            {
-                Slot.count = remaining;
-                Render();
-            }
+    public void TransferToAnotherContainer(ContainerUI targetContainer)
+    {
+        var remaining = targetContainer.Slot.AddAndReturnDifference(Slot.item, Slot.count);
+        targetContainer.Render();
+
+        if (remaining == 0)
+        {
+            Empty();
+        }
+        else if (remaining > 0)
+        {
+            Slot.count = remaining;
+            Render();
         }
     }
 
@@ -146,7 +156,34 @@ public class ContainerUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IPoin
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            if (InventoryController.AccessedBy != null)
+            {
+                TransferTo(InventoryController.AccessedBy);
+                return;
+            }
 
+            if (InventoryController.Accessing != null)
+            {
+                TransferTo(InventoryController.Accessing);
+                return;
+            }
+        }
+    }
+
+    public void TransferTo(IInventoryController inventoryController)
+    {
+        var remaining = inventoryController.Inventory.AddAndReturnRemaining(Slot.item, Slot.count);
+
+        if (remaining == 0)
+        {
+            Empty();
+            return;
+        }
+
+        Slot.count = remaining;
+        Render();
     }
 
     public void Empty()

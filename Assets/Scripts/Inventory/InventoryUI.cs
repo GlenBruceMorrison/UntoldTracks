@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 public class InventoryUI : MonoBehaviour
 {
-    private Inventory _inventory;
+    private IInventoryController InventoryController { get; set; }
     public ContainerUI containerPrefab;
     public GameObject containerWindow;
     public List<ContainerUI> containers = new List<ContainerUI>();
@@ -28,23 +28,23 @@ public class InventoryUI : MonoBehaviour
         onInventoryClosed?.Invoke();
     }
 
-    public void LinkInventory(Inventory targetInventory)
+    public void LinkInventory(IInventoryController targetInventory)
     {
-        if (_inventory != null)
+        if (InventoryController != null)
         {
             throw new System.Exception("Trying to link to another inventory when already linked");
         }
 
-        inventoryName.text = targetInventory.name;
+        inventoryName.text = targetInventory.Inventory.name;
 
-        _inventory = targetInventory;
-        _inventory.onModified.AddListener(Render);
+        InventoryController = targetInventory;
+        InventoryController.Inventory.onModified.AddListener(Render);
         Render();
     }
 
     public void Render()
     {
-        if (_inventory == null)
+        if (InventoryController == null)
         {
             throw new System.Exception("Trying to render an inventory that has not been linked yet");
         }
@@ -56,11 +56,11 @@ public class InventoryUI : MonoBehaviour
 
         containers = new List<ContainerUI>();
 
-        for (int i=0; i< _inventory.containers.Count; i++)
+        for (int i=0; i< InventoryController.Inventory.containers.Count; i++)
         {
             var newContainer = Instantiate(containerPrefab, transform.position, Quaternion.identity);
 
-            newContainer.LinkToInventory(_inventory, i);
+            newContainer.LinkToInventory(InventoryController, i);
             newContainer.transform.parent = containerWindow.transform;
             containers.Add(newContainer);
         }

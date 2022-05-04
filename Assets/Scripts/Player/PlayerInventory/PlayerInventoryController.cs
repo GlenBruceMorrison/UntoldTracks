@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInventoryController : MonoBehaviour
+public class PlayerInventoryController : MonoBehaviour, IInventoryController
 {
     public PlayerManager playerManager;
 
@@ -13,7 +13,12 @@ public class PlayerInventoryController : MonoBehaviour
 
     public InventoryUI inventoryUIPrefab;
 
-    public GenericInventoryController accessing;
+    public IInventoryController accessing;
+
+    public Inventory Inventory { get => inventory; }
+    public InventoryUI UI { get => inventoryUI; }
+    public PlayerInventoryController AccessedBy { get => null; }
+    public IInventoryController Accessing { get => accessing; }
 
     private void Awake()
     {
@@ -23,14 +28,19 @@ public class PlayerInventoryController : MonoBehaviour
         invent.transform.parent = canvas.transform;
 
         inventoryUI = invent.GetComponent<InventoryUI>();
-        inventoryUI.LinkInventory(inventory);
+        inventoryUI.LinkInventory(this);
 
         inventoryUI.gameObject.SetActive(false);
     }
 
     private void OnEnable()
     {
-        inventoryUI.onInventoryClosed += HideInventory;
+        inventoryUI.onInventoryClosed += Hide;
+    }
+
+    private void OnDisable()
+    {
+        inventoryUI.onInventoryClosed -= Hide;
     }
 
     public void HandleItemPickupFromWorld(ItemContainerWorldObject containerWorldObject)
@@ -49,27 +59,11 @@ public class PlayerInventoryController : MonoBehaviour
         GameObject.Destroy(containerWorldObject.gameObject);
     }
 
-    internal void AccessInventory(GenericInventoryController inventoryController)
+    internal void AccessInventory(IInventoryController inventoryController)
     {
         accessing = inventoryController;
         //accessing.Access(playerManager);
-        playerManager.inventoryController.ShowInventory();
-    }
-
-    public void ShowInventory()
-    {
-        playerManager.FirstPersonController.Movement.LoseControl();
-        playerManager.FirstPersonController.Look.UnlockPointer();
-        inventoryUI.gameObject.SetActive(true);
-    }
-
-    public void HideInventory()
-    {
-        playerManager.FirstPersonController.Movement.GainControl();
-        playerManager.FirstPersonController.Look.LockPointer();
-        inventoryUI.gameObject.SetActive(false);
-
-        
+        playerManager.inventoryController.Show();
     }
 
     private void Update()
@@ -78,17 +72,31 @@ public class PlayerInventoryController : MonoBehaviour
         {
             if (inventoryUI.gameObject.activeSelf)
             {
-                HideInventory();
+                Hide();
                 if (accessing != null)
                 {
-                    accessing.HideInventory();
+                    accessing.Hide();
                     accessing = null;
                 }
             }
             else
             {
-                ShowInventory();
+                Show();
             }
         }
+    }
+
+    public void Hide()
+    {
+        playerManager.FirstPersonController.Movement.GainControl();
+        playerManager.FirstPersonController.Look.LockPointer();
+        inventoryUI.gameObject.SetActive(false);
+    }
+
+    public void Show()
+    {
+        playerManager.FirstPersonController.Movement.LoseControl();
+        playerManager.FirstPersonController.Look.UnlockPointer();
+        inventoryUI.gameObject.SetActive(true);
     }
 }
