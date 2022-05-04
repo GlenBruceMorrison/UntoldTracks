@@ -11,6 +11,11 @@ public class PlayerInteractionController : MonoBehaviour
 
     private void Update()
     {
+        if (playerManager.controlController.IsFreeViewOn())
+        {
+            return;
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             Debug.DrawRay(transform.position, transform.forward * interactionDistance, Color.red);
@@ -20,6 +25,11 @@ public class PlayerInteractionController : MonoBehaviour
                 if (hit.collider.TryGetComponent(out ItemContainerWorldObject itemContainerWorldObject))
                 {
                     playerManager.inventoryController.HandleItemPickupFromWorld(itemContainerWorldObject);
+                }
+                else if (hit.collider.TryGetComponent(out GenericInventoryControler genericInventoryController))
+                {
+                    genericInventoryController.ShowInventory();
+                    playerManager.inventoryController.ShowIntenvtory();
                 }
             }
         }

@@ -12,6 +12,11 @@ public class PlayerControlController : MonoBehaviour, IPlayerControlController
         look.FreeViewOff();
     }
 
+    public bool IsFreeViewOn()
+    {
+        return look.free;
+    }
+
     public void FreeViewOn()
     {
         look.FreeViewOn();

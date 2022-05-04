@@ -59,7 +59,8 @@ public class PlayerInventoryController : MonoBehaviour
         playerManager.controlController.GainControl();
         playerManager.controlController.FreeViewOff();
         inventoryUI.gameObject.SetActive(false);
-        Debug.Log("closed");
+
+        
     }
 
     private void Update()

@@ -22,6 +22,8 @@ public class GenericInventoryControler : MonoBehaviour
 
         inventoryUI = invent.GetComponent<InventoryUI>();
         inventoryUI.LinkInventory(inventory);
+
+        HideInventory();
     }
 
     public void ShowInventory()
@@ -32,18 +34,5 @@ public class GenericInventoryControler : MonoBehaviour
     public void HideInventory()
     {
         inventoryUI.gameObject.SetActive(false);
-
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown("w"))
-        {
-            HideInventory();
-        }
-        if (Input.GetKeyDown("r"))
-        {
-            ShowInventory();
-        }
     }
 }
