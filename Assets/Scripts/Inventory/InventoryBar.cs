@@ -15,15 +15,17 @@ public class InventoryBar : MonoBehaviour
 
     public List<ItemContainerUI> BarContainers = new List<ItemContainerUI>();
 
-    public int activeIndex;
+    [SerializeField]
+    private int _activeIndex;
 
-    public Image selector;
+    [SerializeField]
+    private Image _selector;
 
     public ItemContainer ActiveItem
     {
         get
         {
-            return BarContainers[activeIndex].Slot;
+            return BarContainers[_activeIndex].Slot;
         }
     }
 
@@ -52,12 +54,12 @@ public class InventoryBar : MonoBehaviour
         }
     }
 
-    public void RenderSelector()
+    private void RenderSelector()
     {
-        var targetContainer = BarContainers[activeIndex];
+        var targetContainer = BarContainers[_activeIndex];
 
-        selector.transform.parent = targetContainer.transform;
-        selector.rectTransform.localPosition = new Vector3(0, 0, 0);
+        _selector.transform.parent = targetContainer.transform;
+        _selector.rectTransform.localPosition = new Vector3(0, 0, 0);
     }
 
     public void SetActiveIndex(int index)
@@ -65,15 +67,15 @@ public class InventoryBar : MonoBehaviour
         Debug.Log(index);
         if (index > (BarContainers.Count - 1))
         {
-            activeIndex = 0;
+            _activeIndex = 0;
         }
         else if(index < 0)
         {
-            activeIndex = BarContainers.Count - 1;
+            _activeIndex = BarContainers.Count - 1;
         }
         else
         {
-            activeIndex = index;
+            _activeIndex = index;
         }
 
         RenderSelector();
@@ -83,11 +85,11 @@ public class InventoryBar : MonoBehaviour
     {
         if(Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
-            SetActiveIndex(activeIndex+1);
+            SetActiveIndex(_activeIndex + 1);
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
         {
-            SetActiveIndex(activeIndex-1);
+            SetActiveIndex(_activeIndex - 1);
         }
     }
 }

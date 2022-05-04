@@ -12,13 +12,22 @@ public class PlayerInventoryController : MonoBehaviour, IInventoryController
     [SerializeField]
     private Inventory _inventory;
 
-    public InventoryUI _inventoryUI;
+    private InventoryUI _inventoryUI;
 
     private IInventoryController _accessing;
 
     public InventoryUI inventoryUIPrefab;
 
-    public InventoryBar inventoryBar;
+    [SerializeField]
+    private InventoryBar _inventoryBar;
+
+    public InventoryBar InventoryBar
+    {
+        get
+        {
+            return _inventoryBar;
+        }
+    }
 
     public Inventory Inventory
     {
@@ -64,8 +73,7 @@ public class PlayerInventoryController : MonoBehaviour, IInventoryController
 
         _inventoryUI = invent.GetComponent<InventoryUI>();
         _inventoryUI.LinkInventory(this);
-
-        inventoryBar.LinkInventory(this);
+        _inventoryBar.LinkInventory(this);
 
         _inventoryUI.gameObject.SetActive(false);
     }
@@ -78,28 +86,6 @@ public class PlayerInventoryController : MonoBehaviour, IInventoryController
     private void OnDisable()
     {
         _inventoryUI.onInventoryClosed -= Hide;
-    }
-
-    public void HandleItemPickupFromWorld(ItemContainerWorldObject containerWorldObject)
-    {
-        var remaining = _inventory.AddAndReturnRemaining(containerWorldObject.GetContainerValue().item, containerWorldObject.GetContainerValue().count);
-
-        if (remaining > 0)
-        {
-            GetComponent<Backplate>().HandleItemDropped(new ItemContainer()
-            {
-                item = containerWorldObject.Container.item,
-                count = remaining
-            });
-        }
-
-        Destroy(containerWorldObject.gameObject);
-    }
-
-    internal void AccessInventory(IInventoryController inventoryController)
-    {
-        _accessing = inventoryController;   
-        playerManager.inventoryController.Show();
     }
 
     private void Update()
@@ -120,6 +106,28 @@ public class PlayerInventoryController : MonoBehaviour, IInventoryController
                 Show();
             }
         }
+    }
+
+    public void AccessInventory(IInventoryController inventoryController)
+    {
+        _accessing = inventoryController;
+        playerManager.inventoryController.Show();
+    }
+
+    public void HandleItemPickupFromWorld(ItemContainerWorldObject containerWorldObject)
+    {
+        var remaining = _inventory.AddAndReturnRemaining(containerWorldObject.GetContainerValue().item, containerWorldObject.GetContainerValue().count);
+
+        if (remaining > 0)
+        {
+            GetComponent<Backplate>().HandleItemDropped(new ItemContainer()
+            {
+                item = containerWorldObject.Container.item,
+                count = remaining
+            });
+        }
+
+        Destroy(containerWorldObject.gameObject);
     }
 
     public void Hide()
