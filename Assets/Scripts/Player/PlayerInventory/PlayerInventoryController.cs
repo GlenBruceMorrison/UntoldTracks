@@ -22,6 +22,8 @@ public class PlayerInventoryController : MonoBehaviour
 
         inventoryUI = invent.GetComponent<InventoryUI>();
         inventoryUI.LinkInventory(inventory);
+
+        inventoryUI.gameObject.SetActive(false);
     }
 
     public void HandleItemPickupFromWorld(ItemContainerWorldObject containerWorldObject)

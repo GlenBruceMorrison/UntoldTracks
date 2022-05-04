@@ -5,7 +5,7 @@ public class FirstPersonMovement : MonoBehaviour
 {
     public float speed = 5;
 
-    public bool inControl;
+    public bool inControl = true;
 
     [Header("Running")]
     public bool canRun = true;
