@@ -17,6 +17,8 @@ public class InventoryBar : MonoBehaviour
 
     public int activeIndex;
 
+    public Image selector;
+
     public ItemContainer ActiveItem
     {
         get
@@ -47,6 +49,45 @@ public class InventoryBar : MonoBehaviour
         for (int i=0; i<BarContainers.Count; i++)
         {
             BarContainers[i].LinkToInventory(InventoryController, i);
+        }
+    }
+
+    public void RenderSelector()
+    {
+        var targetContainer = BarContainers[activeIndex];
+
+        selector.transform.parent = targetContainer.transform;
+        selector.rectTransform.localPosition = new Vector3(0, 0, 0);
+    }
+
+    public void SetActiveIndex(int index)
+    {
+        Debug.Log(index);
+        if (index > (BarContainers.Count - 1))
+        {
+            activeIndex = 0;
+        }
+        else if(index < 0)
+        {
+            activeIndex = BarContainers.Count - 1;
+        }
+        else
+        {
+            activeIndex = index;
+        }
+
+        RenderSelector();
+    }
+
+    public void Update()
+    {
+        if(Input.GetAxis("Mouse ScrollWheel") > 0f)
+        {
+            SetActiveIndex(activeIndex+1);
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+        {
+            SetActiveIndex(activeIndex-1);
         }
     }
 }
