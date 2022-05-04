@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ItemContainerWorldObject : MonoBehaviour
 {
+    [SerializeField]
     private ItemContainer _container = new ItemContainer();
     public ItemContainer Container 
     {
