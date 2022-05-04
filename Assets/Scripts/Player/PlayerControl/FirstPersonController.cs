@@ -3,6 +3,7 @@ using System.Collections;
 
 public class FirstPersonController : MonoBehaviour, IPlayerControlController
 {
+    [HideInInspector]
     public PlayerManager playerManager;
     public IFirstPersonLook Look { get; private set; }
     public IFirstPersonMovement Movement { get; set; }

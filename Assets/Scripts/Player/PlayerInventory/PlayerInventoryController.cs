@@ -4,48 +4,83 @@ using UnityEngine;
 
 public class PlayerInventoryController : MonoBehaviour, IInventoryController
 {
+    [HideInInspector]
     public PlayerManager playerManager;
 
-    public Inventory inventory;
+    [SerializeField]
+    private Inventory _inventory;
 
-    [HideInInspector]
-    public InventoryUI inventoryUI;
+    public InventoryUI _inventoryUI;
+
+    private IInventoryController _accessing;
 
     public InventoryUI inventoryUIPrefab;
 
-    public IInventoryController accessing;
+    public InventoryBar inventoryBar;
 
-    public Inventory Inventory { get => inventory; }
-    public InventoryUI UI { get => inventoryUI; }
-    public PlayerInventoryController AccessedBy { get => null; }
-    public IInventoryController Accessing { get => accessing; }
+    public Inventory Inventory
+    {
+        get
+        {
+            return _inventory;
+        }
+    }
+
+    public InventoryUI UI
+    {
+        get
+        {
+            return _inventoryUI;
+        }
+    }
+
+    public PlayerInventoryController AccessedBy
+    {
+        get
+        {
+            // player cannot be accessed by any other
+            return null;
+        }
+    }
+
+    public IInventoryController Accessing
+    {
+        get
+        {
+            return _accessing;
+        }
+    } 
 
     private void Awake()
     {
         var canvas = GameObject.Find("Main");
         var invent = Instantiate(inventoryUIPrefab, canvas.transform.position, Quaternion.identity);
 
+        invent.inventoryStartFromIndex = 10;
+
         invent.transform.parent = canvas.transform;
 
-        inventoryUI = invent.GetComponent<InventoryUI>();
-        inventoryUI.LinkInventory(this);
+        _inventoryUI = invent.GetComponent<InventoryUI>();
+        _inventoryUI.LinkInventory(this);
 
-        inventoryUI.gameObject.SetActive(false);
+        inventoryBar.LinkInventory(this);
+
+        _inventoryUI.gameObject.SetActive(false);
     }
 
     private void OnEnable()
     {
-        inventoryUI.onInventoryClosed += Hide;
+        _inventoryUI.onInventoryClosed += Hide;
     }
 
     private void OnDisable()
     {
-        inventoryUI.onInventoryClosed -= Hide;
+        _inventoryUI.onInventoryClosed -= Hide;
     }
 
     public void HandleItemPickupFromWorld(ItemContainerWorldObject containerWorldObject)
     {
-        var remaining = inventory.AddAndReturnRemaining(containerWorldObject.GetContainerValue().item, containerWorldObject.GetContainerValue().count);
+        var remaining = _inventory.AddAndReturnRemaining(containerWorldObject.GetContainerValue().item, containerWorldObject.GetContainerValue().count);
 
         if (remaining > 0)
         {
@@ -56,13 +91,12 @@ public class PlayerInventoryController : MonoBehaviour, IInventoryController
             });
         }
 
-        GameObject.Destroy(containerWorldObject.gameObject);
+        Destroy(containerWorldObject.gameObject);
     }
 
     internal void AccessInventory(IInventoryController inventoryController)
     {
-        accessing = inventoryController;
-        //accessing.Access(playerManager);
+        _accessing = inventoryController;   
         playerManager.inventoryController.Show();
     }
 
@@ -70,13 +104,13 @@ public class PlayerInventoryController : MonoBehaviour, IInventoryController
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if (inventoryUI.gameObject.activeSelf)
+            if (_inventoryUI.gameObject.activeSelf)
             {
                 Hide();
-                if (accessing != null)
+                if (_accessing != null)
                 {
-                    accessing.Hide();
-                    accessing = null;
+                    _accessing.Hide();
+                    _accessing = null;
                 }
             }
             else
@@ -90,13 +124,13 @@ public class PlayerInventoryController : MonoBehaviour, IInventoryController
     {
         playerManager.FirstPersonController.Movement.GainControl();
         playerManager.FirstPersonController.Look.LockPointer();
-        inventoryUI.gameObject.SetActive(false);
+        _inventoryUI.gameObject.SetActive(false);
     }
 
     public void Show()
     {
         playerManager.FirstPersonController.Movement.LoseControl();
         playerManager.FirstPersonController.Look.UnlockPointer();
-        inventoryUI.gameObject.SetActive(true);
+        _inventoryUI.gameObject.SetActive(true);
     }
 }

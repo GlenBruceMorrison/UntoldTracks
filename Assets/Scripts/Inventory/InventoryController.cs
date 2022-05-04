@@ -3,30 +3,52 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GenericInventoryController : MonoBehaviour, IInteractable, IInventoryController
+public class InventoryController : MonoBehaviour, IInteractable, IInventoryController
 {
     public InventoryUI inventoryUIPrefab;
 
     [SerializeField]
     private Inventory _inventory;
 
-    [HideInInspector]
     private InventoryUI _inventoryUI;
 
-    // can only ever be accessing some inventory once at a time
     private PlayerInventoryController _accessedBy;
 
-    public UnityEvent<ItemContainer> onItemDropped;
+    // Data object
+    public Inventory Inventory
+    {
+        get
+        {
+            return _inventory;
+        }
+    }
 
-    public Inventory Inventory => _inventory;
+    // The user interface representation of this inventory
+    public InventoryUI UI
+    {
+        get
+        {
+            return _inventoryUI;
+        }
+    }
 
-    public InventoryUI UI => _inventoryUI;
+    // What other inventory is accessing this one. if it is open, null if not
+    public PlayerInventoryController AccessedBy
+    {
+        get
+        {
+            return _accessedBy;
+        }
+    }
 
-    public PlayerInventoryController AccessedBy => _accessedBy;
-
-    public IInventoryController Accessing => throw new System.Exception("This cannot access any other iventory as it is not controlled by the player");
-
-
+    // What inventory this is accessing
+    public IInventoryController Accessing
+    {
+        get
+        {
+            throw new System.Exception("This cannot access any other iventory as it is not controlled by the player");
+        }
+    }
 
     private void Awake()
     {
@@ -51,7 +73,7 @@ public class GenericInventoryController : MonoBehaviour, IInteractable, IInvento
         player.inventoryController.AccessInventory(this);
         Show();
         _accessedBy = player.inventoryController;
-        AccessedBy.inventoryUI.onInventoryClosed += Hide;
+        AccessedBy.UI.onInventoryClosed += Hide;
     }
 
     public void HandleInteraction(PlayerManager player)
@@ -65,7 +87,7 @@ public class GenericInventoryController : MonoBehaviour, IInteractable, IInvento
 
         if (AccessedBy != null)
         {
-            AccessedBy.inventoryUI.onInventoryClosed -= Hide;
+            AccessedBy.UI.onInventoryClosed -= Hide;
         }
 
         _accessedBy = null;

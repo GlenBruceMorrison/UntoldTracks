@@ -63,7 +63,8 @@ public class Inventory
     {
         var remaining = toRemove;
 
-        containers.Where(x => x.item == item).Reverse().ToList().ForEach(x => {
+        containers.Where(x => x.item == item).Reverse().ToList().ForEach(x =>
+        {
             if (remaining > 0)
             {
                 remaining = x.RemoveAndReturnRemaining(remaining);

@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using System.Linq;
 
-public class ContainerUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IPointerUpHandler, IPointerDownHandler
+public class ItemContainerUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
     public TMP_Text countText;
     public Image displayImage;
@@ -17,7 +17,7 @@ public class ContainerUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IPoin
     public IInventoryController InventoryController { get; private set; }
     public int SlotIndex { get; private set; }
 
-    public UnityAction<ContainerUI> onDragBegin, onDrag, onDrop;
+    public UnityAction<ItemContainerUI> onDragBegin, onDrag, onDrop;
 
     public ItemContainer Slot => InventoryController.Inventory.containers[SlotIndex];
 
@@ -35,6 +35,17 @@ public class ContainerUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IPoin
     public void SetItem(Item item, int count)
     {
         Slot.item = item;
+        Slot.count = count;
+        Render();
+    }
+
+    public void SetCount(int count)
+    {
+        if (Slot.item == null)
+        {
+            throw new System.Exception("Can't add more to this container because it has no item");
+        }
+
         Slot.count = count;
         Render();
     }
@@ -79,7 +90,7 @@ public class ContainerUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IPoin
         contents.transform.position = new Vector3(eventData.position.x, eventData.position.y, 100);
     }
 
-    public void SwapWithAnotherContainer(ContainerUI targetContainer)
+    public void SwapWithAnotherContainer(ItemContainerUI targetContainer)
     {
         var origionalItem = targetContainer.Slot.item;
         var origionalCount = targetContainer.Slot.count;
@@ -88,7 +99,7 @@ public class ContainerUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IPoin
         SetItem(origionalItem, origionalCount);
     }
 
-    public void HandleDropOnContainer(ContainerUI container)
+    public void HandleDropOnContainer(ItemContainerUI container)
     {
         // swap with another item
         if (container.Slot.item != null && container.Slot.item != Slot.item)
@@ -103,7 +114,7 @@ public class ContainerUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IPoin
         }
     }
 
-    public void TransferToAnotherContainer(ContainerUI targetContainer)
+    public void TransferToAnotherContainer(ItemContainerUI targetContainer)
     {
         var remaining = targetContainer.Slot.AddAndReturnDifference(Slot.item, Slot.count);
         targetContainer.Render();
@@ -114,8 +125,7 @@ public class ContainerUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IPoin
         }
         else if (remaining > 0)
         {
-            Slot.count = remaining;
-            Render();
+            SetCount(remaining);
         }
     }
 
@@ -131,7 +141,7 @@ public class ContainerUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IPoin
 
         foreach(var target in raycastResults)
         {
-            if (target.gameObject.TryGetComponent<ContainerUI>(out ContainerUI container))
+            if (target.gameObject.TryGetComponent<ItemContainerUI>(out ItemContainerUI container))
             {
                 if(container == this)
                 {
@@ -182,8 +192,7 @@ public class ContainerUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IPoin
             return;
         }
 
-        Slot.count = remaining;
-        Render();
+        SetCount(remaining);
     }
 
     public void Empty()
