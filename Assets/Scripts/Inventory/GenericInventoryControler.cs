@@ -10,6 +10,8 @@ public class GenericInventoryControler : MonoBehaviour
     public InventoryUI inventoryUI;
     public InventoryUI inventoryUIPrefab;
 
+    // can only ever be accessing some inventory once at a time
+    public PlayerInventoryController accessedBy;
 
     public UnityEvent<ItemContainer> onItemDropped;
 
@@ -26,6 +28,22 @@ public class GenericInventoryControler : MonoBehaviour
         HideInventory();
     }
 
+    public void Access(PlayerInventoryController playerInventory)
+    {
+        if (accessedBy != null)
+        {
+            // being accessed by something else...
+            return;
+        }
+
+        ShowInventory();
+        accessedBy = playerInventory;
+        accessedBy.inventoryUI.onInventoryClosed += () =>
+        {
+            HideInventory();
+        };
+    }
+
     public void ShowInventory()
     {
         inventoryUI.gameObject.SetActive(true);
@@ -34,5 +52,6 @@ public class GenericInventoryControler : MonoBehaviour
     public void HideInventory()
     {
         inventoryUI.gameObject.SetActive(false);
+        accessedBy = null;
     }
 }

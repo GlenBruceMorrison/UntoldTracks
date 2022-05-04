@@ -11,7 +11,7 @@ public class PlayerInteractionController : MonoBehaviour
 
     private void Update()
     {
-        if (playerManager.controlController.IsFreeViewOn())
+        if (playerManager.FirstPersonController.Look.IsPointerLocked())
         {
             return;
         }
@@ -28,7 +28,7 @@ public class PlayerInteractionController : MonoBehaviour
                 }
                 else if (hit.collider.TryGetComponent(out GenericInventoryControler genericInventoryController))
                 {
-                    genericInventoryController.ShowInventory();
+                    genericInventoryController.Access(playerManager.inventoryController);
                     playerManager.inventoryController.ShowIntenvtory();
                 }
             }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class FirstPersonLook : MonoBehaviour
+public class FirstPersonLook : MonoBehaviour, IFirstPersonLook
 {
     [SerializeField]
     Transform character;
@@ -10,7 +10,7 @@ public class FirstPersonLook : MonoBehaviour
     Vector2 velocity;
     Vector2 frameVelocity;
 
-    public bool free = false;
+    private bool _pointerLocked = false;
 
 
     void Reset()
@@ -21,13 +21,12 @@ public class FirstPersonLook : MonoBehaviour
 
     void Start()
     {
-        // Lock the mouse cursor to the game screen.
-        Cursor.lockState = CursorLockMode.Locked;
+        LockPointer();
     }
 
     void Update()
     {
-        if (!free)
+        if (!_pointerLocked)
         {
             // Get smooth velocity.
             Vector2 mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
@@ -42,18 +41,20 @@ public class FirstPersonLook : MonoBehaviour
         }
     }
 
-    public void FreeViewOff()
+    public bool IsPointerLocked()
     {
-        free = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        velocity = Vector3.zero;
-        transform.localRotation = Quaternion.AngleAxis(0, Vector3.zero);
-        character.localRotation = Quaternion.AngleAxis(0, Vector3.zero);
+        return _pointerLocked;
     }
 
-    public void FreeViewOn()
+    public void LockPointer()
     {
-        free = true;
+        _pointerLocked = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void UnlockPointer()
+    {
+        _pointerLocked = true;
         Cursor.lockState = CursorLockMode.None;
     }
 }

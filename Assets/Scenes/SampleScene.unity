@@ -1951,17 +1951,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1593727746557118, guid: 11aaea5348574644a9eb4f4504fcce3f, type: 3}
   m_PrefabInstance: {fileID: 1203318495}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &962896465 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114657890492222300, guid: 11aaea5348574644a9eb4f4504fcce3f, type: 3}
-  m_PrefabInstance: {fileID: 1203318495}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 962896462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec72980442fddac4d86e75ab24b4d027, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &962896469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2644,17 +2633,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1773623360729482, guid: 11aaea5348574644a9eb4f4504fcce3f, type: 3}
   m_PrefabInstance: {fileID: 1203318495}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1399783894 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114963311885979670, guid: 11aaea5348574644a9eb4f4504fcce3f, type: 3}
-  m_PrefabInstance: {fileID: 1203318495}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1399783891}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97fca36bd81de7c4cafce7bbf02ca611, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1399783898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2664,12 +2642,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1399783891}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 544d3aeb05d1d4a4385c61978b341a86, type: 3}
+  m_Script: {fileID: 11500000, guid: 8e30f3f3e17454143835b1eed3ebaab9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerManager: {fileID: 0}
-  look: {fileID: 962896465}
-  move: {fileID: 1399783894}
 --- !u!114 &1399783899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2719,7 +2695,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryController: {fileID: 0}
-  controlController: {fileID: 0}
+  FirstPersonController: {fileID: 0}
   interactionController: {fileID: 0}
 --- !u!1 &1404741625 stripped
 GameObject:

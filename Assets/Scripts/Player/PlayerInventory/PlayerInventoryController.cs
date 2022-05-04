@@ -49,15 +49,15 @@ public class PlayerInventoryController : MonoBehaviour
 
     public void ShowIntenvtory()
     {
-        playerManager.controlController.LoseControl();
-        playerManager.controlController.FreeViewOn();
+        playerManager.FirstPersonController.Movement.LoseControl();
+        playerManager.FirstPersonController.Look.UnlockPointer();
         inventoryUI.gameObject.SetActive(true);
     }
 
     public void HideInventory()
     {
-        playerManager.controlController.GainControl();
-        playerManager.controlController.FreeViewOff();
+        playerManager.FirstPersonController.Movement.GainControl();
+        playerManager.FirstPersonController.Look.LockPointer();
         inventoryUI.gameObject.SetActive(false);
 
         

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     public PlayerInventoryController inventoryController;
-    public PlayerControlController controlController;
+    public FirstPersonController FirstPersonController;
     public PlayerInteractionController interactionController;
 
 
@@ -18,12 +18,12 @@ public class PlayerManager : MonoBehaviour
         }
         inventoryController.playerManager = this;
 
-        controlController = GetComponentInChildren<PlayerControlController>();
-        if (controlController == null)
+        FirstPersonController = GetComponentInChildren<FirstPersonController>();
+        if (FirstPersonController == null)
         {
             throw new System.Exception("This player mananger must have an control controller attatched");
         }
-        controlController.playerManager = this;
+        FirstPersonController.playerManager = this;
 
         interactionController = GetComponentInChildren<PlayerInteractionController>();
         if (interactionController == null)
