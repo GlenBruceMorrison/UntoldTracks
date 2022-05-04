@@ -9,8 +9,15 @@ public class InventoryUI : MonoBehaviour
 {
     private Inventory _inventory;
     public ContainerUI containerPrefab;
-
+    public GameObject containerWindow;
     public List<ContainerUI> containers = new List<ContainerUI>();
+
+    public Button onClose;
+
+    private void Start()
+    {
+        onClose.onClick.AddListener(() => this.gameObject.SetActive(false));
+    }
 
     public void LinkInventory(Inventory targetInventory)
     {
@@ -31,7 +38,7 @@ public class InventoryUI : MonoBehaviour
             throw new System.Exception("Trying to render an inventory that has not been linked yet");
         }
 
-        foreach(Transform child in transform)
+        foreach(Transform child in containerWindow.transform)
         {
             Destroy(child.gameObject);
         }
@@ -43,7 +50,7 @@ public class InventoryUI : MonoBehaviour
             var newContainer = Instantiate(containerPrefab, transform.position, Quaternion.identity);
 
             newContainer.LinkToInventory(_inventory, i);
-            newContainer.transform.parent = this.transform;
+            newContainer.transform.parent = containerWindow.transform;
             containers.Add(newContainer);
         }
     }

@@ -15,7 +15,7 @@ public class GenericInventoryControler : MonoBehaviour
 
     private void Awake()
     {
-        var canvas = GameObject.Find("Canvas");
+        var canvas = GameObject.Find("Main");
         var invent = Instantiate(inventoryUIPrefab, canvas.transform.position, Quaternion.identity);
 
         invent.transform.parent = canvas.transform;

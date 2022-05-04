@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInterfaceManager : MonoBehaviour
+public class PlayerInteractionController : MonoBehaviour
 {
+    [HideInInspector]
     public PlayerManager playerManager;
-    public PlayerInventoryController inventory;
 
     public float interactionDistance = 300f;
 
@@ -19,7 +19,7 @@ public class PlayerInterfaceManager : MonoBehaviour
             {
                 if (hit.collider.TryGetComponent(out ItemContainerWorldObject itemContainerWorldObject))
                 {
-                    inventory.HandleItemPickupFromWorld(itemContainerWorldObject);
+                    playerManager.inventoryController.HandleItemPickupFromWorld(itemContainerWorldObject);
                 }
             }
         }

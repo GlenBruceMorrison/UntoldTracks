@@ -61,7 +61,7 @@ public class ContainerUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IPoin
             return;
         }
 
-        contents.transform.parent = this.transform.parent.parent;
+        contents.transform.parent = this.transform.parent.parent.parent.parent;
         contents.transform.SetAsLastSibling();
         preDragPosition = contents.transform.position;
         onDragBegin?.Invoke(this);

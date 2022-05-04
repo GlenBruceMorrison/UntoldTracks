@@ -4,7 +4,28 @@ using UnityEngine;
 
 public class ItemContainerWorldObject : MonoBehaviour
 {
-    public ItemContainer container;
+    private ItemContainer _container = new ItemContainer();
+    public ItemContainer Container 
+    {
+        get
+        {
+            return _container;
+        }
+        set
+        {
+            _container.item = value.item;
+            _container.count = value.count;
+        }
+    }
 
 
+    public void SetItemContainer(ItemContainer newContainer)
+    {
+        Container = newContainer;
+    }
+
+    public ItemContainer GetContainerValue()
+    {
+        return _container;
+    }
 }
