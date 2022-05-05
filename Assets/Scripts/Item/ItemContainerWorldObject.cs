@@ -33,4 +33,14 @@ public class ItemContainerWorldObject : MonoBehaviour, IInteractable
     {
         player.inventoryController.HandleItemPickupFromWorld(this);
     }
+
+    public void HandleBecomeFocus(PlayerManager player)
+    {
+
+    }
+
+    public void HandleLoseFocus(PlayerManager player)
+    {
+
+    }
 }

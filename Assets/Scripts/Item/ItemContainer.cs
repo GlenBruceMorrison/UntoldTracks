@@ -59,6 +59,11 @@ public class ItemContainer
         return AddAndReturnDifference(item, toAdd);
     }
 
+    public bool IsEmpty()
+    {
+        return item == null;
+    }
+
     public int AddAndReturnDifference(Item itemToAdd, int toAdd)
     {
         if (locked)

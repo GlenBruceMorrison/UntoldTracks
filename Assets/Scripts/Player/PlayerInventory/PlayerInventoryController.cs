@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerInventoryController : MonoBehaviour, IInventoryController
 {
@@ -20,6 +21,8 @@ public class PlayerInventoryController : MonoBehaviour, IInventoryController
 
     [SerializeField]
     private InventoryBar _inventoryBar;
+
+    public UnityEvent onActiveItemChanged;
 
     public InventoryBar InventoryBar
     {

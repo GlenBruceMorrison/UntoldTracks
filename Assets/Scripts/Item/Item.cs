@@ -10,4 +10,5 @@ public class Item : ScriptableObject
     public Sprite sprite;
     public bool stackable;
     public int stackSize;
+    public bool isBuildingTool;
 }

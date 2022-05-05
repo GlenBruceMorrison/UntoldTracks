@@ -7,7 +7,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerInventoryController inventoryController;
     public FirstPersonController FirstPersonController;
     public PlayerInteractionController interactionController;
-
+    public PlayerBuildingController buildingController;
 
     private void Awake()
     {
@@ -31,5 +31,12 @@ public class PlayerManager : MonoBehaviour
             throw new System.Exception("This player mananger must have an interaction controller attatched");
         }
         interactionController.playerManager = this;
+
+        buildingController = GetComponentInChildren<PlayerBuildingController>();
+        if (buildingController == null)
+        {
+            throw new System.Exception("This player mananger must have a building controller attatched");
+        }
+        buildingController.playerManager = this;
     }
 }
