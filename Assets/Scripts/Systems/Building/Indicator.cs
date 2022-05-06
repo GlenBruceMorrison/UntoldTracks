@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 
-namespace Tracks.Systems.Building
-{
     public class Indicator
     {
         public IndicationDirection Direction { get; set; }
@@ -25,4 +23,3 @@ namespace Tracks.Systems.Building
             return Vector3.zero;
         }
     }
-}

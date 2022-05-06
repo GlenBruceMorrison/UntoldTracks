@@ -21,8 +21,6 @@ public class InventoryBar : MonoBehaviour
     [SerializeField]
     private Image _selector;
 
-    public UnityAction<ItemContainer> onActiveItemChanged;
-
     public ItemContainer ActiveItem
     {
         get
@@ -75,7 +73,6 @@ public class InventoryBar : MonoBehaviour
 
     public void SetActiveIndex(int index)
     {
-        Debug.Log(index);
         if (index > (BarContainers.Count - 1))
         {
             _activeIndex = 0;
@@ -89,12 +86,12 @@ public class InventoryBar : MonoBehaviour
             _activeIndex = index;
         }
 
-        Debug.Log(ActiveItem);
-
-        if (onActiveItemChanged != null)
+        Debug.Log(playerMananger.gameObject);
+        ActiveItemChangeEvent.BroadcastEvent(new ActiveItemChangeEvent()
         {
-            onActiveItemChanged.Invoke(ActiveItem);
-        }
+            player = playerMananger,
+            item = ActiveItem
+        });
 
         RenderSelector();
     }

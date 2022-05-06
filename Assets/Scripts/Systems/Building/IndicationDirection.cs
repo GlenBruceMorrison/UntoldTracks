@@ -1,5 +1,4 @@
-﻿namespace Tracks.Systems.Building
-{
+﻿
     public enum IndicationDirection
     {
         Left,
@@ -7,4 +6,3 @@
         Forward,
         Backward
     }
-}

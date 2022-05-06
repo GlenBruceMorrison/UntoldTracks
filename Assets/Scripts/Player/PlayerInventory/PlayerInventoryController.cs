@@ -81,6 +81,11 @@ public class PlayerInventoryController : MonoBehaviour, IInventoryController
         _inventoryUI.gameObject.SetActive(false);
     }
 
+    private void Start()
+    {
+        _inventoryBar.playerMananger = playerManager;
+    }
+
     private void OnEnable()
     {
         _inventoryUI.onInventoryClosed += Hide;

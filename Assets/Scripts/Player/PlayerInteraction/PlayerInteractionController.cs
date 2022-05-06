@@ -12,8 +12,6 @@ public class PlayerInteractionController : MonoBehaviour
 
     public IInteractable currentFocus;
 
-    public UnityAction<IInteractable> onFocusChange;
-
     private void LookingAtInteractable(IInteractable interactable)
     {
         if (currentFocus != null)
@@ -22,15 +20,29 @@ public class PlayerInteractionController : MonoBehaviour
             {
                 currentFocus.HandleLoseFocus(playerManager);
                 interactable.HandleBecomeFocus(playerManager);
+
+                OnFocusChangeEvent.BroadcastEvent(new OnFocusChangeEvent()
+                {
+                    player = playerManager,
+                    newFocus = interactable,
+                    oldFocus = currentFocus
+                });
+
                 currentFocus = interactable;
-                onFocusChange?.Invoke(interactable);
             }
         }
 
         if (currentFocus == null)
         {
             currentFocus = interactable;
-            onFocusChange?.Invoke(interactable);
+
+            OnFocusChangeEvent.BroadcastEvent(new OnFocusChangeEvent()
+            {
+                player = playerManager,
+                newFocus = interactable,
+                oldFocus = currentFocus
+            });
+
             interactable.HandleBecomeFocus(playerManager);
         }
     }

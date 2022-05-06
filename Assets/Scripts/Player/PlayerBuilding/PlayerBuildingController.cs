@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.Events;
-using Tracks.Systems.Building;
 
 public class PlayerBuildingController : MonoBehaviour
 {
@@ -10,7 +9,6 @@ public class PlayerBuildingController : MonoBehaviour
 
     [SerializeField]
     private bool _buildModeActive;
-
 
     public FoundationPiece buildIndicatorHolder;
 
@@ -26,24 +24,30 @@ public class PlayerBuildingController : MonoBehaviour
 
     private void Start()
     {
-        var inv = playerManager.inventoryController;
-        playerManager.inventoryController.InventoryBar.onActiveItemChanged += CheckForBuildMode;
+        ActiveItemChangeEvent.RegisterListener(CheckForBuildMode);
     }
 
     private void OnDisable()
     {
-        playerManager.inventoryController.InventoryBar.onActiveItemChanged -= CheckForBuildMode;
+        ActiveItemChangeEvent.UnregisterListener(CheckForBuildMode);
     }
 
-    public void CheckForBuildMode(ItemContainer itemContainer)
+    public void CheckForBuildMode(ActiveItemChangeEvent eventData)
     {
-        if (itemContainer.IsEmpty())
+        Debug.Log(eventData.player.gameObject.name);
+
+        if (eventData.player != playerManager)
+        {
+            return;
+        }
+
+        if (eventData.item.IsEmpty())
         {
             DeActivateBuildMode();
             return;
         }
 
-        if (itemContainer.item.isBuildingTool)
+        if (eventData.item.item.isBuildingTool)
         {
             ActivateBuildMode();
         }

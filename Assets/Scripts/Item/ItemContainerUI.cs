@@ -7,6 +7,10 @@ using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using System.Linq;
 
+
+public delegate void ContainerResized(int fromSize, int toSize);
+
+
 public class ItemContainerUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
     public TMP_Text countText;
@@ -18,6 +22,8 @@ public class ItemContainerUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public int SlotIndex { get; private set; }
 
     public UnityAction<ItemContainerUI> onDragBegin, onDrag, onDrop;
+
+    public event ContainerResized OnContainerResized;
 
     public ItemContainer Slot => InventoryController.Inventory.containers[SlotIndex];
 
@@ -34,6 +40,7 @@ public class ItemContainerUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void SetItem(Item item, int count)
     {
+        OnContainerResized.Invoke(Slot.count, count);
         Slot.item = item;
         Slot.count = count;
         Render();
