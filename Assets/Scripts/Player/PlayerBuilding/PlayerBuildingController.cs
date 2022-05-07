@@ -24,14 +24,15 @@ public class PlayerBuildingController : MonoBehaviour
 
     private void Start()
     {
-        ActiveItemChangeEvent.RegisterListener(CheckForBuildMode);
+        //ActiveItemChangeEvent.RegisterListener(CheckForBuildMode);
     }
 
     private void OnDisable()
     {
-        ActiveItemChangeEvent.UnregisterListener(CheckForBuildMode);
+        //ActiveItemChangeEvent.UnregisterListener(CheckForBuildMode);
     }
 
+    /*
     public void CheckForBuildMode(ActiveItemChangeEvent eventData)
     {
         Debug.Log(eventData.player.gameObject.name);
@@ -56,7 +57,7 @@ public class PlayerBuildingController : MonoBehaviour
             DeActivateBuildMode();
         }
     }
-
+    */
     public void ActivateBuildMode()
     {
         _buildModeActive = true;

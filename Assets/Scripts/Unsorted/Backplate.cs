@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
+using Tracks.Inventory;
 
 public class Backplate : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
 {
@@ -13,7 +14,7 @@ public class Backplate : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
     public void HandleItemDropped(ItemContainer container)
     {
         var worldItem = Instantiate(itemWorldObjectPrefab, GameObject.Find("PlayerController").transform.position + (GameObject.Find("PlayerController").transform.forward), Quaternion.identity);
-        worldItem.GetComponent<ItemContainerWorldObject>().SetItemContainer(container);
+        //worldItem.GetComponent<ItemContainerWorldObject>().SetItemContainer(container);
     }
 
     public void OnPointerDown(PointerEventData eventData)
