@@ -11,15 +11,8 @@ namespace Tracks.Resource
 
         public UnityEvent OnHarvested;
 
+        public int capacity = 10;
 
-        private void OnEnable()
-        {
-            holder.OnHarvested += () =>
-            {
-                OnHarvested?.Invoke();
-                Destroy(this.gameObject);
-            };
-        }
 
         public void HandleLoseFocus(PlayerManager player) { }
         public void HandleBecomeFocus(PlayerManager player) { }
@@ -30,6 +23,14 @@ namespace Tracks.Resource
             if (collected == null)
             {
                 return;
+            }
+
+            capacity -= 1;
+
+            if (capacity < 1)
+            {
+                OnHarvested?.Invoke();
+                Destroy(this.gameObject);
             }
 
             foreach (var container in collected)

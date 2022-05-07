@@ -25,11 +25,6 @@ namespace Tracks.Resource
         // maybe should be an inventory for return type???
         public List<ItemContainer> Harvest()
         {
-            if (capacity < 1)
-            {
-                return null;
-            }
-
             var result = new List<ItemContainer>();
 
             foreach (var resource in CanProduce)
@@ -52,16 +47,6 @@ namespace Tracks.Resource
                     }
 
                     result.Add(container);
-                }
-            }
-
-            if (result.Count > 0)
-            {
-                capacity -= 1;
-
-                if (capacity <= 0)
-                {
-                    OnHarvested?.Invoke();
                 }
             }
 
