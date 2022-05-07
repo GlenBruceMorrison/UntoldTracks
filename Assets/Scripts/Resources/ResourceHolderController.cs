@@ -26,6 +26,12 @@ namespace Tracks.Resource
         public void HandleInteraction(PlayerManager playerManager)
         {
             var collected = holder.Harvest();
+
+            if (collected == null)
+            {
+                return;
+            }
+
             foreach (var container in collected)
             {
                 playerManager.inventoryController.Inventory.FillAndReturnRemaining(container.Item, container.Count);
