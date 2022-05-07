@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Apple
   description: A fruit you can eat.
-  sprite: {fileID: 21300000, guid: 5d9ba4e7d0964044ea54abe409d81dfd, type: 3}
+  sprite: {fileID: 21300000, guid: 331e0a46122604702a029a3a1a3bb83f, type: 3}
   stackable: 1
   stackSize: 20
+  isBuildingTool: 0

@@ -612,6 +612,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holder: {fileID: 11400000, guid: 74244bb983fa043a8a0f719a697b8e67, type: 2}
+  OnHarvested:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &618080574
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1351,7 +1354,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ff6976151b2c4d4787beb6ea59dd85b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  holder: {fileID: 0}
+  holder: {fileID: 11400000, guid: d2cf783bbbce24c29818fb30ef0986ea, type: 2}
+  OnHarvested:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1954210473
 BoxCollider:
   m_ObjectHideFlags: 0

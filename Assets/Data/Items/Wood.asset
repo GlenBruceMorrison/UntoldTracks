@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Wood
   description: A wooden log
-  sprite: {fileID: 21300000, guid: db427fab3e94daf4caa704d9314a77a1, type: 3}
+  sprite: {fileID: 21300000, guid: 6e503bd3814284304899b5ebfa40fb3d, type: 3}
   stackable: 1
   stackSize: 20
   isBuildingTool: 0

@@ -20,6 +20,6 @@ MonoBehaviour:
     maxPossible: 5
     multipleChance: 0.2
   itemToHarvest: {fileID: 11400000, guid: 4dcc75568882e43dba0755286b535265, type: 2}
-  capacity: 10
+  capacity: 12
   harvestAudio: {fileID: 8300000, guid: 3888a1e1c52793144a6d07b8c508772e, type: 3}
   fullyHarvestedAudio: {fileID: 8300000, guid: f8c14f2814b4b124a894a65c32c44987, type: 3}

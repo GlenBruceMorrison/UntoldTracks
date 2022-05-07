@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Metal Hamer
   description: A strong hammer made of metal
-  sprite: {fileID: 21300000, guid: 172774604c1bee84185a69041576525b, type: 3}
+  sprite: {fileID: 21300000, guid: 32fb7e0aee1614fe8ac38467a139e9a6, type: 3}
   stackable: 0
   stackSize: 1
   isBuildingTool: 0
