@@ -7,11 +7,14 @@ namespace Tracks.Inventory
     {
         private IInventory _inventory;
         private List<ItemContainerUI> _uiContainers = new List<ItemContainerUI>();
-        public ItemContainerUI _uiContainerPrefab;
-        public Transform containerRoot;
-
         private int _startIndex = -1;
         private int _endIndex = -1;
+
+        [SerializeField]
+        private ItemContainerUI _uiContainerPrefab;
+
+        [SerializeField]
+        private Transform _containerRoot;
 
         public void LinkToInventory(IInventory inventory, int startIndex=-1, int endIndex=-1)
         {
@@ -25,8 +28,6 @@ namespace Tracks.Inventory
 
         public void Render()
         {
-            Debug.Log($"Rendering inventory of size {_inventory.Size}");
-
             foreach (var uiContainer in _uiContainers)
             {
                 Destroy(uiContainer.gameObject);
@@ -39,12 +40,11 @@ namespace Tracks.Inventory
 
             for (int i = start; i < end; i++)
             {
-                var container = Instantiate(_uiContainerPrefab, containerRoot.transform);
+                var container = Instantiate(_uiContainerPrefab, _containerRoot.transform);
                 _uiContainers.Add(container);
                 container.LinkContainer(_inventory.Containers[i]);
+                container.Render();
             }
-
-            RenderContainers();
         }
 
         public void RenderContainers()

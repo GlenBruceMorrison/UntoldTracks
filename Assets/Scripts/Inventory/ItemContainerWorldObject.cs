@@ -21,7 +21,7 @@ public class ItemContainerWorldObject : MonoBehaviour, IInteractable
 
     public void HandleInteraction(PlayerManager player)
     {
-        var left = player.inventoryController.PlayerInventory.FillAndReturnRemaining(Container.Item, Container.Count);
+        var left = player.inventoryController.Inventory.FillAndReturnRemaining(Container.Item, Container.Count);
         Destroy(this.gameObject);
     }
 

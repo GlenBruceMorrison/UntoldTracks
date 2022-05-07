@@ -9,9 +9,11 @@ namespace Tracks.Inventory
     public class ItemContainerDragHandler : MonoBehaviour
     {
         private PlayerInventoryController _playerInventoryController;
-        public ItemContainerUI selectedContainerUI;
 
-        public ItemContainerUI GetFirstContainerUnderMouse()
+        [SerializeField]
+        private ItemContainerUI _selectedContainerUI;
+
+        private ItemContainerUI GetFirstContainerUnderMouse()
         {
             var pointerData = new PointerEventData(EventSystem.current) { pointerId = -1 };
             pointerData.position = Input.mousePosition;
@@ -22,9 +24,9 @@ namespace Tracks.Inventory
             {
                 if (result.gameObject.TryGetComponent(out ItemContainerUI containerUI))
                 {
-                    if (selectedContainerUI.Container.IsEmpty())
+                    if (_selectedContainerUI.Container.IsEmpty())
                     {
-                        if (containerUI == selectedContainerUI)
+                        if (containerUI == _selectedContainerUI)
                         {
                             continue;
                         }
@@ -54,28 +56,28 @@ namespace Tracks.Inventory
             _playerInventoryController.OnOpen.RemoveListener(HandleInventoryOpened);
         }
 
-        public void HandleInventoryOpened()
+        private void HandleInventoryOpened()
         {
-            selectedContainerUI.Container.Empty();
-            selectedContainerUI.gameObject.SetActive(true);
+            _selectedContainerUI.Container.Empty();
+            _selectedContainerUI.gameObject.SetActive(true);
         }
 
-        public void HandleInventoryClosed()
+        private void HandleInventoryClosed()
         {
-            if (!selectedContainerUI.Container.IsEmpty())
+            if (!_selectedContainerUI.Container.IsEmpty())
             {
-                _playerInventoryController.PlayerInventory.FillAndReturnRemaining(selectedContainerUI.Container.Item, selectedContainerUI.Container.Count);
-                selectedContainerUI.Container.Empty();
-                selectedContainerUI.gameObject.SetActive(false);
+                _playerInventoryController.Inventory.FillAndReturnRemaining(_selectedContainerUI.Container.Item, _selectedContainerUI.Container.Count);
+                _selectedContainerUI.Container.Empty();
+                _selectedContainerUI.gameObject.SetActive(false);
             }
         }
 
-        public void HandleHoldingContainer()
+        private void HandleHoldingContainer()
         {
-            selectedContainerUI.transform.position = Input.mousePosition;
+            _selectedContainerUI.transform.position = Input.mousePosition;
         }
 
-        public void HandlePickUpContainer()
+        private void HandlePickUpContainer()
         {
             var containerUnderMouse = GetFirstContainerUnderMouse();
             if (containerUnderMouse != null)
@@ -83,12 +85,12 @@ namespace Tracks.Inventory
                 if (!containerUnderMouse.Container.IsEmpty())
                 {
                     var taken = containerUnderMouse.Container.TakeAll();
-                    selectedContainerUI.Container.FillAndReturnRemaining(taken.Item, taken.Count);
+                    _selectedContainerUI.Container.FillAndReturnRemaining(taken.Item, taken.Count);
                 }
             }
         }
 
-        public void HandleDropContainer()
+        private void HandleDropContainer()
         {
             var otherContainer = GetFirstContainerUnderMouse();
 
@@ -96,28 +98,28 @@ namespace Tracks.Inventory
             if (otherContainer != null)
             {
                 // if the items are the same
-                if (otherContainer.Container.HasItem(selectedContainerUI.Container.Item))
+                if (otherContainer.Container.HasItem(_selectedContainerUI.Container.Item))
                 {
-                    var item = selectedContainerUI.Container.Item;
+                    var item = _selectedContainerUI.Container.Item;
 
                     // fill container
-                    var remainder = otherContainer.Container.FillAndReturnRemaining(selectedContainerUI.Container.Item, selectedContainerUI.Container.Count);
+                    var remainder = otherContainer.Container.FillAndReturnRemaining(_selectedContainerUI.Container.Item, _selectedContainerUI.Container.Count);
 
-                    selectedContainerUI.Container.Empty();
-                    selectedContainerUI.Container.FillAndReturnRemaining(item, remainder);
+                    _selectedContainerUI.Container.Empty();
+                    _selectedContainerUI.Container.FillAndReturnRemaining(item, remainder);
                 }
                 // if dropping into an empty container
                 else if (otherContainer.Container.IsEmpty())
                 {
                     // fill space
-                    otherContainer.Container.FillAndReturnRemaining(selectedContainerUI.Container.Item, selectedContainerUI.Container.Count);
-                    selectedContainerUI.Container.Empty();
+                    otherContainer.Container.FillAndReturnRemaining(_selectedContainerUI.Container.Item, _selectedContainerUI.Container.Count);
+                    _selectedContainerUI.Container.Empty();
                 }
                 // if items are different
-                else if (!otherContainer.Container.HasItem(selectedContainerUI.Container.Item))
+                else if (!otherContainer.Container.HasItem(_selectedContainerUI.Container.Item))
                 {
                     //swap items
-                    otherContainer.Container.Swap(selectedContainerUI.Container);
+                    otherContainer.Container.Swap(_selectedContainerUI.Container);
                 }
             }
             else
@@ -128,19 +130,16 @@ namespace Tracks.Inventory
 
         private void Update()
         {
-            if (!_playerInventoryController.isOpen)
+            if (!_playerInventoryController.IsOpen)
             {
                 return;
             }
 
-            //if (!selectedContainerUI.Container.IsEmpty())
-            //{
-                HandleHoldingContainer();
-            //}
+            HandleHoldingContainer();
 
             if (Input.GetMouseButtonDown(0))
             {
-                if (selectedContainerUI.Container.IsEmpty())
+                if (_selectedContainerUI.Container.IsEmpty())
                 {
                     HandlePickUpContainer();
                 }
@@ -148,7 +147,7 @@ namespace Tracks.Inventory
 
             if (Input.GetMouseButtonUp(0))
             {
-                if (selectedContainerUI.Container.IsEmpty())
+                if (_selectedContainerUI.Container.IsEmpty())
                 {
                     return;
                 }

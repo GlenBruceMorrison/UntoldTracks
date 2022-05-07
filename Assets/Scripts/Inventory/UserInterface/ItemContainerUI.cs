@@ -6,8 +6,11 @@ namespace Tracks.Inventory
 {
     public class ItemContainerUI : MonoBehaviour
     {
-        public Image imgItem;
-        public TMP_Text txtCount;
+        [SerializeField]
+        private Image _imgItem;
+
+        [SerializeField]
+        private TMP_Text _txtCount;
 
         public IItemContainer Container { get; private set; }
 
@@ -17,6 +20,8 @@ namespace Tracks.Inventory
             {
                 Container = new ItemContainer(null, -0);
             }
+
+            Render();
         }
 
         private void OnEnable()
@@ -39,7 +44,7 @@ namespace Tracks.Inventory
             Container.OnModified -= HandleContainerModified;
         }
 
-        public void HandleContainerModified(IItemContainer oldValue, IItemContainer newValue)
+        private void HandleContainerModified(IItemContainer oldValue, IItemContainer newValue)
         {
             Render();
         }
@@ -48,15 +53,15 @@ namespace Tracks.Inventory
         {
             if (Container == null || Container.IsEmpty())
             {
-                imgItem.sprite = null;
-                imgItem.enabled = false;
-                txtCount.text = "";
+                _imgItem.sprite = null;
+                _imgItem.enabled = false;
+                _txtCount.text = "";
                 return;
             }
 
-            imgItem.enabled = true;
-            imgItem.sprite = Container.Item.sprite;
-            txtCount.text = Container.Item.stackable ? Container.Count.ToString() : "";
+            _imgItem.enabled = true;
+            _imgItem.sprite = Container.Item.sprite;
+            _txtCount.text = Container.Item.stackable ? Container.Count.ToString() : "";
         }
 
         public void LinkContainer(IItemContainer container)

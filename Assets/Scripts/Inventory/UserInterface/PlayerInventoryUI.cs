@@ -1,14 +1,31 @@
 ﻿using System;
 using System.Linq;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace Tracks.Inventory
 {
 
     public class PlayerInventoryUI : InventoryUI
     {
-        public int inventoryBarSize = 9;
-        public PlayerInventory Inventory { get; private set; }
-        public InventoryUI _linkedInventory;
+        [SerializeField]
+        private InventoryUI _linkedInventory;
+
+        [SerializeField]
+        private Button _btnClose;
+
+        public UnityAction OnClose;
+
+        private void OnEnable()
+        {
+            _btnClose.onClick.AddListener(OnClose);
+        }
+
+        private void OnDisable()
+        {
+            _btnClose.onClick.RemoveListener(OnClose);
+        }
 
         public void Open(IInventory inventory=null)
         {
@@ -22,11 +39,6 @@ namespace Tracks.Inventory
         public void Close()
         {
             _linkedInventory.gameObject.SetActive(false);
-        }
-
-        internal void Initiate(PlayerInventory playerInventory)
-        {
-            Inventory = playerInventory;
         }
     }
 }

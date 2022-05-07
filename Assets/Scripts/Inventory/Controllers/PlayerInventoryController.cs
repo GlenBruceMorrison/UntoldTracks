@@ -15,47 +15,63 @@ namespace Tracks.Inventory
 
     public class PlayerInventoryController : MonoBehaviour
     {
+        [SerializeField]
+        private List<ItemContainerTemplate> _initialContents = new List<ItemContainerTemplate>();
+
+        [SerializeField]
+        private PlayerInventoryUI _ui;
+
+        [SerializeField]
+        private PlayerInventoryBarUI _uiInventoryBar;
+
         internal PlayerManager playerManager;
-
-        public PlayerManager playerMananger;
-
-        public PlayerInventory PlayerInventory { get; private set; }
-
-        public bool isOpen;
+        private IInventory _inventory;
+        private bool _isOpen = false;
 
         public UnityEvent OnClose, OnOpen;
 
-        [SerializeField]
-        private List<ItemContainerTemplate> _starterTemplate = new List<ItemContainerTemplate>();
-
-        public PlayerInventoryUI _ui;
-        public PlayerInventoryBarUI _uiInventoryBar;
-
-        public void AddFromTempalte()
+        public IInventory Inventory
         {
-            foreach (var containerTemplate in _starterTemplate)
+            get
+            {
+                return _inventory;
+            }
+        }
+
+        public bool IsOpen
+        {
+            get
+            {
+                return _isOpen;
+            }
+        }
+
+        public void Seed()
+        {
+            foreach (var containerTemplate in _initialContents)
             {
                 if (containerTemplate.item == null || containerTemplate.count < 1)
                 {
                     continue;
                 }
 
-                PlayerInventory.FillAndReturnRemaining(containerTemplate.item, containerTemplate.count);
+                Inventory.FillAndReturnRemaining(containerTemplate.item, containerTemplate.count);
             }
         }
 
         public void Awake()
         {
-            PlayerInventory = new PlayerInventory(25);
-            _ui.Initiate(PlayerInventory);
+            _inventory = new Inventory(25);
 
-            if (_starterTemplate != null)
+            if (_initialContents != null)
             {
-                AddFromTempalte();
+                Seed();
             }
 
-            _uiInventoryBar.LinkToInventory(PlayerInventory, 0, 9);
-            _ui.LinkToInventory(PlayerInventory, 9, 25);
+            _uiInventoryBar.LinkToInventory(Inventory, 0, 9);
+            _ui.LinkToInventory(Inventory, 9, 25);
+
+            _ui.OnClose += Close;
         }
 
         private void Start()
@@ -74,7 +90,7 @@ namespace Tracks.Inventory
             playerManager.FirstPersonController.Look.LockPointer();
             _ui.gameObject.SetActive(false);
             _ui.Close();
-            isOpen = false;
+            _isOpen = false;
             OnClose?.Invoke();
         }
 
@@ -83,7 +99,7 @@ namespace Tracks.Inventory
             playerManager.FirstPersonController.Look.UnlockPointer();
             _ui.gameObject.SetActive(true);
             _ui.Open();
-            isOpen = true;
+            _isOpen = true;
             OnOpen?.Invoke();
         }
 
@@ -91,7 +107,7 @@ namespace Tracks.Inventory
         {
             if (Input.GetKeyDown(KeyCode.Tab))
             {
-                if (isOpen)
+                if (_isOpen)
                 {
                     Close();
                 }
