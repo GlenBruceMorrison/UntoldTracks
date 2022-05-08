@@ -20,6 +20,11 @@ namespace Tracks.Resource
         public void HandleBecomeFocus(PlayerManager player) { }
         public void HandleInteraction(PlayerManager playerManager)
         {
+            if (capacity < 1)
+            {
+                return;
+            }
+
             var collected = holder.Harvest();
 
             if (collected == null)
@@ -32,7 +37,7 @@ namespace Tracks.Resource
             if (capacity < 1)
             {
                 OnHarvested?.Invoke();
-                Destroy(this.gameObject);
+                //Destroy(this.gameObject);
                 source.PlayOneShot(holder.fullyHarvestedAudio);
             }
             else

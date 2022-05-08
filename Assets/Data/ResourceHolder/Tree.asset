@@ -19,7 +19,18 @@ MonoBehaviour:
     canProductMultiple: 1
     maxPossible: 5
     multipleChance: 0.2
+  - item: {fileID: 11400000, guid: 0be1aa3f53ddd4629805355d25a84843, type: 2}
+    rarity: 0.5
+    baseAmount: 1
+    canProductMultiple: 0
+    maxPossible: 0
+    multipleChance: 0
+  - item: {fileID: 11400000, guid: 405c07afe3cfa4cc8a40f4402fa788e3, type: 2}
+    rarity: 0.2
+    baseAmount: 1
+    canProductMultiple: 1
+    maxPossible: 2
+    multipleChance: 0.2
   itemToHarvest: {fileID: 11400000, guid: 4dcc75568882e43dba0755286b535265, type: 2}
-  capacity: 12
-  harvestAudio: {fileID: 8300000, guid: 3888a1e1c52793144a6d07b8c508772e, type: 3}
-  fullyHarvestedAudio: {fileID: 8300000, guid: f8c14f2814b4b124a894a65c32c44987, type: 3}
+  harvestAudio: {fileID: 8300000, guid: 7128552d1c9264747affafdbf60b112c, type: 3}
+  fullyHarvestedAudio: {fileID: 8300000, guid: fc6e1266dd51c4d65ba65ea604bb1c78, type: 3}
