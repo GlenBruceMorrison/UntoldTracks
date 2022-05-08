@@ -115,16 +115,30 @@ namespace Tracks.Inventory
         {
             var remaining = count;
 
-            Containers.Where(x => x.HasItem(item)).Reverse().ToList().ForEach(x =>
+            try
             {
-                if (remaining > 0)
+                var toCheck = Containers.Where(x => x.HasItem(item)).Reverse().ToList();
+
+                toCheck.ForEach(x =>
                 {
-                    remaining = x.TakeAndReturnRemaining(remaining);
-                }
-            });
+                    if (remaining > 0)
+                    {
+                        remaining = x.TakeAndReturnRemaining(remaining);
+                    }
+                });
+            }
+            catch(Exception e)
+            {
+
+            }
 
             OnModified.Invoke();
             return remaining;
+        }
+
+        public List<IItemContainer> GetNonEmptyContainer()
+        {
+            return _containers.Where(x => !x.IsEmpty()).ToList();
         }
 
         public bool HasItem(Item item, int count)
@@ -138,7 +152,7 @@ namespace Tracks.Inventory
                 return false;
             }
 
-            foreach (var container in containers)
+            foreach (var container in GetNonEmptyContainer())
             {
                 remainder = container.TakeAndReturnRemaining(count, false);
             }

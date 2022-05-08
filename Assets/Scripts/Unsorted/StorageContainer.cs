@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class StorageContainer : MonoBehaviour, IInteractable
 {
+    public IInventory _inventory;
+    public int size;
+
     [SerializeField]
     private List<ItemContainerTemplate> _starterTemplate = new List<ItemContainerTemplate>();
 
@@ -13,9 +16,6 @@ public class StorageContainer : MonoBehaviour, IInteractable
 
     [SerializeField]
     private Sprite _displaySprite;
-
-    public IInventory _inventory;
-    public int size;
 
     public string DisplayText
     {
