@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine.EventSystems;
 
-namespace Tracks.Inventory
+namespace UntoldTracks.Inventory
 {
     public delegate void ItemContainerModified(IItemContainer oldValue, IItemContainer newValue);
 

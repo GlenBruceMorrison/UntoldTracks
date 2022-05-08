@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace Tracks.Inventory
+namespace UntoldTracks.Inventory
 {
 
     public class PlayerInventoryUI : InventoryUI

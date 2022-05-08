@@ -1,4 +1,4 @@
-﻿namespace Tracks.Resource
+﻿namespace UntoldTracks.Resource
 {
     [System.Serializable]
     public class ResourceContainer

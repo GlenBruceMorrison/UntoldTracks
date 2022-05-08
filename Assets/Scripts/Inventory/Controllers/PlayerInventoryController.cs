@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
-namespace Tracks.Inventory
+namespace UntoldTracks.Inventory
 {
     [System.Serializable]
     public class ItemContainerTemplate

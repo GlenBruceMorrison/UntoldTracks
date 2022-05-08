@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Tracks.Inventory
+namespace UntoldTracks.Inventory
 {
     public delegate void PlayerInteraction(PlayerManager player);
     public delegate void InventoryModified();

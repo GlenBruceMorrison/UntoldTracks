@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using Tracks.Inventory;
+using UntoldTracks.Inventory;
 using UnityEngine;
 
-namespace Tracks.Machines
+namespace UntoldTracks.Machines
 {
     public class Kiln : MonoBehaviour
     {

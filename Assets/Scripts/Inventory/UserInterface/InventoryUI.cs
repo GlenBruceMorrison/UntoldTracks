@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-namespace Tracks.Inventory
+namespace UntoldTracks.Inventory
 {
     public class InventoryUI : MonoBehaviour
     {

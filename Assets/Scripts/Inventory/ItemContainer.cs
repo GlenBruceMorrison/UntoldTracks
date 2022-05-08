@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace Tracks.Inventory
+namespace UntoldTracks.Inventory
 {
     [System.Serializable]
     public class ItemContainer : IItemContainer

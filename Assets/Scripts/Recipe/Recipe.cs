@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Tracks.Inventory;
+using UntoldTracks.Inventory;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Item", menuName = "Data/Recipe")]

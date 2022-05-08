@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tracks.Inventory
+namespace UntoldTracks.Inventory
 {
     public class Inventory : IInventory
     {

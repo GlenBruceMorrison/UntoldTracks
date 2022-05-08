@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using Tracks.Inventory;
+using UntoldTracks.Inventory;
 using UnityEngine.Events;
 
-namespace Tracks.Resource
+namespace UntoldTracks.Resource
 {
     [CreateAssetMenu(fileName = "Item", menuName = "Data/ResourceHolder")]
     public class ResourceHolder : ScriptableObject
