@@ -115,24 +115,17 @@ namespace Tracks.Inventory
         {
             var remaining = count;
 
-            try
-            {
-                var toCheck = Containers.Where(x => x.HasItem(item)).Reverse().ToList();
+            var toCheck = Containers.Where(x => x.HasItem(item)).Reverse().ToList();
 
-                toCheck.ForEach(x =>
+            toCheck.ForEach(x =>
+            {
+                if (remaining > 0)
                 {
-                    if (remaining > 0)
-                    {
-                        remaining = x.TakeAndReturnRemaining(remaining);
-                    }
-                });
-            }
-            catch(Exception e)
-            {
+                    remaining = x.TakeAndReturnRemaining(remaining);
+                }
+            });
 
-            }
-
-            OnModified.Invoke();
+            OnModified?.Invoke();
             return remaining;
         }
 
