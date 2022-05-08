@@ -7,6 +7,28 @@ namespace Tracks.Resource
 {
     public class ResourceHolderController : MonoBehaviour, IInteractable
     {
+        [SerializeField]
+        private string _displayText;
+
+        [SerializeField]
+        private Sprite _displaySprite;
+
+        public string DisplayText
+        {
+            get
+            {
+                return _displayText;
+            }
+        }
+
+        public Sprite DisplaySprite
+        {
+            get
+            {
+                return _displaySprite;
+            }
+        }
+
         public ResourceHolder holder;
 
         public UnityEvent OnHarvested;

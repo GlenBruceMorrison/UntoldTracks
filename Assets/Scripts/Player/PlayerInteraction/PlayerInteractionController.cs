@@ -8,6 +8,9 @@ public class PlayerInteractionController : MonoBehaviour
     [HideInInspector]
     public PlayerManager playerManager;
 
+    [SerializeField]
+    private PlayerInteractionControllerUI _uiInteractionController;
+
     public float interactionDistance = 300f;
 
     public IInteractable currentFocus;
@@ -36,6 +39,7 @@ public class PlayerInteractionController : MonoBehaviour
         {
             currentFocus = interactable;
 
+
             OnFocusChangeEvent.BroadcastEvent(new OnFocusChangeEvent()
             {
                 player = playerManager,
@@ -45,6 +49,8 @@ public class PlayerInteractionController : MonoBehaviour
 
             interactable.HandleBecomeFocus(playerManager);
         }
+
+        _uiInteractionController.DisplayInteractable(currentFocus);
     }
 
     private void NotLookingAtInteractable()
@@ -54,6 +60,7 @@ public class PlayerInteractionController : MonoBehaviour
             currentFocus.HandleLoseFocus(playerManager);
         }
 
+        _uiInteractionController.HideInteractable();
         currentFocus = null;
     }
 
@@ -64,6 +71,7 @@ public class PlayerInteractionController : MonoBehaviour
             currentFocus.HandleLoseFocus(playerManager);
         }
 
+        _uiInteractionController.HideInteractable();
         currentFocus = null;
     }
 

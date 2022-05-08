@@ -5,12 +5,33 @@ using UnityEngine;
 
 public class StorageContainer : MonoBehaviour, IInteractable
 {
-    public IInventory _inventory;
-
-    public int size;
-
     [SerializeField]
     private List<ItemContainerTemplate> _starterTemplate = new List<ItemContainerTemplate>();
+
+    [SerializeField]
+    private string _displayText;
+
+    [SerializeField]
+    private Sprite _displaySprite;
+
+    public IInventory _inventory;
+    public int size;
+
+    public string DisplayText
+    {
+        get
+        {
+            return _displayText;
+        }
+    }
+
+    public Sprite DisplaySprite
+    {
+        get
+        {
+            return _displaySprite;
+        }
+    }
 
     private void Awake()
     {

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae6880a8766e14bef8e7c995f2275825, type: 3}
-  m_Name: Feather
+  m_Name: Dirt
   m_EditorClassIdentifier: 
-  name: Feather
-  description: A feather from a bird
-  sprite: {fileID: 21300000, guid: 6157d9853c3ff444ba3ed0fae026ed10, type: 3}
-  stackable: 1
-  stackSize: 20
+  name: 
+  description: 
+  sprite: {fileID: 0}
+  stackable: 0
+  stackSize: 0
   isBuildingTool: 0

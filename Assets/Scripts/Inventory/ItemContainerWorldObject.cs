@@ -6,7 +6,30 @@ using UnityEngine;
 public class ItemContainerWorldObject : MonoBehaviour, IInteractable
 {
     [SerializeField]
+    private string _displayText;
+
+    [SerializeField]
+    private Sprite _displaySprite;
+
+    [SerializeField]
     private ItemContainer _container;
+
+    public string DisplayText
+    {
+        get
+        {
+            return _displayText;
+        }
+    }
+
+    public Sprite DisplaySprite
+    {
+        get
+        {
+            return _displaySprite;
+        }
+    }
+
     public ItemContainer Container 
     {
         get
