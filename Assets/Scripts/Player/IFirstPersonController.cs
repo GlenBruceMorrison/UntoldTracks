@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public interface IFirstPersonLook
+﻿public interface IFirstPersonController
 {
     public bool IsPointerLocked();
     public void LockPointer();

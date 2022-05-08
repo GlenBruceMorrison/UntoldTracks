@@ -48,12 +48,12 @@ public class FoundationPiece : MonoBehaviour
 
         interactable.onGainFocus.AddListener((PlayerManager playerManager) =>
         {
-            playerManager.buildingController.MoveBuildObject(floorLeft.transform.position);
+            //playerManager.buildingController.MoveBuildObject(floorLeft.transform.position);
         });
 
         interactable.onLoseFocus.AddListener((PlayerManager playerManager) =>
         {
-            playerManager.buildingController.MoveBuildObject(Vector3.zero);
+            //playerManager.buildingController.MoveBuildObject(Vector3.zero);
         });
 
         return result;

@@ -87,7 +87,7 @@ namespace UntoldTracks.Inventory
 
         public void Close()
         {
-            playerManager.FirstPersonController.Look.LockPointer();
+            playerManager.FirstPersonController.LockPointer();
             _ui.gameObject.SetActive(false);
             _ui.Close();
             _isOpen = false;
@@ -96,7 +96,7 @@ namespace UntoldTracks.Inventory
 
         public void Open()
         {
-            playerManager.FirstPersonController.Look.UnlockPointer();
+            playerManager.FirstPersonController.UnlockPointer();
             _ui.gameObject.SetActive(true);
             _ui.Open();
             _isOpen = true;

@@ -77,7 +77,7 @@ public class PlayerInteractionController : MonoBehaviour
 
     private void Update()
     {
-        if (playerManager.FirstPersonController.Look.IsPointerLocked())
+        if (playerManager.FirstPersonController.IsPointerLocked())
         {
             return;
         }

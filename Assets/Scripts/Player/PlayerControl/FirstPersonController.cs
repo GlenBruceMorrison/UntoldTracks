@@ -1,12 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FirstPersonController : MonoBehaviour, IPlayerControlController
+public class FirstPersonController : MonoBehaviour, IFirstPersonController
 {
     [HideInInspector]
     public PlayerManager playerManager;
-    public IFirstPersonLook Look { get; private set; }
+    public IFirstPersonController Look { get; private set; }
     public IFirstPersonMovement Movement { get; set; }
+
+    public bool IsPointerLocked()
+    {
+        return false;
+    }
+
+    public void LockPointer()
+    {
+
+    }
+
+    public void UnlockPointer()
+    {
+
+    }
 
     private void Awake()
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class FirstPersonLook : MonoBehaviour, IFirstPersonLook
+public class FirstPersonLook : MonoBehaviour, IFirstPersonController
 {
     [SerializeField]
     Transform character;

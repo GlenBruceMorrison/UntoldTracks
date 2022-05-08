@@ -13,19 +13,19 @@ namespace UntoldTracks.Inventory
         private InventoryUI _linkedInventory;
 
         [SerializeField]
-        private Button _btnClose;
+        //private Button _btnClose;
 
         public UnityAction OnClose;
 
         private void OnEnable()
         {
-            _btnClose.onClick.AddListener(OnClose);
+            //_btnClose.onClick.AddListener(OnClose);
             RenderContainers();
         }
 
         private void OnDisable()
         {
-            _btnClose.onClick.RemoveListener(OnClose);
+            //_btnClose.onClick.RemoveListener(OnClose);
         }
 
         public void Open(IInventory inventory=null)

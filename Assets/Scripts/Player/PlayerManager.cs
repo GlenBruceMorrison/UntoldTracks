@@ -6,9 +6,9 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     public PlayerInventoryController inventoryController;
-    public FirstPersonController FirstPersonController;
+    public IFirstPersonController FirstPersonController;
     public PlayerInteractionController interactionController;
-    public PlayerBuildingController buildingController;
+    //public PlayerBuildingController buildingController;
 
     private void Awake()
     {
@@ -19,12 +19,12 @@ public class PlayerManager : MonoBehaviour
         }
         inventoryController.playerManager = this;
 
-        FirstPersonController = GetComponentInChildren<FirstPersonController>();
+        FirstPersonController = GetComponentInChildren<IFirstPersonController>();
         if (FirstPersonController == null)
         {
             throw new System.Exception("This player mananger must have an control controller attatched");
         }
-        FirstPersonController.playerManager = this;
+        //FirstPersonController.playerManager = this;
 
         interactionController = GetComponentInChildren<PlayerInteractionController>();
         if (interactionController == null)
@@ -33,11 +33,11 @@ public class PlayerManager : MonoBehaviour
         }
         interactionController.playerManager = this;
 
-        buildingController = GetComponentInChildren<PlayerBuildingController>();
-        if (buildingController == null)
-        {
-            throw new System.Exception("This player mananger must have a building controller attatched");
-        }
-        buildingController.playerManager = this;
+        //buildingController = GetComponentInChildren<PlayerBuildingController>();
+        //if (buildingController == null)
+        //{
+        //    throw new System.Exception("This player mananger must have a building controller attatched");
+        //}
+        //buildingController.playerManager = this;
     }
 }
