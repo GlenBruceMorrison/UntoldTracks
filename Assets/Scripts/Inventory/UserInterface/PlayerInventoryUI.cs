@@ -20,6 +20,7 @@ namespace Tracks.Inventory
         private void OnEnable()
         {
             _btnClose.onClick.AddListener(OnClose);
+            RenderContainers();
         }
 
         private void OnDisable()

@@ -13,9 +13,6 @@ namespace Tracks.Resource
         public List<ResourceContainer> CanProduce = new List<ResourceContainer>();
 
         public Item itemToHarvest;
-
-        public int capacity = 1;
-
         public AudioClip harvestAudio;
         public AudioClip fullyHarvestedAudio;
 
@@ -52,16 +49,5 @@ namespace Tracks.Resource
 
             return result;
         }
-    }
-
-    [System.Serializable]
-    public class ResourceContainer
-    {
-        public Item item;
-        public float rarity = 1;
-        public int baseAmount = 1;
-        public bool canProductMultiple = false;
-        public int maxPossible = 1;
-        public float multipleChance = 1;
     }
 }

@@ -13,6 +13,8 @@ namespace Tracks.Resource
 
         public int capacity = 10;
 
+        public AudioSource source;
+
 
         public void HandleLoseFocus(PlayerManager player) { }
         public void HandleBecomeFocus(PlayerManager player) { }
@@ -31,6 +33,11 @@ namespace Tracks.Resource
             {
                 OnHarvested?.Invoke();
                 Destroy(this.gameObject);
+                source.PlayOneShot(holder.fullyHarvestedAudio);
+            }
+            else
+            {
+                source.PlayOneShot(holder.harvestAudio);
             }
 
             foreach (var container in collected)
