@@ -3676,8 +3676,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ff6976151b2c4d4787beb6ea59dd85b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _displayText: 
-  _displaySprite: {fileID: 0}
+  _displayText: Chop Tree
+  _displaySprite: {fileID: 21300000, guid: 6e503bd3814284304899b5ebfa40fb3d, type: 3}
   holder: {fileID: 11400000, guid: d2cf783bbbce24c29818fb30ef0986ea, type: 2}
   OnHarvested:
     m_PersistentCalls:
@@ -3694,7 +3694,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  capacity: 20
+  capacity: 9999
   source: {fileID: 79814501}
 --- !u!82 &79814501
 AudioSource:
@@ -26196,8 +26196,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ff6976151b2c4d4787beb6ea59dd85b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _displayText: 
-  _displaySprite: {fileID: 0}
+  _displayText: Chop Tree
+  _displaySprite: {fileID: 21300000, guid: 6e503bd3814284304899b5ebfa40fb3d, type: 3}
   holder: {fileID: 11400000, guid: d2cf783bbbce24c29818fb30ef0986ea, type: 2}
   OnHarvested:
     m_PersistentCalls:
@@ -26214,7 +26214,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  capacity: 20
+  capacity: 9999
   source: {fileID: 549276836}
 --- !u!82 &549276836
 AudioSource:
@@ -64603,8 +64603,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ff6976151b2c4d4787beb6ea59dd85b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _displayText: 
-  _displaySprite: {fileID: 0}
+  _displayText: Chop Tree
+  _displaySprite: {fileID: 21300000, guid: 6e503bd3814284304899b5ebfa40fb3d, type: 3}
   holder: {fileID: 11400000, guid: d2cf783bbbce24c29818fb30ef0986ea, type: 2}
   OnHarvested:
     m_PersistentCalls:
@@ -64621,7 +64621,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  capacity: 20
+  capacity: 9999
   source: {fileID: 1539770338}
 --- !u!82 &1539770338
 AudioSource:
@@ -74285,8 +74285,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ff6976151b2c4d4787beb6ea59dd85b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _displayText: 
-  _displaySprite: {fileID: 0}
+  _displayText: Chop Tree
+  _displaySprite: {fileID: 21300000, guid: 6e503bd3814284304899b5ebfa40fb3d, type: 3}
   holder: {fileID: 11400000, guid: d2cf783bbbce24c29818fb30ef0986ea, type: 2}
   OnHarvested:
     m_PersistentCalls:
@@ -74303,7 +74303,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  capacity: 20
+  capacity: 9999
   source: {fileID: 1717185122}
 --- !u!82 &1717185122
 AudioSource:
