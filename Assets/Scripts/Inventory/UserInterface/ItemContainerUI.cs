@@ -53,6 +53,8 @@ namespace UntoldTracks.Inventory
         {
             if (Container == null || Container.IsEmpty())
             {
+                Debug.Log("test");
+
                 _imgItem.sprite = null;
                 _imgItem.enabled = false;
                 _txtCount.text = "";

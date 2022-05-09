@@ -1,31 +1,35 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UntoldTracks.Player;
 
-public class FirstPersonController : MonoBehaviour, IFirstPersonController
+namespace UntoldTracks.CharacterController
 {
-    [HideInInspector]
-    public PlayerManager playerManager;
-    public IFirstPersonController Look { get; private set; }
-    public IFirstPersonMovement Movement { get; set; }
-
-    public bool IsPointerLocked()
+    public class FirstPersonController : MonoBehaviour, IFirstPersonController
     {
-        return false;
-    }
+        [HideInInspector]
+        public PlayerManager playerManager;
+        public IFirstPersonController Look { get; private set; }
+        public IFirstPersonMovement Movement { get; set; }
 
-    public void LockPointer()
-    {
+        public bool IsPointerLocked()
+        {
+            return false;
+        }
 
-    }
+        public void LockPointer()
+        {
 
-    public void UnlockPointer()
-    {
+        }
 
-    }
+        public void UnlockPointer()
+        {
 
-    private void Awake()
-    {
-        Look = GetComponentInChildren<FirstPersonLook>();
-        Movement = GetComponentInChildren<FirstPersonMovement>();
+        }
+
+        private void Awake()
+        {
+            Look = GetComponentInChildren<FirstPersonLook>();
+            Movement = GetComponentInChildren<FirstPersonMovement>();
+        }
     }
 }

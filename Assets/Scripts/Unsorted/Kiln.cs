@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UntoldTracks.Inventory;
 using UnityEngine;
+using UntoldTracks.Player;
 
 namespace UntoldTracks.Machines
 {

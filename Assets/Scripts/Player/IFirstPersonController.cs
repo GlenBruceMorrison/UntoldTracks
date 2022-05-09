@@ -1,6 +1,10 @@
-﻿public interface IFirstPersonController
+﻿
+namespace UntoldTracks.CharacterController
 {
-    public bool IsPointerLocked();
-    public void LockPointer();
-    public void UnlockPointer();
+    public interface IFirstPersonController
+    {
+        public bool IsPointerLocked();
+        public void LockPointer();
+        public void UnlockPointer();
+    }
 }

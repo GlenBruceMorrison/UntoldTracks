@@ -2,86 +2,89 @@
 using System.Collections;
 using UnityEngine.Events;
 
-public class PlayerBuildingController : MonoBehaviour
+namespace UntoldTracks.Player
 {
-    [HideInInspector]
-    public PlayerManager playerManager;
-
-    [SerializeField]
-    private bool _buildModeActive;
-
-    public FoundationPiece buildIndicatorHolder;
-
-    public GameObject testPrefab;
-
-    public bool BuildModeActive
+    public class PlayerBuildingController : MonoBehaviour
     {
-        get
+        [HideInInspector]
+        public PlayerManager playerManager;
+
+        [SerializeField]
+        private bool _buildModeActive;
+
+        public FoundationPiece buildIndicatorHolder;
+
+        public GameObject testPrefab;
+
+        public bool BuildModeActive
         {
-            return _buildModeActive;
-        }
-    }
-
-    private void Start()
-    {
-        //ActiveItemChangeEvent.RegisterListener(CheckForBuildMode);
-    }
-
-    private void OnDisable()
-    {
-        //ActiveItemChangeEvent.UnregisterListener(CheckForBuildMode);
-    }
-
-    /*
-    public void CheckForBuildMode(ActiveItemChangeEvent eventData)
-    {
-        Debug.Log(eventData.player.gameObject.name);
-
-        if (eventData.player != playerManager)
-        {
-            return;
+            get
+            {
+                return _buildModeActive;
+            }
         }
 
-        if (eventData.item.IsEmpty())
+        private void Start()
         {
-            DeActivateBuildMode();
-            return;
+            //ActiveItemChangeEvent.RegisterListener(CheckForBuildMode);
         }
 
-        if (eventData.item.item.isBuildingTool)
+        private void OnDisable()
         {
-            ActivateBuildMode();
-        }
-        else
-        {
-            DeActivateBuildMode();
-        }
-    }
-    */
-    public void ActivateBuildMode()
-    {
-        _buildModeActive = true;
-    }
-
-    public void DeActivateBuildMode()
-    {
-        _buildModeActive = false;
-    }
-    
-    public void MoveBuildObject(Vector3 pos)
-    {
-        if (!BuildModeActive)
-        {
-            testPrefab.transform.position = Vector3.one*999;
-            return;
+            //ActiveItemChangeEvent.UnregisterListener(CheckForBuildMode);
         }
 
-        if (pos == Vector3.zero)
+        /*
+        public void CheckForBuildMode(ActiveItemChangeEvent eventData)
         {
-            testPrefab.transform.position = Vector3.one * 999;
-            return;
+            Debug.Log(eventData.player.gameObject.name);
+
+            if (eventData.player != playerManager)
+            {
+                return;
+            }
+
+            if (eventData.item.IsEmpty())
+            {
+                DeActivateBuildMode();
+                return;
+            }
+
+            if (eventData.item.item.isBuildingTool)
+            {
+                ActivateBuildMode();
+            }
+            else
+            {
+                DeActivateBuildMode();
+            }
+        }
+        */
+        public void ActivateBuildMode()
+        {
+            _buildModeActive = true;
         }
 
-        testPrefab.transform.position = pos;
+        public void DeActivateBuildMode()
+        {
+            _buildModeActive = false;
+        }
+
+        public void MoveBuildObject(Vector3 pos)
+        {
+            if (!BuildModeActive)
+            {
+                testPrefab.transform.position = Vector3.one * 999;
+                return;
+            }
+
+            if (pos == Vector3.zero)
+            {
+                testPrefab.transform.position = Vector3.one * 999;
+                return;
+            }
+
+            testPrefab.transform.position = pos;
+        }
     }
 }

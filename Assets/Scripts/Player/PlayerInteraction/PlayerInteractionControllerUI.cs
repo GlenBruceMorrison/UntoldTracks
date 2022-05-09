@@ -3,41 +3,44 @@ using System.Collections;
 using TMPro;
 using UnityEngine.UI;
 
-public class PlayerInteractionControllerUI : MonoBehaviour
+namespace UntoldTracks.Player
 {
-    [SerializeField]
-    private TMP_Text txtInteraction;
-
-    [SerializeField]
-    private Image imgInteraction;
-
-    [SerializeField]
-    private Transform pnlTextHolder;
-
-    public void DisplayInteractable(IInteractable interactable)
+    public class PlayerInteractionControllerUI : MonoBehaviour
     {
-        if (interactable.DisplaySprite != null)
+        [SerializeField]
+        private TMP_Text txtInteraction;
+
+        [SerializeField]
+        private Image imgInteraction;
+
+        [SerializeField]
+        private Transform pnlTextHolder;
+
+        public void DisplayInteractable(IInteractable interactable)
         {
-            imgInteraction.sprite = interactable.DisplaySprite;
-            imgInteraction.gameObject.SetActive(true);
+            if (interactable.DisplaySprite != null)
+            {
+                imgInteraction.sprite = interactable.DisplaySprite;
+                imgInteraction.gameObject.SetActive(true);
+            }
+
+            if (!string.IsNullOrWhiteSpace(interactable.DisplayText))
+            {
+                txtInteraction.text = interactable.DisplayText;
+
+                pnlTextHolder.gameObject.SetActive(true);
+                txtInteraction.gameObject.SetActive(true);
+            }
         }
 
-        if (!string.IsNullOrWhiteSpace(interactable.DisplayText))
+        public void HideInteractable()
         {
-            txtInteraction.text = interactable.DisplayText;
+            txtInteraction.text = "";
+            imgInteraction.sprite = null;
 
-            pnlTextHolder.gameObject.SetActive(true);
-            txtInteraction.gameObject.SetActive(true);
+            pnlTextHolder.gameObject.SetActive(false);
+            txtInteraction.gameObject.SetActive(false);
+            imgInteraction.gameObject.SetActive(false);
         }
-    }
-
-    public void HideInteractable()
-    {
-        txtInteraction.text = "";
-        imgInteraction.sprite = null;
-
-        pnlTextHolder.gameObject.SetActive(false);
-        txtInteraction.gameObject.SetActive(false);
-        imgInteraction.gameObject.SetActive(false);
     }
 }

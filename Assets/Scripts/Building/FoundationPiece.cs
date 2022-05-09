@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using UntoldTracks;
+using UntoldTracks.Player;
+
 public class FoundationPiece : MonoBehaviour
 {
     private int _gridSize = 1;
@@ -44,7 +47,8 @@ public class FoundationPiece : MonoBehaviour
         result.GameObject = floorLeft;
         result.Collider = col;
 
-        var interactable = result.GameObject.AddComponent<Interactable>();
+        /*
+        var interactable = result.GameObject.AddComponent<UntoldTracks.UntoldTracks>();
 
         interactable.onGainFocus.AddListener((PlayerManager playerManager) =>
         {
@@ -55,6 +59,7 @@ public class FoundationPiece : MonoBehaviour
         {
             //playerManager.buildingController.MoveBuildObject(Vector3.zero);
         });
+        */
 
         return result;
     }

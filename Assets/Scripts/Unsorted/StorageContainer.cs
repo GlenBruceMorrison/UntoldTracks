@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UntoldTracks.Inventory;
 using UnityEngine;
 
+using UntoldTracks;
+using UntoldTracks.Player;
+
 public class StorageContainer : MonoBehaviour, IInteractable
 {
     public IInventory _inventory;

@@ -75,6 +75,7 @@ namespace UntoldTracks.Inventory
         private void HandleHoldingContainer()
         {
             _selectedContainerUI.transform.position = Input.mousePosition;
+            //Debug.Log(_selectedContainerUI.Container?.Item?.name);
         }
 
         private void HandlePickUpContainer()
@@ -86,6 +87,8 @@ namespace UntoldTracks.Inventory
                 {
                     var taken = containerUnderMouse.Container.TakeAll();
                     _selectedContainerUI.Container.FillAndReturnRemaining(taken.Item, taken.Count);
+
+                    Debug.Log($"{_selectedContainerUI.Container.Item.name} & {_selectedContainerUI.Container.Count}");
                 }
             }
         }
@@ -152,7 +155,7 @@ namespace UntoldTracks.Inventory
                     return;
                 }
 
-                HandleDropContainer();
+                //HandleDropContainer();
             }
         }
     }

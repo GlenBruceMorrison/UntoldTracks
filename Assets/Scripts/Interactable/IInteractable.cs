@@ -1,12 +1,16 @@
 ﻿using System;
 using UnityEngine;
+using UntoldTracks.Player;
 
-public interface IInteractable
+namespace UntoldTracks
 {
-    public string DisplayText { get; }
-    public Sprite DisplaySprite { get; }
+    public interface IInteractable
+    {
+        public string DisplayText { get; }
+        public Sprite DisplaySprite { get; }
 
-    public void HandleInteraction(PlayerManager player);
-    public void HandleBecomeFocus(PlayerManager player);
-    public void HandleLoseFocus(PlayerManager player);
+        public void HandleInteraction(PlayerManager player);
+        public void HandleBecomeFocus(PlayerManager player);
+        public void HandleLoseFocus(PlayerManager player);
+    }
 }

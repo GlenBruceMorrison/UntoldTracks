@@ -2,42 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UntoldTracks.Inventory;
 using UnityEngine;
+using UntoldTracks.CharacterController;
 
-public class PlayerManager : MonoBehaviour
+namespace UntoldTracks.Player
 {
-    public PlayerInventoryController inventoryController;
-    public IFirstPersonController FirstPersonController;
-    public PlayerInteractionController interactionController;
-    //public PlayerBuildingController buildingController;
-
-    private void Awake()
+    public class PlayerManager : MonoBehaviour
     {
-        inventoryController = GetComponentInChildren<PlayerInventoryController>();
-        if (inventoryController == null)
-        {
-            throw new System.Exception("This player mananger must have an inventory controller attatched");
-        }
-        inventoryController.playerManager = this;
+        public PlayerInventoryController inventoryController;
+        public IFirstPersonController FirstPersonController;
+        public PlayerInteractionController interactionController;
+        //public PlayerBuildingController buildingController;
 
-        FirstPersonController = GetComponentInChildren<IFirstPersonController>();
-        if (FirstPersonController == null)
+        private void Awake()
         {
-            throw new System.Exception("This player mananger must have an control controller attatched");
-        }
-        //FirstPersonController.playerManager = this;
+            inventoryController = GetComponentInChildren<PlayerInventoryController>();
+            if (inventoryController == null)
+            {
+                throw new System.Exception("This player mananger must have an inventory controller attatched");
+            }
+            inventoryController.playerManager = this;
 
-        interactionController = GetComponentInChildren<PlayerInteractionController>();
-        if (interactionController == null)
-        {
-            throw new System.Exception("This player mananger must have an interaction controller attatched");
-        }
-        interactionController.playerManager = this;
+            FirstPersonController = GetComponentInChildren<IFirstPersonController>();
+            if (FirstPersonController == null)
+            {
+                throw new System.Exception("This player mananger must have an control controller attatched");
+            }
+            //FirstPersonController.playerManager = this;
 
-        //buildingController = GetComponentInChildren<PlayerBuildingController>();
-        //if (buildingController == null)
-        //{
-        //    throw new System.Exception("This player mananger must have a building controller attatched");
-        //}
-        //buildingController.playerManager = this;
+            interactionController = GetComponentInChildren<PlayerInteractionController>();
+            if (interactionController == null)
+            {
+                throw new System.Exception("This player mananger must have an interaction controller attatched");
+            }
+            interactionController.playerManager = this;
+
+            //buildingController = GetComponentInChildren<PlayerBuildingController>();
+            //if (buildingController == null)
+            //{
+            //    throw new System.Exception("This player mananger must have a building controller attatched");
+            //}
+            //buildingController.playerManager = this;
+        }
     }
 }
