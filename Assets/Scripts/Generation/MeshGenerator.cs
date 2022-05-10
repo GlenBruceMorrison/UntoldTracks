@@ -81,23 +81,9 @@ public class MeshGenerator : MonoBehaviour
 
             float perlinValue = (Mathf.PerlinNoise(mapZ, mapX)) * 2 - 1;
 
-            var pers = 0f;
-
-
-            if (x < 50) pers = 0.1f;
-            if (x < 60) pers = 0.2f;
-            if (x < 70) pers = 0.3f;
-            if (x < 80) pers = 0.4f;
-            if (x < 90) pers = 0.5f;
-            if (x < 100) pers = 0.6f;
-            if (x < 110) pers = 0.7f;
-            if (x < 120) pers = 0.8f;
-
-
-
-            noiseHeight += heightCurve.Evaluate(perlinValue) * amplitude;
+            noiseHeight += 0;// heightCurve.Evaluate(perlinValue) * amplitude;
             frequency *= lacunarity;
-            amplitude *= pers;
+            amplitude *= persistence;
         }
 
         return noiseHeight;
