@@ -95,6 +95,16 @@ namespace UntoldTracks.Inventory
             _ui.OnClose += Close;
         }
 
+        private void OnEnable()
+        {
+            _inventory.OnContainerModified += HandleItemContainerUpdate;
+        }
+
+        private void OnDisable()
+        {
+            _inventory.OnContainerModified -= HandleItemContainerUpdate;
+        }
+
         private void LinkToInventory()
         {
             _uiInventoryBar.LinkToInventory(Inventory, 0, _inventoryBarSize);
@@ -149,6 +159,14 @@ namespace UntoldTracks.Inventory
             _ui.Open();
             _isOpen = true;
             OnOpen?.Invoke();
+        }
+
+        private void HandleItemContainerUpdate(IItemContainer container)
+        {
+            if (container.Index == _activeItemIndex)
+            {
+                OnActiveItemChanged?.Invoke(playerManager, ActiveItem);
+            }
         }
 
         private void Update()

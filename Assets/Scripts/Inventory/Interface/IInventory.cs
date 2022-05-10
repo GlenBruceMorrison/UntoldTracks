@@ -4,7 +4,7 @@ using UntoldTracks.Player;
 namespace UntoldTracks.Inventory
 {
     public delegate void PlayerInteraction(PlayerManager player);
-    public delegate void ContainerAdded(ItemContainer container);
+    public delegate void ContainerModified(IItemContainer container);
     public delegate void InventoryModified();
 
     public interface IInventory
@@ -32,12 +32,17 @@ namespace UntoldTracks.Inventory
         /// <summary>
         /// 
         /// </summary>
-        public event ContainerAdded OnContainerAdded;
+        public event ContainerModified OnContainerAdded;
 
         /// <summary>
         /// 
         /// </summary>
-        public event ContainerAdded OnContainerRemoved;
+        public event ContainerModified OnContainerRemoved;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public event ContainerModified OnContainerModified;
 
         /// <summary>
         /// Event fired when some player entity accessed this inventory

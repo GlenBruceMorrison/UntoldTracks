@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f611fe3209cb64f0f9d29818b2edb173, type: 3}
+  m_Name: ClayDeposit
+  m_EditorClassIdentifier: 
+  CanProduce:
+  - item: {fileID: 11400000, guid: a0f4fbde1465341298bfd3fdf4d5f6a6, type: 2}
+    rarity: 1
+    baseAmount: 1
+    canProductMultiple: 1
+    maxPossible: 5
+    multipleChance: 0.2
+  - item: {fileID: 11400000, guid: 0be1aa3f53ddd4629805355d25a84843, type: 2}
+    rarity: 0.5
+    baseAmount: 1
+    canProductMultiple: 0
+    maxPossible: 0
+    multipleChance: 0
+  - item: {fileID: 11400000, guid: 405c07afe3cfa4cc8a40f4402fa788e3, type: 2}
+    rarity: 0.2
+    baseAmount: 1
+    canProductMultiple: 1
+    maxPossible: 2
+    multipleChance: 0.2
+  - item: {fileID: 11400000, guid: 6059cd8fd34f049279853e0055956da2, type: 2}
+    rarity: 0.2
+    baseAmount: 1
+    canProductMultiple: 1
+    maxPossible: 5
+    multipleChance: 0.2
+  - item: {fileID: 11400000, guid: 0988e82f940c943bea13227f31420c5a, type: 2}
+    rarity: 0.05
+    baseAmount: 1
+    canProductMultiple: 1
+    maxPossible: 2
+    multipleChance: 0.05
+  itemToHarvest: {fileID: 11400000, guid: 4dcc75568882e43dba0755286b535265, type: 2}
+  harvestAudio: {fileID: 8300000, guid: 7128552d1c9264747affafdbf60b112c, type: 3}
+  fullyHarvestedAudio: {fileID: 8300000, guid: fc6e1266dd51c4d65ba65ea604bb1c78, type: 3}

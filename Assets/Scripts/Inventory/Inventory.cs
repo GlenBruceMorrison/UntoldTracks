@@ -50,8 +50,9 @@ namespace UntoldTracks.Inventory
 
         #region events
         public event InventoryModified OnModified;
-        public event ContainerAdded OnContainerAdded; 
-        public event ContainerAdded OnContainerRemoved;
+        public event ContainerModified OnContainerAdded; 
+        public event ContainerModified OnContainerRemoved;
+        public event ContainerModified OnContainerModified;
         #endregion
 
         public Inventory(int size)
@@ -63,7 +64,13 @@ namespace UntoldTracks.Inventory
         {
             var container = new ItemContainer(this, _containers.Count);
             _containers.Add(container);
+            container.OnModified += HandleContainerModified;
             return container;
+        }
+
+        private void HandleContainerModified(IItemContainer oldValue, IItemContainer newValue)
+        {
+            OnContainerModified?.Invoke(newValue);
         }
 
         public bool CanFill(Item item, int count)
