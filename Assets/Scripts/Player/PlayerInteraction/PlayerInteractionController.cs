@@ -7,8 +7,9 @@ namespace UntoldTracks.Player
 {
     public class PlayerInteractionController : MonoBehaviour
     {
-        [HideInInspector]
         public PlayerManager playerManager;
+
+        public Camera playerCamera;
 
         [SerializeField]
         private PlayerInteractionControllerUI _uiInteractionController;
@@ -16,6 +17,8 @@ namespace UntoldTracks.Player
         public float interactionDistance = 300f;
 
         public IInteractable currentFocus;
+
+
 
         private void LookingAtInteractable(IInteractable interactable)
         {
@@ -26,12 +29,14 @@ namespace UntoldTracks.Player
                     currentFocus.HandleLoseFocus(playerManager);
                     interactable.HandleBecomeFocus(playerManager);
 
+                    /*
                     OnFocusChangeEvent.BroadcastEvent(new OnFocusChangeEvent()
                     {
                         player = playerManager,
                         newFocus = interactable,
                         oldFocus = currentFocus
                     });
+                    */
 
                     currentFocus = interactable;
                 }
@@ -41,13 +46,14 @@ namespace UntoldTracks.Player
             {
                 currentFocus = interactable;
 
-
+                /*
                 OnFocusChangeEvent.BroadcastEvent(new OnFocusChangeEvent()
                 {
                     player = playerManager,
                     newFocus = interactable,
                     oldFocus = currentFocus
                 });
+                */
 
                 interactable.HandleBecomeFocus(playerManager);
             }
@@ -84,9 +90,9 @@ namespace UntoldTracks.Player
                 return;
             }
 
-            Debug.DrawRay(transform.position, transform.forward * interactionDistance, Color.red);
+            Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * interactionDistance, Color.red);
 
-            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit2, interactionDistance))
+            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit2, interactionDistance))
             {
                 if (hit2.collider.gameObject.TryGetComponent(out IInteractable interactable))
                 {

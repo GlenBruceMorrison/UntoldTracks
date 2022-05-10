@@ -155,7 +155,7 @@ namespace UntoldTracks.Inventory
                     return;
                 }
 
-                //HandleDropContainer();
+                HandleDropContainer();
             }
         }
     }

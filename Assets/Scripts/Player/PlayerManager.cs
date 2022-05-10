@@ -9,7 +9,7 @@ namespace UntoldTracks.Player
     public class PlayerManager : MonoBehaviour
     {
         public PlayerInventoryController inventoryController;
-        public IFirstPersonController FirstPersonController;
+        public PlayerCharacterController FirstPersonController;
         public PlayerInteractionController interactionController;
         //public PlayerBuildingController buildingController;
 
@@ -22,7 +22,7 @@ namespace UntoldTracks.Player
             }
             inventoryController.playerManager = this;
 
-            FirstPersonController = GetComponentInChildren<IFirstPersonController>();
+            FirstPersonController = GetComponentInChildren<PlayerCharacterController>();
             if (FirstPersonController == null)
             {
                 throw new System.Exception("This player mananger must have an control controller attatched");
