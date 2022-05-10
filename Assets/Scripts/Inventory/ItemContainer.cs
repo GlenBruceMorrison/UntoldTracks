@@ -61,6 +61,14 @@ namespace UntoldTracks.Inventory
             _index = index;
         }
 
+        public ItemContainer(Item item, int count)
+        {
+            _inventory = null;
+            _index = -1;
+            _item = item;
+            _count = count;
+        }
+
         public bool IsFull()
         {
             if (IsEmpty())

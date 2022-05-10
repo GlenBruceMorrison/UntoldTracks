@@ -18,7 +18,7 @@ namespace UntoldTracks.Inventory
         {
             if (Container == null)
             {
-                Container = new ItemContainer(null, -0);
+                Container = new ItemContainer(inventory:null, 0);
             }
 
             Render();
@@ -53,8 +53,6 @@ namespace UntoldTracks.Inventory
         {
             if (Container == null || Container.IsEmpty())
             {
-                Debug.Log("test");
-
                 _imgItem.sprite = null;
                 _imgItem.enabled = false;
                 _txtCount.text = "";

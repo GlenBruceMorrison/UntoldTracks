@@ -49,11 +49,11 @@ namespace UntoldTracks.Inventory
         #endregion
 
         #region events
-        //public event PlayerInteraction OnOpened;
-        //public event PlayerInteraction OnClosed;
         public event InventoryModified OnModified;
+        public event ContainerAdded OnContainerAdded; 
+        public event ContainerAdded OnContainerRemoved;
         #endregion
-         
+
         public Inventory(int size)
         {
             SetSize(size);
@@ -109,6 +109,12 @@ namespace UntoldTracks.Inventory
             }
 
             OnModified?.Invoke();
+
+            if (remaining != count)
+            {
+                OnContainerAdded?.Invoke(new ItemContainer(item, count - remaining));
+            }
+
             return remaining;
         }
 
@@ -127,6 +133,12 @@ namespace UntoldTracks.Inventory
             });
 
             OnModified?.Invoke();
+
+            if (remaining != count)
+            {
+                OnContainerRemoved?.Invoke(new ItemContainer(item, count - remaining));
+            }
+
             return remaining;
         }
 

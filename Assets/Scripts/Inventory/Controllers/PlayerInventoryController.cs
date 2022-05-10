@@ -14,8 +14,11 @@ namespace UntoldTracks.Inventory
         public int count;
     }
 
+    public delegate void ActiveItemChanged(PlayerManager player, IItemContainer container);
+
     public class PlayerInventoryController : MonoBehaviour
     {
+        #region private
         [SerializeField]
         private List<ItemContainerTemplate> _initialContents = new List<ItemContainerTemplate>();
 
@@ -25,12 +28,21 @@ namespace UntoldTracks.Inventory
         [SerializeField]
         private PlayerInventoryBarUI _uiInventoryBar;
 
+        private int _inventoryBarSize = 9;
+        private int _inventorySize = 25;
+        private int _activeItemIndex = 0;
         internal PlayerManager playerManager;
         private IInventory _inventory;
         private bool _isOpen = false;
+        #endregion
 
+        #region events
         public UnityEvent OnClose, OnOpen;
 
+        public event ActiveItemChanged OnActiveItemChanged;
+        #endregion
+
+        #region getters
         public IInventory Inventory
         {
             get
@@ -47,6 +59,15 @@ namespace UntoldTracks.Inventory
             }
         }
 
+        public IItemContainer ActiveItem
+        {
+            get
+            {
+                return _inventory.Containers[_activeItemIndex];
+            }
+        }
+        #endregion
+
         public void Seed()
         {
             foreach (var containerTemplate in _initialContents)
@@ -62,17 +83,23 @@ namespace UntoldTracks.Inventory
 
         public void Awake()
         {
-            _inventory = new Inventory(25);
+            _inventory = new Inventory(_inventorySize);
 
             if (_initialContents != null)
             {
                 Seed();
             }
 
-            _uiInventoryBar.LinkToInventory(Inventory, 0, 9);
-            _ui.LinkToInventory(Inventory, 9, 25);
+            LinkToInventory();
 
             _ui.OnClose += Close;
+        }
+
+        private void LinkToInventory()
+        {
+            _uiInventoryBar.LinkToInventory(Inventory, 0, _inventoryBarSize);
+            _ui.LinkToInventory(Inventory, _inventoryBarSize, _inventorySize);
+            _activeItemIndex = 0;
         }
 
         private void Start()
@@ -93,6 +120,26 @@ namespace UntoldTracks.Inventory
             _ui.Close();
             _isOpen = false;
             OnClose?.Invoke();
+        }
+
+        public void SetActiveIndex(int index)
+        {
+            var newIndex = index;
+
+            if (index > _inventoryBarSize-1)
+            {
+                newIndex = 0;
+            }
+            else if (index < 0)
+            {
+                newIndex = _inventoryBarSize - 1;
+            }
+
+            _activeItemIndex = newIndex;
+
+            OnActiveItemChanged?.Invoke(playerManager, ActiveItem);
+
+            _uiInventoryBar.SetActiveIndex(_activeItemIndex);
         }
 
         public void Open()
@@ -116,6 +163,15 @@ namespace UntoldTracks.Inventory
                 {
                     Open();
                 }
+            }
+
+            if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+            {
+                SetActiveIndex(_activeItemIndex + 1);
+            }
+            else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+            {
+                SetActiveIndex(_activeItemIndex - 1);
             }
         }
     }

@@ -18,6 +18,8 @@ namespace UntoldTracks
 
         public UnityEvent<PlayerManager> onInteract, onLoseFocus, onGainFocus;
 
+        public Item Shovel;
+
         public void HandleBecomeFocus(PlayerManager player)
         {
             onGainFocus?.Invoke(player);
