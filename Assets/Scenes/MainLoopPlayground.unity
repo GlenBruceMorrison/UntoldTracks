@@ -20961,12 +20961,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1140364414}
   m_LocalRotation: {x: 0.13056168, y: 0.005053677, z: 0.0060425857, w: 0.9914089}
-  m_LocalPosition: {x: 0.843, y: 1.107, z: 1.095}
+  m_LocalPosition: {x: 0.843, y: -0.29900002, z: 1.095}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1226867942}
-  m_RootOrder: 1
+  m_Father: {fileID: 1758465680}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 15, y: 0.688, z: 0.789}
 --- !u!114 &1140364416
 MonoBehaviour:
@@ -22486,11 +22486,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1223907122}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1226867942 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8546294319191798716, guid: 6e9030623d6d44a578466bcc7e4a5262, type: 3}
-  m_PrefabInstance: {fileID: 8544700175996894153}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1231472483
 GameObject:
   m_ObjectHideFlags: 0
@@ -30220,7 +30215,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.70000005, y: 0}
   m_AnchorMax: {x: 1, y: 0.67700005}
-  m_AnchoredPosition: {x: -0.0014954, y: 0}
+  m_AnchoredPosition: {x: -0.0015258789, y: 0}
   m_SizeDelta: {x: -0.0029297, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1668573066
@@ -31896,6 +31891,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1740358308}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1758465680 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8546609785750182188, guid: 6e9030623d6d44a578466bcc7e4a5262, type: 3}
+  m_PrefabInstance: {fileID: 8544700175996894153}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1764209309
 GameObject:
   m_ObjectHideFlags: 0
@@ -40108,6 +40108,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8853567224444707973, guid: 6e9030623d6d44a578466bcc7e4a5262, type: 3}
+      propertyPath: interactionController
+      value: 
+      objectReference: {fileID: 1706938038}
     m_RemovedComponents:
     - {fileID: 2887733667189420495, guid: 6e9030623d6d44a578466bcc7e4a5262, type: 3}
     - {fileID: 3722081371945668194, guid: 6e9030623d6d44a578466bcc7e4a5262, type: 3}

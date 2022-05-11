@@ -8,7 +8,7 @@ namespace UntoldTracks.Player
 {
     public class PlayerActiveItem : MonoBehaviour
     {
-        public PlayerManager playerMananger => GetComponentInParent<PlayerManager>();
+        public PlayerManager playerMananger => GameObject.FindObjectOfType<PlayerManager>();
         public Item ActiveItem => playerMananger.inventoryController.ActiveItem?.Item;
 
         public GameObject activeItemObject;
