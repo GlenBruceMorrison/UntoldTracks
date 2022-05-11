@@ -66,6 +66,14 @@ namespace UntoldTracks.Inventory
                 return _inventory.Containers[_activeItemIndex];
             }
         }
+
+        public bool HasActiveItem
+        {
+            get
+            {
+                return !(ActiveItem == null || ActiveItem.IsEmpty());
+            }
+        }
         #endregion
 
         public void Seed()

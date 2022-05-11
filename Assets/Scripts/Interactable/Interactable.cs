@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.Events;
 using UntoldTracks.Player;
+using UntoldTracks.Inventory;
 
 namespace UntoldTracks
 {
@@ -20,12 +21,12 @@ namespace UntoldTracks
 
         public Item Shovel;
 
-        public void HandleBecomeFocus(PlayerManager player)
+        public virtual void HandleBecomeFocus(PlayerManager player)
         {
             onGainFocus?.Invoke(player);
         }
 
-        public void HandleInteraction(PlayerManager player)
+        public void HandleInteraction(PlayerManager player, ItemContainer usingContainer, InteractionInput input)
         {
             onInteract?.Invoke(player);
         }

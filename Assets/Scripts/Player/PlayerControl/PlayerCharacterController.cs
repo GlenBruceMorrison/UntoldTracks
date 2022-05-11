@@ -4,6 +4,7 @@ using UntoldTracks.Player;
 using KinematicCharacterController.Examples;
 using KinematicCharacterController;
 
+
 namespace UntoldTracks.CharacterController
 {
     public class PlayerCharacterController : MonoBehaviour, IFirstPersonController
@@ -16,6 +17,14 @@ namespace UntoldTracks.CharacterController
         private const string MouseScrollInput = "Mouse ScrollWheel";
         private const string HorizontalInput = "Horizontal";
         private const string VerticalInput = "Vertical";
+
+        public bool IsMoving
+        {
+            get
+            {
+                return Character.Motor.Velocity.x != 0 || Character.Motor.Velocity.z != 0;
+            }
+        }
 
         private void Start()
         {

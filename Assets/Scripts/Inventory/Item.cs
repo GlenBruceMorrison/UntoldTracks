@@ -13,4 +13,8 @@ public class Item : ScriptableObject
     public bool isBuildingTool = false;
     public bool isFuel = false;
     public int fuelStrength = 1;
+    public bool hasCustomInteractionFrame = false;
+
+    public bool isTool;
+    public GameObject toolPrefab;
 }

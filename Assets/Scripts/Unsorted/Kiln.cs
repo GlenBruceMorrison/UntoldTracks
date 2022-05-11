@@ -13,7 +13,7 @@ namespace UntoldTracks.Machines
         public List<Transform> fuelModels = new List<Transform>();
         public Item fuel;
 
-        public void AddFuel(PlayerManager player)
+        public void AddFuel(PlayerManager player, ItemContainer usingContainer, InteractionInput input)
         {
             // if already full then return
             if (currentFuel >= maxFuel)

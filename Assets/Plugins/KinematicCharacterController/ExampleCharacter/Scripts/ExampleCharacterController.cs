@@ -25,8 +25,6 @@ namespace KinematicCharacterController.Examples
         public bool JumpDown;
         public bool CrouchDown;
         public bool CrouchUp;
-
-        public bool ClimbLadder;
     }
 
     public struct AICharacterInputs

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UntoldTracks.Inventory;
 using UntoldTracks.Player;
 
 namespace UntoldTracks.Resource
@@ -41,11 +42,24 @@ namespace UntoldTracks.Resource
 
         public void HandleLoseFocus(PlayerManager player) { }
         public void HandleBecomeFocus(PlayerManager player) { }
-        public void HandleInteraction(PlayerManager playerManager)
+        public void HandleInteraction(PlayerManager playerManager, ItemContainer usingContainer, InteractionInput input)
         {
             if (capacity < 1)
             {
                 return;
+            }
+
+            if (holder.itemToHarvest != null)
+            {
+                if (!playerManager.inventoryController.HasActiveItem)
+                {
+                    return;
+                }
+
+                if (playerManager.inventoryController.ActiveItem.Item != holder.itemToHarvest)
+                {
+                    return;
+                }
             }
 
             var collected = holder.Harvest();
