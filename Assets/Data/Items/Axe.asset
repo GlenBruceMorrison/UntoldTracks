@@ -22,4 +22,4 @@ MonoBehaviour:
   fuelStrength: 1
   hasCustomInteractionFrame: 1
   isTool: 1
-  toolPrefab: {fileID: 7643700511563902989, guid: 263bc7446919843758a76ab59ac7d0cd, type: 3}
+  toolPrefab: {fileID: 7643700511563902989, guid: 391d4c28f8093492db19cff157d23ede, type: 3}
