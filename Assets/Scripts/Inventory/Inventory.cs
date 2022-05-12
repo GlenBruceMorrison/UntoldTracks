@@ -173,6 +173,11 @@ namespace UntoldTracks.Inventory
             return !(remainder > 0);
         }
 
+        public int GetItemCount(Item item)
+        {
+            return GetNonEmptyContainer().Where(x => x.Item == item).Sum(x => x.Count);
+        }
+
         /*
         public void Open(PlayerManager player)
         {

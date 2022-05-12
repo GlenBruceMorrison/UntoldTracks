@@ -8,4 +8,17 @@ public class Recipe : ScriptableObject
 {
     public List<ItemContainer> ingredients = new List<ItemContainer>();
     public ItemContainer produces;
+
+    public bool CanCreate(IInventory inventory)
+    {
+        foreach(var ingredient in ingredients)
+        {
+            if (!inventory.HasItem(ingredient.Item, ingredient.Count))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

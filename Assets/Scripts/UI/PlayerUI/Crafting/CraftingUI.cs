@@ -1,0 +1,75 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UntoldTracks.Inventory;
+using UntoldTracks.Player;
+
+public class CraftingUI : MonoBehaviour
+{
+    public Transform recipeContainer;
+
+    public CraftingWindow craftingWindow;
+
+    public CraftingButton craftingButton;
+
+    public List<RecipeSelector> recipeSelectors = new List<RecipeSelector>();
+    public RecipeSelector recipeSelectorPrefab;
+
+    public List<Recipe> currentRecipes = new List<Recipe>();
+
+    public PlayerManager playerManager => GameObject.FindObjectOfType<PlayerManager>();
+
+    public Recipe selectedRecipe;
+
+
+    private void OnEnable()
+    {
+        RenderRecipeBook(currentRecipes);
+
+        craftingButton.OnClick += () =>
+        {
+            Craft();
+        };
+    }
+
+    public void Craft()
+    {
+        if (!selectedRecipe.CanCreate(playerManager.inventoryController.Inventory))
+        {
+            return;
+        }
+
+        playerManager.inventoryController.Inventory.FillAndReturnRemaining(selectedRecipe.produces.Item, selectedRecipe.produces.Count);
+    }
+
+    public void Init(PlayerManager playerManager)
+    {
+        //this.playerManager = playerManager;
+    }
+
+    public void RenderRecipeBook(List<Recipe> recipes)
+    {
+        currentRecipes = recipes;
+
+        foreach (var recipe in recipeSelectors)
+        {
+            Destroy(recipe.gameObject);
+        }
+
+        recipeSelectors = new List<RecipeSelector>();
+
+        foreach (var recipe in recipes)
+        {
+            var newPanel = Instantiate(recipeSelectorPrefab, recipeContainer.transform);
+            recipeSelectors.Add(newPanel);
+
+            newPanel.Render(recipe);
+        }
+    }
+
+    public void ShowRecipe(Recipe recipe)
+    {
+        selectedRecipe = recipe;
+        craftingWindow.Render(recipe, playerManager.inventoryController.Inventory);
+    }
+}

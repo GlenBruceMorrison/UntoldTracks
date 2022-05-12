@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41cf72670afae4f0da1bcdb2aedb3670, type: 3}
-  m_Name: MetalAxeRecipe
+  m_Name: StoneShovel
   m_EditorClassIdentifier: 
   ingredients:
-  - item: {fileID: 11400000, guid: faf949030edf14bb19f822b6a699d2c2, type: 2}
-    count: 2
-  - item: {fileID: 11400000, guid: a0f4fbde1465341298bfd3fdf4d5f6a6, type: 2}
-    count: 2
+  - _item: {fileID: 11400000, guid: d4895223a3464492896ddfe9360331c8, type: 2}
+    _count: 1
+  - _item: {fileID: 11400000, guid: a0f4fbde1465341298bfd3fdf4d5f6a6, type: 2}
+    _count: 3
   produces:
-    item: {fileID: 11400000, guid: 4dcc75568882e43dba0755286b535265, type: 2}
-    count: 1
+    _item: {fileID: 11400000, guid: 63772c9f6660d46a09bf0b6ace5f897f, type: 2}
+    _count: 1

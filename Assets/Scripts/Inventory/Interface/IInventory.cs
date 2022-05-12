@@ -121,5 +121,7 @@ namespace UntoldTracks.Inventory
         /// </summary>
         /// <param name="size">Target size</param>
         public void SetSize(int size);
+
+        int GetItemCount(Item item);
     }
 }

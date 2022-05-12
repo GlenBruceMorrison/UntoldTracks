@@ -147,14 +147,7 @@ namespace UntoldTracks.Player
             {
                 if (currentFocus != null)
                 {
-                    if (playerManager.inventoryController.HasActiveItem && playerManager.inventoryController.ActiveItem.Item.hasCustomInteractionFrame)
-                    {
-                        GetComponentInChildren<UseableItem>().HandleInteractionDown(InteractionInput.Secondary);
-                    }
-                    else
-                    {
-                        currentFocus.HandleInteraction(playerManager, (ItemContainer)playerManager.inventoryController.ActiveItem, InteractionInput.Secondary);
-                    }
+                     currentFocus.HandleInteraction(playerManager, (ItemContainer)playerManager.inventoryController.ActiveItem, InteractionInput.Secondary);
                 }
             }
         }
