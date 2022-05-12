@@ -15,6 +15,8 @@ namespace UntoldTracks.Resource
         [SerializeField]
         private Sprite _displaySprite;
 
+        public bool deleteOnHarvested;
+
         public string DisplayText
         {
             get
@@ -74,7 +76,12 @@ namespace UntoldTracks.Resource
             if (capacity < 1)
             {
                 OnHarvested?.Invoke();
-                //Destroy(this.gameObject);
+
+                if (deleteOnHarvested)
+                {
+                    Destroy(this.gameObject);
+                }
+
                 source.PlayOneShot(holder.fullyHarvestedAudio);
             }
             else
