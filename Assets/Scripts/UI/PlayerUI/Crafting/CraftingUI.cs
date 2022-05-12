@@ -26,10 +26,12 @@ public class CraftingUI : MonoBehaviour
     {
         RenderRecipeBook(currentRecipes);
 
-        craftingButton.OnClick += () =>
-        {
-            Craft();
-        };
+        craftingButton.OnClick += Craft;
+    }
+
+    private void OnDisable()
+    {
+        craftingButton.OnClick -= Craft;
     }
 
     public void Craft()
@@ -39,7 +41,14 @@ public class CraftingUI : MonoBehaviour
             return;
         }
 
+        foreach (var ingredient in selectedRecipe.ingredients)
+        {
+            playerManager.inventoryController.Inventory.TakeAndReturnRemaining(ingredient.Item, ingredient.Count);
+        }
+
         playerManager.inventoryController.Inventory.FillAndReturnRemaining(selectedRecipe.produces.Item, selectedRecipe.produces.Count);
+
+        RenderRecipeBook(currentRecipes);
     }
 
     public void Init(PlayerManager playerManager)
@@ -49,8 +58,6 @@ public class CraftingUI : MonoBehaviour
 
     public void RenderRecipeBook(List<Recipe> recipes)
     {
-        currentRecipes = recipes;
-
         foreach (var recipe in recipeSelectors)
         {
             Destroy(recipe.gameObject);
