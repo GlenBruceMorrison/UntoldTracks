@@ -5,19 +5,22 @@ using TMPro;
 using UnityEngine.UI;
 using UntoldTracks.Inventory;
 
-public class RecipeIngredient : MonoBehaviour
+namespace UntoldTracks.UI
 {
-    public Image ingredientImage;
-    public TMP_Text ingredientName;
-    public TMP_Text ingredientCount;
-
-    public void Render(ItemContainer container, IInventory source)
+    public class RecipeIngredient : MonoBehaviour
     {
-        ingredientImage.sprite = container.Item.sprite;
-        ingredientName.text = container.Item.name;
+        public Image ingredientImage;
+        public TMP_Text ingredientName;
+        public TMP_Text ingredientCount;
 
-        var sourceCount = source.GetItemCount(container.Item);
+        public void Render(ItemContainer container, IInventory source)
+        {
+            ingredientImage.sprite = container.Item.sprite;
+            ingredientName.text = container.Item.name;
 
-        ingredientCount.text = $"{sourceCount}/{container.Count}";
+            var sourceCount = source.GetItemCount(container.Item);
+
+            ingredientCount.text = $"{sourceCount}/{container.Count}";
+        }
     }
 }

@@ -5,37 +5,40 @@ using TMPro;
 using UnityEngine.UI;
 using UntoldTracks.Inventory;
 
-public class CraftingWindow : MonoBehaviour
+namespace UntoldTracks.UI
 {
-    public Image targetItemSprite;
-    public TMP_Text targetItemName;
-    public TMP_Text targetItemDescription;
-
-    public Transform ingredientsContainer;
-
-    public RecipeIngredient ingredientPrefab;
-    public List<RecipeIngredient> ingredients = new List<RecipeIngredient>();
-
-    public void Render(Recipe recipe, IInventory inventory)
+    public class CraftingWindow : MonoBehaviour
     {
-        foreach (var ingredient in ingredients)
+        public Image targetItemSprite;
+        public TMP_Text targetItemName;
+        public TMP_Text targetItemDescription;
+
+        public Transform ingredientsContainer;
+
+        public RecipeIngredient ingredientPrefab;
+        public List<RecipeIngredient> ingredients = new List<RecipeIngredient>();
+
+        public void Render(Recipe recipe, IInventory inventory)
         {
-            Destroy(ingredient.gameObject);
-        }
+            foreach (var ingredient in ingredients)
+            {
+                Destroy(ingredient.gameObject);
+            }
 
-        ingredients = new List<RecipeIngredient>();
+            ingredients = new List<RecipeIngredient>();
 
-        targetItemSprite.sprite = recipe.produces.Item.sprite;
-        targetItemName.text = recipe.produces.Item.name;
-        targetItemDescription.text = recipe.produces.Item.description;
+            targetItemSprite.sprite = recipe.produces.Item.sprite;
+            targetItemName.text = recipe.produces.Item.name;
+            targetItemDescription.text = recipe.produces.Item.description;
 
-        foreach (var ingredient in recipe.ingredients)
-        {
-            var ingredientObject = Instantiate(ingredientPrefab, ingredientsContainer.transform);
+            foreach (var ingredient in recipe.ingredients)
+            {
+                var ingredientObject = Instantiate(ingredientPrefab, ingredientsContainer.transform);
 
-            ingredients.Add(ingredientObject);
+                ingredients.Add(ingredientObject);
 
-            ingredientObject.Render(ingredient, inventory);
+                ingredientObject.Render(ingredient, inventory);
+            }
         }
     }
 }

@@ -5,12 +5,15 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UntoldTracks.Inventory;
 
-public class CraftingButton : MonoBehaviour, IPointerClickHandler
+namespace UntoldTracks.UI
 {
-    public UnityAction OnClick;
-
-    public void OnPointerClick(PointerEventData eventData)
+    public class CraftingButton : MonoBehaviour, IPointerClickHandler
     {
-        OnClick?.Invoke();
+        public UnityAction OnClick;
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            OnClick?.Invoke();
+        }
     }
 }

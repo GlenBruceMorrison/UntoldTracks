@@ -5,36 +5,39 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class RecipeSelector : MonoBehaviour, IPointerClickHandler
+namespace UntoldTracks.UI
 {
-    public Image sprite;
-    public TMP_Text title;
-
-    public Recipe recipe;
-
-    public CraftingUI craftingUI;
-
-    private void Awake()
+    public class RecipeSelector : MonoBehaviour, IPointerClickHandler
     {
-        craftingUI = GetComponentInParent<CraftingUI>();
-    }
+        public Image sprite;
+        public TMP_Text title;
 
-    public void Render(Recipe recipe)
-    {
-        this.recipe = recipe;
+        public Recipe recipe;
 
-        if (recipe == null)
+        public CraftingUI craftingUI;
+
+        private void Awake()
         {
-            sprite = null;
-            title.text = "";
+            craftingUI = GetComponentInParent<CraftingUI>();
         }
 
-        sprite.sprite = recipe.produces.Item.sprite;
-        title.text = recipe.produces.Item.name;
-    }
+        public void Render(Recipe recipe)
+        {
+            this.recipe = recipe;
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        craftingUI.ShowRecipe(recipe);
+            if (recipe == null)
+            {
+                sprite = null;
+                title.text = "";
+            }
+
+            sprite.sprite = recipe.produces.Item.sprite;
+            title.text = recipe.produces.Item.name;
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            craftingUI.ShowRecipe(recipe);
+        }
     }
 }
