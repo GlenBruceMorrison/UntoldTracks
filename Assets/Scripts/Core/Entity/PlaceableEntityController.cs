@@ -22,13 +22,13 @@ public class PlaceableEntityController : MonoBehaviour
         foreach (var origin in targetPlaceable.raycastOrigins)
         {
             Debug.DrawRay(origin.position, Vector3.down * 1f);
+
             var hit = Physics.Raycast(origin.position, Vector3.down, 1);
+
             if (!hit)
             {
                 return false;
             }
-
-            Debug.Log("a hit"); 
         }
 
         return true;
@@ -47,6 +47,11 @@ public class PlaceableEntityController : MonoBehaviour
 
         transform.position = Vector3.zero;
 
+        GameObject.FindObjectOfType<PlayerActiveItem>().activeItemObject = null;
+        GameObject.FindObjectOfType<PlayerManager>().inventoryController.Inventory.TakeAndReturnRemaining(targetPlaceable.source, 1);
+
+        targetPlaceable = null;
+
         return true;
     }
 
@@ -64,8 +69,6 @@ public class PlaceableEntityController : MonoBehaviour
         targetPlaceable.transform.localPosition = Vector3.zero;
         targetPlaceable.transform.localEulerAngles = Vector3.zero;
 
-        Debug.Log(transform.name);
-
         targetPlaceable.OnEntityMove += HandleEntityMove;
     }
 
@@ -76,9 +79,7 @@ public class PlaceableEntityController : MonoBehaviour
 
     private void HandleEntityMove(Vector3 old, Vector3 current)
     {
-        var canPlace = IsPlaceable();
-
-
+        //var canPlace = IsPlaceable();
     }
 
     private void Update()
@@ -87,13 +88,21 @@ public class PlaceableEntityController : MonoBehaviour
         {
             if (TryPlace())
             {
-                this.gameObject.SetActive(false);
+                //this.gameObject.SetActive(false);
             }
         }
 
+        if (targetPlaceable == null)
+        {
+            return;
+        }
 
-            transform.position = GameObject.FindObjectOfType<PlayerInteractionController>().LookingAt;
+        var fromGround = targetPlaceable.transform.localScale.y/2;
 
+        transform.position = new Vector3(
+            interactionController.LookingAt.x,
+            interactionController.LookingAt.y + fromGround,
+            interactionController.LookingAt.z);
 
         Debug.Log(IsPlaceable());
     }
