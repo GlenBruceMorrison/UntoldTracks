@@ -100,8 +100,9 @@ namespace UntoldTracks.Inventory
         /// </summary>
         /// <param name="item">The Item to be taken</param>
         /// <param name="count">The ammount desired</param>
+        /// <param name="preferredIndex">The inventory index you would preffered to priotise first</param>
         /// <returns>Returns the count of what couldn't be taken, will be 0 if the desired amount was all taken from this inventory</returns>
-        public int TakeAndReturnRemaining(Item item, int count);
+        public int TakeAndReturnRemaining(Item item, int count, int preferredIndex=-1);
 
         /// <summary>
         /// Get the container at a given index

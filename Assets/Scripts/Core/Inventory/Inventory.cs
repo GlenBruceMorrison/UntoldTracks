@@ -125,9 +125,21 @@ namespace UntoldTracks.Inventory
             return remaining;
         }
 
-        public int TakeAndReturnRemaining(Item item, int count)
+        public int TakeAndReturnRemaining(Item item, int count, int preferredIndex=-1)
         {
             var remaining = count;
+
+            // prioritise preferred index first
+            if (preferredIndex >= 0)
+            {
+                var preferredContainer = GetContainerAtIndex(preferredIndex);
+                remaining = preferredContainer.TakeAndReturnRemaining(count);
+                if (remaining <= 0)
+                {
+                    OnContainerRemoved?.Invoke(new ItemContainer(item, count - remaining));
+                    return 0;
+                }
+            }
 
             var toCheck = Containers.Where(x => x.HasItem(item)).Reverse().ToList();
 

@@ -9,6 +9,7 @@ namespace UntoldTracks.Player
     public class PlayerActiveItem : MonoBehaviour
     {
         private PlayerManager _playerMananger;
+        public Transform playerHand;
 
         public PlaceableEntityController _placeableEntityController => GameObject.FindObjectOfType<PlaceableEntityController>();
 
@@ -78,7 +79,7 @@ namespace UntoldTracks.Player
 
         public void SwitchToTool(GameObject toolPrefab)
         {
-            activeItemObject = Instantiate(toolPrefab, this.transform);
+            activeItemObject = Instantiate(toolPrefab, playerHand.transform);
             activeItemObject.transform.localPosition = Vector3.zero;
             activeItemObject.transform.localEulerAngles = Vector3.zero;
         }
@@ -89,6 +90,18 @@ namespace UntoldTracks.Player
             activeItemObject = obj.gameObject;
             _placeableEntityController.gameObject.SetActive(true);
             _placeableEntityController.EquipPlaceable(obj);
+        }
+
+        public bool TryGetTool(out ToolEntity tool)
+        {
+            if (GetComponentInChildren<ToolEntity>() == null)
+            {
+                tool = null;
+                return false;
+            }
+
+            tool = GetComponentInChildren<ToolEntity>();
+            return true;
         }
     }
 }

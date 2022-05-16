@@ -18,8 +18,12 @@ MonoBehaviour:
   stackable: 1
   stackSize: 1
   isTool: 0
+  toolStrength: 1
   isBuildingTool: 0
   hasCustomInteractionFrame: 0
   toolPrefab: {fileID: 0}
+  isPlaceable: 1
+  placeablePrefab: {fileID: 113868969284383495, guid: eca6fb0feb2fa4fae8fbb48a6f5c53a3, type: 3}
+  canRotate: 0
   isFuel: 0
   fuelStrength: 1

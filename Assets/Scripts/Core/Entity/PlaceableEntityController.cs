@@ -4,7 +4,7 @@ using UntoldTracks.Player;
 
 public class PlaceableEntityController : MonoBehaviour
 {
-    public PlayerInteractionController interactionController;
+    public PlayerManager playerManager;
     public PlaceableEntity targetPlaceable;
 
     public bool IsPlaceable()
@@ -48,7 +48,10 @@ public class PlaceableEntityController : MonoBehaviour
         transform.position = Vector3.zero;
 
         GameObject.FindObjectOfType<PlayerActiveItem>().activeItemObject = null;
-        GameObject.FindObjectOfType<PlayerManager>().inventoryController.Inventory.TakeAndReturnRemaining(targetPlaceable.source, 1);
+        playerManager.inventoryController.Inventory.TakeAndReturnRemaining(
+            targetPlaceable.source,
+            1,
+            playerManager.inventoryController.ActiveItem.Index);
 
         targetPlaceable = null;
 
@@ -57,6 +60,8 @@ public class PlaceableEntityController : MonoBehaviour
 
     public void EquipPlaceable(PlaceableEntity entity)
     {
+        ResetTransform(this.transform);
+
         targetPlaceable = entity;
 
         if (targetPlaceable == null)
@@ -66,10 +71,16 @@ public class PlaceableEntityController : MonoBehaviour
         }
 
         targetPlaceable.transform.parent = this.transform;
-        targetPlaceable.transform.localPosition = Vector3.zero;
-        targetPlaceable.transform.localEulerAngles = Vector3.zero;
+        ResetTransform(targetPlaceable.transform);
 
         targetPlaceable.OnEntityMove += HandleEntityMove;
+    }
+
+
+    public void ResetTransform(Transform transform)
+    {
+        transform.localPosition = Vector3.zero;
+        transform.localEulerAngles = Vector3.zero;
     }
 
     private void OnDisable()
@@ -97,12 +108,21 @@ public class PlaceableEntityController : MonoBehaviour
             return;
         }
 
+        if(Input.GetKey("q"))
+        {
+            transform.localEulerAngles -= Vector3.up * 5;
+        }
+        else if (Input.GetKey("r"))
+        {
+            transform.localEulerAngles += Vector3.up * 5;
+        }
+
         var fromGround = targetPlaceable.transform.localScale.y/2;
 
         transform.position = new Vector3(
-            interactionController.LookingAt.x,
-            interactionController.LookingAt.y + fromGround,
-            interactionController.LookingAt.z);
+            playerManager.interactionController.LookingAt.x,
+            playerManager.interactionController.LookingAt.y + fromGround,
+            playerManager.interactionController.LookingAt.z);
 
         Debug.Log(IsPlaceable());
     }

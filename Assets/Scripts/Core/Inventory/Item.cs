@@ -25,6 +25,7 @@ public class Item : ScriptableObject
     [Header("Placeable Settings")]
     public bool isPlaceable = false;
     public PlaceableEntity placeablePrefab;
+    public bool canRotate=true;
 
     [Header("MISC")]
     public bool isFuel = false;

@@ -7,6 +7,8 @@ using UntoldTracks.UI;
 
 namespace UntoldTracks.Player
 {
+    public delegate void FocusChange(IInteractable target);
+
     public class PlayerInteractionController : MonoBehaviour
     {
         public PlayerManager playerManager;
@@ -22,6 +24,8 @@ namespace UntoldTracks.Player
 
         [SerializeField]
         private Vector3 _lookingAt;
+
+        public event FocusChange OnFocusChange;
 
         public Vector3 LookingAt
         {
@@ -75,16 +79,9 @@ namespace UntoldTracks.Player
                     currentFocus.HandleLoseFocus(playerManager);
                     interactable.HandleBecomeFocus(playerManager);
 
-                    /*
-                    OnFocusChangeEvent.BroadcastEvent(new OnFocusChangeEvent()
-                    {
-                        player = playerManager,
-                        newFocus = interactable,
-                        oldFocus = currentFocus
-                    });
-                    */
-
                     currentFocus = interactable;
+
+                    OnFocusChange?.Invoke(currentFocus);
                 }
             }
 
@@ -92,16 +89,9 @@ namespace UntoldTracks.Player
             {
                 currentFocus = interactable;
 
-                /*
-                OnFocusChangeEvent.BroadcastEvent(new OnFocusChangeEvent()
-                {
-                    player = playerManager,
-                    newFocus = interactable,
-                    oldFocus = currentFocus
-                });
-                */
-
                 interactable.HandleBecomeFocus(playerManager);
+
+                OnFocusChange?.Invoke(currentFocus);
             }
 
             _uiInteractionController.DisplayInteractable(currentFocus);
@@ -140,7 +130,10 @@ namespace UntoldTracks.Player
                 {
                     if (playerManager.inventoryController.HasActiveItem && playerManager.inventoryController.ActiveItem.Item.hasCustomInteractionFrame)
                     {
-                        playerManager.gameObject.GetComponentInChildren<ToolEntity>().HandleInteractionDown(InteractionInput.Primary);
+                        if (playerManager.playerActiveItem.TryGetTool(out ToolEntity tool))
+                        {
+                            tool.HandleInteractionDown(InteractionInput.Primary);
+                        }
                     }
                     else
                     {
