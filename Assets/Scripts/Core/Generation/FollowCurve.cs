@@ -10,6 +10,8 @@ public class FollowCurve : MonoBehaviour
     public float speed = 5;
     float distanceTravelled;
 
+    float startDistance = 0;
+
     private void Start()
     {
         pathCreator = GameObject.FindObjectOfType<PathCreator>();    
@@ -18,7 +20,7 @@ public class FollowCurve : MonoBehaviour
     void Update()
     {
         distanceTravelled += speed * Time.deltaTime;
-        transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
-        transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+        transform.position = pathCreator.path.GetPointAtDistance(startDistance + distanceTravelled, endOfPathInstruction);
+        transform.rotation = pathCreator.path.GetRotationAtDistance(startDistance + distanceTravelled, endOfPathInstruction);
     }
 }
