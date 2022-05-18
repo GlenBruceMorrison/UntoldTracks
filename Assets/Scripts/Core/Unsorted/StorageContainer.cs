@@ -63,16 +63,19 @@ public class StorageContainer : MonoBehaviour, IInteractable
 
     }
 
-    public void HandleInteraction(PlayerManager player, ItemContainer usingContainer, InteractionInput input)
-    {
-        if (input == InteractionInput.Secondary)
-        {
-            player.inventoryController.OpenOtherInventory(_inventory);
-        }
-    }
 
     public void HandleLoseFocus(PlayerManager player)
     {
 
+    }
+
+    public void HandlePrimaryInput(PlayerManager player, ItemContainer usingContainer)
+    {
+
+    }
+
+    public void HandleSecondaryInput(PlayerManager player, ItemContainer usingContainer)
+    {
+        player.inventoryController.OpenOtherInventory(_inventory);
     }
 }

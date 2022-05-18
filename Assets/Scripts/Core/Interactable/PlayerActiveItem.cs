@@ -94,13 +94,13 @@ namespace UntoldTracks.Player
 
         public bool TryGetTool(out ToolEntity tool)
         {
-            if (GetComponentInChildren<ToolEntity>() == null)
+            if (playerHand.GetComponentInChildren<ToolEntity>() == null)
             {
                 tool = null;
                 return false;
             }
 
-            tool = GetComponentInChildren<ToolEntity>();
+            tool = playerHand.GetComponentInChildren<ToolEntity>();
             return true;
         }
     }

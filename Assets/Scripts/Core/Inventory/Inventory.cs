@@ -168,8 +168,6 @@ namespace UntoldTracks.Inventory
 
         public bool HasItem(Item item, int count)
         {
-            var remainder = count;
-
             var containers = _containers.Where(x => x.HasItem(item)).ToList();
 
             if (containers.Count == 0)
@@ -177,7 +175,9 @@ namespace UntoldTracks.Inventory
                 return false;
             }
 
-            foreach (var container in GetNonEmptyContainer())
+            var remainder = count;
+
+            foreach (var container in containers)
             {
                 remainder = container.TakeAndReturnRemaining(count, false);
             }
@@ -226,7 +226,7 @@ namespace UntoldTracks.Inventory
 
             if (index + 1 >= _containers.Capacity || index < 0)
             {
-                Debug.LogWarning("Trying to acces container at non existing index");
+                //Debug.LogWarning("Trying to access container at non existing index");
                 return null;
             }
 
@@ -237,7 +237,7 @@ namespace UntoldTracks.Inventory
         {
             _containers = new List<IItemContainer>();
 
-            for (int i=0;i<size; i++)
+            for (var i=0;i<size; i++)
             {
                 AppendContainer();
             }

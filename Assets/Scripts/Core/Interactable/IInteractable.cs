@@ -16,7 +16,8 @@ namespace UntoldTracks
         public string DisplayText { get; }
         public Sprite DisplaySprite { get; }
 
-        public void HandleInteraction(PlayerManager player, ItemContainer usingContainer, InteractionInput input);
+        public void HandlePrimaryInput(PlayerManager player, ItemContainer usingContainer);
+        public void HandleSecondaryInput(PlayerManager player, ItemContainer usingContainer);
         public void HandleBecomeFocus(PlayerManager player);
         public void HandleLoseFocus(PlayerManager player);
     }

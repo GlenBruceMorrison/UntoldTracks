@@ -53,7 +53,7 @@ namespace UntoldTracks.Resource
 
         public void HandleLoseFocus(PlayerManager player) { }
         public void HandleBecomeFocus(PlayerManager player) { }
-        public void HandleInteraction(PlayerManager playerManager, ItemContainer usingContainer, InteractionInput input)
+        public void HandlePrimaryInput(PlayerManager player, ItemContainer usingContainer)
         {
             /*
             if (capacity < 1)
@@ -94,7 +94,7 @@ namespace UntoldTracks.Resource
 
             foreach (var container in collected)
             {
-                playerManager.inventoryController.Inventory.FillAndReturnRemaining(container.Item, container.Count);
+                player.inventoryController.Inventory.FillAndReturnRemaining(container.Item, container.Count);
             }
 
             OnHarvested?.Invoke();
@@ -105,6 +105,11 @@ namespace UntoldTracks.Resource
             }
 
             source.PlayOneShot(holder.fullyHarvestedAudio);
+        }
+
+        public void HandleSecondaryInput(PlayerManager player, ItemContainer usingContainer)
+        {
+
         }
     }
 }

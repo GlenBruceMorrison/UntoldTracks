@@ -44,12 +44,6 @@ public class ItemContainerWorldObject : MonoBehaviour, IInteractable
         }
     }
 
-    public void HandleInteraction(PlayerManager player, ItemContainer usingContainer, InteractionInput input)
-    {
-        var left = player.inventoryController.Inventory.FillAndReturnRemaining(Container.Item, Container.Count);
-        Destroy(this.gameObject);
-    }
-
     public void HandleBecomeFocus(PlayerManager player)
     {
 
@@ -57,6 +51,18 @@ public class ItemContainerWorldObject : MonoBehaviour, IInteractable
 
     public void HandleLoseFocus(PlayerManager player)
     {
+
+    }
+
+    public void HandlePrimaryInput(PlayerManager player, ItemContainer usingContainer)
+    {
+        var left = player.inventoryController.Inventory.FillAndReturnRemaining(Container.Item, Container.Count);
+        Destroy(this.gameObject);
+    }
+
+    public void HandleSecondaryInput(PlayerManager player, ItemContainer usingContainer)
+    {
+
 
     }
 }

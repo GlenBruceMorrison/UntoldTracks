@@ -22,10 +22,11 @@ namespace UntoldTracks.UI
         public PlayerManager playerManager => GameObject.FindObjectOfType<PlayerManager>();
 
         public Recipe selectedRecipe;
-
-
+        
         private void OnEnable()
         {
+            playerManager.inventoryController.Inventory.OnContainerModified +=  (container => ShowRecipe(selectedRecipe));
+            
             RenderRecipeBook(currentRecipes);
 
             craftingButton.OnClick += Craft;

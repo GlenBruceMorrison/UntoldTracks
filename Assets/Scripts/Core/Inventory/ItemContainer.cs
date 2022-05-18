@@ -121,6 +121,8 @@ namespace UntoldTracks.Inventory
             {
                 return count;
             }
+            
+            var prev = (IItemContainer)this.MemberwiseClone();
 
             if (IsEmpty())
             {
@@ -143,13 +145,24 @@ namespace UntoldTracks.Inventory
                     return 0;
                 }
             }
+            else
+            {
+                if (!_item.stackable)
+                {
+                    return count;
+                }
+            }
 
             if (!item.stackable)
             {
-                return count;
-            }
+                if (modifyContainer)
+                {
+                    _count = 1;
+                    OnModified?.Invoke(prev, this);
+                }
 
-            var prev = (IItemContainer)this.MemberwiseClone();
+                return count - 1;
+            }
 
             var diff = _item.stackSize - (_count + count);
 

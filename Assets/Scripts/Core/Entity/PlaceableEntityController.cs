@@ -66,7 +66,7 @@ public class PlaceableEntityController : MonoBehaviour
 
         if (targetPlaceable == null)
         {
-            Debug.LogError("A targetPlaceable is not set, so we are going to disable");
+            //Debug.LogError("A targetPlaceable is not set, so we are going to disable");
             this.gameObject.SetActive(false);
         }
 

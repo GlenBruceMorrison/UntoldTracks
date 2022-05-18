@@ -17,23 +17,26 @@ namespace UntoldTracks
         public string DisplayText => _displayText;
         public Sprite DisplaySprite => _displaySprite;
 
-        public UnityEvent<PlayerManager> onInteract, onLoseFocus, onGainFocus;
-
-        public Item Shovel;
+        public UnityEvent<PlayerManager> onPrimaryInteract, onSecondaryInteract, onLoseFocus, onGainFocus;
 
         public virtual void HandleBecomeFocus(PlayerManager player)
         {
             onGainFocus?.Invoke(player);
         }
 
-        public void HandleInteraction(PlayerManager player, ItemContainer usingContainer, InteractionInput input)
-        {
-            onInteract?.Invoke(player);
-        }
-
         public void HandleLoseFocus(PlayerManager player)
         {
             onLoseFocus?.Invoke(player);
+        }
+
+        public void HandlePrimaryInput(PlayerManager player, ItemContainer usingContainer)
+        {
+            onPrimaryInteract?.Invoke(player);
+        }
+
+        public void HandleSecondaryInput(PlayerManager player, ItemContainer usingContainer)
+        {
+            onSecondaryInteract?.Invoke(player);
         }
     }
 }

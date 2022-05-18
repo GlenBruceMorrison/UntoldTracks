@@ -153,14 +153,14 @@ namespace UntoldTracks.Player
             {
                 if (currentFocus != null)
                 {
-                     currentFocus.HandleInteraction(playerManager, (ItemContainer)playerManager.inventoryController.ActiveItem, InteractionInput.Secondary);
+                     currentFocus.HandleSecondaryInput(playerManager, (ItemContainer)playerManager.inventoryController.ActiveItem);
                 }
             }
         }
 
         private void Interact(IInteractable interactable)
         {
-            interactable.HandleInteraction(playerManager, (ItemContainer)playerManager.inventoryController.ActiveItem, InteractionInput.Primary);
+            interactable.HandlePrimaryInput(playerManager, (ItemContainer)playerManager.inventoryController.ActiveItem);
         }
 
         public void TriggerCurrentFocus()
@@ -170,7 +170,7 @@ namespace UntoldTracks.Player
                 return;
             }
 
-            currentFocus.HandleInteraction(playerManager, (ItemContainer)playerManager.inventoryController.ActiveItem, InteractionInput.Primary);
+            currentFocus.HandlePrimaryInput(playerManager, (ItemContainer)playerManager.inventoryController.ActiveItem);
         }
         #endregion
     }
