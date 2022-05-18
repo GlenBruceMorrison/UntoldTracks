@@ -9,6 +9,47 @@ public class PlaceableEntity : Entity
     
     private bool _beingPlaced;
     private int _startLayerIndex;
+
+    private Material _origionalMaterial;
+    
+    private MeshRenderer _meshRenderer;
+    
+    public Material[] allMaterials;
+ 
+    private Renderer[] _allRenderers;
+    
+    public void SetMaterial(Material material)
+    {
+        foreach (var t in _allRenderers)
+        {
+            t.material = material;
+        }
+    }
+ 
+    public void ResetMaterials()
+    {
+        for (var i = 0; i < _allRenderers.Length; i++)
+        {
+            _allRenderers[i].material = allMaterials[i];
+        }
+    }
+
+    public void GrabAllRenderers()
+    {
+        _allRenderers = GetComponentsInChildren<Renderer>();
+        allMaterials = new Material[_allRenderers.Length];
+        
+        for (var i = 0; i < _allRenderers.Length; i++)
+        {
+            allMaterials[i] = _allRenderers[i].material;
+        }
+    }
+    
+    void Awake()
+    {
+        GrabAllRenderers();
+        _startLayerIndex = gameObject.layer;
+    }
     
     public bool BeingPlaced
     {
@@ -31,10 +72,4 @@ public class PlaceableEntity : Entity
             }
         }
     }
-
-    private void Awake()
-    {
-        _startLayerIndex = gameObject.layer;
-    }
-
 }

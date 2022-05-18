@@ -7,7 +7,12 @@ public class PlaceableEntityController : MonoBehaviour
     public PlayerManager playerManager;
     public PlaceableEntity targetPlaceable;
 
+    public float rayLength = 0.2f;
+    
     public int placeableTurnSpeed = 5;
+
+    public Material canPlaceMaterial, cantPlaceMaterial;
+    public Material originalMaterial;
     
     public bool IsPlaceable()
     {
@@ -23,9 +28,9 @@ public class PlaceableEntityController : MonoBehaviour
 
         foreach (var origin in targetPlaceable.raycastOrigins)
         {
-            Debug.DrawRay(origin.position, Vector3.down * 1f);
+            Debug.DrawRay(origin.position, Vector3.down * rayLength);
 
-            var hit = Physics.Raycast(origin.position, Vector3.down, 1);
+            var hit = Physics.Raycast(origin.position, Vector3.down, rayLength);
 
             if (!hit)
             {
@@ -43,13 +48,16 @@ public class PlaceableEntityController : MonoBehaviour
             return false;
         }
 
-        targetPlaceable.transform.parent = this.transform.parent;
-        targetPlaceable.transform.localPosition = this.transform.localPosition;
-        targetPlaceable.transform.localEulerAngles = this.transform.localEulerAngles;
+        targetPlaceable.transform.parent = transform.parent;
+        targetPlaceable.transform.localPosition = transform.localPosition;
+        targetPlaceable.transform.localEulerAngles = transform.localEulerAngles;
 
         transform.position = Vector3.zero;
-
+        
+        targetPlaceable.ResetMaterials();
+            
         GameObject.FindObjectOfType<PlayerActiveItem>().activeItemObject = null;
+        
         playerManager.inventoryController.Inventory.TakeAndReturnRemaining(
             targetPlaceable.source,
             1,
@@ -70,10 +78,14 @@ public class PlaceableEntityController : MonoBehaviour
 
         if (targetPlaceable == null)
         {
-            //Debug.LogError("A targetPlaceable is not set, so we are going to disable");
+            Debug.LogError("A targetPlaceable is not set, so we are going to disable");
             this.gameObject.SetActive(false);
         }
 
+        // todo: optimize
+        targetPlaceable.GrabAllRenderers();
+        targetPlaceable.SetMaterial(canPlaceMaterial);
+        
         targetPlaceable.BeingPlaced = true;
         
         targetPlaceable.transform.parent = this.transform;
@@ -105,7 +117,7 @@ public class PlaceableEntityController : MonoBehaviour
         {
             if (TryPlace())
             {
-                
+                return;
             }
         }
 
@@ -136,6 +148,6 @@ public class PlaceableEntityController : MonoBehaviour
             playerManager.interactionController.LookingAt.y + fromGround,
             playerManager.interactionController.LookingAt.z);
 
-        Debug.Log(IsPlaceable());
+        targetPlaceable.SetMaterial(IsPlaceable() ? canPlaceMaterial : cantPlaceMaterial);
     }
 }
