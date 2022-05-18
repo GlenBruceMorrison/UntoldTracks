@@ -15,11 +15,15 @@ MonoBehaviour:
   name: Metal Shovel
   sprite: {fileID: 21300000, guid: d2f20f7e9fda744e7bcc56c561cf393d, type: 3}
   description: Can pick up stuff better
-  stackable: 1
+  stackable: 0
   stackSize: 1
   isTool: 1
+  toolStrength: 1
   isBuildingTool: 0
   hasCustomInteractionFrame: 1
   toolPrefab: {fileID: 7643700511563902989, guid: 676b0d0a4df79476590e4dc0844ba65e, type: 3}
+  isPlaceable: 0
+  placeablePrefab: {fileID: 0}
+  canRotate: 1
   isFuel: 0
   fuelStrength: 1
