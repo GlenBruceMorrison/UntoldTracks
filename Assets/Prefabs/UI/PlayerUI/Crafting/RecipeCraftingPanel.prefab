@@ -318,6 +318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cee2b2f5589e342ec8d172ce89f0b78b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerUI: {fileID: 0}
   targetItemSprite: {fileID: 2645509046730567164}
   targetItemName: {fileID: 140264313375208717}
   targetItemDescription: {fileID: 2524198197216255024}
@@ -489,8 +490,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 169.32013, y: 0}
-  m_SizeDelta: {x: -474.5115, y: -296.8422}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 427.481, y: 262.8619}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4904050149680113009
 CanvasRenderer:
@@ -1082,7 +1083,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 240.3222, y: -0.00097791}
+  m_AnchoredPosition: {x: 240.32, y: -0.0030531}
   m_SizeDelta: {x: 480.6476, y: 599.46}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5286019363517328707

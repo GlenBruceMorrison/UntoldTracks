@@ -6,7 +6,7 @@ using UnityEngine;
 using UntoldTracks;
 using UntoldTracks.Player;
 
-public class StorageContainer : MonoBehaviour, IInteractable
+public class StorageContainer : PlaceableEntity, IInteractable
 {
     public IInventory _inventory;
     public int size;

@@ -7,6 +7,8 @@ public class PlaceableEntityController : MonoBehaviour
     public PlayerManager playerManager;
     public PlaceableEntity targetPlaceable;
 
+    public int placeableTurnSpeed = 5;
+    
     public bool IsPlaceable()
     {
         if (targetPlaceable == null)
@@ -53,6 +55,8 @@ public class PlaceableEntityController : MonoBehaviour
             1,
             playerManager.inventoryController.ActiveItem.Index);
 
+        targetPlaceable.BeingPlaced = false;
+        
         targetPlaceable = null;
 
         return true;
@@ -70,6 +74,8 @@ public class PlaceableEntityController : MonoBehaviour
             this.gameObject.SetActive(false);
         }
 
+        targetPlaceable.BeingPlaced = true;
+        
         targetPlaceable.transform.parent = this.transform;
         ResetTransform(targetPlaceable.transform);
 
@@ -99,7 +105,7 @@ public class PlaceableEntityController : MonoBehaviour
         {
             if (TryPlace())
             {
-                //this.gameObject.SetActive(false);
+                
             }
         }
 
@@ -110,11 +116,17 @@ public class PlaceableEntityController : MonoBehaviour
 
         if(Input.GetKey("q"))
         {
-            transform.localEulerAngles -= Vector3.up * 5;
+            if (targetPlaceable.source.canRotate)
+            {
+                transform.localEulerAngles -= Vector3.up * placeableTurnSpeed;
+            }
         }
         else if (Input.GetKey("r"))
         {
-            transform.localEulerAngles += Vector3.up * 5;
+            if (targetPlaceable.source.canRotate)
+            {
+                transform.localEulerAngles += Vector3.up * placeableTurnSpeed;
+            }
         }
 
         var fromGround = targetPlaceable.transform.localScale.y/2;
