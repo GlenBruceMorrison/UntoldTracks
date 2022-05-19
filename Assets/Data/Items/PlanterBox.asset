@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae6880a8766e14bef8e7c995f2275825, type: 3}
+  m_Name: PlanterBox
+  m_EditorClassIdentifier: 
+  name: Planter Box
+  sprite: {fileID: 21300000, guid: 598ec3f6a70264f3e97ad2ca02478857, type: 3}
+  description: 'A planter box
+
+'
+  stackable: 0
+  stackSize: 1
+  isTool: 0
+  toolStrength: 1
+  isBuildingTool: 0
+  hasCustomInteractionFrame: 0
+  toolPrefab: {fileID: 0}
+  isPlaceable: 1
+  placeablePrefab: {fileID: 4763081645515626382, guid: 57060c0a1f3f84cb3a2c79188744c215, type: 3}
+  canRotate: 1
+  isFuel: 0
+  fuelStrength: 1
