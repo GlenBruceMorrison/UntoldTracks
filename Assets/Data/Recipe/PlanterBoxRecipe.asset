@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41cf72670afae4f0da1bcdb2aedb3670, type: 3}
   m_Name: PlanterBoxRecipe
   m_EditorClassIdentifier: 
-  ingredients: []
+  ingredients:
+  - _item: {fileID: 11400000, guid: a0f4fbde1465341298bfd3fdf4d5f6a6, type: 2}
+    _count: 1
   produces:
-    _item: {fileID: 0}
-    _count: 0
+    _item: {fileID: 11400000, guid: 39b8b352560524ad18cc09f17b56da10, type: 2}
+    _count: 1
