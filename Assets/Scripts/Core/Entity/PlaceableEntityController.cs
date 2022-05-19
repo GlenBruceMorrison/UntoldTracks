@@ -145,7 +145,7 @@ public class PlaceableEntityController : MonoBehaviour
 
         transform.position = new Vector3(
             playerManager.interactionController.LookingAt.x,
-            playerManager.interactionController.LookingAt.y + fromGround,
+            playerManager.interactionController.LookingAt.y,
             playerManager.interactionController.LookingAt.z);
 
         targetPlaceable.SetMaterial(IsPlaceable() ? canPlaceMaterial : cantPlaceMaterial);
