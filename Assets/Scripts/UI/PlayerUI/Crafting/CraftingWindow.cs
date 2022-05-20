@@ -30,6 +30,8 @@ namespace UntoldTracks.UI
 
         public void Render(Recipe recipe, IInventory inventory)
         {
+            return;
+            
             foreach (var ingredient in ingredients)
             {
                 Destroy(ingredient.gameObject);

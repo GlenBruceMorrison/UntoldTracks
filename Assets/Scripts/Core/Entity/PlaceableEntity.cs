@@ -18,6 +18,28 @@ public class PlaceableEntity : Entity
  
     private Renderer[] _allRenderers;
     
+    public bool BeingPlaced
+    {
+        get
+        {
+            return _beingPlaced;
+        }
+        set
+        {
+            _beingPlaced = value;
+            
+            if (_beingPlaced)
+            {
+                var layerIgnoreRaycast = LayerMask.NameToLayer("Ignore Raycast");
+                gameObject.layer = layerIgnoreRaycast;
+            }
+            else
+            {
+                gameObject.layer = _startLayerIndex;
+            }
+        }
+    }
+    
     public void SetMaterial(Material material)
     {
         foreach (var t in _allRenderers)
@@ -49,27 +71,5 @@ public class PlaceableEntity : Entity
     {
         GrabAllRenderers();
         _startLayerIndex = gameObject.layer;
-    }
-    
-    public bool BeingPlaced
-    {
-        get
-        {
-            return _beingPlaced;
-        }
-        set
-        {
-            _beingPlaced = value;
-            
-            if (_beingPlaced)
-            {
-                int layerIgnoreRaycast = LayerMask.NameToLayer("Ignore Raycast");
-                gameObject.layer = layerIgnoreRaycast;
-            }
-            else
-            {
-                gameObject.layer = _startLayerIndex;
-            }
-        }
     }
 }

@@ -23,7 +23,7 @@ MonoBehaviour:
   hasCustomInteractionFrame: 0
   toolPrefab: {fileID: 0}
   isPlaceable: 1
-  placeablePrefab: {fileID: 113868969284383495, guid: eca6fb0feb2fa4fae8fbb48a6f5c53a3, type: 3}
-  canRotate: 0
+  placeablePrefab: {fileID: 6196773792244837926, guid: 97ff2845c00d043c09ae53c8aee13a43, type: 3}
+  canRotate: 1
   isFuel: 0
   fuelStrength: 1
