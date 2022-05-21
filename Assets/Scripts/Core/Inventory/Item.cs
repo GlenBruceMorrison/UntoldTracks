@@ -14,6 +14,8 @@ public class Item : ScriptableObject
     [Header("Stack Settings")]
     public bool stackable = true;
     public int stackSize = 20;
+    public bool degradable = false;
+    public int durability = 0;
 
     [Header("Tool Settings")]
     public bool isTool;
@@ -30,4 +32,67 @@ public class Item : ScriptableObject
     [Header("MISC")]
     public bool isFuel = false;
     public int fuelStrength = 1;
+}
+
+public class ItemInstance
+{
+    private Item _data;
+    private float _currentDurability;
+
+    public ItemInstance(Item data)
+    {
+        _data = data;
+    }
+
+    public Item Item
+    {
+        get
+        {
+            return _data;
+        }
+        set
+        {
+            _data = value;
+        }
+    }
+
+    public float CurrentDurability
+    {
+        get
+        {
+            return _currentDurability;
+        }
+    }
+
+    public int MaxDurability
+    {
+        get
+        {
+            return _data.durability;
+        }
+    }
+
+    public bool DoesDegrage
+    {
+        get
+        {
+            return _data.degradable;
+        }
+    }
+
+    public bool DoesStack
+    {
+        get
+        {
+            return _data.stackable;
+        }
+    }
+
+    public int StackSize
+    {
+        get
+        {
+            return _data.stackSize;
+        }
+    }
 }

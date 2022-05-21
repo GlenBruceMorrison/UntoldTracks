@@ -40,7 +40,7 @@ public class ItemContainerWorldObject : MonoBehaviour, IInteractable
         }
         set
         {
-            _container.FillAndReturnRemaining(value.Item, value.Count);
+            _container.Give(value);
         }
     }
 
@@ -56,7 +56,7 @@ public class ItemContainerWorldObject : MonoBehaviour, IInteractable
 
     public void HandlePrimaryInput(PlayerManager player, ItemContainer usingContainer)
     {
-        var left = player.inventoryController.Inventory.FillAndReturnRemaining(Container.Item, Container.Count);
+        player.inventoryController.Inventory.Give(Container);
         Destroy(this.gameObject);
     }
 

@@ -15,7 +15,7 @@ namespace UntoldTracks.Inventory
         public int count;
     }
 
-    public delegate void ActiveItemChanged(PlayerManager player, IItemContainer container);
+    public delegate void ActiveItemChanged(PlayerManager player, ItemContainer container);
 
     public class PlayerInventoryController : MonoBehaviour
     {
@@ -60,7 +60,7 @@ namespace UntoldTracks.Inventory
             }
         }
 
-        public IItemContainer ActiveItem
+        public ItemContainer ActiveItem
         {
             get
             {
@@ -86,7 +86,7 @@ namespace UntoldTracks.Inventory
                     continue;
                 }
 
-                Inventory.FillAndReturnRemaining(containerTemplate.item, containerTemplate.count);
+                Inventory.Give(new ItemContainer(containerTemplate.item, containerTemplate.count));
             }
         }
 
@@ -164,13 +164,13 @@ namespace UntoldTracks.Inventory
         public void Open()
         {
             playerManager.FirstPersonController.UnlockPointer();
-            _ui.gameObject.SetActive(true);
+            _ui.gameObject.SetActive(true); 
             _ui.Open();
             _isOpen = true;
             OnOpen?.Invoke();
         }
 
-        private void HandleItemContainerUpdate(IItemContainer container)
+        private void HandleItemContainerUpdate(ItemContainer container)
         {
             if (container.Index == _activeItemIndex)
             {

@@ -67,7 +67,7 @@ namespace UntoldTracks.Inventory
         {
             if (!_selectedContainerUI.Container.IsEmpty())
             {
-                _playerInventoryController.Inventory.FillAndReturnRemaining(_selectedContainerUI.Container.Item, _selectedContainerUI.Container.Count);
+                _playerInventoryController.Inventory.Give(_selectedContainerUI.Container);
                 _selectedContainerUI.Container.Empty();
                 _selectedContainerUI.gameObject.SetActive(false);
             }
@@ -86,8 +86,8 @@ namespace UntoldTracks.Inventory
             {
                 if (!containerUnderMouse.Container.IsEmpty())
                 {
-                    var taken = containerUnderMouse.Container.TakeAll();
-                    _selectedContainerUI.Container.FillAndReturnRemaining(taken.Item, taken.Count);
+                    var container = containerUnderMouse.Container.TakeAll();
+                    _selectedContainerUI.Container.Give(container);
                 }
             }
         }
@@ -102,19 +102,23 @@ namespace UntoldTracks.Inventory
                 // if the items are the same
                 if (otherContainer.Container.HasItem(_selectedContainerUI.Container.Item))
                 {
-                    var item = _selectedContainerUI.Container.Item;
-
-                    // fill container
-                    var remainder = otherContainer.Container.FillAndReturnRemaining(_selectedContainerUI.Container.Item, _selectedContainerUI.Container.Count);
+                    // fill other container with what we can
+                    var queryResult = otherContainer.Container.Give(_selectedContainerUI.Container);
 
                     _selectedContainerUI.Container.Empty();
-                    _selectedContainerUI.Container.FillAndReturnRemaining(item, remainder);
+
+                    // if not everything was able to be added, give the remaining back to this container
+                    var amountNotAdded = queryResult.amountAdded - _selectedContainerUI.Container.Count;
+                    if (amountNotAdded > 0)
+                    {
+                        _selectedContainerUI.Container.Give(new ItemContainer(_selectedContainerUI.Container.Item, queryResult.amountAdded));
+                    }
                 }
                 // if dropping into an empty container
                 else if (otherContainer.Container.IsEmpty())
                 {
                     // fill space
-                    otherContainer.Container.FillAndReturnRemaining(_selectedContainerUI.Container.Item, _selectedContainerUI.Container.Count);
+                    otherContainer.Container.Give(_selectedContainerUI.Container);
                     _selectedContainerUI.Container.Empty();
                 }
                 // if items are different

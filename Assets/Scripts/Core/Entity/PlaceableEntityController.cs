@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Linq;
 using UntoldTracks.Player;
+using UntoldTracks.Inventory;
 
 public class PlaceableEntityController : MonoBehaviour
 {
@@ -57,11 +58,8 @@ public class PlaceableEntityController : MonoBehaviour
         targetPlaceable.ResetMaterials();
             
         GameObject.FindObjectOfType<PlayerActiveItem>().activeItemObject = null;
-        
-        playerManager.inventoryController.Inventory.TakeAndReturnRemaining(
-            targetPlaceable.source,
-            1,
-            playerManager.inventoryController.ActiveItem.Index);
+
+        playerManager.inventoryController.Inventory.Take(new ItemQuery(targetPlaceable.source, 1, playerManager.inventoryController.ActiveItem.Index));
 
         targetPlaceable.BeingPlaced = false;
         

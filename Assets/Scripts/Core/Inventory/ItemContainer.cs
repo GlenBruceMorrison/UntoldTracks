@@ -5,14 +5,52 @@ using System.Collections.Generic;
 
 namespace UntoldTracks.Inventory
 {
+    public class ItemQueryResult
+    {
+        public Item item;
+        public int amountAdded;
+        public float durability;
+
+        public ItemQueryResult(Item item, int count = 1, float durability=-1)
+        {
+            this.item = item;
+            this.amountAdded = count;
+            this.durability = durability;
+        }
+    }
+
+    public class ItemQuery
+    {
+        public Item item;
+        public int count;
+        public int preferredIndex;
+
+        public ItemQuery(Item item, int count = 1, int preferredIndex = -1)
+        {
+            this.item = item;
+            this.count = count;
+            this.preferredIndex = preferredIndex;
+        }
+
+        public ItemQuery(ItemContainer container)
+        {
+            this.item = container.Item;
+            this.count = container.Count;
+        }
+    }
+
+    public delegate void ItemContainerModified(ItemContainer newValue);
+
     [System.Serializable]
-    public class ItemContainer : IItemContainer
+    public class ItemContainer
     {
         #region private
         [SerializeField]
         private Item _item;
         [SerializeField]
         private int _count;
+        [SerializeField]
+        private float _currentDurability;
         private IInventory _inventory;
         private int _index;
         #endregion
@@ -49,6 +87,14 @@ namespace UntoldTracks.Inventory
                 return _index;
             }
         }
+
+        public float CurrentDurability
+        {
+            get
+            {
+                return _currentDurability;
+            }
+        }
         #endregion
 
         #region events
@@ -60,13 +106,14 @@ namespace UntoldTracks.Inventory
             _inventory = inventory;
             _index = index;
         }
-
+         
         public ItemContainer(Item item, int count)
         {
             _inventory = null;
             _index = -1;
             _item = item;
             _count = count;
+            _currentDurability = item.durability;
         }
 
         public bool IsFull()
@@ -121,8 +168,6 @@ namespace UntoldTracks.Inventory
             {
                 return count;
             }
-            
-            var prev = (IItemContainer)this.MemberwiseClone();
 
             if (IsEmpty())
             {
@@ -158,7 +203,7 @@ namespace UntoldTracks.Inventory
                 if (modifyContainer)
                 {
                     _count = 1;
-                    OnModified?.Invoke(prev, this);
+                    OnModified?.Invoke(this);
                 }
 
                 return count - 1;
@@ -171,7 +216,7 @@ namespace UntoldTracks.Inventory
                 if (modifyContainer)
                 {
                     _count = _item.stackSize;
-                    OnModified?.Invoke(prev, this);
+                    OnModified?.Invoke(this);
                 }
                 return -diff;
             }
@@ -179,7 +224,7 @@ namespace UntoldTracks.Inventory
             if (modifyContainer)
             {
                 _count += count;
-                OnModified?.Invoke(prev, this);
+                OnModified?.Invoke(this);
             }
 
             return 0;
@@ -192,8 +237,6 @@ namespace UntoldTracks.Inventory
                 throw new Exception("Trying to take items from an empty container");
             }
 
-            var prev = (IItemContainer)this.MemberwiseClone();
-
             var diff = _count - count;
 
             if (diff < 0)
@@ -202,7 +245,7 @@ namespace UntoldTracks.Inventory
                 {
                     _count = 0;
                     _item = null;
-                    OnModified?.Invoke(prev, this);
+                    OnModified?.Invoke(this);
                 }
 
                 return -diff;
@@ -217,7 +260,7 @@ namespace UntoldTracks.Inventory
                     _item = null;
                 }
 
-                OnModified?.Invoke(prev, this);
+                OnModified?.Invoke(this);
             }
 
             return 0;
@@ -252,42 +295,187 @@ namespace UntoldTracks.Inventory
 
         public void Empty()
         {
-            var prev = (IItemContainer)this.MemberwiseClone();
-
             _item = null;
             _count = 0;
 
-            OnModified?.Invoke(prev, this);
+            OnModified?.Invoke(this);
         }
 
-        public IItemContainer TakeAll()
+        public ItemContainer TakeAll()
         {
-            var prev = (IItemContainer)this.MemberwiseClone();
+            var prev = (ItemContainer)this.MemberwiseClone();
 
             _item = null;
             _count = 0;
 
-            OnModified?.Invoke(prev, this);
+            OnModified?.Invoke(this);
 
             return prev;
         }
 
-        public void OnPointerDown(PointerEventData eventData)
+        public void Swap(ItemContainer container)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Swap(IItemContainer container)
-        {
-            var prev = (IItemContainer)this.MemberwiseClone();
+            var prev = (ItemContainer)this.MemberwiseClone();
 
             _item = container.Item;
             _count = container.Count;
+            _currentDurability = container.CurrentDurability;
 
             container.Empty();
-            container.FillAndReturnRemaining(prev.Item, prev.Count);
+            container.Give(prev);
 
-            OnModified(prev, this);
+            OnModified?.Invoke(this);
+        }
+
+        public void SetDurability(float value)
+        {
+            _currentDurability = value;
+        }
+
+        /// <summary>
+        /// Takes items from this container based on the data passed in using the ItemQuery class.
+        /// </summary>
+        public ItemQueryResult Take(ItemQuery query)
+        {
+            var itemQueryResult = new ItemQueryResult(query.item, 0);
+
+            // not valid
+            if (!HasItem(query.item) || Count <= 0)
+            {
+                return itemQueryResult;
+            }
+
+            // if item is not stackable
+            if (!_item.stackable)
+            {
+                // if it is degradable, tranfer it's degrade value
+                if (_item.degradable)
+                {
+                    itemQueryResult.durability = _currentDurability;
+                }
+
+                // non stackables have to be 1, so set this value
+                itemQueryResult.amountAdded = 1;
+                Empty();
+            }
+            else
+            {
+                // get difference between request and count
+                var diff = _count - query.count;
+
+                // if we can't give all, return what we couldn't give
+                if (diff < 0)
+                {
+                    _item = null;
+                    _count = 0;
+                    itemQueryResult.amountAdded = -diff;
+                }
+
+                _count -= query.count;
+
+                if (_count <= 0)
+                {
+                    _item = null;
+                    _count = 0;
+                }
+
+                OnModified?.Invoke(this);
+            }
+
+            return itemQueryResult;
+        }
+
+        public ItemQueryResult Give(ItemContainer container)
+        {
+            var itemQueryResult = new ItemQueryResult(container.Item, 0);
+
+            // have a different item already, no point in continuing
+            if (!HasItem(container.Item) && !IsEmpty())
+            {
+                return itemQueryResult;
+            }
+
+            // item is non stackable, so has more unique requirments
+            if (!container.Item.stackable)
+            {
+                // non stackable items can only have one, so has to be empty to continue
+                if (IsEmpty())
+                {
+                    this._item = container.Item;
+                    this._count = 1;
+
+                    if (container.Item.degradable)
+                    {
+                        this._currentDurability = container.CurrentDurability;
+                    }
+
+                    OnModified?.Invoke(this);
+                }
+
+                return itemQueryResult;
+            }
+
+            // if is empty, just fill with what we are provided
+            if (IsEmpty())
+            {
+                this._item = container.Item;
+
+                // sometimes we might pass a container with item count more that max stack size
+                var extra = container.Item.stackSize - container.Count;
+
+                // passing in more than the items max stack size, so just add the items max stack size
+                if (extra < 0)
+                {
+                    _count = container.Item.stackSize;
+                    itemQueryResult.amountAdded = container.Item.stackSize;
+                }
+                // passing in less than the max, so give it all
+                else
+                {
+                    _count = container.Count;
+                    itemQueryResult.amountAdded = container.Count;
+                }
+
+                OnModified?.Invoke(this);
+
+                return itemQueryResult;
+            }
+
+            // if here then item is the same as the one adding and is not stackable
+            
+            // already full
+            if (_count >= Item.stackSize)
+            {
+                return itemQueryResult;
+            }
+
+            // difference, minus means that we are trying to add too much
+            var diff = container.Item.stackSize - (container.Count + _count);
+
+            // giving too much
+            if (diff < 0)
+            {
+                itemQueryResult.amountAdded = container.Item.stackSize - _count;
+                _count = container.Item.stackSize;
+            }
+            // can take everything we are giving
+            else
+            {
+                _count += container.Count;
+                itemQueryResult.amountAdded = container.Count;
+            }
+
+            OnModified?.Invoke(this);
+            return itemQueryResult;
+        }
+
+        public void DecreaseDurability(int amount)
+        {
+            _currentDurability -= amount;
+            if (_currentDurability <= 0)
+            {
+                Empty();
+            }
         }
     }
 }

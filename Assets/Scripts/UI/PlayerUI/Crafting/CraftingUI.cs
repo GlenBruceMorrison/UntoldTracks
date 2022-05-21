@@ -51,10 +51,10 @@ namespace UntoldTracks.UI
 
             foreach (var ingredient in selectedRecipe.ingredients)
             {
-                playerManager.inventoryController.Inventory.TakeAndReturnRemaining(ingredient.Item, ingredient.Count);
+                playerManager.inventoryController.Inventory.Take(new ItemQuery(ingredient.Item, ingredient.Count));
             }
 
-            playerManager.inventoryController.Inventory.FillAndReturnRemaining(selectedRecipe.produces.Item, selectedRecipe.produces.Count);
+            playerManager.inventoryController.Inventory.Give(selectedRecipe.produces);
 
             RenderRecipeBook(currentRecipes);
         }

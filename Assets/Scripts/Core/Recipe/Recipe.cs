@@ -16,7 +16,7 @@ namespace UntoldTracks
         {
             foreach (var ingredient in ingredients)
             {
-                if (!inventory.HasItem(ingredient.Item, ingredient.Count))
+                if (!inventory.CanTake(ingredient.Item, ingredient.Count))
                 {
                     return false;
                 }

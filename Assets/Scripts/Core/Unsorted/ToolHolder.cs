@@ -54,7 +54,7 @@ public class ToolHolder : MonoBehaviour, IInteractable
         if (_holdiningWorldObject != null)
         {
             Destroy(_holdiningWorldObject);
-            player.inventoryController.Inventory.FillAndReturnRemaining(usingContainer.Item, usingContainer.Count);
+            player.inventoryController.Inventory.Give(usingContainer);
         }
     }
 
@@ -75,7 +75,7 @@ public class ToolHolder : MonoBehaviour, IInteractable
             _holdiningWorldObject = Instantiate(usingContainer.Item.toolPrefab, transform);
 
             // remove this item from the players inventory
-            player.inventoryController.Inventory.TakeAndReturnRemaining(usingContainer.Item, usingContainer.Count);
+            player.inventoryController.Inventory.Take(new ItemQuery(usingContainer.Item, usingContainer.Count));
         }
     }
 }

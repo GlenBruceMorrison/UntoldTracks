@@ -58,7 +58,7 @@ namespace UntoldTracks.Player
             Destroy(activeItemObject);
         }
 
-        private void HandleActiveItemChanged(PlayerManager player, IItemContainer container)
+        private void HandleActiveItemChanged(PlayerManager player, ItemContainer container)
         {
             EmptyHand();
 
@@ -69,7 +69,7 @@ namespace UntoldTracks.Player
 
             if (container.Item.isTool && container.Item.toolPrefab != null)
             {
-                SwitchToTool(container.Item.toolPrefab);
+                SwitchToTool(container);
             }
             else if (container.Item.isPlaceable && container.Item.placeablePrefab != null)
             {
@@ -77,9 +77,10 @@ namespace UntoldTracks.Player
             }
         }
 
-        public void SwitchToTool(GameObject toolPrefab)
+        public void SwitchToTool(ItemContainer container)
         {
-            activeItemObject = Instantiate(toolPrefab, playerHand.transform);
+            activeItemObject = Instantiate(container.Item.toolPrefab, playerHand.transform);
+            activeItemObject.GetComponent<ToolEntity>().container = container;
             activeItemObject.transform.localPosition = Vector3.zero;
             activeItemObject.transform.localEulerAngles = Vector3.zero;
         }

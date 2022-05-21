@@ -37,7 +37,7 @@ namespace UntoldTracks.Resource
                 if (roll >= (1 - resource.rarity))
                 {
                     var container = new ItemContainer(inventory:null, -1);
-                    container.FillAndReturnRemaining(resource.item, resource.baseAmount);
+                    container.Give(new ItemContainer(resource.item, resource.baseAmount));
 
                     for (int i=0; i<resource.maxPossible; i++)
                     {
@@ -45,7 +45,7 @@ namespace UntoldTracks.Resource
 
                         if (multipleItemRoll >= (1 - resource.multipleChance))
                         {
-                            container.FillAndReturnRemaining(resource.item, Random.Range(1, resource.baseAmount));
+                            container.Give(new ItemContainer(resource.item, Random.Range(1, resource.baseAmount)));
                         }
                     }
 

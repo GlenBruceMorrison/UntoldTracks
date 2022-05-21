@@ -54,7 +54,7 @@ public class StorageContainer : PlaceableEntity, IInteractable
                 continue;
             }
 
-            _inventory.FillAndReturnRemaining(containerTemplate.item, containerTemplate.count);
+            _inventory.Give(new ItemContainer(containerTemplate.item, containerTemplate.count));
         }
     }
 

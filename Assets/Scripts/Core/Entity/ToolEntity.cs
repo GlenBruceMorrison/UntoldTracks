@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UntoldTracks;
+using UntoldTracks.Inventory;
 
 public class ToolEntity : Entity
 {
+    public ItemContainer container;
+
     public virtual void HandleInputUp(InteractionInput input)
     {
 
@@ -19,6 +22,7 @@ public class ToolEntity : Entity
     {
         var playerManager = GetComponentInParent<UntoldTracks.Player.PlayerManager>();
         playerManager.interactionController.TriggerCurrentFocus();
+        container.DecreaseDurability(1);
     }
 
     public virtual void HandleUnequip()

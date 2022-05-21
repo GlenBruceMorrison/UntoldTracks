@@ -4,7 +4,7 @@ using UntoldTracks.Player;
 namespace UntoldTracks.Inventory
 {
     public delegate void PlayerInteraction(PlayerManager player);
-    public delegate void ContainerModified(IItemContainer container);
+    public delegate void ContainerModified(ItemContainer container);
     public delegate void InventoryModified();
 
     public interface IInventory
@@ -15,14 +15,9 @@ namespace UntoldTracks.Inventory
         public bool IsOpen { get; }
 
         /// <summary>
-        /// The player who is currently accessing this, returns null if no-one is
-        /// </summary>
-        //public PlayerManager AccessedBy { get; }
-
-        /// <summary>
         /// List of containers which hold items
         /// </summary>
-        public List<IItemContainer> Containers { get; }
+        public List<ItemContainer> Containers { get; }
 
         /// <summary>
         /// How many containers this has
@@ -45,39 +40,13 @@ namespace UntoldTracks.Inventory
         public event ContainerModified OnContainerModified;
 
         /// <summary>
-        /// Event fired when some player entity accessed this inventory
-        /// </summary>
-        //public event PlayerInteraction OnOpened;
-
-        /// <summary>
-        /// Event fired when some player entity stops accessing this inventory
-        /// </summary>
-        //public event PlayerInteraction OnClosed;
-
-        /// <summary>
-        /// Event fired when any containers are modifieds
-        /// </summary>
-        //public event InventoryModified OnModified;
-
-        /// <summary>
-        /// Sets this inventory to open by player
-        /// </summary>
-        /// <param name="player">The player who is accesing this inventory</param>
-        //public void Open(PlayerManager player);
-
-        /// <summary>
-        /// Sets the inventory to closed by player
-        /// </summary>
-        /// <param name="player">The player who is closing this inventory</param>
-        //public void Close(PlayerManager player);
-
-        /// <summary>
         /// Checks whether we can get this amount of an item from this inventory
         /// </summary>
         /// <param name="item">The Item to be checked</param>
         /// <param name="count">The ammount to check</param>
         /// <returns>Return true if the inventory can be filled</returns>
-        public bool CanFill(Item item, int count);
+        public bool CanGive(Item item, int count);
+        ItemQueryResult Give(ItemContainer container);
 
         /// <summary>
         /// Checks whether we can get this amount of an item from this inventory
@@ -85,37 +54,22 @@ namespace UntoldTracks.Inventory
         /// <param name="item">The Item to be checked</param>
         /// <param name="count">The ammount to check</param>
         /// <returns>Return true if the invenory contains at least that amount of the given item</returns>
-        public bool HasItem(Item item, int count);
+        public bool CanTake(Item item, int count);
 
-        /// <summary>
-        /// Fills the inventory with as much of a given item it can hold, and returns whatever it couldn't
-        /// </summary>
-        /// <param name="item">The Item to be add</param>
-        /// <param name="count">The ammount desired</param>
-        /// <returns>Returns the count of what couldn't be added, will be 0 if everything was succesfully added</returns>
-        public int FillAndReturnRemaining(Item item, int count);
-
-        /// <summary>
-        /// Takes from the inventory as much as can be taken, and returns what couldn't be taken
-        /// </summary>
-        /// <param name="item">The Item to be taken</param>
-        /// <param name="count">The ammount desired</param>
-        /// <param name="preferredIndex">The inventory index you would preffered to priotise first</param>
-        /// <returns>Returns the count of what couldn't be taken, will be 0 if the desired amount was all taken from this inventory</returns>
-        public int TakeAndReturnRemaining(Item item, int count, int preferredIndex=-1);
+        public ItemQueryResult Take(ItemQuery query);
 
         /// <summary>
         /// Get the container at a given index
         /// </summary>
         /// <param name="index">The index to get</param>
-        /// <returns>Returns the inventoryies <see cref="IItemContainer"/> at the given index, will be null if not found</returns>
-        public IItemContainer GetContainerAtIndex(int index);
+        /// <returns>Returns the inventoryies <see cref="ItemContainer"/> at the given index, will be null if not found</returns>
+        public ItemContainer GetContainerAtIndex(int index);
 
         /// <summary>
         /// Adds a new itemContainer to this inventories container list
         /// </summary>
-        /// <returns>Returns the <see cref="IItemContainer"/> added</returns>
-        public IItemContainer AppendContainer();
+        /// <returns>Returns the <see cref="ItemContainer"/> added</returns>
+        public ItemContainer AppendContainer();
 
         /// <summary>
         /// Resets the inventory and updates size
