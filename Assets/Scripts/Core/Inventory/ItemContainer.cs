@@ -476,6 +476,10 @@ namespace UntoldTracks.Inventory
             {
                 Empty();
             }
+            else
+            {
+                OnModified?.Invoke(this);
+            }
         }
     }
 }

@@ -17,6 +17,8 @@ MonoBehaviour:
   description: Can pick up stuff
   stackable: 0
   stackSize: 1
+  degradable: 1
+  durability: 20
   isTool: 1
   toolStrength: 3
   isBuildingTool: 0
