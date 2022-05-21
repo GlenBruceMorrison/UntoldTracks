@@ -92,6 +92,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerManager: {fileID: 558332989}
   targetPlaceable: {fileID: 0}
+  rayLength: 0.2
+  placeableTurnSpeed: 5
+  canPlaceMaterial: {fileID: 0}
+  cantPlaceMaterial: {fileID: 0}
+  originalMaterial: {fileID: 0}
 --- !u!1 &9562693862899834
 GameObject:
   m_ObjectHideFlags: 0

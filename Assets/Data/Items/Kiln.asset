@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Kiln
   m_EditorClassIdentifier: 
   name: Kiln
-  sprite: {fileID: 21300000, guid: 308372d4121d14cfc8f3fd347023a279, type: 3}
+  sprite: {fileID: 21300000, guid: fe26fb512412a40c28000001b040d0ab, type: 3}
   description: A kiln
   stackable: 0
   stackSize: 1

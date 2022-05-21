@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shovel
   m_EditorClassIdentifier: 
   name: Shovel
-  sprite: {fileID: 21300000, guid: 092adeff3cbd34c41b52606be811d161, type: 3}
+  sprite: {fileID: 21300000, guid: 83c1a4157ed064664b30fa4992a52f11, type: 3}
   description: Can pick up stuff
   stackable: 0
   stackSize: 1

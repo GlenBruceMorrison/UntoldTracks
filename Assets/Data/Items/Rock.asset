@@ -13,8 +13,17 @@ MonoBehaviour:
   m_Name: Rock
   m_EditorClassIdentifier: 
   name: Rock
+  sprite: {fileID: 21300000, guid: 197ed6e7d463041538e0e3e1a5b8d11e, type: 3}
   description: A Rock
-  sprite: {fileID: 21300000, guid: 49b554924b4a443809a3a11fadf8f836, type: 3}
   stackable: 1
   stackSize: 20
+  isTool: 0
+  toolStrength: 1
   isBuildingTool: 0
+  hasCustomInteractionFrame: 0
+  toolPrefab: {fileID: 0}
+  isPlaceable: 0
+  placeablePrefab: {fileID: 0}
+  canRotate: 1
+  isFuel: 0
+  fuelStrength: 1

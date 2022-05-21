@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f611fe3209cb64f0f9d29818b2edb173, type: 3}
   m_Name: Tree
   m_EditorClassIdentifier: 
+  durability: 5
+  toolsToHarvest: []
   CanProduce:
   - item: {fileID: 11400000, guid: a0f4fbde1465341298bfd3fdf4d5f6a6, type: 2}
     rarity: 1
@@ -31,18 +33,5 @@ MonoBehaviour:
     canProductMultiple: 1
     maxPossible: 2
     multipleChance: 0.2
-  - item: {fileID: 11400000, guid: 6059cd8fd34f049279853e0055956da2, type: 2}
-    rarity: 0.2
-    baseAmount: 1
-    canProductMultiple: 1
-    maxPossible: 5
-    multipleChance: 0.2
-  - item: {fileID: 11400000, guid: 0988e82f940c943bea13227f31420c5a, type: 2}
-    rarity: 0.05
-    baseAmount: 1
-    canProductMultiple: 1
-    maxPossible: 2
-    multipleChance: 0.05
-  itemToHarvest: {fileID: 11400000, guid: 4dcc75568882e43dba0755286b535265, type: 2}
   harvestAudio: {fileID: 8300000, guid: 7128552d1c9264747affafdbf60b112c, type: 3}
   fullyHarvestedAudio: {fileID: 8300000, guid: fc6e1266dd51c4d65ba65ea604bb1c78, type: 3}

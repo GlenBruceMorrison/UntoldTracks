@@ -13,13 +13,17 @@ MonoBehaviour:
   m_Name: UnfiredCup
   m_EditorClassIdentifier: 
   name: Unfired Cup
+  sprite: {fileID: 21300000, guid: a2db46e52394c4fb8a311af66b105ccc, type: 3}
   description: Needs to be fired in a kiln before it can be used
-  sprite: {fileID: 21300000, guid: 51523327689e14e169650b108ce913cc, type: 3}
   stackable: 1
   stackSize: 20
+  isTool: 0
+  toolStrength: 1
   isBuildingTool: 0
+  hasCustomInteractionFrame: 0
+  toolPrefab: {fileID: 0}
+  isPlaceable: 0
+  placeablePrefab: {fileID: 0}
+  canRotate: 1
   isFuel: 0
   fuelStrength: 1
-  hasCustomInteractionFrame: 0
-  isTool: 0
-  toolPrefab: {fileID: 0}

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f611fe3209cb64f0f9d29818b2edb173, type: 3}
   m_Name: Rock
   m_EditorClassIdentifier: 
+  durability: 5
+  toolsToHarvest: []
   CanProduce:
   - item: {fileID: 11400000, guid: d4895223a3464492896ddfe9360331c8, type: 2}
     rarity: 1
@@ -19,12 +21,5 @@ MonoBehaviour:
     canProductMultiple: 1
     maxPossible: 2
     multipleChance: 1
-  - item: {fileID: 11400000, guid: f02436d9eaa0741ab9f69e84643e12e0, type: 2}
-    rarity: 0.05
-    baseAmount: 1
-    canProductMultiple: 0
-    maxPossible: 0
-    multipleChance: 1
-  itemToHarvest: {fileID: 11400000, guid: 37765c167eb46405ca9a83f005425788, type: 2}
   harvestAudio: {fileID: 8300000, guid: a455134893eb440c1b1d495b892d132b, type: 3}
   fullyHarvestedAudio: {fileID: 8300000, guid: f8c14f2814b4b124a894a65c32c44987, type: 3}
