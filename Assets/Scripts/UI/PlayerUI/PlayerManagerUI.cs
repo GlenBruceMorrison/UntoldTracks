@@ -25,6 +25,10 @@ namespace UntoldTracks.UI
         private void Awake()
         {
             playerManager = GetComponentInParent<PlayerManager>();
+
+            playerInventoryUI.gameObject.SetActive(false);
+            linkedInventory.gameObject.SetActive(false);
+            craftingUI.gameObject.SetActive(false);
         }
 
         public void LinkInventory(Inventory inventory, int inventorySize, int inventoryBarSize)
@@ -37,6 +41,7 @@ namespace UntoldTracks.UI
         {
             playerManager.FirstPersonController.UnlockPointer();
             playerInventoryUI.gameObject.SetActive(true);
+            //craftingUI.gameObject.SetActive(true);
 
             if (linkedInventory != null)
             {
@@ -51,6 +56,7 @@ namespace UntoldTracks.UI
 
             playerInventoryUI.gameObject.SetActive(false);
             linkedInventory.gameObject.SetActive(false);
+            //craftingUI.gameObject.SetActive(false);
         }
 
         public void SetActiveItemIndex(int index)

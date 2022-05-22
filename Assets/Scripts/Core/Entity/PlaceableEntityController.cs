@@ -27,6 +27,11 @@ public class PlaceableEntityController : MonoBehaviour
             return false;
         }
 
+        if (targetPlaceable.IsTriggering)
+        {
+            return false;
+        }
+
         foreach (var origin in targetPlaceable.raycastOrigins)
         {
             Debug.DrawRay(origin.position, Vector3.down * rayLength);

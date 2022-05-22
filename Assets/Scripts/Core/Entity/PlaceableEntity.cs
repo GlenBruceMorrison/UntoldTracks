@@ -6,18 +6,38 @@ public class PlaceableEntity : Entity
 {
     public Item source;
     public List<Transform> raycastOrigins = new List<Transform>();
-    
-    private bool _beingPlaced;
-    private int _startLayerIndex;
+    private Collider[] _worldColliders;
 
+    [SerializeField]
+    private PlacableEntityIndicator _placabableEntityIndicator;
+
+    [SerializeField]
+    private Transform _worldTransform;
+
+    private bool _beingPlaced;
+    private bool _isTriggering = false;
     private Material _origionalMaterial;
-    
     private MeshRenderer _meshRenderer;
-    
-    public Material[] allMaterials;
- 
     private Renderer[] _allRenderers;
-    
+    private Material[] _allMaterials;
+
+    [HideInInspector]
+    public Material[] AllMaterials
+    {
+        get
+        {
+            return _allMaterials;
+        }
+    }
+
+    public bool IsTriggering
+    {
+        get
+        {
+            return _isTriggering;
+        }
+    }
+
     public bool BeingPlaced
     {
         get
@@ -30,16 +50,58 @@ public class PlaceableEntity : Entity
             
             if (_beingPlaced)
             {
-                var layerIgnoreRaycast = LayerMask.NameToLayer("Ignore Raycast");
-                gameObject.layer = layerIgnoreRaycast;
+                _placabableEntityIndicator.gameObject.SetActive(true);
+
+                foreach (var collider in _worldColliders)
+                {
+                    collider.enabled = false;
+                }
             }
             else
             {
-                gameObject.layer = _startLayerIndex;
+                _placabableEntityIndicator.gameObject.SetActive(false);
+
+                foreach (var collider in _worldColliders)
+                {
+                    collider.enabled = true;
+                }
             }
         }
     }
-    
+
+    #region Unity
+    void Awake()
+    {
+        GrabAllRenderers();
+        _worldColliders = _worldTransform.GetComponentsInChildren<Collider>();
+        _placabableEntityIndicator = GetComponentInChildren<PlacableEntityIndicator>();
+    }
+
+    private void OnEnable()
+    {
+        _placabableEntityIndicator.TriggerStay.AddListener(HandleTriggerStay);
+        _placabableEntityIndicator.TriggerExit.AddListener(HandleTriggerExit);
+    }
+
+    private void OnDisable()
+    {
+        _placabableEntityIndicator.TriggerStay.RemoveListener(HandleTriggerStay);
+        _placabableEntityIndicator.TriggerExit.RemoveListener(HandleTriggerExit);
+    }
+    #endregion
+
+    #region EventHandlers
+    public void HandleTriggerStay()
+    {
+        _isTriggering = true;
+    }
+
+    public void HandleTriggerExit()
+    {
+        _isTriggering = false;
+    }
+    #endregion
+
     public void SetMaterial(Material material)
     {
         foreach (var t in _allRenderers)
@@ -52,24 +114,18 @@ public class PlaceableEntity : Entity
     {
         for (var i = 0; i < _allRenderers.Length; i++)
         {
-            _allRenderers[i].material = allMaterials[i];
+            _allRenderers[i].material = AllMaterials[i];
         }
     }
 
     public void GrabAllRenderers()
     {
         _allRenderers = GetComponentsInChildren<Renderer>();
-        allMaterials = new Material[_allRenderers.Length];
-        
+        _allMaterials = new Material[_allRenderers.Length];
+
         for (var i = 0; i < _allRenderers.Length; i++)
         {
-            allMaterials[i] = _allRenderers[i].material;
+            _allMaterials[i] = _allRenderers[i].material;
         }
-    }
-    
-    void Awake()
-    {
-        GrabAllRenderers();
-        _startLayerIndex = gameObject.layer;
     }
 }
