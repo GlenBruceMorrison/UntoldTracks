@@ -36,10 +36,15 @@ namespace UntoldTracks.Player
 
         public GameObject activeItemObject;
 
+        public void Init(PlayerManager playerManager)
+        {
+            
+        }
+        
         private void OnEnable()
         {
             PlayerManager.inventoryController.OnActiveItemChanged += HandleActiveItemChanged;
-            //HandleActiveItemChanged(PlayerManager, PlayerManager.inventoryController.ActiveItem);
+            HandleActiveItemChanged(PlayerManager, PlayerManager.inventoryController.ActiveItem);
         }
 
         private void OnDisable()
@@ -61,7 +66,7 @@ namespace UntoldTracks.Player
         private void HandleActiveItemChanged(PlayerManager player, ItemContainer container)
         {
             EmptyHand();
-
+            
             if (container.IsEmpty())
             {
                 return;

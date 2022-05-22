@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4678786362155052235}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &805764083
 MonoBehaviour:
@@ -107,7 +107,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4678786362155052235}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1462649050
 MonoBehaviour:
@@ -293,7 +293,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4678786362155052235}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1706938038
 MonoBehaviour:
@@ -982,7 +982,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4678786362155052235}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3477754115725372361
 MonoBehaviour:
@@ -1530,7 +1530,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4678786362155052235}
-  - component: {fileID: 8853567224444707973}
   m_Layer: 2
   m_Name: Controllers
   m_TagString: Untagged
@@ -1550,30 +1549,14 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 805764082}
   - {fileID: 8540435538718826196}
   - {fileID: 2166810468993252953}
   - {fileID: 4004778325957684970}
   - {fileID: 1462649049}
-  - {fileID: 805764082}
   m_Father: {fileID: 6818777332706840356}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8853567224444707973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6416132279054810704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a980461dec17d47cfb3f26b75de918ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventoryController: {fileID: 3477754115725372361}
-  FirstPersonController: {fileID: 7660522464615506340}
-  interactionController: {fileID: 1706938038}
-  playerActiveItem: {fileID: 0}
 --- !u!1 &6608641017337265076
 GameObject:
   m_ObjectHideFlags: 0
@@ -2613,7 +2596,7 @@ Transform:
   m_Children:
   - {fileID: 8544700175450528626}
   m_Father: {fileID: 4678786362155052235}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &8606401792875819872
 CapsuleCollider:
@@ -3186,9 +3169,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryController: {fileID: 0}
-  FirstPersonController: {fileID: 0}
+  firstPersonController: {fileID: 0}
   interactionController: {fileID: 0}
   playerActiveItem: {fileID: 0}
+  playerManagerUI: {fileID: 0}
 --- !u!1 &8967602588677296173
 GameObject:
   m_ObjectHideFlags: 0

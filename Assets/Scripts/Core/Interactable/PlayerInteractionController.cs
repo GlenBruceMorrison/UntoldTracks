@@ -35,9 +35,14 @@ namespace UntoldTracks.Player
             }
         }
 
+        public void Init(PlayerManager playerManager)
+        {
+            
+        }
+
         private void Update()
         {
-            if (playerManager.FirstPersonController.IsPointerLocked())
+            if (playerManager.firstPersonController.IsPointerLocked())
             {
                 return;
             }

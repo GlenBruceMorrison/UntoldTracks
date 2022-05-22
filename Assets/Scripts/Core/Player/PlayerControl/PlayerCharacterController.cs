@@ -20,13 +20,10 @@ namespace UntoldTracks.CharacterController
 
         public bool IsMoving
         {
-            get
-            {
-                return Character.Motor.Velocity.x != 0 || Character.Motor.Velocity.z != 0;
-            }
+            get { return Character.Motor.Velocity.x != 0 || Character.Motor.Velocity.z != 0; }
         }
 
-        private void Start()
+        public void Init(PlayerManager playerMananger)
         {
             Cursor.lockState = CursorLockMode.Locked;
 

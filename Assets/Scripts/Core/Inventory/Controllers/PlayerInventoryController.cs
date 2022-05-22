@@ -60,12 +60,7 @@ namespace UntoldTracks.InventorySystem
         public ItemContainer ActiveItem
         {
             get
-            {
-                if (_inventory.Containers.Count > _activeItemIndex)
-                {
-                    return null;
-                }
-
+            { 
                 return _inventory.Containers[_activeItemIndex];
             }
         }
@@ -92,8 +87,10 @@ namespace UntoldTracks.InventorySystem
             }
         }
 
-        public void Awake()
+        public void Init(PlayerManager playerManager)
         {
+            this.playerManager = playerManager;
+            
             _inventory = new Inventory(_inventorySize);
 
             if (_initialContents != null)

@@ -3,52 +3,49 @@ using System.Collections.Generic;
 using UntoldTracks.InventorySystem;
 using UnityEngine;
 using UntoldTracks.CharacterController;
+using UntoldTracks.UI;
 
 namespace UntoldTracks.Player
 {
     public class PlayerManager : MonoBehaviour
     {
         public PlayerInventoryController inventoryController;
-        public PlayerCharacterController FirstPersonController;
+        public PlayerCharacterController firstPersonController;
         public PlayerInteractionController interactionController;
         public PlayerActiveItem playerActiveItem;
-        //public PlayerBuildingController buildingController;
+        public PlayerManagerUI playerManagerUI;
 
         private void Awake()
         {
-            inventoryController = GetComponentInChildren<PlayerInventoryController>();
-            if (inventoryController == null)
-            {
-                throw new System.Exception("This player mananger must have an inventory controller atatched");
-            }
-            inventoryController.playerManager = this;
+            GetDependancies();
+            InitManagers();
+        }
 
-            FirstPersonController = GetComponentInChildren<PlayerCharacterController>();
-            if (FirstPersonController == null)
-            {
-                throw new System.Exception("This player mananger must have an control controller atatched");
-            }
-            //FirstPersonController.playerManager = this;
+        private void GetDependancies()
+        {
+            inventoryController = GetComponentInChildren<PlayerInventoryController>();
+            if (inventoryController == null) throw new System.Exception("This player manager must have a PlayerInventoryController script attached");
+
+            firstPersonController = GetComponentInChildren<PlayerCharacterController>();
+            if (firstPersonController == null) throw new System.Exception("This player manager must have a PlayerCharacterController script attached");
 
             interactionController = GetComponentInChildren<PlayerInteractionController>();
-            if (interactionController == null)
-            {
-                throw new System.Exception("This player mananger must have an interaction controller atatched");
-            }
-            interactionController.playerManager = this;
+            if (interactionController == null) throw new System.Exception("This player manager must have a PlayerInteractionController script attached");
 
             playerActiveItem = GetComponentInChildren<PlayerActiveItem>();
-            if (playerActiveItem == null)
-            {
-                throw new System.Exception("This player mananger must have an active item controller atatched");
-            }
+            if (playerActiveItem == null) throw new System.Exception("This player manager must have an PlayerActiveItem script attached"); 
 
-            //buildingController = GetComponentInChildren<PlayerBuildingController>();
-            //if (buildingController == null)
-            //{
-            //    throw new System.Exception("This player mananger must have a building controller attatched");
-            //}
-            //buildingController.playerManager = this;
+            playerManagerUI = GetComponentInChildren<PlayerManagerUI>();
+            if (playerManagerUI == null) throw new System.Exception("This player manager must have a PlayerManagerUI script attached");
+        }
+
+        private void InitManagers()
+        {
+            inventoryController.Init(this);
+            firstPersonController.Init(this);
+            interactionController.Init(this);
+            playerActiveItem.Init(this);
+            playerManagerUI.Init(this);
         }
     }
 }
