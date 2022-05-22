@@ -14,6 +14,53 @@ namespace UntoldTracks.Inventory
         [SerializeField]
         private ItemContainerUI _selectedContainerUI;
 
+        #region Unity
+        private void Awake()
+        {
+            _playerInventoryController = GetComponent<PlayerInventoryController>();
+        }
+
+        private void OnEnable()
+        {
+            _playerInventoryController.OnClose.AddListener(HandleInventoryClosed);
+            _playerInventoryController.OnOpen.AddListener(HandleInventoryOpened);
+        }
+
+        private void OnDisable()
+        {
+            _playerInventoryController.OnClose.RemoveListener(HandleInventoryClosed);
+            _playerInventoryController.OnOpen.RemoveListener(HandleInventoryOpened);
+        }
+
+        private void Update()
+        {
+            if (!_playerInventoryController.IsOpen)
+            {
+                return;
+            }
+
+            HandleHoldingContainer();
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (_selectedContainerUI.Container.IsEmpty())
+                {
+                    HandlePickUpContainer();
+                }
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                if (_selectedContainerUI.Container.IsEmpty())
+                {
+                    return;
+                }
+
+                HandleDropContainer();
+            }
+        }
+        #endregion
+
         private ItemContainerUI GetFirstContainerUnderMouse()
         {
             var pointerData = new PointerEventData(EventSystem.current) { pointerId = -1 };
@@ -40,23 +87,6 @@ namespace UntoldTracks.Inventory
             return null;
         }
 
-        private void Awake()
-        {
-            _playerInventoryController = GetComponent<PlayerInventoryController>();
-        }
-
-        private void OnEnable()
-        {
-            _playerInventoryController.OnClose.AddListener(HandleInventoryClosed);
-            _playerInventoryController.OnOpen.AddListener(HandleInventoryOpened);
-        }
-
-        private void OnDisable()
-        {
-            _playerInventoryController.OnClose.RemoveListener(HandleInventoryClosed);
-            _playerInventoryController.OnOpen.RemoveListener(HandleInventoryOpened);
-        }
-
         private void HandleInventoryOpened()
         {
             _selectedContainerUI.Container.Empty();
@@ -76,7 +106,6 @@ namespace UntoldTracks.Inventory
         private void HandleHoldingContainer()
         {
             _selectedContainerUI.transform.position = Input.mousePosition;
-            //Debug.Log(_selectedContainerUI.Container?.Item?.name);
         }
 
         private void HandlePickUpContainer()
@@ -131,34 +160,6 @@ namespace UntoldTracks.Inventory
             else
             {
                 //playerInventory.FillAndReturnRemaining(selectedContainerUI.Container.Item, selectedContainerUI.Container.Count);
-            }
-        }
-
-        private void Update()
-        {
-            if (!_playerInventoryController.IsOpen)
-            {
-                return;
-            }
-
-            HandleHoldingContainer();
-
-            if (Input.GetMouseButtonDown(0))
-            {
-                if (_selectedContainerUI.Container.IsEmpty())
-                {
-                    HandlePickUpContainer();
-                }
-            }
-
-            if (Input.GetMouseButtonUp(0))
-            {
-                if (_selectedContainerUI.Container.IsEmpty())
-                {
-                    return;
-                }
-
-                HandleDropContainer();
             }
         }
     }

@@ -77,7 +77,11 @@ namespace UntoldTracks.Resource
                 return;
             }
 
-            source.PlayOneShot(holder.harvestAudio);
+            if (source != null && holder.harvestAudio != null)
+            {
+                source.PlayOneShot(holder.harvestAudio);
+            }
+
             durability -= usingContainer.Item.toolStrength;
 
             if (durability > 0)

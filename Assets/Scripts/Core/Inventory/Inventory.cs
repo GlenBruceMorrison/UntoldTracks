@@ -1,13 +1,10 @@
 using System;
 using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UntoldTracks.Player;
 
 namespace UntoldTracks.Inventory
 {
-
     public class Inventory : IInventory
     {
         #region private

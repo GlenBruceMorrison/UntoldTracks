@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: StoneShovel
   m_EditorClassIdentifier: 
   ingredients:
+  - _item: {fileID: 11400000, guid: a0f4fbde1465341298bfd3fdf4d5f6a6, type: 2}
+    _count: 1
+    _currentDurability: 0
   - _item: {fileID: 11400000, guid: d4895223a3464492896ddfe9360331c8, type: 2}
     _count: 1
-  - _item: {fileID: 11400000, guid: a0f4fbde1465341298bfd3fdf4d5f6a6, type: 2}
-    _count: 3
+    _currentDurability: 0
   produces:
     _item: {fileID: 11400000, guid: 63772c9f6660d46a09bf0b6ace5f897f, type: 2}
     _count: 1
+    _currentDurability: 0

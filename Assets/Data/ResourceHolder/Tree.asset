@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Tree
   m_EditorClassIdentifier: 
   durability: 5
-  toolsToHarvest: []
+  toolsToHarvest:
+  - {fileID: 11400000, guid: 63772c9f6660d46a09bf0b6ace5f897f, type: 2}
   CanProduce:
   - item: {fileID: 11400000, guid: a0f4fbde1465341298bfd3fdf4d5f6a6, type: 2}
     rarity: 1

@@ -5,40 +5,6 @@ using System.Collections.Generic;
 
 namespace UntoldTracks.Inventory
 {
-    public class ItemQueryResult
-    {
-        public Item item;
-        public int amountAdded;
-        public float durability;
-
-        public ItemQueryResult(Item item, int count = 1, float durability=-1)
-        {
-            this.item = item;
-            this.amountAdded = count;
-            this.durability = durability;
-        }
-    }
-
-    public class ItemQuery
-    {
-        public Item item;
-        public int count;
-        public int preferredIndex;
-
-        public ItemQuery(Item item, int count = 1, int preferredIndex = -1)
-        {
-            this.item = item;
-            this.count = count;
-            this.preferredIndex = preferredIndex;
-        }
-
-        public ItemQuery(ItemContainer container)
-        {
-            this.item = container.Item;
-            this.count = container.Count;
-        }
-    }
-
     public delegate void ItemContainerModified(ItemContainer newValue);
 
     [System.Serializable]
@@ -116,32 +82,6 @@ namespace UntoldTracks.Inventory
             _currentDurability = item.durability;
         }
 
-        public bool IsFull()
-        {
-            if (IsEmpty())
-            {
-                return false;
-            }
-
-            if (!_item.stackable)
-            {
-                return true;
-            }
-
-            return _count >= _item.stackSize;
-        }
-
-        public int RemainingSpace()
-        {
-            // cannot tell how much space is remaining if we don't have a max stack size to reference
-            if (IsEmpty())
-            {
-                return -1;
-            }
-
-            return _item.stackSize - _count;
-        }
-
         public bool IsEmpty()
         {
             return _item == null;
@@ -157,7 +97,7 @@ namespace UntoldTracks.Inventory
             return _item == item;
         }
 
-        public int FillAndReturnRemaining(Item item, int count, bool modifyContainer = true)
+        internal int FillAndReturnRemaining(Item item, int count, bool modifyContainer = true)
         {
             if (IsNotEmpty() && !HasItem(item))
             {
@@ -230,7 +170,7 @@ namespace UntoldTracks.Inventory
             return 0;
         }
 
-        public int TakeAndReturnRemaining(int count, bool modifyContainer = true)
+        internal int TakeAndReturnRemaining(int count, bool modifyContainer = true)
         {
             if (IsEmpty())
             {
@@ -266,51 +206,12 @@ namespace UntoldTracks.Inventory
             return 0;
         }
 
-        public bool CanFill(Item item, int count)
-        {
-            if (IsEmpty())
-            {
-                return true;
-            }
-
-            if (!HasItem(item))
-            {
-                return false;
-            }
-
-            if (!_item.stackable)
-            {
-                return false;
-            }
-
-            var proposedTotal = _count + count;
-
-            if (proposedTotal > _item.stackSize)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
         public void Empty()
         {
             _item = null;
             _count = 0;
 
             OnModified?.Invoke(this);
-        }
-
-        public ItemContainer TakeAll()
-        {
-            var prev = (ItemContainer)this.MemberwiseClone();
-
-            _item = null;
-            _count = 0;
-
-            OnModified?.Invoke(this);
-
-            return prev;
         }
 
         public void Swap(ItemContainer container)
@@ -327,14 +228,18 @@ namespace UntoldTracks.Inventory
             OnModified?.Invoke(this);
         }
 
-        public void SetDurability(float value)
+        public ItemContainer TakeAll()
         {
-            _currentDurability = value;
+            var prev = (ItemContainer)this.MemberwiseClone();
+
+            _item = null;
+            _count = 0;
+
+            OnModified?.Invoke(this);
+
+            return prev;
         }
 
-        /// <summary>
-        /// Takes items from this container based on the data passed in using the ItemQuery class.
-        /// </summary>
         public ItemQueryResult Take(ItemQuery query)
         {
             var itemQueryResult = new ItemQueryResult(query.item, 0);
@@ -467,6 +372,56 @@ namespace UntoldTracks.Inventory
 
             OnModified?.Invoke(this);
             return itemQueryResult;
+        }
+        
+        public bool CanTake(Item item, int count)
+        {
+            // this container is empty, so can't return anything
+            if (IsEmpty())
+            {
+                return false;
+            }
+
+            // has the same item
+            if (HasItem(item))
+            {
+                // return whether we gave enough of this or not
+                return (_count >= count);
+            }
+
+            return false;
+        }
+
+        public bool CanGive(Item item, int count)
+        {
+            if (IsEmpty())
+            {
+                return true;
+            }
+
+            if (!HasItem(item))
+            {
+                return false;
+            }
+
+            if (!_item.stackable)
+            {
+                return false;
+            }
+
+            var proposedTotal = _count + count;
+
+            if (proposedTotal > _item.stackSize)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public void SetDurability(float value)
+        {
+            _currentDurability = value;
         }
 
         public void DecreaseDurability(int amount)

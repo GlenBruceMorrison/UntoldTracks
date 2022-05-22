@@ -23,15 +23,8 @@ namespace UntoldTracks.UI
         public RecipeRequirement requirementPrefab;
         public List<RecipeRequirement> ingredients = new List<RecipeRequirement>();
 
-        private void Awake()
-        {
-            
-        }
-
         public void Render(Recipe recipe, IInventory inventory)
         {
-            return;
-            
             foreach (var ingredient in ingredients)
             {
                 Destroy(ingredient.gameObject);
