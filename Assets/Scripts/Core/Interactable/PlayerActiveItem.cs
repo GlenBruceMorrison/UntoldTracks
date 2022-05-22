@@ -39,7 +39,7 @@ namespace UntoldTracks.Player
         private void OnEnable()
         {
             PlayerManager.inventoryController.OnActiveItemChanged += HandleActiveItemChanged;
-            HandleActiveItemChanged(PlayerManager, PlayerManager.inventoryController.ActiveItem);
+            //HandleActiveItemChanged(PlayerManager, PlayerManager.inventoryController.ActiveItem);
         }
 
         private void OnDisable()

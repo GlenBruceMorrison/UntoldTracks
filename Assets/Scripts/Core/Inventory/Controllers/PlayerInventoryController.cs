@@ -61,6 +61,11 @@ namespace UntoldTracks.InventorySystem
         {
             get
             {
+                if (_inventory.Containers.Count > _activeItemIndex)
+                {
+                    return null;
+                }
+
                 return _inventory.Containers[_activeItemIndex];
             }
         }

@@ -75,6 +75,12 @@ public class PlaceableEntity : Entity
         GrabAllRenderers();
         _worldColliders = _worldTransform.GetComponentsInChildren<Collider>();
         _placabableEntityIndicator = GetComponentInChildren<PlacableEntityIndicator>();
+
+        if (_placabableEntityIndicator == null)
+        {
+            Debug.LogWarning("This object does not have a PlaceableEntityIndicator on it, disabling!");
+            this.gameObject.SetActive(false);
+        }
     }
 
     private void OnEnable()
