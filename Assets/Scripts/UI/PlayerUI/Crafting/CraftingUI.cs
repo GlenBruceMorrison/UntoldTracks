@@ -25,7 +25,7 @@ namespace UntoldTracks.UI
         
         private void OnEnable()
         {
-            playerManager.inventoryController.Inventory.OnContainerModified +=  (container => ShowRecipe(selectedRecipe));
+            playerManager.inventoryController.Inventory.OnModified += HandleInventoryModified;
             
             RenderRecipeBook(recipeBook);
 
@@ -34,7 +34,17 @@ namespace UntoldTracks.UI
 
         private void OnDisable()
         {
+            playerManager.inventoryController.Inventory.OnModified -= HandleInventoryModified;
+            
             craftingButton.OnClick -= Craft;
+        }
+
+        private void HandleInventoryModified()
+        {
+            if (selectedRecipe != null)
+            {
+                ShowRecipe(selectedRecipe); 
+            }
         }
 
         public void Craft()
