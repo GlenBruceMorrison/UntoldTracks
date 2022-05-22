@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
-using UntoldTracks.Inventory;
+using UntoldTracks.InventorySystem;
 
 namespace UntoldTracks.UI
 {

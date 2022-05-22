@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UntoldTracks.Inventory;
+using UntoldTracks.InventorySystem;
 
 namespace UntoldTracks.Player
 {

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UntoldTracks.Player;
 
-namespace UntoldTracks.Inventory
+namespace UntoldTracks.InventorySystem
 {
     public class Inventory : IInventory
     {
@@ -53,11 +53,24 @@ namespace UntoldTracks.Inventory
         public event ContainerModified OnContainerModified;
         #endregion
 
+        #region constructors
         public Inventory(int size)
         {
             SetSize(size);
         }
+        #endregion
 
+        #region eventHandlers
+        private void HandleContainerModified(ItemContainer newValue)
+        {
+            OnContainerModified?.Invoke(newValue);
+        }
+        #endregion
+
+        /// <summary>
+        /// Add another container to this inventory
+        /// </summary>
+        /// <returns>Returns the container that was added</returns>
         public ItemContainer AppendContainer()
         {
             var container = new ItemContainer(this, _containers.Count);
@@ -66,11 +79,17 @@ namespace UntoldTracks.Inventory
             return container;
         }
 
-        private void HandleContainerModified(ItemContainer newValue)
-        {
-            OnContainerModified?.Invoke(newValue);
-        }
-
+        /// <summary>
+        /// Attempt to take items from this inventory.
+        /// </summary>
+        /// <param name="query">
+        /// An instance of the ItemQuery class which provides query
+        /// information on what you want to take from this container
+        /// </param>
+        /// <returns>
+        /// Returns a ItemQueryResult instance, that 
+        /// provides information on the result of this query.
+        /// </returns>
         public ItemQueryResult Take(ItemQuery query)
         {
             var itemQueryResult = new ItemQueryResult(query.item, 0);
@@ -116,6 +135,17 @@ namespace UntoldTracks.Inventory
             return itemQueryResult;
         }
 
+        /// <summary>
+        /// Attempt to give this inventory data. 
+        /// </summary>
+        /// <param name="container">
+        /// The item container containing the item and the amount
+        /// you want to attempt to add to this inventory
+        /// </param>
+        /// <returns>
+        /// Returns a ItemQueryResult instance, that 
+        /// provides information on the result of this query.
+        /// </returns>
         public ItemQueryResult Give(ItemContainer container)
         {
             var itemQueryResult = new ItemQueryResult(container.Item, 0);
@@ -167,6 +197,18 @@ namespace UntoldTracks.Inventory
             return itemQueryResult;
         }
 
+        /// <summary>
+        /// Whether this inventory contains the given item and amount.
+        /// </summary>
+        /// <param name="item">
+        /// The target item
+        /// </param>
+        /// <param name="count">
+        /// The amount needed
+        /// </param>
+        /// <returns>
+        /// Returns whether this does contain the given values
+        /// </returns>
         public bool CanTake(Item item, int count)
         {
             var containers = _containers.Where(x => x.HasItem(item)).ToList();
@@ -186,6 +228,18 @@ namespace UntoldTracks.Inventory
             return !(remainder > 0);
         }
 
+        /// <summary>
+        /// Whether this inventory can take the given item and amount
+        /// </summary>
+        /// <param name="item">
+        /// The target item
+        /// </param>
+        /// <param name="count">
+        /// The amount needed
+        /// </param>
+        /// <returns>
+        /// Returns whether this inventory can take the full amount
+        /// </returns>
         public bool CanGive(Item item, int count)
         {
             var remainder = count;
@@ -205,16 +259,24 @@ namespace UntoldTracks.Inventory
             return !(remainder > 0);
         }
 
-        private List<ItemContainer> GetNonEmptyContainer()
-        {
-            return _containers.Where(x => !x.IsEmpty()).ToList();
-        }
-
+        /// <summary>
+        /// Checks how much of a given item is present in this inventory
+        /// </summary>
+        /// <param name="item">The item to check</param>
+        /// <returns>Returns an integer representing the amount present</returns>
         public int GetItemCount(Item item)
         {
             return GetNonEmptyContainer().Where(x => x.Item == item).Sum(x => x.Count);
         }
 
+        /// <summary>
+        /// Reurns the container present at the given index
+        /// </summary>
+        /// <param name="index">The index to check</param>
+        /// <returns>
+        /// Returns the container at the index, will be null if the index does 
+        /// not exist
+        /// </returns>
         public ItemContainer GetContainerAtIndex(int index)
         {
             if (_containers == null || _containers.Count < 1)
@@ -231,6 +293,10 @@ namespace UntoldTracks.Inventory
             return Containers[index];
         }
 
+        /// <summary>
+        /// Sets the size of the inventory
+        /// </summary>
+        /// <param name="size">The size value to target</param>
         public void SetSize(int size)
         {
             _containers = new List<ItemContainer>();
@@ -239,6 +305,11 @@ namespace UntoldTracks.Inventory
             {
                 AppendContainer();
             }
+        }
+
+        private List<ItemContainer> GetNonEmptyContainer()
+        {
+            return _containers.Where(x => !x.IsEmpty()).ToList();
         }
 
         /// <summary>

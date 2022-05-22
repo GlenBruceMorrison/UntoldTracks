@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UntoldTracks.Inventory;
+using UntoldTracks.InventorySystem;
 using UnityEngine;
 
 namespace UntoldTracks
@@ -12,7 +12,7 @@ namespace UntoldTracks
 
         public ItemContainer produces;
 
-        public bool CanCreate(IInventory inventory)
+        public bool CanCreate(Inventory inventory)
         {
             foreach (var ingredient in ingredients)
             {

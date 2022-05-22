@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using UntoldTracks.Inventory;
+using UntoldTracks.InventorySystem;
 
 namespace UntoldTracks.UI
 {
     public class InventoryUI : MonoBehaviour
     {
-        private IInventory _inventory;
+        private Inventory _inventory;
         private int _startIndex = -1;
         private int _endIndex = -1;
 
@@ -18,7 +18,7 @@ namespace UntoldTracks.UI
         [SerializeField]
         private Transform _containerRoot;
 
-        public virtual void LinkToInventory(IInventory inventory, int startIndex=-1, int endIndex=-1)
+        public virtual void LinkToInventory(Inventory inventory, int startIndex=-1, int endIndex=-1)
         {
             _inventory = inventory;
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using UntoldTracks.Inventory;
+using UntoldTracks.InventorySystem;
 
 namespace UntoldTracks.UI
 {
@@ -16,7 +16,7 @@ namespace UntoldTracks.UI
         public Image ingredientImage;
         public TMP_Text ingredientCount;
 
-        public void Render(ItemContainer container, IInventory source)
+        public void Render(ItemContainer container, Inventory source)
         {
             ingredientImage.sprite = container.Item.sprite;
             var sourceCount = source.GetItemCount(container.Item);

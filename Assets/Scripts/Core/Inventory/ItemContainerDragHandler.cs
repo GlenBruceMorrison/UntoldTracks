@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using UntoldTracks.UI;
 
-namespace UntoldTracks.Inventory
+namespace UntoldTracks.InventorySystem
 {
     [RequireComponent(typeof(PlayerInventoryController))]
     public class ItemContainerDragHandler : MonoBehaviour

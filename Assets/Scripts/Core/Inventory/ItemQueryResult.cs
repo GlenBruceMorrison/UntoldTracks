@@ -1,4 +1,4 @@
-﻿namespace UntoldTracks.Inventory
+﻿namespace UntoldTracks.InventorySystem
 {
     public class ItemQueryResult
     {

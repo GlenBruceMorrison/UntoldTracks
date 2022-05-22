@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UntoldTracks.Inventory;
+using UntoldTracks.InventorySystem;
 using UnityEngine;
 using UnityEngine.Events;
 using UntoldTracks.Player;

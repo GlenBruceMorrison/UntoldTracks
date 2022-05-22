@@ -4,18 +4,58 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using UntoldTracks.Inventory;
+using UntoldTracks.InventorySystem;
 using UntoldTracks.Player;
 
 namespace UntoldTracks.UI
 {
     public class PlayerManagerUI : MonoBehaviour
     {
-        public PlayerManager player;
+        public PlayerManager playerManager;
+
+        [SerializeField]
+        private PlayerInventoryUI playerInventoryUI;
+        [SerializeField]
+        private PlayerInventoryBarUI playerInventoryBarUI;
+        [SerializeField]
+        private InventoryUI linkedInventory;
+        [SerializeField]
+        private CraftingUI craftingUI;
 
         private void Awake()
         {
-            player = GetComponentInParent<PlayerManager>();
+            playerManager = GetComponentInParent<PlayerManager>();
+        }
+
+        public void LinkInventory(Inventory inventory, int inventorySize, int inventoryBarSize)
+        {
+            playerInventoryBarUI.LinkToInventory(inventory, 0, inventoryBarSize);
+            playerInventoryUI.LinkToInventory(inventory, inventoryBarSize, inventorySize);
+        }
+
+        public void OpenInventory(Inventory linkedInventory=null)
+        {
+            playerManager.FirstPersonController.UnlockPointer();
+            playerInventoryUI.gameObject.SetActive(true);
+
+            if (linkedInventory != null)
+            {
+                this.linkedInventory.gameObject.SetActive(true);
+                this.linkedInventory.LinkToInventory(linkedInventory);
+            }
+        }
+
+        public void CloseInventory()
+        {
+            playerManager.FirstPersonController.LockPointer();
+
+            playerInventoryUI.gameObject.SetActive(false);
+            linkedInventory.gameObject.SetActive(false);
+        }
+
+        public void SetActiveItemIndex(int index)
+        {
+            playerInventoryBarUI.SetActiveIndex(index);
         }
     }
 }

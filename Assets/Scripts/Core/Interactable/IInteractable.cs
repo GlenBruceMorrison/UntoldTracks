@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-using UntoldTracks.Inventory;
+using UntoldTracks.InventorySystem;
 using UntoldTracks.Player;
 
 namespace UntoldTracks

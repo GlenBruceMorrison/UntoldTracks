@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UntoldTracks.Inventory;
+using UntoldTracks.InventorySystem;
 using UntoldTracks.Player;
 
 namespace UntoldTracks.UI
 {
     public class CraftingUI : MonoBehaviour
     {
+        public RecipeBook recipeBook;
+
         public Transform recipeContainer;
 
         public CraftingWindow craftingWindow;
@@ -17,8 +19,6 @@ namespace UntoldTracks.UI
         public List<RecipeSelector> recipeSelectors = new List<RecipeSelector>();
         public RecipeSelector recipeSelectorPrefab;
 
-        public List<Recipe> currentRecipes = new List<Recipe>();
-
         public PlayerManager playerManager => GameObject.FindObjectOfType<PlayerManager>();
 
         public Recipe selectedRecipe;
@@ -27,7 +27,7 @@ namespace UntoldTracks.UI
         {
             playerManager.inventoryController.Inventory.OnContainerModified +=  (container => ShowRecipe(selectedRecipe));
             
-            RenderRecipeBook(currentRecipes);
+            RenderRecipeBook(recipeBook);
 
             craftingButton.OnClick += Craft;
         }
@@ -56,7 +56,7 @@ namespace UntoldTracks.UI
 
             playerManager.inventoryController.Inventory.Give(selectedRecipe.produces);
 
-            RenderRecipeBook(currentRecipes);
+            RenderRecipeBook(recipeBook);
         }
 
         public void Init(PlayerManager playerManager)
@@ -64,7 +64,7 @@ namespace UntoldTracks.UI
             //this.playerManager = playerManager;
         }
 
-        public void RenderRecipeBook(List<Recipe> recipes)
+        public void RenderRecipeBook(RecipeBook book)
         {
             foreach (var recipe in recipeSelectors)
             {
@@ -73,7 +73,7 @@ namespace UntoldTracks.UI
 
             recipeSelectors = new List<RecipeSelector>();
 
-            foreach (var recipe in recipes)
+            foreach (var recipe in book.recipes)
             {
                 var newPanel = Instantiate(recipeSelectorPrefab, recipeContainer.transform);
                 recipeSelectors.Add(newPanel);

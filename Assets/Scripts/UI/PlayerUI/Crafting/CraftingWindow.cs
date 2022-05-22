@@ -5,7 +5,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
-using UntoldTracks.Inventory;
+using UntoldTracks.InventorySystem;
 using UntoldTracks.Player;
 
 namespace UntoldTracks.UI
@@ -23,8 +23,15 @@ namespace UntoldTracks.UI
         public RecipeRequirement requirementPrefab;
         public List<RecipeRequirement> ingredients = new List<RecipeRequirement>();
 
-        public void Render(Recipe recipe, IInventory inventory)
+        public void Render(Recipe recipe, Inventory inventory)
         {
+            if (recipe == null)
+            {
+                targetItemSprite.sprite = null;
+                targetItemName.text = "";
+                targetItemDescription.text = "";
+            }
+
             foreach (var ingredient in ingredients)
             {
                 Destroy(ingredient.gameObject);

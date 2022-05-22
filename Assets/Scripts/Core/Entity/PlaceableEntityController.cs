@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Linq;
 using UntoldTracks.Player;
-using UntoldTracks.Inventory;
+using UntoldTracks.InventorySystem;
 
 public class PlaceableEntityController : MonoBehaviour
 {
@@ -124,18 +124,18 @@ public class PlaceableEntityController : MonoBehaviour
             return;
         }
 
-        if(Input.GetKey("q"))
+        if(Input.GetKeyUp("q"))
         {
             if (targetPlaceable.source.canRotate)
             {
-                transform.localEulerAngles -= Vector3.up * placeableTurnSpeed;
+                transform.localEulerAngles -= Vector3.up * 22.5f;
             }
         }
-        else if (Input.GetKey("r"))
+        else if (Input.GetKeyUp("r"))
         {
             if (targetPlaceable.source.canRotate)
             {
-                transform.localEulerAngles += Vector3.up * placeableTurnSpeed;
+                transform.localEulerAngles += Vector3.up * 22.5f    ;
             }
         }
 

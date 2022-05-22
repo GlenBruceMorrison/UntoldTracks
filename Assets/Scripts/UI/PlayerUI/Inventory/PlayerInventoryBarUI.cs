@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UntoldTracks.Inventory;
+using UntoldTracks.InventorySystem;
 
 namespace UntoldTracks.UI
 {
@@ -17,7 +17,7 @@ namespace UntoldTracks.UI
             _selector.transform.localPosition = Vector3.zero;
         }
 
-        public override void LinkToInventory(IInventory inventory, int startIndex = -1, int endIndex = -1)
+        public override void LinkToInventory(Inventory inventory, int startIndex = -1, int endIndex = -1)
         {
             base.LinkToInventory(inventory, startIndex, endIndex);
 

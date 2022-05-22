@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using UntoldTracks.Inventory;
+using UntoldTracks.InventorySystem;
 
 namespace UntoldTracks.UI
 {

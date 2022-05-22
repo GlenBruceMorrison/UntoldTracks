@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebe0b340ef73ebd49a045cfe74a26f2b, type: 3}
+  m_Name: CraftingTableRecipeBook
+  m_EditorClassIdentifier: 
+  recipes:
+  - {fileID: 11400000, guid: 58a32c1e506a3478c8f5103328032a85, type: 2}
+  - {fileID: 11400000, guid: f7de33ca36c0048a9b1ced12d48f2817, type: 2}
+  - {fileID: 11400000, guid: 1e1fe285fb4a14ac6997c3dae791b950, type: 2}
+  - {fileID: 11400000, guid: cd2d37f08678a4d1ea970dd61c95e11f, type: 2}
+  - {fileID: 11400000, guid: b36df631f77844368b2a5c9055f00020, type: 2}

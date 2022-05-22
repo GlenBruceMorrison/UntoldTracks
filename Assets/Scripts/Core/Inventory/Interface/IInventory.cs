@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UntoldTracks.Player;
 
-namespace UntoldTracks.Inventory
+namespace UntoldTracks.InventorySystem
 {
     public delegate void PlayerInteraction(PlayerManager player);
     public delegate void ContainerModified(ItemContainer container);

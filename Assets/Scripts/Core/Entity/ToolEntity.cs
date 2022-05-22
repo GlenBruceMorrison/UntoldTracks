@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UntoldTracks;
-using UntoldTracks.Inventory;
+using UntoldTracks.InventorySystem;
 
 public class ToolEntity : Entity
 {

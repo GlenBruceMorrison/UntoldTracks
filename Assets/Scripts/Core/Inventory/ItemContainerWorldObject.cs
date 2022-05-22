@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UntoldTracks.Inventory;
+using UntoldTracks.InventorySystem;
 using UnityEngine;
 using UntoldTracks.Player;
 using UntoldTracks;

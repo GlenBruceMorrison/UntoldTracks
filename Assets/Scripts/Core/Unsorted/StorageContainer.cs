@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UntoldTracks.Inventory;
+using UntoldTracks.InventorySystem;
 using UnityEngine;
 
 using UntoldTracks;
@@ -8,7 +8,7 @@ using UntoldTracks.Player;
 
 public class StorageContainer : PlaceableEntity, IInteractable
 {
-    public IInventory _inventory;
+    public Inventory _inventory;
     public int size;
 
     [SerializeField]
@@ -76,6 +76,6 @@ public class StorageContainer : PlaceableEntity, IInteractable
 
     public void HandleSecondaryInput(PlayerManager player, ItemContainer usingContainer)
     {
-        player.inventoryController.OpenOtherInventory(_inventory);
+        player.inventoryController.Open(_inventory);
     }
 }

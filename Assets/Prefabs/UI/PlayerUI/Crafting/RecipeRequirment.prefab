@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_fontSizeMin: 0
   m_fontSizeMax: 129.22
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -205,7 +205,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 9.255386, y: 3.023861, z: 11.117622, w: 4.00972}
+  m_margin: {x: 9.255386, y: 7.037136, z: 11.117622, w: 4.00972}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -342,7 +342,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f126324fd2486a641842ea5a8244c2d1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a2db46e52394c4fb8a311af66b105ccc, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
