@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41cf72670afae4f0da1bcdb2aedb3670, type: 3}
   m_Name: LogStackRecipe
   m_EditorClassIdentifier: 
-  ingredients: []
+  ingredients:
+  - _item: {fileID: 11400000, guid: d4895223a3464492896ddfe9360331c8, type: 2}
+    _count: 8
+    _currentDurability: 0
   produces:
-    _item: {fileID: 0}
-    _count: 0
+    _item: {fileID: 11400000, guid: 25af844cfdc9945e19db805f4caf61c1, type: 2}
+    _count: 1
     _currentDurability: 0
