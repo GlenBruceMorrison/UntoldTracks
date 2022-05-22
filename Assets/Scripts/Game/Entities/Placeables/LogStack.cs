@@ -44,8 +44,9 @@ public class LogStack : PlaceableEntity, IInteractable
             return false;
         }
         
+        logs[currentStored].gameObject.SetActive(true);
+        
         currentStored += 1;
-        logs[currentStored+1].gameObject.SetActive(true);
         
         return true;
     }
@@ -57,8 +58,10 @@ public class LogStack : PlaceableEntity, IInteractable
             return false;
         }
         
+        logs[currentStored-1].gameObject.SetActive(false);
+        
         currentStored -= 1;
-        logs[currentStored+2].gameObject.SetActive(false);
+        
         return true;
     }
     
