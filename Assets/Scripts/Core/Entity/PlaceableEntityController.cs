@@ -14,6 +14,19 @@ public class PlaceableEntityController : MonoBehaviour
 
     public Material canPlaceMaterial, cantPlaceMaterial;
     public Material originalMaterial;
+
+    public bool IsPlacingSomething
+    {
+        get
+        {
+            return targetPlaceable != null;
+        }
+    }
+    
+    public void Init(PlayerManager playerManager)
+    {
+        this.playerManager = playerManager;
+    }
     
     public bool IsPlaceable()
     {
@@ -61,9 +74,8 @@ public class PlaceableEntityController : MonoBehaviour
         transform.position = Vector3.zero;
         
         targetPlaceable.ResetMaterials();
-            
-        GameObject.FindObjectOfType<PlayerActiveItem>().activeItemObject = null;
-
+        
+        playerManager.playerActiveItem.activeItemObject = null;
         playerManager.inventoryController.Inventory.Take(new ItemQuery(targetPlaceable.source, 1, playerManager.inventoryController.ActiveItem.Index));
 
         targetPlaceable.BeingPlaced = false;
@@ -93,8 +105,6 @@ public class PlaceableEntityController : MonoBehaviour
         
         targetPlaceable.transform.parent = this.transform;
         ResetTransform(targetPlaceable.transform);
-
-        targetPlaceable.OnEntityMove += HandleEntityMove;
     }
 
 
@@ -104,27 +114,9 @@ public class PlaceableEntityController : MonoBehaviour
         transform.localEulerAngles = Vector3.zero;
     }
 
-    private void OnDisable()
-    {
-        
-    }
-
-    private void HandleEntityMove(Vector3 old, Vector3 current)
-    {
-        //var canPlace = IsPlaceable();
-    }
-
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (TryPlace())
-            {
-                return;
-            }
-        }
-
-        if (targetPlaceable == null)
+        if (!IsPlacingSomething)
         {
             return;
         }

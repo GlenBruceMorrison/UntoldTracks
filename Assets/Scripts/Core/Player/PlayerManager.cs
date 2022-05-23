@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UntoldTracks.InventorySystem;
 using UnityEngine;
 using UntoldTracks.CharacterController;
@@ -14,6 +15,7 @@ namespace UntoldTracks.Player
         public PlayerInteractionController interactionController;
         public PlayerActiveItem playerActiveItem;
         public PlayerManagerUI playerManagerUI;
+        public PlaceableEntityController placeableEntityController;
 
         private void Awake()
         {
@@ -37,6 +39,9 @@ namespace UntoldTracks.Player
 
             playerManagerUI = GetComponentInChildren<PlayerManagerUI>();
             if (playerManagerUI == null) throw new System.Exception("This player manager must have a PlayerManagerUI script attached");
+
+            placeableEntityController = GetComponentInChildren<PlaceableEntityController>();
+            if (placeableEntityController == null) throw new System.Exception("This player manager must have a PlaceableEntityController script attached");
         }
 
         private void InitManagers()
@@ -46,6 +51,7 @@ namespace UntoldTracks.Player
             interactionController.Init(this);
             playerActiveItem.Init(this);
             playerManagerUI.Init(this);
+            placeableEntityController.Init(this);
         }
     }
 }

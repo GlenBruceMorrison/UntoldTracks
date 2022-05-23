@@ -68,7 +68,6 @@ MonoBehaviour:
   source: {fileID: 11400000, guid: ab9a2b823ee464e178835d14da252417, type: 2}
   raycastOrigins:
   - {fileID: 6527207167236394272}
-  _placabableEntityIndicator: {fileID: 6395162775034553386}
   _worldTransform: {fileID: 1141402864105315612}
   size: 24
   _starterTemplate: []
@@ -82,7 +81,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 490342279812142178}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.91, y: 0.64, z: 0.7715931}

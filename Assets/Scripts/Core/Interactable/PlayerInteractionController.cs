@@ -133,11 +133,21 @@ namespace UntoldTracks.Player
             {
                 if (currentFocus != null)
                 {
-                    if (playerManager.inventoryController.HasActiveItem && playerManager.inventoryController.ActiveItem.Item.hasCustomInteractionFrame)
+                    if (playerManager.inventoryController.HasActiveItem)
                     {
-                        if (playerManager.playerActiveItem.TryGetTool(out ToolEntity tool))
+                        if (playerManager.inventoryController.ActiveItem.Item.hasCustomInteractionFrame)
                         {
-                            tool.HandleInteractionDown(InteractionInput.Primary);
+                            if (playerManager.playerActiveItem.TryGetTool(out ToolEntity tool))
+                            {
+                                tool.HandleInteractionDown(InteractionInput.Primary);
+                            }
+                        }
+                        else
+                        {
+                            if (!playerManager.inventoryController.ActiveItem.Item.isPlaceable)
+                            {
+                                Interact(currentFocus);
+                            }
                         }
                     }
                     else
@@ -147,9 +157,18 @@ namespace UntoldTracks.Player
                 }
                 else
                 {
-                    if (playerManager.inventoryController.HasActiveItem && playerManager.inventoryController.ActiveItem.Item.hasCustomInteractionFrame)
+                    if (playerManager.inventoryController.HasActiveItem)
                     {
-                        playerManager.gameObject.GetComponentInChildren<ToolEntity>().HandleInteractionDown(InteractionInput.Primary);
+                        if (playerManager.inventoryController.ActiveItem.Item.hasCustomInteractionFrame)
+                        {
+                            playerManager.gameObject.GetComponentInChildren<ToolEntity>()
+                                .HandleInteractionDown(InteractionInput.Primary);
+                        }
+                        else if (playerManager.placeableEntityController.IsPlacingSomething)
+                        {
+                            playerManager.placeableEntityController.TryPlace();
+                            return;
+                        }
                     }
                 }
             }
@@ -158,7 +177,11 @@ namespace UntoldTracks.Player
             {
                 if (currentFocus != null)
                 {
-                     currentFocus.HandleSecondaryInput(playerManager, (ItemContainer)playerManager.inventoryController.ActiveItem);
+                    if (!(playerManager.inventoryController.HasActiveItem && playerManager.inventoryController.ActiveItem.Item.hasCustomInteractionFrame))
+                    {
+                        currentFocus.HandleSecondaryInput(playerManager,
+                            (ItemContainer)playerManager.inventoryController.ActiveItem);
+                    }
                 }
             }
         }

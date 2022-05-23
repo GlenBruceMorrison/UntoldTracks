@@ -56,7 +56,7 @@ public class PlaceableEntity : Entity
     #endregion
     
     #region Unity
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         GrabAllRenderers();
         _worldColliders = _worldTransform.GetComponentsInChildren<Collider>();
@@ -73,7 +73,7 @@ public class PlaceableEntity : Entity
         _placeableEntityIndicator.TriggerExit.AddListener(HandleTriggerExit);
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         _placeableEntityIndicator.TriggerStay.RemoveListener(HandleTriggerStay);
         _placeableEntityIndicator.TriggerExit.RemoveListener(HandleTriggerExit);
