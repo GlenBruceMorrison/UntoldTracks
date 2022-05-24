@@ -1,55 +1,88 @@
 ﻿using UnityEngine;
 using System.Linq;
+using JetBrains.Annotations;
 using UntoldTracks.Player;
 using UntoldTracks.InventorySystem;
 
-public class PlaceableEntityController : MonoBehaviour
+
+public interface IPlacableEntityController: IPlayerManangerComponent
 {
-    public PlayerManager playerManager;
-    public PlaceableEntity targetPlaceable;
-
-    public float rayLength = 0.2f;
+    /// <summary>
+    /// The placable object (if any) that is being placed by the player
+    /// </summary>
+    [CanBeNull]
+    PlaceableEntity TargetPlacable { get; }
     
-    public int placeableTurnSpeed = 5;
+    /// <summary>
+    /// Whether the player is attempting to place a placable entity
+    /// </summary>
+    bool IsPlacingSomething { get; }
+    
+    /// <summary>
+    /// If the player is attempting to place a placable entity, then attempt to place that in the world
+    /// </summary>
+    /// <returns>Return true if the placable entity was succesfully placed</returns>
+    bool TryPlace();
+    
+    /// <summary>
+    /// Set the placable instance to become the active placable
+    /// </summary>
+    /// <param name="entity">An instance of the placable</param>
+    void SetTargetPlacable(PlaceableEntity entity);
+}
 
-    public Material canPlaceMaterial, cantPlaceMaterial;
-    public Material originalMaterial;
+public class PlaceableEntityController : MonoBehaviour, IPlacableEntityController
+{
+    private PlayerManager _playerManager;
+    private PlaceableEntity _targetPlaceable;
+    [SerializeField]
+    private float _rayLength = 0.2f;
+    [SerializeField]
+    private Material _canPlaceMaterial, _cantPlaceMaterial;
+
+    public PlaceableEntity TargetPlacable
+    {
+        get
+        {
+            return _targetPlaceable;
+        }
+    }
 
     public bool IsPlacingSomething
     {
         get
         {
-            return targetPlaceable != null;
+            return _targetPlaceable != null;
         }
     }
     
     public void Init(PlayerManager playerManager)
     {
-        this.playerManager = playerManager;
+        _playerManager = playerManager;
     }
     
     public bool IsPlaceable()
     {
-        if (targetPlaceable == null)
+        if (_targetPlaceable == null)
         {
             return false;
         }
 
-        if (!targetPlaceable.raycastOrigins.Any())
+        if (!_targetPlaceable.raycastOrigins.Any())
         {
             return false;
         }
 
-        if (targetPlaceable.IsTriggering)
+        if (_targetPlaceable.IsTriggering)
         {
             return false;
         }
 
-        foreach (var origin in targetPlaceable.raycastOrigins)
+        foreach (var origin in _targetPlaceable.raycastOrigins)
         {
-            Debug.DrawRay(origin.position, Vector3.down * rayLength);
+            Debug.DrawRay(origin.position, Vector3.down * _rayLength);
 
-            var hit = Physics.Raycast(origin.position, Vector3.down, rayLength);
+            var hit = Physics.Raycast(origin.position, Vector3.down, _rayLength);
 
             if (!hit)
             {
@@ -67,50 +100,50 @@ public class PlaceableEntityController : MonoBehaviour
             return false;
         }
 
-        targetPlaceable.transform.parent = transform.parent;
-        targetPlaceable.transform.localPosition = transform.localPosition;
-        targetPlaceable.transform.localEulerAngles = transform.localEulerAngles;
+        _targetPlaceable.transform.parent = transform.parent;
+        _targetPlaceable.transform.localPosition = transform.localPosition;
+        _targetPlaceable.transform.localEulerAngles = transform.localEulerAngles;
 
         transform.position = Vector3.zero;
 
-        targetPlaceable.transform.parent = playerManager.interactionController.LookingAtGameObject.transform;
+        _targetPlaceable.transform.parent = _playerManager.InteractionController.LookingAtGameObject.transform;
         
-        targetPlaceable.ResetMaterials();
+        _targetPlaceable.ResetMaterials();
         
-        playerManager.playerActiveItem.activeItemObject = null;
-        playerManager.inventoryController.Inventory.Take(new ItemQuery(targetPlaceable.source, 1, playerManager.inventoryController.ActiveItem.Index));
+        _playerManager.PlayerActiveItem.activeItemObject = null;
+        _playerManager.InventoryController.Inventory.Take(new ItemQuery(_targetPlaceable.source, 1, _playerManager.InventoryController.ActiveItem.Index));
 
-        targetPlaceable.BeingPlaced = false;
+        _targetPlaceable.BeingPlaced = false;
         
-        targetPlaceable = null;
+        _targetPlaceable = null;
 
         return true;
     }
 
-    public void EquipPlaceable(PlaceableEntity entity)
+    public void SetTargetPlacable(PlaceableEntity entity)
     {
         ResetTransform(this.transform);
 
-        targetPlaceable = entity;
+        _targetPlaceable = entity;
 
-        if (targetPlaceable == null)
+        if (_targetPlaceable == null)
         {
             Debug.LogError("A targetPlaceable is not set, so we are going to disable");
             this.gameObject.SetActive(false);
         }
 
         // todo: optimize
-        targetPlaceable.GrabAllRenderers();
-        targetPlaceable.SetMaterial(canPlaceMaterial);
+        _targetPlaceable.GrabAllRenderers();
+        _targetPlaceable.SetMaterial(_canPlaceMaterial);
         
-        targetPlaceable.BeingPlaced = true;
+        _targetPlaceable.BeingPlaced = true;
         
-        targetPlaceable.transform.parent = this.transform;
-        ResetTransform(targetPlaceable.transform);
+        _targetPlaceable.transform.parent = this.transform;
+        ResetTransform(_targetPlaceable.transform);
     }
 
 
-    public void ResetTransform(Transform transform)
+    private void ResetTransform(Transform transform)
     {
         transform.localPosition = Vector3.zero;
         transform.localEulerAngles = Vector3.zero;
@@ -125,26 +158,21 @@ public class PlaceableEntityController : MonoBehaviour
 
         if(Input.GetKeyUp("q"))
         {
-            if (targetPlaceable.source.canRotate)
+            if (_targetPlaceable.source.canRotate)
             {
                 transform.localEulerAngles -= Vector3.up * 22.5f;
             }
         }
         else if (Input.GetKeyUp("r"))
         {
-            if (targetPlaceable.source.canRotate)
+            if (_targetPlaceable.source.canRotate)
             {
                 transform.localEulerAngles += Vector3.up * 22.5f    ;
             }
         }
 
-        var fromGround = targetPlaceable.transform.localScale.y/2;
+        transform.position = _playerManager.InteractionController.LookingAtVector;
 
-        transform.position = new Vector3(
-            playerManager.interactionController.LookingAtPosition.x,
-            playerManager.interactionController.LookingAtPosition.y,
-            playerManager.interactionController.LookingAtPosition.z);
-
-        targetPlaceable.SetMaterial(IsPlaceable() ? canPlaceMaterial : cantPlaceMaterial);
+        _targetPlaceable.SetMaterial(IsPlaceable() ? _canPlaceMaterial : _cantPlaceMaterial);
     }
 }

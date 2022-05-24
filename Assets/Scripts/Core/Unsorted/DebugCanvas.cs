@@ -22,7 +22,7 @@ public class DebugCanvas : MonoBehaviour
     {
         var player = GameObject.FindObjectOfType<PlayerManager>();
 
-        player.inventoryController.OnActiveItemChanged += (player, container) =>
+        player.InventoryController.OnActiveItemChanged += (player, container) =>
         {
             if (container == null || container.Item == null)
             {
@@ -32,12 +32,12 @@ public class DebugCanvas : MonoBehaviour
             Log("Active item changed to " + ((container == null || container.Item == null) ? "Empty" : container.Item.name));
         };
 
-        player.inventoryController.Inventory.OnContainerAdded += (container) =>
+        player.InventoryController.Inventory.OnContainerAdded += (container) =>
         {
             Log($"{container.Count} {container.Item.name}(s) added to player's inventory");
         };
 
-        player.inventoryController.Inventory.OnContainerRemoved += (container) =>
+        player.InventoryController.Inventory.OnContainerRemoved += (container) =>
         {
             Log($"{container.Count} {container.Item.name}(s) removed to player's inventory");
         };

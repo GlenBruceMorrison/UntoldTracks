@@ -21,7 +21,7 @@ public class ToolEntity : Entity
     public virtual void TriggerInteraction()
     {
         var playerManager = GetComponentInParent<UntoldTracks.Player.PlayerManager>();
-        playerManager.interactionController.TriggerCurrentFocus();
+        playerManager.InteractionController.TriggerCurrentFocus();
         container.DecreaseDurability(1);
     }
 

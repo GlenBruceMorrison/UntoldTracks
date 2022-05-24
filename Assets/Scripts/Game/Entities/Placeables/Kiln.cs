@@ -70,7 +70,7 @@ namespace UntoldTracks.Machines
             }
 
             // Check if player has fuel needed in inventory
-            var hasFuel = player.inventoryController.Inventory.CanTake(fuel, 1);
+            var hasFuel = player.InventoryController.Inventory.CanTake(fuel, 1);
             
             if (!hasFuel)
             {
@@ -78,7 +78,7 @@ namespace UntoldTracks.Machines
             }
             
             // remove fuel from player and add fuel level
-            player.inventoryController.Inventory.Take(new ItemQuery(fuel, 1));
+            player.InventoryController.Inventory.Take(new ItemQuery(fuel, 1));
             
             CurrentFuelLevel += 1;
         }

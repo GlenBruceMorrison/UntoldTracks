@@ -78,7 +78,7 @@ public class LogStack : PlaceableEntity, IInteractable
     
     public void HandlePrimaryInput(PlayerManager player, ItemContainer usingContainer)
     {
-        if (!player.inventoryController.Inventory.CanTake(logItem, 1))
+        if (!player.InventoryController.Inventory.CanTake(logItem, 1))
         {
             return;
         }
@@ -88,12 +88,12 @@ public class LogStack : PlaceableEntity, IInteractable
             return;
         }
 
-        player.inventoryController.Inventory.Take(new ItemQuery(logItem, 1));
+        player.InventoryController.Inventory.Take(new ItemQuery(logItem, 1));
     }
     
     public void HandleSecondaryInput(PlayerManager player, ItemContainer usingContainer)
     {
-        if (!player.inventoryController.Inventory.CanGive(logItem, 1))
+        if (!player.InventoryController.Inventory.CanGive(logItem, 1))
         {
             return;
         }
@@ -103,7 +103,7 @@ public class LogStack : PlaceableEntity, IInteractable
             return;
         }
         
-        player.inventoryController.Inventory.Give(new ItemContainer(logItem, 1));
+        player.InventoryController.Inventory.Give(new ItemContainer(logItem, 1));
     }
     
     public void HandleBecomeFocus(PlayerManager player) { }

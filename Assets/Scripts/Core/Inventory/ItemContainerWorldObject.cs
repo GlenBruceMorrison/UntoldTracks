@@ -56,7 +56,7 @@ public class ItemContainerWorldObject : MonoBehaviour, IInteractable
 
     public void HandlePrimaryInput(PlayerManager player, ItemContainer usingContainer)
     {
-        player.inventoryController.Inventory.Give(Container);
+        player.InventoryController.Inventory.Give(Container);
         Destroy(this.gameObject);
     }
 

@@ -98,7 +98,7 @@ namespace UntoldTracks.Resource
 
             foreach (var container in collected)
             {
-                player.inventoryController.Inventory.Give(container);
+                player.InventoryController.Inventory.Give(container);
             }
 
             OnHarvested?.Invoke();

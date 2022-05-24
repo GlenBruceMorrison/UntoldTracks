@@ -30,7 +30,7 @@ namespace UntoldTracks.Player
         {
             get
             {
-                return _playerMananger.inventoryController.ActiveItem?.Item;
+                return _playerMananger.InventoryController.ActiveItem?.Item;
             }
         }
 
@@ -43,13 +43,13 @@ namespace UntoldTracks.Player
         
         private void OnEnable()
         {
-            PlayerManager.inventoryController.OnActiveItemChanged += HandleActiveItemChanged;
-            HandleActiveItemChanged(PlayerManager, PlayerManager.inventoryController.ActiveItem);
+            PlayerManager.InventoryController.OnActiveItemChanged += HandleActiveItemChanged;
+            HandleActiveItemChanged(PlayerManager, PlayerManager.InventoryController.ActiveItem);
         }
 
         private void OnDisable()
         {
-            _playerMananger.inventoryController.OnActiveItemChanged -= HandleActiveItemChanged;
+            _playerMananger.InventoryController.OnActiveItemChanged -= HandleActiveItemChanged;
             EmptyHand();
         }
 
@@ -95,7 +95,7 @@ namespace UntoldTracks.Player
             var obj = Instantiate(placeablePrefab, this.transform);
             activeItemObject = obj.gameObject;
             _placeableEntityController.gameObject.SetActive(true);
-            _placeableEntityController.EquipPlaceable(obj);
+            _placeableEntityController.SetTargetPlacable(obj);
         }
 
         public bool TryGetTool(out ToolEntity tool)

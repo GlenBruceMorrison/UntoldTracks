@@ -22,6 +22,16 @@ namespace UntoldTracks.UI
         [SerializeField]
         private CraftingUI craftingUI;
 
+        private bool _isUiOpen = false;
+
+        public bool IsUiOpen
+        {
+            get
+            {
+                return _isUiOpen;
+            }
+        }
+        
         public void Init(PlayerManager playerManager)
         {
             this.playerManager = playerManager;
@@ -39,7 +49,9 @@ namespace UntoldTracks.UI
 
         public void OpenInventory(Inventory linkedInventory=null)
         {
-            playerManager.firstPersonController.UnlockPointer();
+            _isUiOpen = true;
+            
+            playerManager.FirstPersonController.UnlockPointer();
             playerInventoryUI.gameObject.SetActive(true);
             craftingUI.gameObject.SetActive(true);
 
@@ -52,7 +64,9 @@ namespace UntoldTracks.UI
 
         public void CloseInventory()
         {
-            playerManager.firstPersonController.LockPointer();
+            _isUiOpen = false;
+            
+            playerManager.FirstPersonController.LockPointer();
 
             playerInventoryUI.gameObject.SetActive(false);
             linkedInventory.gameObject.SetActive(false);

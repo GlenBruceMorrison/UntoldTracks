@@ -76,6 +76,6 @@ public class StorageContainer : PlaceableEntity, IInteractable
 
     public void HandleSecondaryInput(PlayerManager player, ItemContainer usingContainer)
     {
-        player.inventoryController.Open(_inventory);
+        player.InventoryController.Open(_inventory);
     }
 }

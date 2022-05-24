@@ -8,27 +8,70 @@ using UntoldTracks.UI;
 
 namespace UntoldTracks.Player
 {
+    public interface IPlayerInteractionController : IPlayerManangerComponent
+    {
+        /// <summary>
+        /// The current interactable (if any) that the player is looking at
+        /// </summary>
+        IInteractable CurrentFocus { get; }
+
+        /// <summary>
+        /// The Vector3 position that the player is looking at
+        /// </summary>
+        Vector3 LookingAtVector { get; }
+        
+        /// <summary>
+        /// The GameObject that the player is currently looking at
+        /// </summary>
+        GameObject LookingAtGameObject { get; }
+
+        /// <summary>
+        /// An event that is fired whenever the player changes the interactable that they are looking at
+        /// </summary>
+        event FocusChange OnFocusChange;
+        
+        /// <summary>
+        /// Trigger the interaction code on the current interaction that the player is looking at
+        /// </summary>
+        void TriggerCurrentFocus();
+    }
+    
     public delegate void FocusChange(IInteractable target);
 
-    public class PlayerInteractionController : MonoBehaviour
+    public class PlayerInteractionController : MonoBehaviour, IPlayerInteractionController
     {
-        public PlayerManager playerManager;
-
-        public Camera playerCamera;
+        #region private
+        private PlayerManager _playerManager;
+        
+        [SerializeField]
+        private Camera _playerCamera;
 
         [SerializeField]
         private PlayerInteractionControllerUI _uiInteractionController;
 
-        public float interactionDistance = 5;
+        [SerializeField]
+        private float _interactionDistance = 5;
 
-        public IInteractable currentFocus;
-
+        private IInteractable _currentFocus;
         private Vector3 _lookingAtPosition;
         private GameObject _lookingAtGameObject;
-
+        private FocusChange _onFocusChange;
+        #endregion
+        
+        #region events
         public event FocusChange OnFocusChange;
+        #endregion
+        
+        #region getters
+        public IInteractable CurrentFocus
+        {
+            get
+            {
+                return _currentFocus;
+            }
+        }
 
-        public Vector3 LookingAtPosition
+        public Vector3 LookingAtVector
         {
             get
             {
@@ -43,15 +86,16 @@ namespace UntoldTracks.Player
                 return _lookingAtGameObject;
             }
         }
-
+        #endregion
+        
         public void Init(PlayerManager playerManager)
         {
-            
+            _playerManager = playerManager;
         }
 
         private void Update()
         {
-            if (playerManager.firstPersonController.IsPointerLocked())
+            if (_playerManager.FirstPersonController.IsPointerLocked())
             {
                 return;
             }
@@ -63,9 +107,9 @@ namespace UntoldTracks.Player
 
         private void DetermineLookStates()
         {
-            Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * interactionDistance, Color.red);
+            Debug.DrawRay(_playerCamera.transform.position, _playerCamera.transform.forward * _interactionDistance, Color.red);
 
-            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit2, interactionDistance))
+            if (Physics.Raycast(_playerCamera.transform.position, _playerCamera.transform.forward, out RaycastHit hit2, _interactionDistance))
             {
                 _lookingAtPosition = hit2.point;
                 _lookingAtGameObject = hit2.collider.gameObject;
@@ -88,96 +132,95 @@ namespace UntoldTracks.Player
         #region LookStates
         private void LookingAtInteractable(IInteractable interactable)
         {
-            if (currentFocus != null)
+            if (_currentFocus != null)
             {
-                if (currentFocus != interactable)
+                if (_currentFocus != interactable)
                 {
-                    currentFocus.HandleLoseFocus(playerManager);
-                    interactable.HandleBecomeFocus(playerManager);
+                    _currentFocus.HandleLoseFocus(_playerManager);
+                    interactable.HandleBecomeFocus(_playerManager);
 
-                    currentFocus = interactable;
+                    _currentFocus = interactable;
 
-                    OnFocusChange?.Invoke(currentFocus);
+                    OnFocusChange?.Invoke(_currentFocus);
                 }
             }
 
-            if (currentFocus == null)
+            if (_currentFocus == null)
             {
-                currentFocus = interactable;
+                _currentFocus = interactable;
 
-                interactable.HandleBecomeFocus(playerManager);
+                interactable.HandleBecomeFocus(_playerManager);
 
-                OnFocusChange?.Invoke(currentFocus);
+                OnFocusChange?.Invoke(_currentFocus);
             }
 
-            _uiInteractionController.DisplayInteractable(currentFocus);
+            _uiInteractionController.DisplayInteractable(_currentFocus);
         }
 
         private void NotLookingAtInteractable()
         {
-            if (currentFocus != null)
+            if (_currentFocus != null)
             {
-                currentFocus.HandleLoseFocus(playerManager);
+                _currentFocus.HandleLoseFocus(_playerManager);
             }
 
             _uiInteractionController.HideInteractable();
-            currentFocus = null;
+            _currentFocus = null;
         }
 
         private void NotLookingAtAnything()
         {
-            if (currentFocus != null)
+            if (_currentFocus != null)
             {
-                currentFocus.HandleLoseFocus(playerManager);
+                _currentFocus.HandleLoseFocus(_playerManager);
             }
 
             _uiInteractionController.HideInteractable();
-            currentFocus = null;
+            _currentFocus = null;
         }
         #endregion
-
 
         #region InteractionStates
         private void DetermineInteractionStates()
         {
             if (Input.GetMouseButtonDown(0))
             {
-                if (currentFocus != null)
+                if (_currentFocus != null)
                 {
-                    if (playerManager.inventoryController.HasActiveItem)
+                    if (_playerManager.InventoryController.HasActiveItem)
                     {
-                        if (playerManager.inventoryController.ActiveItem.Item.hasCustomInteractionFrame)
+                        if (_playerManager.InventoryController.ActiveItem.Item.hasCustomInteractionFrame)
                         {
-                            if (playerManager.playerActiveItem.TryGetTool(out ToolEntity tool))
+                            if (_playerManager.PlayerActiveItem.TryGetTool(out ToolEntity tool))
                             {
                                 tool.HandleInteractionDown(InteractionInput.Primary);
                             }
                         }
                         else
                         {
-                            if (!playerManager.inventoryController.ActiveItem.Item.isPlaceable)
+                            if (!_playerManager.InventoryController.ActiveItem.Item.isPlaceable)
                             {
-                                Interact(currentFocus);
+                                Interact(_currentFocus);
                             }
                         }
                     }
                     else
                     {
-                        Interact(currentFocus);
+                        Interact(_currentFocus);
                     }
                 }
                 else
                 {
-                    if (playerManager.inventoryController.HasActiveItem)
+                    if (_playerManager.InventoryController.HasActiveItem)
                     {
-                        if (playerManager.inventoryController.ActiveItem.Item.hasCustomInteractionFrame)
+                        if (_playerManager.InventoryController.ActiveItem.Item.hasCustomInteractionFrame)
                         {
-                            playerManager.gameObject.GetComponentInChildren<ToolEntity>()
+                            _playerManager.gameObject.GetComponentInChildren<ToolEntity>()
                                 .HandleInteractionDown(InteractionInput.Primary);
                         }
-                        else if (playerManager.placeableEntityController.IsPlacingSomething)
+                        else if (_playerManager.PlaceableEntityController.IsPlacingSomething)
                         {
-                            playerManager.placeableEntityController.TryPlace();
+                            _playerManager.PlaceableEntityController.TryPlace();
                             return;
                         }
                     }
@@ -186,12 +229,12 @@ namespace UntoldTracks.Player
 
             if (Input.GetMouseButtonDown(1))
             {
-                if (currentFocus != null)
+                if (_currentFocus != null)
                 {
-                    if (!(playerManager.inventoryController.HasActiveItem && playerManager.inventoryController.ActiveItem.Item.hasCustomInteractionFrame))
+                    if (!(_playerManager.InventoryController.HasActiveItem && _playerManager.InventoryController.ActiveItem.Item.hasCustomInteractionFrame))
                     {
-                        currentFocus.HandleSecondaryInput(playerManager,
-                            (ItemContainer)playerManager.inventoryController.ActiveItem);
+                        _currentFocus.HandleSecondaryInput(_playerManager,
+                            (ItemContainer)_playerManager.InventoryController.ActiveItem);
                     }
                 }
             }
@@ -199,17 +242,17 @@ namespace UntoldTracks.Player
 
         private void Interact(IInteractable interactable)
         {
-            interactable.HandlePrimaryInput(playerManager, (ItemContainer)playerManager.inventoryController.ActiveItem);
+            interactable.HandlePrimaryInput(_playerManager, (ItemContainer)_playerManager.InventoryController.ActiveItem);
         }
 
         public void TriggerCurrentFocus()
         {
-            if (currentFocus == null)
+            if (_currentFocus == null)
             {
                 return;
             }
 
-            currentFocus.HandlePrimaryInput(playerManager, (ItemContainer)playerManager.inventoryController.ActiveItem);
+            _currentFocus.HandlePrimaryInput(_playerManager, (ItemContainer)_playerManager.InventoryController.ActiveItem);
         }
         #endregion
     }

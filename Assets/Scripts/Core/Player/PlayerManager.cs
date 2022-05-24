@@ -8,15 +8,68 @@ using UntoldTracks.UI;
 
 namespace UntoldTracks.Player
 {
+    public interface IPlayerManangerComponent
+    {
+        void Init(PlayerManager manager);
+    }
+    
     public class PlayerManager : MonoBehaviour
     {
-        public PlayerInventoryController inventoryController;
-        public PlayerCharacterController firstPersonController;
-        public PlayerInteractionController interactionController;
-        public PlayerActiveItem playerActiveItem;
-        public PlayerManagerUI playerManagerUI;
-        public PlaceableEntityController placeableEntityController;
+        private PlayerInventoryController _inventoryController;
+        private PlayerCharacterController _firstPersonController;
+        private PlayerInteractionController _interactionController;
+        private PlayerActiveItem _playerActiveItem;
+        private PlayerManagerUI _playerManagerUI;
+        private IPlacableEntityController _placeableEntityController;
 
+        public PlayerInventoryController InventoryController
+        {
+            get
+            {
+                return _inventoryController;
+            }
+        }
+
+        public PlayerCharacterController FirstPersonController
+        {
+            get
+            {
+                return _firstPersonController;
+            }
+        }
+
+        public PlayerInteractionController InteractionController
+        {
+            get
+            {
+                return _interactionController;
+            }
+        }
+
+        public PlayerActiveItem PlayerActiveItem
+        {
+            get
+            {
+                return _playerActiveItem;
+            }
+        }
+
+        public PlayerManagerUI PlayerManagerUI
+        {
+            get
+            {
+                return _playerManagerUI;
+            }
+        }
+
+        public IPlacableEntityController PlaceableEntityController
+        {
+            get
+            {
+                return _placeableEntityController;
+            }
+        }
+        
         private void Awake()
         {
             GetDependancies();
@@ -25,33 +78,33 @@ namespace UntoldTracks.Player
 
         private void GetDependancies()
         {
-            inventoryController = GetComponentInChildren<PlayerInventoryController>();
-            if (inventoryController == null) throw new System.Exception("This player manager must have a PlayerInventoryController script attached");
+            _inventoryController = GetComponentInChildren<PlayerInventoryController>();
+            if (_inventoryController == null) throw new System.Exception("This player manager must have a PlayerInventoryController script attached");
 
-            firstPersonController = GetComponentInChildren<PlayerCharacterController>();
-            if (firstPersonController == null) throw new System.Exception("This player manager must have a PlayerCharacterController script attached");
+            _firstPersonController = GetComponentInChildren<PlayerCharacterController>();
+            if (_firstPersonController == null) throw new System.Exception("This player manager must have a PlayerCharacterController script attached");
 
-            interactionController = GetComponentInChildren<PlayerInteractionController>();
-            if (interactionController == null) throw new System.Exception("This player manager must have a PlayerInteractionController script attached");
+            _interactionController = GetComponentInChildren<PlayerInteractionController>();
+            if (_interactionController == null) throw new System.Exception("This player manager must have a PlayerInteractionController script attached");
 
-            playerActiveItem = GetComponentInChildren<PlayerActiveItem>();
-            if (playerActiveItem == null) throw new System.Exception("This player manager must have an PlayerActiveItem script attached"); 
+            _playerActiveItem = GetComponentInChildren<PlayerActiveItem>();
+            if (_playerActiveItem == null) throw new System.Exception("This player manager must have an PlayerActiveItem script attached"); 
 
-            playerManagerUI = GetComponentInChildren<PlayerManagerUI>();
-            if (playerManagerUI == null) throw new System.Exception("This player manager must have a PlayerManagerUI script attached");
+            _playerManagerUI = GetComponentInChildren<PlayerManagerUI>();
+            if (_playerManagerUI == null) throw new System.Exception("This player manager must have a PlayerManagerUI script attached");
 
-            placeableEntityController = GetComponentInChildren<PlaceableEntityController>();
-            if (placeableEntityController == null) throw new System.Exception("This player manager must have a PlaceableEntityController script attached");
+            _placeableEntityController = GetComponentInChildren<PlaceableEntityController>();
+            if (_placeableEntityController == null) throw new System.Exception("This player manager must have a PlaceableEntityController script attached");
         }
 
         private void InitManagers()
         {
-            inventoryController.Init(this);
-            firstPersonController.Init(this);
-            interactionController.Init(this);
-            playerActiveItem.Init(this);
-            playerManagerUI.Init(this);
-            placeableEntityController.Init(this);
+            _inventoryController.Init(this);
+            _firstPersonController.Init(this);
+            _interactionController.Init(this);
+            _playerActiveItem.Init(this);
+            _playerManagerUI.Init(this);
+            _placeableEntityController.Init(this);
         }
     }
 }

@@ -25,7 +25,7 @@ namespace UntoldTracks.UI
         
         private void OnEnable()
         {
-            playerManager.inventoryController.Inventory.OnModified += HandleInventoryModified;
+            playerManager.InventoryController.Inventory.OnModified += HandleInventoryModified;
             
             RenderRecipeBook(recipeBook);
 
@@ -34,7 +34,7 @@ namespace UntoldTracks.UI
 
         private void OnDisable()
         {
-            playerManager.inventoryController.Inventory.OnModified -= HandleInventoryModified;
+            playerManager.InventoryController.Inventory.OnModified -= HandleInventoryModified;
             
             craftingButton.OnClick -= Craft;
         }
@@ -54,17 +54,17 @@ namespace UntoldTracks.UI
                 return;
             }
 
-            if (!selectedRecipe.CanCreate(playerManager.inventoryController.Inventory))
+            if (!selectedRecipe.CanCreate(playerManager.InventoryController.Inventory))
             {
                 return;
             }
 
             foreach (var ingredient in selectedRecipe.ingredients)
             {
-                playerManager.inventoryController.Inventory.Take(new ItemQuery(ingredient.Item, ingredient.Count));
+                playerManager.InventoryController.Inventory.Take(new ItemQuery(ingredient.Item, ingredient.Count));
             }
 
-            playerManager.inventoryController.Inventory.Give(selectedRecipe.produces);
+            playerManager.InventoryController.Inventory.Give(selectedRecipe.produces);
 
             RenderRecipeBook(recipeBook);
         }
@@ -95,7 +95,7 @@ namespace UntoldTracks.UI
         public void ShowRecipe(Recipe recipe)
         {
             selectedRecipe = recipe;
-            craftingWindow.Render(recipe, playerManager.inventoryController.Inventory);
+            craftingWindow.Render(recipe, playerManager.InventoryController.Inventory);
         }
     }
 }
