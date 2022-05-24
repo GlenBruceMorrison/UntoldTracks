@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using UntoldTracks.InventorySystem;
 using UntoldTracks.UI;
 
@@ -22,16 +23,24 @@ namespace UntoldTracks.Player
 
         public IInteractable currentFocus;
 
-        [SerializeField]
-        private Vector3 _lookingAt;
+        private Vector3 _lookingAtPosition;
+        private GameObject _lookingAtGameObject;
 
         public event FocusChange OnFocusChange;
 
-        public Vector3 LookingAt
+        public Vector3 LookingAtPosition
         {
             get
             {
-                return _lookingAt;
+                return _lookingAtPosition;
+            }
+        }
+        
+        public GameObject LookingAtGameObject
+        {
+            get
+            {
+                return _lookingAtGameObject;
             }
         }
 
@@ -58,7 +67,9 @@ namespace UntoldTracks.Player
 
             if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit2, interactionDistance))
             {
-                _lookingAt = hit2.point;
+                _lookingAtPosition = hit2.point;
+                _lookingAtGameObject = hit2.collider.gameObject;
+                
                 if (hit2.collider.gameObject.TryGetComponent(out IInteractable interactable))
                 {
                     LookingAtInteractable(interactable);

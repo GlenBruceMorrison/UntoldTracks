@@ -72,6 +72,8 @@ public class PlaceableEntityController : MonoBehaviour
         targetPlaceable.transform.localEulerAngles = transform.localEulerAngles;
 
         transform.position = Vector3.zero;
+
+        targetPlaceable.transform.parent = playerManager.interactionController.LookingAtGameObject.transform;
         
         targetPlaceable.ResetMaterials();
         
@@ -139,9 +141,9 @@ public class PlaceableEntityController : MonoBehaviour
         var fromGround = targetPlaceable.transform.localScale.y/2;
 
         transform.position = new Vector3(
-            playerManager.interactionController.LookingAt.x,
-            playerManager.interactionController.LookingAt.y,
-            playerManager.interactionController.LookingAt.z);
+            playerManager.interactionController.LookingAtPosition.x,
+            playerManager.interactionController.LookingAtPosition.y,
+            playerManager.interactionController.LookingAtPosition.z);
 
         targetPlaceable.SetMaterial(IsPlaceable() ? canPlaceMaterial : cantPlaceMaterial);
     }
