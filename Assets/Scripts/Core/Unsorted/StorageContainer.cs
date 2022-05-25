@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UntoldTracks.InventorySystem;
 using UnityEngine;
-
+using UnityEngine.Serialization;
 using UntoldTracks;
 using UntoldTracks.Player;
 
@@ -11,7 +11,7 @@ public class StorageContainer : PlaceableEntity, IInteractable
     public int size;
     
     private Inventory _inventory;
-    [SerializeField] private List<ItemContainerTemplate> _starterTemplate = new List<ItemContainerTemplate>();
+    [FormerlySerializedAs("_seed")] [SerializeField] private InventorySeed _inventorySeed;
     [SerializeField] private string _displayText;
     [SerializeField] private Sprite _displaySprite;
 
@@ -34,25 +34,12 @@ public class StorageContainer : PlaceableEntity, IInteractable
     private void Awake()
     {
         _inventory = new Inventory(size);
-        if (_starterTemplate != null)
+        if (_inventorySeed != null)
         {
-            AddFromTempalte();
+            _inventorySeed.Seed(this._inventory);
         }
     }
-
-    public void AddFromTempalte()
-    {
-        foreach (var containerTemplate in _starterTemplate)
-        {
-            if (containerTemplate.item == null || containerTemplate.count < 1)
-            {
-                continue;
-            }
-
-            _inventory.Give(new ItemContainer(containerTemplate.item, containerTemplate.count));
-        }
-    }
-
+    
     public void HandleBecomeFocus(PlayerManager player)
     {
 

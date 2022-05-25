@@ -8,20 +8,12 @@ using UntoldTracks.UI;
 
 namespace UntoldTracks.InventorySystem
 {
-    [System.Serializable]
-    public class ItemContainerTemplate
-    {
-        public Item item;
-        public int count;
-    }
 
     public delegate void ActiveItemChanged(PlayerManager player, ItemContainer container);
 
     public class PlayerInventoryController : PlayerComponent
     {
         #region private
-        [SerializeField] private List<ItemContainerTemplate> _initialContents = new List<ItemContainerTemplate>();
-
         private const int _inventoryBarSize = 9;
         private const int _inventorySize = 25;
         
@@ -30,6 +22,8 @@ namespace UntoldTracks.InventorySystem
         private bool _isOpen = false;
         #endregion
 
+        public InventorySeed inventorySeed;
+        
         #region events
         public UnityEvent OnClose, OnOpen;
 
@@ -69,20 +63,7 @@ namespace UntoldTracks.InventorySystem
             }
         }
         #endregion
-
-        public void Seed()
-        {
-            foreach (var containerTemplate in _initialContents)
-            {
-                if (containerTemplate.item == null || containerTemplate.count < 1)
-                {
-                    continue;
-                }
-
-                Inventory.Give(new ItemContainer(containerTemplate.item, containerTemplate.count));
-            }
-        }
-
+        
         private void LinkToInventory()
         {
             _playerManager.PlayerManagerUI.LinkInventory(_inventory, _inventorySize, _inventoryBarSize);
@@ -136,9 +117,9 @@ namespace UntoldTracks.InventorySystem
             
             _inventory = new Inventory(_inventorySize);
 
-            if (_initialContents != null)
+            if (inventorySeed != null)
             {
-                Seed();
+                inventorySeed.Seed(_inventory);
             }
 
             LinkToInventory();

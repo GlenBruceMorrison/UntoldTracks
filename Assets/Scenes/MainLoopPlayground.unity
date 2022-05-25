@@ -10680,6 +10680,17 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &641114900 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1154011237, guid: 6e9030623d6d44a578466bcc7e4a5262, type: 3}
+  m_PrefabInstance: {fileID: 8544700175996894153}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edfb184a4efa24abe8f622d933accf39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &644867503
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36777,6 +36788,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3477754115725372361, guid: 6e9030623d6d44a578466bcc7e4a5262, type: 3}
+      propertyPath: inventorySeed
+      value: 
+      objectReference: {fileID: 11400000, guid: 2666a566b41164ba9a8bde8a1d20f558, type: 2}
+    - target: {fileID: 3763319996382972406, guid: 6e9030623d6d44a578466bcc7e4a5262, type: 3}
+      propertyPath: interactionControllerUI
+      value: 
+      objectReference: {fileID: 641114900}
+    - target: {fileID: 3763319996382972406, guid: 6e9030623d6d44a578466bcc7e4a5262, type: 3}
+      propertyPath: _interactionControllerUI
+      value: 
+      objectReference: {fileID: 641114900}
     - target: {fileID: 3898756315942598730, guid: 6e9030623d6d44a578466bcc7e4a5262, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
