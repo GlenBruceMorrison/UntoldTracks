@@ -10,11 +10,8 @@ namespace UntoldTracks.Machines
 {
     public class Kiln : PlaceableEntity
     {
-        [SerializeField]
-        private float _fuelDegradeRate;
-        
-        [SerializeField]
-        private List<Transform> _fuelModels = new List<Transform>();
+        [SerializeField] private float _fuelDegradeRate;
+        [SerializeField] private List<Transform> _fuelModels = new List<Transform>();
         
         public Item fuel;
 

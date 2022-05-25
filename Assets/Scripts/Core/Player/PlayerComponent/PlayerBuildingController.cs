@@ -6,11 +6,8 @@ namespace UntoldTracks.Player
 {
     public class PlayerBuildingController : MonoBehaviour
     {
-        [HideInInspector]
-        public PlayerManager playerManager;
-
-        [SerializeField]
-        private bool _buildModeActive;
+        [HideInInspector] public PlayerManager playerManager;
+        [SerializeField] private bool _buildModeActive;
 
         public FoundationPiece buildIndicatorHolder;
 

@@ -17,19 +17,15 @@ namespace UntoldTracks.InventorySystem
 
     public delegate void ActiveItemChanged(PlayerManager player, ItemContainer container);
 
-    public class PlayerInventoryController : MonoBehaviour
+    public class PlayerInventoryController : PlayerComponent
     {
         #region private
-        [SerializeField]
-        private List<ItemContainerTemplate> _initialContents = new List<ItemContainerTemplate>();
+        [SerializeField] private List<ItemContainerTemplate> _initialContents = new List<ItemContainerTemplate>();
 
-        [SerializeField]
-        private PlayerManagerUI _ui;
-
-        private int _inventoryBarSize = 9;
-        private int _inventorySize = 25;
+        private const int _inventoryBarSize = 9;
+        private const int _inventorySize = 25;
+        
         private int _activeItemIndex = 0;
-        internal PlayerManager playerManager;
         private Inventory _inventory;
         private bool _isOpen = false;
         #endregion
@@ -87,9 +83,56 @@ namespace UntoldTracks.InventorySystem
             }
         }
 
-        public void Init(PlayerManager playerManager)
+        private void LinkToInventory()
         {
-            this.playerManager = playerManager;
+            _playerManager.PlayerManagerUI.LinkInventory(_inventory, _inventorySize, _inventoryBarSize);
+            _activeItemIndex = 0;
+        }
+
+        public void Close()
+        {
+            _playerManager.PlayerManagerUI.CloseInventory();
+            _isOpen = false;
+        }
+
+        public void SetActiveIndex(int index)
+        {
+            var newIndex = index;
+
+            if (index > _inventoryBarSize-1)
+            {
+                newIndex = 0;
+            }
+            else if (index < 0)
+            {
+                newIndex = _inventoryBarSize - 1;
+            }
+
+            _activeItemIndex = newIndex;
+
+            OnActiveItemChanged?.Invoke(_playerManager, ActiveItem);
+
+            _playerManager.PlayerManagerUI.SetActiveItemIndex(_activeItemIndex);
+        }
+
+        public void Open(Inventory linkedInventory)
+        {
+            _playerManager.PlayerManagerUI.OpenInventory(linkedInventory);
+            _isOpen = true;
+        }
+
+        private void HandleItemContainerUpdate(ItemContainer container)
+        {
+            if (container.Index == _activeItemIndex)
+            {
+                OnActiveItemChanged?.Invoke(_playerManager, ActiveItem);
+            }
+        }
+        
+        #region Player Component
+        protected override void Initiate()
+        {
+            Close();
             
             _inventory = new Inventory(_inventorySize);
 
@@ -110,74 +153,8 @@ namespace UntoldTracks.InventorySystem
         {
             _inventory.OnContainerModified -= HandleItemContainerUpdate;
         }
-
-        private void LinkToInventory()
-        {
-            _ui.LinkInventory(_inventory, _inventorySize, _inventoryBarSize);
-            _activeItemIndex = 0;
-        }
-
-        private void Start()
-        {
-            Close();
-        }
-
-        public void Close()
-        {
-            _ui.CloseInventory();
-            _isOpen = false;
-
-            /*
-            playerManager.FirstPersonController.LockPointer();
-            _ui.gameObject.SetActive(false);
-            _ui.playerInventoryUI.Close();
-            _isOpen = false;
-            OnClose?.Invoke();
-            */
-        }
-
-        public void SetActiveIndex(int index)
-        {
-            var newIndex = index;
-
-            if (index > _inventoryBarSize-1)
-            {
-                newIndex = 0;
-            }
-            else if (index < 0)
-            {
-                newIndex = _inventoryBarSize - 1;
-            }
-
-            _activeItemIndex = newIndex;
-
-            OnActiveItemChanged?.Invoke(playerManager, ActiveItem);
-
-            _ui.SetActiveItemIndex(_activeItemIndex);
-        }
-
-        public void Open(Inventory linkedInventory)
-        {
-            _ui.OpenInventory(linkedInventory);
-            _isOpen = true;
-            /*
-            playerManager.FirstPersonController.UnlockPointer();
-            _ui.gameObject.SetActive(true); 
-            _ui.playerInventoryUI.Open();
-            _isOpen = true;
-            OnOpen?.Invoke();
-            */
-        }
-
-        private void HandleItemContainerUpdate(ItemContainer container)
-        {
-            if (container.Index == _activeItemIndex)
-            {
-                OnActiveItemChanged?.Invoke(playerManager, ActiveItem);
-            }
-        }
-
-        private void Update()
+        
+        protected override void Run(float deltaTime)
         {
             if (Input.GetKeyDown(KeyCode.Tab))
             {
@@ -210,5 +187,6 @@ namespace UntoldTracks.InventorySystem
             else if (Input.GetKeyDown("7")) SetActiveIndex(6);
             else if (Input.GetKeyDown("8")) SetActiveIndex(7);
         }
+        #endregion
     }
 }

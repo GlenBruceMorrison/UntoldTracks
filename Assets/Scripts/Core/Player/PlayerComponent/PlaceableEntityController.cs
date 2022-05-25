@@ -5,12 +5,11 @@ using UntoldTracks.Player;
 using UntoldTracks.InventorySystem;
 
 
-public interface IPlacableEntityController: IPlayerManangerComponent
+public interface IPlacableEntityController
 {
     /// <summary>
     /// The placable object (if any) that is being placed by the player
     /// </summary>
-    [CanBeNull]
     PlaceableEntity TargetPlacable { get; }
     
     /// <summary>
@@ -21,7 +20,7 @@ public interface IPlacableEntityController: IPlayerManangerComponent
     /// <summary>
     /// If the player is attempting to place a placable entity, then attempt to place that in the world
     /// </summary>
-    /// <returns>Return true if the placable entity was succesfully placed</returns>
+    /// <returns>Return true if the placable entity was succesfully placedz</returns>
     bool TryPlace();
     
     /// <summary>
@@ -31,15 +30,12 @@ public interface IPlacableEntityController: IPlayerManangerComponent
     void SetTargetPlacable(PlaceableEntity entity);
 }
 
-public class PlaceableEntityController : MonoBehaviour, IPlacableEntityController
+public class PlaceableEntityController : PlayerComponent, IPlacableEntityController
 {
-    private PlayerManager _playerManager;
     private PlaceableEntity _targetPlaceable;
-    [SerializeField]
-    private float _rayLength = 0.2f;
-    [SerializeField]
-    private Material _canPlaceMaterial, _cantPlaceMaterial;
-
+    [SerializeField] private float _rayLength = 0.2f;
+    [SerializeField] private Material _canPlaceMaterial, _cantPlaceMaterial;
+    
     public PlaceableEntity TargetPlacable
     {
         get
@@ -56,12 +52,7 @@ public class PlaceableEntityController : MonoBehaviour, IPlacableEntityControlle
         }
     }
     
-    public void Init(PlayerManager playerManager)
-    {
-        _playerManager = playerManager;
-    }
-    
-    public bool IsPlaceable()
+    private bool IsPlaceable()
     {
         if (_targetPlaceable == null)
         {
@@ -73,17 +64,21 @@ public class PlaceableEntityController : MonoBehaviour, IPlacableEntityControlle
             return false;
         }
 
+        // if this is colliding with something, then return
         if (_targetPlaceable.IsTriggering)
         {
             return false;
         }
 
+        // loop through each ray on the active placable
         foreach (var origin in _targetPlaceable.raycastOrigins)
         {
             Debug.DrawRay(origin.position, Vector3.down * _rayLength);
 
+            // chek if that ray has succesfully hit something
             var hit = Physics.Raycast(origin.position, Vector3.down, _rayLength);
 
+            // if not then return this as not placable
             if (!hit)
             {
                 return false;
@@ -100,21 +95,27 @@ public class PlaceableEntityController : MonoBehaviour, IPlacableEntityControlle
             return false;
         }
 
+        // set transform values
         _targetPlaceable.transform.parent = transform.parent;
         _targetPlaceable.transform.localPosition = transform.localPosition;
         _targetPlaceable.transform.localEulerAngles = transform.localEulerAngles;
-
         transform.position = Vector3.zero;
 
+        // set parent to object placed on
         _targetPlaceable.transform.parent = _playerManager.InteractionController.LookingAtGameObject.transform;
         
+        // remove can place and cant place material indicators
         _targetPlaceable.ResetMaterials();
         
-        _playerManager.PlayerActiveItem.activeItemObject = null;
+        // remove this as the players active item
+        //todo: Can we just reove the item from inventory and this is handled by that event?
+        _playerManager.PlayerActiveItemController.activeItemObject = null;
+        
+        // remove this placable from the players inventory
         _playerManager.InventoryController.Inventory.Take(new ItemQuery(_targetPlaceable.source, 1, _playerManager.InventoryController.ActiveItem.Index));
 
+        // reset placable values
         _targetPlaceable.BeingPlaced = false;
-        
         _targetPlaceable = null;
 
         return true;
@@ -142,14 +143,14 @@ public class PlaceableEntityController : MonoBehaviour, IPlacableEntityControlle
         ResetTransform(_targetPlaceable.transform);
     }
 
-
     private void ResetTransform(Transform transform)
     {
         transform.localPosition = Vector3.zero;
         transform.localEulerAngles = Vector3.zero;
     }
 
-    private void Update()
+    #region Player Component
+    protected override void Run(float deltaTime)
     {
         if (!IsPlacingSomething)
         {
@@ -173,6 +174,8 @@ public class PlaceableEntityController : MonoBehaviour, IPlacableEntityControlle
 
         transform.position = _playerManager.InteractionController.LookingAtVector;
 
+        // todo: optimise, we don't need to change these renderers ever frame only when the state changes
         _targetPlaceable.SetMaterial(IsPlaceable() ? _canPlaceMaterial : _cantPlaceMaterial);
     }
+    #endregion
 }

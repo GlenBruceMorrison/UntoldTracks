@@ -7,14 +7,9 @@ namespace UntoldTracks.UI
 {
     public class PlayerInteractionControllerUI : MonoBehaviour
     {
-        [SerializeField]
-        private TMP_Text txtInteraction;
-
-        [SerializeField]
-        private Image imgInteraction;
-
-        [SerializeField]
-        private Transform pnlTextHolder;
+        [SerializeField] private TMP_Text txtInteraction;
+        [SerializeField] private Image imgInteraction;
+        [SerializeField] private Transform pnlTextHolder;
 
         public void DisplayInteractable(IInteractable interactable)
         {

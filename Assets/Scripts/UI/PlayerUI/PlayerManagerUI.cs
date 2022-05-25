@@ -13,14 +13,11 @@ namespace UntoldTracks.UI
     {
         public PlayerManager playerManager;
 
-        [SerializeField]
-        private PlayerInventoryUI playerInventoryUI;
-        [SerializeField]
-        private PlayerInventoryBarUI playerInventoryBarUI;
-        [SerializeField]
-        private InventoryUI linkedInventory;
-        [SerializeField]
-        private CraftingUI craftingUI;
+        [SerializeField] private PlayerInventoryUI playerInventoryUI;
+        [SerializeField] private PlayerInventoryBarUI playerInventoryBarUI;
+        [SerializeField] private InventoryUI linkedInventory;
+        [SerializeField] private CraftingUI craftingUI;
+        [SerializeField] private PlayerInteractionControllerUI _interactionControllerUI;
 
         private bool _isUiOpen = false;
 
@@ -32,7 +29,7 @@ namespace UntoldTracks.UI
             }
         }
         
-        public void Init(PlayerManager playerManager)
+        public void InitPlayerComponent(PlayerManager playerManager)
         {
             this.playerManager = playerManager;
 
@@ -76,6 +73,16 @@ namespace UntoldTracks.UI
         public void SetActiveItemIndex(int index)
         {
             playerInventoryBarUI.SetActiveIndex(index);
+        }
+
+        public void DisplayInteractable(IInteractable interactable)
+        {
+            _interactionControllerUI.DisplayInteractable(interactable);
+        }
+        
+        public void HideInteractable()
+        {
+            _interactionControllerUI.HideInteractable();
         }
     }
 }

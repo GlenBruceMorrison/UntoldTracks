@@ -8,17 +8,12 @@ using UntoldTracks.Player;
 
 public class StorageContainer : PlaceableEntity, IInteractable
 {
-    public Inventory _inventory;
     public int size;
-
-    [SerializeField]
-    private List<ItemContainerTemplate> _starterTemplate = new List<ItemContainerTemplate>();
-
-    [SerializeField]
-    private string _displayText;
-
-    [SerializeField]
-    private Sprite _displaySprite;
+    
+    private Inventory _inventory;
+    [SerializeField] private List<ItemContainerTemplate> _starterTemplate = new List<ItemContainerTemplate>();
+    [SerializeField] private string _displayText;
+    [SerializeField] private Sprite _displaySprite;
 
     public string DisplayText
     {

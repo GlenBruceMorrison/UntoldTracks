@@ -4,10 +4,16 @@ using UntoldTracks.Player;
 using KinematicCharacterController.Examples;
 using KinematicCharacterController;
 
-
 namespace UntoldTracks.CharacterController
 {
-    public class PlayerCharacterController : Entity, IFirstPersonController
+    public interface IFirstPersonController
+    {
+        public bool IsPointerLocked();
+        public void LockPointer();
+        public void UnlockPointer();
+    }
+    
+    public class PlayerCharacterController : PlayerComponent, IFirstPersonController
     {
         public ExampleCharacterController Character;
         public ExampleCharacterCamera CharacterCamera;
@@ -23,7 +29,7 @@ namespace UntoldTracks.CharacterController
             get { return Character.Motor.Velocity.x != 0 || Character.Motor.Velocity.z != 0; }
         }
 
-        public void Init(PlayerManager playerMananger)
+        protected override void Initiate()
         {
             Cursor.lockState = CursorLockMode.Locked;
 
@@ -35,12 +41,12 @@ namespace UntoldTracks.CharacterController
             CharacterCamera.IgnoredColliders.AddRange(Character.GetComponentsInChildren<Collider>());
         }
 
-        private void Update()
+        protected override void Run(float deltaTime)
         {
             HandleCharacterInput();
         }
 
-        private void LateUpdate()
+        protected override void LateRun()
         {
             // Handle rotating the camera along with physics movers
             if (CharacterCamera.RotateWithPhysicsMover && Character.Motor.AttachedRigidbody != null)

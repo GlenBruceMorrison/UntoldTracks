@@ -8,8 +8,7 @@ namespace UntoldTracks.UI
 {
     public class PlayerInventoryBarUI : InventoryUI
     {
-        [SerializeField]
-        private Transform _selector;
+        [SerializeField] private Transform _selector;
 
         public void SetActiveIndex(int activeItemIndex)
         {

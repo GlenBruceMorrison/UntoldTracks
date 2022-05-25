@@ -6,54 +6,32 @@ using UntoldTracks.InventorySystem;
 
 namespace UntoldTracks.Player
 {
-    public class PlayerActiveItem : MonoBehaviour
+    public interface IPlayerActiveItem
     {
-        private PlayerManager _playerMananger;
+        //GameObject ActiveItem { get; }
+        bool TryGetTool(out ToolEntity tool);
+    }
+
+    public class PlayerActiveItemController : PlayerComponent, IPlayerActiveItem
+    {
         public Transform playerHand;
-
-        public PlaceableEntityController _placeableEntityController => GameObject.FindObjectOfType<PlaceableEntityController>();
-
-        public PlayerManager PlayerManager
-        {
-            get
-            {
-                if (_playerMananger == null)
-                {
-                    _playerMananger = FindObjectOfType<PlayerManager>();
-                }
-
-                return _playerMananger;
-            }
-        }
-
-        public Item ActiveItem
-        {
-            get
-            {
-                return _playerMananger.InventoryController.ActiveItem?.Item;
-            }
-        }
-
         public GameObject activeItemObject;
 
-        public void Init(PlayerManager playerManager)
-        {
-            
-        }
-        
+        #region Player Component
         private void OnEnable()
         {
-            PlayerManager.InventoryController.OnActiveItemChanged += HandleActiveItemChanged;
-            HandleActiveItemChanged(PlayerManager, PlayerManager.InventoryController.ActiveItem);
+            _playerManager.InventoryController.OnActiveItemChanged += HandleActiveItemChanged;
+            HandleActiveItemChanged(_playerManager, _playerManager.InventoryController.ActiveItem);
         }
 
         private void OnDisable()
         {
-            _playerMananger.InventoryController.OnActiveItemChanged -= HandleActiveItemChanged;
+            _playerManager.InventoryController.OnActiveItemChanged -= HandleActiveItemChanged;
             EmptyHand();
         }
+        #endregion
 
-        public void EmptyHand()
+        private void EmptyHand()
         {
             if (activeItemObject == null)
             {
@@ -82,7 +60,7 @@ namespace UntoldTracks.Player
             }
         }
 
-        public void SwitchToTool(ItemContainer container)
+        private void SwitchToTool(ItemContainer container)
         {
             activeItemObject = Instantiate(container.Item.toolPrefab, playerHand.transform);
             activeItemObject.GetComponent<ToolEntity>().container = container;
@@ -90,12 +68,12 @@ namespace UntoldTracks.Player
             activeItemObject.transform.localEulerAngles = Vector3.zero;
         }
 
-        public void SwitchToPlaceable(PlaceableEntity placeablePrefab)
+        private void SwitchToPlaceable(PlaceableEntity placeablePrefab)
         {
             var obj = Instantiate(placeablePrefab, this.transform);
             activeItemObject = obj.gameObject;
-            _placeableEntityController.gameObject.SetActive(true);
-            _placeableEntityController.SetTargetPlacable(obj);
+            //_playerMananger.PlaceableEntityController.gameObject.SetActive(true);
+            _playerManager.PlaceableEntityController.SetTargetPlacable(obj);
         }
 
         public bool TryGetTool(out ToolEntity tool)

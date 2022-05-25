@@ -17,7 +17,7 @@ namespace UntoldTracks.UI
                 return result;
             }
 
-            new System.Exception($"Could not find panel named {name}");
+            throw new System.Exception($"Could not find panel named {name}");
 
             return null;
         }
@@ -31,7 +31,6 @@ namespace UntoldTracks.UI
         public void AddElement(string name)
         {
             var element = this.transform.Find(name);
-
         }
     }
 }

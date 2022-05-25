@@ -15194,6 +15194,11 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.78, y: 0.07, z: 1.91}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!20 &904470442 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 8562291067534829000, guid: 6e9030623d6d44a578466bcc7e4a5262, type: 3}
+  m_PrefabInstance: {fileID: 8544700175996894153}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &905187882
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36656,6 +36661,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1462649050, guid: 6e9030623d6d44a578466bcc7e4a5262, type: 3}
+      propertyPath: _canPlaceMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 83308775efd294012b5f2672a04e0142, type: 2}
+    - target: {fileID: 1462649050, guid: 6e9030623d6d44a578466bcc7e4a5262, type: 3}
+      propertyPath: _cantPlaceMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 6489d91835be94aaa8e0039c747bc18c, type: 2}
+    - target: {fileID: 1706938038, guid: 6e9030623d6d44a578466bcc7e4a5262, type: 3}
+      propertyPath: _playerCamera
+      value: 
+      objectReference: {fileID: 904470442}
     - target: {fileID: 575929613879090581, guid: 6e9030623d6d44a578466bcc7e4a5262, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

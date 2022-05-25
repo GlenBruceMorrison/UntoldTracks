@@ -7,14 +7,9 @@ namespace UntoldTracks.UI
 {
     public class ItemContainerUI : MonoBehaviour
     {
-        [SerializeField]
-        private Image _imgItem;
-
-        [SerializeField]
-        private TMP_Text _txtCount;
-
-        [SerializeField]
-        private TMP_Text _txtDurability;
+        [SerializeField] private Image _imgItem;
+        [SerializeField] private TMP_Text _txtCount;
+        [SerializeField] private TMP_Text _txtDurability;
 
         public ItemContainer Container { get; private set; }
 

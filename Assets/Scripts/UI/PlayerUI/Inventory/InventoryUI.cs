@@ -12,19 +12,15 @@ namespace UntoldTracks.UI
 
         protected List<ItemContainerUI> _uiContainers = new List<ItemContainerUI>();
 
-        [SerializeField]
-        private ItemContainerUI _uiContainerPrefab;
-
-        [SerializeField]
-        private Transform _containerRoot;
+        [SerializeField] private ItemContainerUI _uiContainerPrefab;
+        [SerializeField] private Transform _containerRoot;
 
         public virtual void LinkToInventory(Inventory inventory, int startIndex=-1, int endIndex=-1)
         {
             _inventory = inventory;
-
             _startIndex = startIndex;
             _endIndex = endIndex;
-
+            
             Render();
         }
 

@@ -8,7 +8,7 @@ using UntoldTracks.UI;
 
 namespace UntoldTracks.Player
 {
-    public interface IPlayerInteractionController : IPlayerManangerComponent
+    public interface IPlayerInteractionController
     {
         /// <summary>
         /// The current interactable (if any) that the player is looking at
@@ -38,19 +38,11 @@ namespace UntoldTracks.Player
     
     public delegate void FocusChange(IInteractable target);
 
-    public class PlayerInteractionController : MonoBehaviour, IPlayerInteractionController
+    public class PlayerInteractionController : PlayerComponent, IPlayerInteractionController
     {
-        #region private
-        private PlayerManager _playerManager;
-        
-        [SerializeField]
-        private Camera _playerCamera;
-
-        [SerializeField]
-        private PlayerInteractionControllerUI _uiInteractionController;
-
-        [SerializeField]
-        private float _interactionDistance = 5;
+        #region Private
+        [SerializeField] private Camera _playerCamera;
+        [SerializeField] private float _interactionDistance = 5;
 
         private IInteractable _currentFocus;
         private Vector3 _lookingAtPosition;
@@ -58,11 +50,11 @@ namespace UntoldTracks.Player
         private FocusChange _onFocusChange;
         #endregion
         
-        #region events
+        #region Events
         public event FocusChange OnFocusChange;
         #endregion
         
-        #region getters
+        #region Getters
         public IInteractable CurrentFocus
         {
             get
@@ -88,12 +80,13 @@ namespace UntoldTracks.Player
         }
         #endregion
         
-        public void Init(PlayerManager playerManager)
+        #region Player Component
+        protected override void Initiate()
         {
-            _playerManager = playerManager;
+            
         }
 
-        private void Update()
+        protected override void Run(float deltaTime)
         {
             if (_playerManager.FirstPersonController.IsPointerLocked())
             {
@@ -104,7 +97,9 @@ namespace UntoldTracks.Player
 
             DetermineInteractionStates();
         }
+        #endregion
 
+        #region Look States
         private void DetermineLookStates()
         {
             Debug.DrawRay(_playerCamera.transform.position, _playerCamera.transform.forward * _interactionDistance, Color.red);
@@ -129,7 +124,6 @@ namespace UntoldTracks.Player
             }
         }
 
-        #region LookStates
         private void LookingAtInteractable(IInteractable interactable)
         {
             if (_currentFocus != null)
@@ -154,7 +148,7 @@ namespace UntoldTracks.Player
                 OnFocusChange?.Invoke(_currentFocus);
             }
 
-            _uiInteractionController.DisplayInteractable(_currentFocus);
+            _playerManager.PlayerManagerUI.DisplayInteractable(_currentFocus);
         }
 
         private void NotLookingAtInteractable()
@@ -164,7 +158,7 @@ namespace UntoldTracks.Player
                 _currentFocus.HandleLoseFocus(_playerManager);
             }
 
-            _uiInteractionController.HideInteractable();
+            _playerManager.PlayerManagerUI.HideInteractable();
             _currentFocus = null;
         }
 
@@ -175,12 +169,12 @@ namespace UntoldTracks.Player
                 _currentFocus.HandleLoseFocus(_playerManager);
             }
 
-            _uiInteractionController.HideInteractable();
+            _playerManager.PlayerManagerUI.HideInteractable();
             _currentFocus = null;
         }
         #endregion
 
-        #region InteractionStates
+        #region Interaction States
         private void DetermineInteractionStates()
         {
             if (Input.GetMouseButtonDown(0))
@@ -191,7 +185,7 @@ namespace UntoldTracks.Player
                     {
                         if (_playerManager.InventoryController.ActiveItem.Item.hasCustomInteractionFrame)
                         {
-                            if (_playerManager.PlayerActiveItem.TryGetTool(out ToolEntity tool))
+                            if (_playerManager.PlayerActiveItemController.TryGetTool(out ToolEntity tool))
                             {
                                 tool.HandleInteractionDown(InteractionInput.Primary);
                             }

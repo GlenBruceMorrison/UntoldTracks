@@ -8,11 +8,8 @@ namespace UntoldTracks
 {
     public class Interactable : MonoBehaviour, IInteractable
     {
-        [SerializeField]
-        private string _displayText;
-
-        [SerializeField]
-        private Sprite _displaySprite;
+        [SerializeField] private string _displayText;
+        [SerializeField] private Sprite _displaySprite;
 
         public string DisplayText => _displayText;
         public Sprite DisplaySprite => _displaySprite;
