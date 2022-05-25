@@ -44,32 +44,6 @@ namespace UntoldTracks.UI
             playerInventoryUI.LinkToInventory(inventory, inventoryBarSize, inventorySize);
         }
 
-        public void OpenInventory(Inventory linkedInventory=null)
-        {
-            _isUiOpen = true;
-            
-            playerManager.FirstPersonController.UnlockPointer();
-            playerInventoryUI.gameObject.SetActive(true);
-            craftingUI.gameObject.SetActive(true);
-
-            if (linkedInventory != null)
-            {
-                this.linkedInventory.gameObject.SetActive(true);
-                this.linkedInventory.LinkToInventory(linkedInventory);
-            }
-        }
-
-        public void CloseInventory()
-        {
-            _isUiOpen = false;
-            
-            playerManager.FirstPersonController.LockPointer();
-
-            playerInventoryUI.gameObject.SetActive(false);
-            linkedInventory.gameObject.SetActive(false);
-            craftingUI.gameObject.SetActive(false);
-        }
-
         public void SetActiveItemIndex(int index)
         {
             playerInventoryBarUI.SetActiveIndex(index);
@@ -83,6 +57,51 @@ namespace UntoldTracks.UI
         public void HideInteractable()
         {
             _interactionControllerUI.HideInteractable();
+        }
+
+        public void OpenCraftingWindow(RecipeBook recipeBook)
+        {
+            _isUiOpen = true;
+            craftingUI.SetCraftingBook(recipeBook);
+            
+            playerManager.FirstPersonController.UnlockPointer();
+            playerInventoryUI.gameObject.SetActive(true);
+            craftingUI.gameObject.SetActive(true);
+        }
+
+        public void OpenMainWindow(Inventory linkedInventory=null, RecipeBook recipeBook=null)
+        {
+            if (_isUiOpen)
+            {
+                CloseMainWindow();
+                return;
+            }
+            
+            _isUiOpen = true;
+            
+            playerManager.FirstPersonController.UnlockPointer();
+            playerInventoryUI.gameObject.SetActive(true);
+            
+            craftingUI.SetCraftingBook(recipeBook);
+            craftingUI.gameObject.SetActive(true);
+            
+            if (linkedInventory != null)
+            {
+                this.linkedInventory.gameObject.SetActive(true);
+                this.linkedInventory.LinkToInventory(linkedInventory);
+            }
+        }
+
+        public void CloseMainWindow()
+        {
+            _isUiOpen = false;
+
+            craftingUI.ClearRecipe();
+            playerManager.FirstPersonController.LockPointer();
+
+            playerInventoryUI.gameObject.SetActive(false);
+            linkedInventory.gameObject.SetActive(false);
+            craftingUI.gameObject.SetActive(false);
         }
     }
 }

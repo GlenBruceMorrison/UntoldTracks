@@ -72,7 +72,7 @@ namespace UntoldTracks.InventorySystem
 
         public void Close()
         {
-            _playerManager.PlayerManagerUI.CloseInventory();
+            _playerManager.PlayerManagerUI.CloseMainWindow();
             _isOpen = false;
         }
 
@@ -98,7 +98,7 @@ namespace UntoldTracks.InventorySystem
 
         public void Open(Inventory linkedInventory)
         {
-            _playerManager.PlayerManagerUI.OpenInventory(linkedInventory);
+            _playerManager.PlayerManagerUI.OpenMainWindow(linkedInventory);
             _isOpen = true;
         }
 

@@ -1,20 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UntoldTracks.InventorySystem;
+using UntoldTracks.Player;
 
 namespace UntoldTracks
 {
-    public class CraftingStationEntity : Entity
+    public class CraftingStationEntity : Entity, IInteractable
     {
         public CraftingStationData _data;
-    }
-
-    [CreateAssetMenu(fileName = "CraftingStation", menuName = "Data/CraftingStation")]
-    public class CraftingStationData : ScriptableObject
-    {
+        public string DisplayText => _data._item.name;
+        public Sprite DisplaySprite => _data._item.sprite;
         
-        public Item item;
-        public CraftingStationEntity worldObject;
-        public List<Recipe> recipes = new List<Recipe>();
+        public void HandlePrimaryInput(PlayerManager player, ItemContainer usingContainer)
+        {
+            player.PlayerManagerUI.OpenMainWindow(null, _data._recipeBook);
+        }
+
+        public void HandleSecondaryInput(PlayerManager player, ItemContainer usingContainer) { }
+        public void HandleBecomeFocus(PlayerManager player) { }
+        public void HandleLoseFocus(PlayerManager player) { }
     }
 }

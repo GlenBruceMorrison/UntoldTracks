@@ -28,8 +28,15 @@ namespace UntoldTracks.UI
             if (recipe == null)
             {
                 targetItemSprite.sprite = null;
+                targetItemSprite.enabled = false;
                 targetItemName.text = "";
                 targetItemDescription.text = "";
+                foreach (var ingredient in ingredients)
+                {
+                    Destroy(ingredient.gameObject);
+                }
+                ingredients = new List<RecipeRequirement>();
+                return;
             }
 
             foreach (var ingredient in ingredients)
@@ -39,6 +46,7 @@ namespace UntoldTracks.UI
 
             ingredients = new List<RecipeRequirement>();
 
+            targetItemSprite.enabled = true;
             targetItemSprite.sprite = recipe.produces.Item.sprite;
             targetItemName.text = recipe.produces.Item.name;
             targetItemDescription.text = recipe.produces.Item.description;

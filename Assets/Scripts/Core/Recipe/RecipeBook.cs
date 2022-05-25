@@ -8,6 +8,7 @@ namespace UntoldTracks
     [CreateAssetMenu(fileName = "Item", menuName = "Data/RecipeBook")]
     public class RecipeBook : ScriptableObject
     {
+        public string recipeBookTitle;
         public List<Recipe> recipes = new List<Recipe>();
     }
 }

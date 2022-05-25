@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebe0b340ef73ebd49a045cfe74a26f2b, type: 3}
-  m_Name: CraftingTableRecipeBook
+  m_Script: {fileID: 11500000, guid: f6ef27d3eae784dd7876924f4d75cff6, type: 3}
+  m_Name: Forge
   m_EditorClassIdentifier: 
-  recipeBookTitle: 
-  recipes:
-  - {fileID: 11400000, guid: 0577e8907da1a486a873bbed7e20207f, type: 2}
-  - {fileID: 11400000, guid: f7de33ca36c0048a9b1ced12d48f2817, type: 2}
+  _item: {fileID: 11400000, guid: 946dbf4f24065464f979973007dc28f7, type: 2}
+  _worldObject: {fileID: 0}
+  _recipeBook: {fileID: 11400000, guid: 83b42c4382fe441caa0658410516a733, type: 2}

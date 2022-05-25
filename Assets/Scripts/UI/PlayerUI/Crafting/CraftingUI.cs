@@ -8,7 +8,16 @@ namespace UntoldTracks.UI
 {
     public class CraftingUI : MonoBehaviour
     {
-        public RecipeBook recipeBook;
+        [SerializeField] private RecipeBook baseRecipeBook;
+        [SerializeField] private RecipeBook overrideRecipeBook;
+
+        private RecipeBook CurrentRecipeBook
+        {
+            get
+            {
+                return overrideRecipeBook == null ? baseRecipeBook: overrideRecipeBook;
+            }
+        }
 
         public Transform recipeContainer;
 
@@ -23,19 +32,17 @@ namespace UntoldTracks.UI
 
         public Recipe selectedRecipe;
         
+        
         private void OnEnable()
         {
             playerManager.InventoryController.Inventory.OnModified += HandleInventoryModified;
-            
-            RenderRecipeBook(recipeBook);
-
+            RenderRecipeBook();
             craftingButton.OnClick += Craft;
         }
 
         private void OnDisable()
         {
             playerManager.InventoryController.Inventory.OnModified -= HandleInventoryModified;
-            
             craftingButton.OnClick -= Craft;
         }
 
@@ -45,6 +52,20 @@ namespace UntoldTracks.UI
             {
                 ShowRecipe(selectedRecipe); 
             }
+        }
+
+        public void SetCraftingBook(RecipeBook recipeBook)
+        {
+            if (recipeBook != null)
+            {
+                overrideRecipeBook = recipeBook;
+            }
+            else
+            {
+                overrideRecipeBook = null;
+            }
+
+            RenderRecipeBook();
         }
 
         public void Craft()
@@ -66,15 +87,10 @@ namespace UntoldTracks.UI
 
             playerManager.InventoryController.Inventory.Give(selectedRecipe.produces);
 
-            RenderRecipeBook(recipeBook);
+            RenderRecipeBook();
         }
 
-        public void Init(PlayerManager playerManager)
-        {
-            //this.playerManager = playerManager;
-        }
-
-        public void RenderRecipeBook(RecipeBook book)
+        public void RenderRecipeBook()
         {
             foreach (var recipe in recipeSelectors)
             {
@@ -83,13 +99,19 @@ namespace UntoldTracks.UI
 
             recipeSelectors = new List<RecipeSelector>();
 
-            foreach (var recipe in book.recipes)
+            foreach (var recipe in CurrentRecipeBook.recipes)
             {
                 var newPanel = Instantiate(recipeSelectorPrefab, recipeContainer.transform);
                 recipeSelectors.Add(newPanel);
 
                 newPanel.Render(recipe);
             }
+        }
+
+        public void ClearRecipe()
+        {
+            selectedRecipe = null;
+            craftingWindow.Render(null, playerManager.InventoryController.Inventory);
         }
 
         public void ShowRecipe(Recipe recipe)
