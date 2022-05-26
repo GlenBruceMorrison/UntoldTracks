@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: CraftingTable
   m_EditorClassIdentifier: Assembly-CSharp:UntoldTracks:CraftingStationData
   _item: {fileID: 11400000, guid: a12bd0b9165424fb4bbab9cbf229caba, type: 2}
-  _worldObject: {fileID: 0}
+  _worldObject: {fileID: 353044810429674381, guid: 716fb1528c6a748df9f03abd23a773c4, type: 3}
   _recipeBook: {fileID: 11400000, guid: 9eebdf1fa90379e46ba66f7cf7906380, type: 2}

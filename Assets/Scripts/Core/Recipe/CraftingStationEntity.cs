@@ -6,7 +6,7 @@ using UntoldTracks.Player;
 
 namespace UntoldTracks
 {
-    public class CraftingStationEntity : Entity, IInteractable
+    public class CraftingStationEntity : PlaceableEntity, IInteractable
     {
         public CraftingStationData _data;
         public string DisplayText => _data._item.name;

@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recipeBookTitle: Crafting Table
   recipes:
+  - {fileID: 11400000, guid: a04e3a1c7423f4d6a8ea943c774a8c19, type: 2}
   - {fileID: 11400000, guid: 58a32c1e506a3478c8f5103328032a85, type: 2}
   - {fileID: 11400000, guid: b36df631f77844368b2a5c9055f00020, type: 2}
