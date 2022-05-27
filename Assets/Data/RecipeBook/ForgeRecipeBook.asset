@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebe0b340ef73ebd49a045cfe74a26f2b, type: 3}
-  m_Name: ForceRecipeBook
+  m_Name: ForgeRecipeBook
   m_EditorClassIdentifier: 
   recipeBookTitle: Forge
   recipes:

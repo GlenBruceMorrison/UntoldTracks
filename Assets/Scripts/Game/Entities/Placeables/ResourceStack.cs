@@ -3,19 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UntoldTracks;
 using UntoldTracks.InventorySystem;
 using UntoldTracks.Player;
 
-public class LogStack : PlaceableEntity, IInteractable
+public class ResourceStack : PlaceableEntity, IInteractable
 {
+    [SerializeField]
     private int _currentStored = 0;
     
-    public Transform logContainer;
-    public List<Transform> logs = new List<Transform>();
-    public int Max => logs.Count;
-    public Item logItem;
-    public string DisplayText => "RMB [Remove Log]\nLMB [Add Log]";
+    public Transform resourceContainer;
+    public List<Transform> resource = new List<Transform>();
+    public int Max => resource.Count;
+    public Item resourceItem;
+    public string DisplayText => $"RMB [Remove {resourceItem.name}]\nLMB [Add {resourceItem.name}]";
     public Sprite DisplaySprite => source.sprite;
 
     private void Awake()
@@ -31,9 +33,9 @@ public class LogStack : PlaceableEntity, IInteractable
     private void SetLogLevel()
     {
         var index = 0;
-        foreach (Transform child in logContainer.transform)
+        foreach (Transform child in resourceContainer.transform)
         {
-            logs.Add(child);
+            resource.Add(child);
 
             if (_currentStored > index)
             {
@@ -55,7 +57,7 @@ public class LogStack : PlaceableEntity, IInteractable
             return false;
         }
         
-        logs[_currentStored].gameObject.SetActive(true);
+        resource[_currentStored].gameObject.SetActive(true);
         
         _currentStored += 1;
         
@@ -69,7 +71,7 @@ public class LogStack : PlaceableEntity, IInteractable
             return false;
         }
         
-        logs[_currentStored-1].gameObject.SetActive(false);
+        resource[_currentStored-1].gameObject.SetActive(false);
         
         _currentStored -= 1;
         
@@ -78,7 +80,7 @@ public class LogStack : PlaceableEntity, IInteractable
     
     public void HandlePrimaryInput(PlayerManager player, ItemContainer usingContainer)
     {
-        if (!player.InventoryController.Inventory.CanTake(logItem, 1))
+        if (!player.InventoryController.Inventory.CanTake(resourceItem, 1))
         {
             return;
         }
@@ -88,12 +90,12 @@ public class LogStack : PlaceableEntity, IInteractable
             return;
         }
 
-        player.InventoryController.Inventory.Take(new ItemQuery(logItem, 1));
+        player.InventoryController.Inventory.Take(new ItemQuery(resourceItem, 1));
     }
     
     public void HandleSecondaryInput(PlayerManager player, ItemContainer usingContainer)
     {
-        if (!player.InventoryController.Inventory.CanGive(logItem, 1))
+        if (!player.InventoryController.Inventory.CanGive(resourceItem, 1))
         {
             return;
         }
@@ -103,7 +105,7 @@ public class LogStack : PlaceableEntity, IInteractable
             return;
         }
         
-        player.InventoryController.Inventory.Give(new ItemContainer(logItem, 1));
+        player.InventoryController.Inventory.Give(new ItemContainer(resourceItem, 1));
     }
     
     public void HandleBecomeFocus(PlayerManager player) { }

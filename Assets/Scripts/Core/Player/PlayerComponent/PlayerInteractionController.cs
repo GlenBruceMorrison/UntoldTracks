@@ -104,24 +104,27 @@ namespace UntoldTracks.Player
         {
             Debug.DrawRay(_playerCamera.transform.position, _playerCamera.transform.forward * _interactionDistance, Color.red);
 
+            // if hit any collider
             if (Physics.Raycast(_playerCamera.transform.position, _playerCamera.transform.forward, out RaycastHit hit2, _interactionDistance))
             {
+                // set looking at values
                 _lookingAtPosition = hit2.point;
                 _lookingAtGameObject = hit2.collider.gameObject;
                 
+                // check if the hit is an interactable
                 if (hit2.collider.gameObject.TryGetComponent(out IInteractable interactable))
                 {
                     LookingAtInteractable(interactable);
+                    return;
                 }
-                else
-                {
-                    NotLookingAtInteractable();
-                }
+                
+                NotLookingAtInteractable();
+                return;
             }
-            else
-            {
-                NotLookingAtAnything();
-            }
+            
+            _lookingAtPosition = Vector3.zero;
+            _lookingAtGameObject = null;
+            NotLookingAtAnything();
         }
 
         private void LookingAtInteractable(IInteractable interactable)
