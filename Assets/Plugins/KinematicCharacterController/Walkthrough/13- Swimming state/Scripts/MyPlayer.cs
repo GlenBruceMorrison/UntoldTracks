@@ -26,9 +26,6 @@ namespace KinematicCharacterController.Walkthrough.SwimmingState
             // Tell camera to follow transform
             OrbitCamera.SetFollowTransform(CameraFollowPoint);
 
-            // Ignore the character's collider(s) for camera obstruction checks
-            OrbitCamera.IgnoredColliders.Clear();
-            OrbitCamera.IgnoredColliders.AddRange(Character.GetComponentsInChildren<Collider>());
         }
 
         private void Update()

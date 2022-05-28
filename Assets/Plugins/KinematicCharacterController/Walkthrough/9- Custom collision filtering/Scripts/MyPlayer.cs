@@ -26,8 +26,6 @@ namespace KinematicCharacterController.Walkthrough.CollisionFiltering
             // Tell camera to follow transform
             OrbitCamera.SetFollowTransform(CameraFollowPoint);
 
-            // Ignore the character's collider(s) for camera obstruction checks
-            OrbitCamera.IgnoredColliders = Character.GetComponentsInChildren<Collider>().ToList();
         }
 
         private void Update()

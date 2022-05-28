@@ -42,6 +42,8 @@ namespace KinematicCharacterController.Examples
 
     public class ExampleCharacterController : MonoBehaviour, ICharacterController
     {
+        public PhysicsMover parentMover;
+
         public KinematicCharacterMotor Motor;
 
         [Header("Stable Movement")]
@@ -225,6 +227,13 @@ namespace KinematicCharacterController.Examples
         /// </summary>
         public void UpdateRotation(ref Quaternion currentRotation, float deltaTime)
         {
+            /*
+            currentRotation.eulerAngles = new Vector3(
+                currentRotation.eulerAngles.x + parentMover.RotationDeltaFromInterpolation.eulerAngles.x,
+                currentRotation.eulerAngles.y + parentMover.RotationDeltaFromInterpolation.eulerAngles.y,
+                currentRotation.eulerAngles.z + parentMover.RotationDeltaFromInterpolation.eulerAngles.z);
+            */
+
             switch (CurrentCharacterState)
             {
                 case CharacterState.Default:
