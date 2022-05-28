@@ -10,7 +10,7 @@ public class Carriage : MonoBehaviour, IMoverController
     public PhysicsMover Mover;
     public PathCreator pathCreator;
     public float Speed => train.currentSpeed;
-    float distanceTravelled;
+    float DistanceTravelled => train.distanceTravelled - delay;
     public EndOfPathInstruction endOfPathInstruction;
     public float delay = 0;
 
@@ -26,9 +26,7 @@ public class Carriage : MonoBehaviour, IMoverController
 
     public void UpdateMovement(out Vector3 goalPosition, out Quaternion goalRotation, float deltaTime)
     {
-        distanceTravelled += Speed * deltaTime;
-
-        goalPosition = pathCreator.path.GetPointAtDistance(distanceTravelled-delay, endOfPathInstruction);
-        goalRotation = pathCreator.path.GetRotationAtDistance(distanceTravelled-delay, endOfPathInstruction);
+        goalPosition = pathCreator.path.GetPointAtDistance(DistanceTravelled, endOfPathInstruction);
+        goalRotation = pathCreator.path.GetRotationAtDistance(DistanceTravelled, endOfPathInstruction);
     }
 }

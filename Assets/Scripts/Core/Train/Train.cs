@@ -64,5 +64,7 @@ public class Train : MonoBehaviour
                 currentSpeed -= (acc * 3) * Time.deltaTime;
             }
         }
+
+        distanceTravelled += currentSpeed * Time.deltaTime;
     }
 }
