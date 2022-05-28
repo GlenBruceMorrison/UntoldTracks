@@ -9,12 +9,12 @@ public class Workstation : PlaceableEntity, IInteractable
 {
     public string DisplayText { get; }
     public Sprite DisplaySprite { get; }
-    public void HandlePrimaryInput(PlayerManager player, ItemContainer usingContainer)
+    public List<InteractionDisplay> PossibleInputs => new List<InteractionDisplay>()
     {
-        throw new System.NotImplementedException();
-    }
+        new InteractionDisplay(InteractionInput.Primary, "Place")
+    };
 
-    public void HandleSecondaryInput(PlayerManager player, ItemContainer usingContainer)
+    public void HandleInput(PlayerManager manager, InteractionInput input)
     {
         throw new System.NotImplementedException();
     }

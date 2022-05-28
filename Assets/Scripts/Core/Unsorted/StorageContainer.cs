@@ -15,6 +15,11 @@ public class StorageContainer : PlaceableEntity, IInteractable
     [SerializeField] private string _displayText;
     [SerializeField] private Sprite _displaySprite;
 
+    public List<InteractionDisplay> PossibleInputs => new List<InteractionDisplay>()
+    {
+        new InteractionDisplay(InteractionInput.Secondary, $"Open")
+    };
+
     public string DisplayText
     {
         get
@@ -39,7 +44,17 @@ public class StorageContainer : PlaceableEntity, IInteractable
             _inventorySeed.Seed(this._inventory);
         }
     }
-    
+
+    public void HandleInput(PlayerManager manager, InteractionInput input)
+    {
+        switch (input)
+        {
+            case InteractionInput.Secondary:
+                manager.InventoryController.Open(_inventory);
+                break;
+        }
+    }
+
     public void HandleBecomeFocus(PlayerManager player)
     {
 
@@ -49,15 +64,5 @@ public class StorageContainer : PlaceableEntity, IInteractable
     public void HandleLoseFocus(PlayerManager player)
     {
 
-    }
-
-    public void HandlePrimaryInput(PlayerManager player, ItemContainer usingContainer)
-    {
-
-    }
-
-    public void HandleSecondaryInput(PlayerManager player, ItemContainer usingContainer)
-    {
-        player.InventoryController.Open(_inventory);
     }
 }

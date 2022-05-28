@@ -11,6 +11,10 @@ public class ToolHolder : MonoBehaviour, IInteractable
     private GameObject _holdiningWorldObject;
 
     public Sprite emptyIcon;
+    public List<InteractionDisplay> PossibleInputs => new List<InteractionDisplay>()
+    {
+        new InteractionDisplay(InteractionInput.Secondary, _holding == null ? "Place" : "Take")
+    };
 
     public string DisplayText
     {
@@ -50,32 +54,45 @@ public class ToolHolder : MonoBehaviour, IInteractable
 
     public void HandlePrimaryInput(PlayerManager player, ItemContainer usingContainer)
     {
-        // if we are already holding something we want to remove it
-        if (_holdiningWorldObject != null)
-        {
-            Destroy(_holdiningWorldObject);
-            player.InventoryController.Inventory.Give(usingContainer);
-        }
     }
 
     public void HandleSecondaryInput(PlayerManager player, ItemContainer usingContainer)
     {
-        // check if we can actually store this or not
-        if (usingContainer.Item.toolPrefab)
+    }
+
+    public void HandleInput(PlayerManager manager, InteractionInput input)
+    {
+        switch (input)
         {
-            if (_holdiningWorldObject != null)
-            {
-                return;
-            }
+            case InteractionInput.Primary:
+                // if we are already holding something we want to remove it
+                if (_holdiningWorldObject != null)
+                {
+                    Destroy(_holdiningWorldObject);
+                    manager.InventoryController.Inventory.Give(manager.InventoryController.ActiveItem);
+                }
+                break;
+            case InteractionInput.Secondary:
+                var container = manager.InventoryController.ActiveItem;
 
-            // add a reference to what item we are holding
-            _holding = usingContainer.Item;
+                // check if we can actually store this or not
+                if (container.Item.toolPrefab)
+                {
+                    if (_holdiningWorldObject != null)
+                    {
+                        return;
+                    }
 
-            // get the world representation of this item and spawn it in to the scene
-            _holdiningWorldObject = Instantiate(usingContainer.Item.toolPrefab, transform);
+                    // add a reference to what item we are holding
+                    _holding = container.Item;
 
-            // remove this item from the players inventory
-            player.InventoryController.Inventory.Take(new ItemQuery(usingContainer.Item, usingContainer.Count));
+                    // get the world representation of this item and spawn it in to the scene
+                    _holdiningWorldObject = Instantiate(container.Item.toolPrefab, transform);
+
+                    // remove this item from the players inventory
+                    manager.InventoryController.Inventory.Take(new ItemQuery(container.Item, container.Count));
+                }
+                break;
         }
     }
 }

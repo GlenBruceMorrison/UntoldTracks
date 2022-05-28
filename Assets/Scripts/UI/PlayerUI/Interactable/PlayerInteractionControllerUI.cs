@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 using TMPro;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 namespace UntoldTracks.UI
 {
@@ -11,6 +13,8 @@ namespace UntoldTracks.UI
         [SerializeField] private Image imgInteraction;
         [SerializeField] private Transform pnlTextHolder;
 
+        public List<InteractionInputDisplay> inputDisplays = new List<InteractionInputDisplay>();
+
         public void DisplayInteractable(IInteractable interactable)
         {
             if (interactable.DisplaySprite != null)
@@ -19,23 +23,39 @@ namespace UntoldTracks.UI
                 imgInteraction.gameObject.SetActive(true);
             }
 
-            if (!string.IsNullOrWhiteSpace(interactable.DisplayText))
-            {
-                txtInteraction.text = interactable.DisplayText;
+            ClearAllInput();
 
-                pnlTextHolder.gameObject.SetActive(true);
-                txtInteraction.gameObject.SetActive(true);
+            if (interactable.PossibleInputs != null)
+            { 
+                foreach (var input in interactable.PossibleInputs)
+                {
+                    var inputDisplay = inputDisplays.FirstOrDefault(x => x.inputType == input.input);
+                
+                    if (inputDisplay != null)
+                    {
+                        inputDisplay.gameObject.SetActive(true);
+                        inputDisplay.SetText(input.text);
+                    }
+                }
             }
         }
 
         public void HideInteractable()
         {
-            txtInteraction.text = "";
             imgInteraction.sprite = null;
 
-            pnlTextHolder.gameObject.SetActive(false);
-            txtInteraction.gameObject.SetActive(false);
             imgInteraction.gameObject.SetActive(false);
+
+            ClearAllInput();
+        }
+
+        public void ClearAllInput()
+        {
+            foreach(var input in inputDisplays)
+            {
+                input.ClearText();
+                input.gameObject.SetActive(false);
+            }
         }
     }
 }

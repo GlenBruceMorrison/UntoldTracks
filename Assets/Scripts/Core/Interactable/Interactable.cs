@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.Events;
 using UntoldTracks.Player;
 using UntoldTracks.InventorySystem;
+using System.Collections.Generic;
 
 namespace UntoldTracks
 {
@@ -10,11 +11,20 @@ namespace UntoldTracks
     {
         [SerializeField] private string _displayText;
         [SerializeField] private Sprite _displaySprite;
+        [SerializeField] private List<InteractionDisplay> _displayList;
 
         public string DisplayText => _displayText;
         public Sprite DisplaySprite => _displaySprite;
+        public List<InteractionDisplay> PossibleInputs => _displayList;
 
-        public UnityEvent<PlayerManager> onPrimaryInteract, onSecondaryInteract, onLoseFocus, onGainFocus;
+        public UnityEvent<PlayerManager, InteractionInput> onInteraction;
+        public UnityEvent<PlayerManager> onLoseFocus, onGainFocus;
+
+
+        public void HandleInput(PlayerManager manager, InteractionInput input)
+        {
+            onInteraction?.Invoke(manager, input);
+        }
 
         public virtual void HandleBecomeFocus(PlayerManager player)
         {
@@ -24,16 +34,6 @@ namespace UntoldTracks
         public void HandleLoseFocus(PlayerManager player)
         {
             onLoseFocus?.Invoke(player);
-        }
-
-        public void HandlePrimaryInput(PlayerManager player, ItemContainer usingContainer)
-        {
-            onPrimaryInteract?.Invoke(player);
-        }
-
-        public void HandleSecondaryInput(PlayerManager player, ItemContainer usingContainer)
-        {
-            onSecondaryInteract?.Invoke(player);
         }
     }
 }

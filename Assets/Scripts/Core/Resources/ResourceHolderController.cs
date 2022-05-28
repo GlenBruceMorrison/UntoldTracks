@@ -18,6 +18,11 @@ namespace UntoldTracks.Resource
         public int durability;
         //public int capacity = 10;
 
+        public List<InteractionDisplay> PossibleInputs => new List<InteractionDisplay>()
+        {
+            new InteractionDisplay(InteractionInput.Primary, $"Harvest {holder.name}.")
+        };
+
         public bool IsDepleted
         {
             get
@@ -53,67 +58,68 @@ namespace UntoldTracks.Resource
 
         public void HandleLoseFocus(PlayerManager player) { }
         public void HandleBecomeFocus(PlayerManager player) { }
-        public void HandlePrimaryInput(PlayerManager player, ItemContainer usingContainer)
-        {
-            /*
-            if (capacity < 1)
-            {
-                return;
-            }
-            */
 
-            /*
-            if (holder.IsItemValid(usingContainer.Item))
+        public void HandleInput(PlayerManager manager, InteractionInput input)
+        {
+            if (input == InteractionInput.Primary)
             {
-                if (!playerManager.inventoryController.HasActiveItem)
+                /*
+                if (capacity < 1)
                 {
                     return;
                 }
+                */
+
+                /*
+                if (holder.IsItemValid(usingContainer.Item))
+                {
+                    if (!playerManager.inventoryController.HasActiveItem)
+                    {
+                        return;
+                    }
+                }
+                */
+
+                var container = manager.InventoryController.ActiveItem;
+
+                if (!holder.IsItemValid(container.Item))
+                {
+                    return;
+                }
+
+                if (source != null && holder.harvestAudio != null)
+                {
+                    source.PlayOneShot(holder.harvestAudio);
+                }
+
+                durability -= container.Item.toolStrength;
+
+                if (durability > 0)
+                {
+                    return;
+                }
+
+                var collected = holder.Harvest();
+
+                if (collected == null)
+                {
+                    return;
+                }
+
+                foreach (var result in collected)
+                {
+                    manager.InventoryController.Inventory.Give(result);
+                }
+
+                OnHarvested?.Invoke();
+
+                if (deleteOnHarvested)
+                {
+                    Destroy(this.gameObject);
+                }
+
+                source.PlayOneShot(holder.fullyHarvestedAudio);
             }
-            */
-
-            if (!holder.IsItemValid(usingContainer.Item))
-            {
-                return;
-            }
-
-            if (source != null && holder.harvestAudio != null)
-            {
-                source.PlayOneShot(holder.harvestAudio);
-            }
-
-            durability -= usingContainer.Item.toolStrength;
-
-            if (durability > 0)
-            {
-                return;
-            }
-
-            var collected = holder.Harvest();
-
-            if (collected == null)
-            {
-                return;
-            }
-
-            foreach (var container in collected)
-            {
-                player.InventoryController.Inventory.Give(container);
-            }
-
-            OnHarvested?.Invoke();
-
-            if (deleteOnHarvested)
-            {
-                Destroy(this.gameObject);
-            }
-
-            source.PlayOneShot(holder.fullyHarvestedAudio);
-        }
-
-        public void HandleSecondaryInput(PlayerManager player, ItemContainer usingContainer)
-        {
-
         }
     }
 }

@@ -20,6 +20,12 @@ public class ResourceStack : PlaceableEntity, IInteractable
     public string DisplayText => $"RMB [Remove {resourceItem.name}]\nLMB [Add {resourceItem.name}]";
     public Sprite DisplaySprite => source.sprite;
 
+    public List<InteractionDisplay> PossibleInputs => new List<InteractionDisplay>()
+    {
+        new InteractionDisplay(InteractionInput.Primary, "Place"),
+        new InteractionDisplay(InteractionInput.Secondary, "Take")
+    };
+
     private void Awake()
     {
         SetLogLevel();
@@ -78,36 +84,40 @@ public class ResourceStack : PlaceableEntity, IInteractable
         return true;
     }
     
-    public void HandlePrimaryInput(PlayerManager player, ItemContainer usingContainer)
-    {
-        if (!player.InventoryController.Inventory.CanTake(resourceItem, 1))
-        {
-            return;
-        }
-
-        if (!AddLog())
-        {
-            return;
-        }
-
-        player.InventoryController.Inventory.Take(new ItemQuery(resourceItem, 1));
-    }
-    
-    public void HandleSecondaryInput(PlayerManager player, ItemContainer usingContainer)
-    {
-        if (!player.InventoryController.Inventory.CanGive(resourceItem, 1))
-        {
-            return;
-        }
-
-        if (!RemoveLog())
-        {
-            return;
-        }
-        
-        player.InventoryController.Inventory.Give(new ItemContainer(resourceItem, 1));
-    }
-    
     public void HandleBecomeFocus(PlayerManager player) { }
     public void HandleLoseFocus(PlayerManager player) { }
+
+    public void HandleInput(PlayerManager manager, InteractionInput input)
+    {
+        switch (input)
+        {
+            case InteractionInput.Primary:
+                if (!manager.InventoryController.Inventory.CanTake(resourceItem, 1))
+                {
+                    return;
+                }
+
+                if (!AddLog())
+                {
+                    return;
+                }
+
+                manager.InventoryController.Inventory.Take(new ItemQuery(resourceItem, 1));
+                break;
+
+            case InteractionInput.Secondary:
+                if (!manager.InventoryController.Inventory.CanGive(resourceItem, 1))
+                {
+                    return;
+                }
+
+                if (!RemoveLog())
+                {
+                    return;
+                }
+
+                manager.InventoryController.Inventory.Give(new ItemContainer(resourceItem, 1));
+                break;
+        }
+    }
 }

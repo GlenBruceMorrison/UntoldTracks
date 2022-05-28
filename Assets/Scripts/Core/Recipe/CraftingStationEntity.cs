@@ -11,14 +11,22 @@ namespace UntoldTracks
         public CraftingStationData _data;
         public string DisplayText => _data._item.name;
         public Sprite DisplaySprite => _data._item.sprite;
-        
-        public void HandlePrimaryInput(PlayerManager player, ItemContainer usingContainer)
-        {
-            player.PlayerManagerUI.OpenMainWindow(null, _data._recipeBook);
-        }
 
-        public void HandleSecondaryInput(PlayerManager player, ItemContainer usingContainer) { }
+        public List<InteractionDisplay> PossibleInputs => new List<InteractionDisplay>()
+        {
+            new InteractionDisplay(InteractionInput.Primary, $"Place {_data._item.name}.")
+        };
+
+
         public void HandleBecomeFocus(PlayerManager player) { }
         public void HandleLoseFocus(PlayerManager player) { }
+
+        public void HandleInput(PlayerManager manager, InteractionInput input)
+        {
+            if (input == InteractionInput.Primary)
+            {
+                manager.PlayerManagerUI.OpenMainWindow(null, _data._recipeBook);
+            }
+        }
     }
 }

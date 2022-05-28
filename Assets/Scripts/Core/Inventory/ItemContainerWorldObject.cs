@@ -16,6 +16,11 @@ public class ItemContainerWorldObject : MonoBehaviour, IInteractable
     [SerializeField]
     private Sprite _displaySprite;
 
+    public List<InteractionDisplay> PossibleInputs => new List<InteractionDisplay>()
+    {
+        new InteractionDisplay(InteractionInput.Primary, $"Pick up {_container.Item.name}.")
+    };
+
     public string DisplayText
     {
         get
@@ -49,20 +54,17 @@ public class ItemContainerWorldObject : MonoBehaviour, IInteractable
 
     }
 
+    public void HandleInput(PlayerManager manager, InteractionInput input)
+    {
+        if (input == InteractionInput.Primary)
+        {
+            manager.InventoryController.Inventory.Give(Container);
+            Destroy(this.gameObject);
+        }
+    }
+
     public void HandleLoseFocus(PlayerManager player)
     {
-
-    }
-
-    public void HandlePrimaryInput(PlayerManager player, ItemContainer usingContainer)
-    {
-        player.InventoryController.Inventory.Give(Container);
-        Destroy(this.gameObject);
-    }
-
-    public void HandleSecondaryInput(PlayerManager player, ItemContainer usingContainer)
-    {
-
 
     }
 }

@@ -5040,25 +5040,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _displayText: Add Fuel
-  _displaySprite: {fileID: 21300000, guid: e0eac6b76fdd842e88a7f8c75ecffaf4, type: 3}
-  onPrimaryInteract:
+  _displaySprite: {fileID: 21300000, guid: d5b6f161ff04c4a1cb1df9c364511066, type: 3}
+  _displayList:
+  - input: 1
+    text: Add Fuel
+  onInteraction:
     m_PersistentCalls:
       m_Calls: []
-  onSecondaryInteract:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6196773792244837926}
-        m_TargetAssemblyTypeName: UntoldTracks.Machines.Kiln, Assembly-CSharp
-        m_MethodName: AddFuel
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   onLoseFocus:
     m_PersistentCalls:
       m_Calls: []
@@ -5196,7 +5184,6 @@ MonoBehaviour:
   source: {fileID: 11400000, guid: f247bc4b7355c4e7a896c3402dd659f0, type: 2}
   raycastOrigins:
   - {fileID: 2216528690549517725}
-  _placabableEntityIndicator: {fileID: 0}
   _worldTransform: {fileID: 2776459808838580531}
   _fuelDegradeRate: 0.2
   _fuelModels:

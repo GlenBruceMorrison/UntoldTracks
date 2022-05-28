@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UntoldTracks.InventorySystem;
 using UntoldTracks.Player;
@@ -11,13 +12,25 @@ namespace UntoldTracks
         Secondary
     }
 
+    [System.Serializable]
+    public class InteractionDisplay
+    {
+        public InteractionInput input;
+        public string text;
+
+        public InteractionDisplay(InteractionInput input, string text)
+        {
+            this.input = input;
+            this.text = text;
+        }
+    }
+
     public interface IInteractable
     {
-        public string DisplayText { get; }
         public Sprite DisplaySprite { get; }
+        public List<InteractionDisplay> PossibleInputs { get; }
 
-        public void HandlePrimaryInput(PlayerManager player, ItemContainer usingContainer);
-        public void HandleSecondaryInput(PlayerManager player, ItemContainer usingContainer);
+        public void HandleInput(PlayerManager manager, InteractionInput input);
         public void HandleBecomeFocus(PlayerManager player);
         public void HandleLoseFocus(PlayerManager player);
     }
