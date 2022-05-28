@@ -1,3 +1,4 @@
+using PathCreation;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,25 +6,25 @@ using UnityEngine;
 
 public class Train : MonoBehaviour
 {
+    public float trainSpeed = 5;
+    public int carriageLength = 9;
+    public int carriagesToSpawn = 10;
     public List<Carriage> carriages = new List<Carriage>();
+
     public Carriage carriagePrefab;
-
-    public int offset = 5;
-
-    public int amountToSpawn = 1;
+    public PathCreator path;
 
     private void Awake()
     {
-        if (amountToSpawn == -1)
+        for (var i = 0; i < carriageLength; i++)
         {
-            carriages = GetComponentsInChildren<Carriage>().ToList();
+            var carriage = Instantiate(carriagePrefab);
+            
+            carriage.transform.parent = transform;
+            carriage.pathCreator = path;
+            carriage.speed = trainSpeed;
 
-            return;
-        }
-
-        for (int i = 0; i < amountToSpawn; i++)
-        {
-            var carriage = Instantiate(carriagePrefab, transform);
+            carriage.delay = -(i * carriageLength);
 
             carriages.Add(carriage);
         }
