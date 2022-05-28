@@ -99,6 +99,7 @@ public class PlaceableEntityController : PlayerComponent, IPlacableEntityControl
         _targetPlaceable.transform.parent = transform.parent;
         _targetPlaceable.transform.localPosition = transform.localPosition;
         _targetPlaceable.transform.localEulerAngles = transform.localEulerAngles;
+        Destroy(_targetPlaceable.GetComponent<Rigidbody>());
         transform.position = Vector3.zero;
 
         // set parent to object placed on
