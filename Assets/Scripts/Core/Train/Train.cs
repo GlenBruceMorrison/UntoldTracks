@@ -6,27 +6,63 @@ using UnityEngine;
 
 public class Train : MonoBehaviour
 {
-    public float trainSpeed = 5;
-    public int carriageLength = 9;
     public int carriagesToSpawn = 10;
-    public List<Carriage> carriages = new List<Carriage>();
+    public int carriageLength = 9;
 
-    public Carriage carriagePrefab;
+    public List<Carriage> carriagePrefabs = new List<Carriage>();
     public PathCreator path;
+
+    [HideInInspector] public List<Carriage> carriages = new List<Carriage>();
+
+    public bool moving;
+    public float currentSpeed = 5;
+    public int maxSpeed = 15;
+    public float acc;
+
+    public float distanceTravelled;
 
     private void Awake()
     {
-        for (var i = 0; i < carriageLength; i++)
+        for (var i = 0; i < carriagesToSpawn; i++)
         {
-            var carriage = Instantiate(carriagePrefab);
-            
-            carriage.transform.parent = transform;
-            carriage.pathCreator = path;
-            carriage.speed = trainSpeed;
+            AddTrain(carriagePrefabs[Random.Range(0, carriagePrefabs.Count)]);
+        }
+    }
 
-            carriage.delay = -(i * carriageLength);
+    private void AddTrain(Carriage prefab)
+    {
+        var carriage = Instantiate(prefab);
 
-            carriages.Add(carriage);
+        carriage.transform.parent = transform;
+        carriage.pathCreator = path;
+
+        carriage.delay = -(carriages.Count * carriageLength);
+
+        carriage.train = this;
+
+        carriages.Add(carriage);
+    }
+
+    public void StartStop()
+    {
+        moving = !moving;
+    }
+
+    private void Update()
+    {
+        if (moving)
+        {
+            if (currentSpeed < maxSpeed)
+            {
+                currentSpeed += acc * Time.deltaTime;
+            }
+        }
+        else
+        {
+            if (currentSpeed > 0)
+            {
+                currentSpeed -= (acc * 3) * Time.deltaTime;
+            }
         }
     }
 }
