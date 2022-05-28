@@ -5041,10 +5041,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _displayText: Add Fuel
   _displaySprite: {fileID: 21300000, guid: d5b6f161ff04c4a1cb1df9c364511066, type: 3}
-  _displayList:
-  - input: 1
+  _inputDisplay:
+  - input: 0
     text: Add Fuel
   onInteraction:
+    m_PersistentCalls:
+      m_Calls: []
+  onPrimaryInput:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6196773792244837926}
+        m_TargetAssemblyTypeName: UntoldTracks.Machines.Kiln, Assembly-CSharp
+        m_MethodName: AddFuel
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onSecondaryInput:
     m_PersistentCalls:
       m_Calls: []
   onLoseFocus:
@@ -5144,7 +5162,7 @@ Transform:
   m_GameObject: {fileID: 8322026100594088584}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7692308, y: 0.7692308, z: 0.7692308}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2216528690549517725}
@@ -5585,7 +5603,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2330239533875951432, guid: c2d0973dbeb644d4ead2818ea69d1b8a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.115
       objectReference: {fileID: 0}
     - target: {fileID: 2330239533875951432, guid: c2d0973dbeb644d4ead2818ea69d1b8a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5593,7 +5611,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2330239533875951432, guid: c2d0973dbeb644d4ead2818ea69d1b8a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.007
       objectReference: {fileID: 0}
     - target: {fileID: 2330239533875951432, guid: c2d0973dbeb644d4ead2818ea69d1b8a, type: 3}
       propertyPath: m_LocalRotation.w

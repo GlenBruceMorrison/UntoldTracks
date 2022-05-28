@@ -11,19 +11,27 @@ namespace UntoldTracks
     {
         [SerializeField] private string _displayText;
         [SerializeField] private Sprite _displaySprite;
-        [SerializeField] private List<InteractionDisplay> _displayList;
+        [SerializeField] private List<InteractionDisplay> _inputDisplay;
 
         public string DisplayText => _displayText;
         public Sprite DisplaySprite => _displaySprite;
-        public List<InteractionDisplay> PossibleInputs => _displayList;
+        public List<InteractionDisplay> PossibleInputs => _inputDisplay;
 
         public UnityEvent<PlayerManager, InteractionInput> onInteraction;
-        public UnityEvent<PlayerManager> onLoseFocus, onGainFocus;
+        public UnityEvent<PlayerManager> onPrimaryInput, onSecondaryInput, onLoseFocus, onGainFocus;
 
 
         public void HandleInput(PlayerManager manager, InteractionInput input)
         {
-            onInteraction?.Invoke(manager, input);
+            switch (input)
+            {
+                case InteractionInput.Primary:
+                    onPrimaryInput?.Invoke(manager);
+                    break;
+                case InteractionInput.Secondary:
+                    onSecondaryInput?.Invoke(manager);
+                    break;
+            }
         }
 
         public virtual void HandleBecomeFocus(PlayerManager player)
