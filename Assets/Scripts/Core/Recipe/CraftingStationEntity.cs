@@ -14,7 +14,7 @@ namespace UntoldTracks
 
         public List<InteractionDisplay> PossibleInputs => new List<InteractionDisplay>()
         {
-            new InteractionDisplay(InteractionInput.Primary, $"Place {_data._item.name}.")
+            new InteractionDisplay(InteractionInput.Primary, $"Work")
         };
 
 
