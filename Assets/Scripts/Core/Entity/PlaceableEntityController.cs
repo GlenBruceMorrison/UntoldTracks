@@ -35,7 +35,7 @@ public class PlaceableEntityController : PlayerComponent, IPlacableEntityControl
     private PlaceableEntity _targetPlaceable;
     [SerializeField] private float _rayLength = 0.2f;
     [SerializeField] private Material _canPlaceMaterial, _cantPlaceMaterial;
-    
+
     public PlaceableEntity TargetPlacable
     {
         get
@@ -51,7 +51,7 @@ public class PlaceableEntityController : PlayerComponent, IPlacableEntityControl
             return _targetPlaceable != null;
         }
     }
-    
+
     private bool IsPlaceable()
     {
         if (_targetPlaceable == null)
@@ -104,14 +104,14 @@ public class PlaceableEntityController : PlayerComponent, IPlacableEntityControl
 
         // set parent to object placed on
         _targetPlaceable.transform.parent = _playerManager.InteractionController.LookingAtGameObject.transform;
-        
+
         // remove can place and cant place material indicators
         _targetPlaceable.ResetMaterials();
-        
+
         // remove this as the players active item
         //todo: Can we just reove the item from inventory and this is handled by that event?
         _playerManager.PlayerActiveItemController.activeItemObject = null;
-        
+
         // remove this placable from the players inventory
         _playerManager.InventoryController.Inventory.Take(new ItemQuery(_targetPlaceable.source, 1, _playerManager.InventoryController.ActiveItem.Index));
 
@@ -137,9 +137,9 @@ public class PlaceableEntityController : PlayerComponent, IPlacableEntityControl
         // todo: optimize
         _targetPlaceable.GrabAllRenderers();
         _targetPlaceable.SetMaterial(_canPlaceMaterial);
-        
+
         _targetPlaceable.BeingPlaced = true;
-        
+
         _targetPlaceable.transform.parent = this.transform;
         ResetTransform(_targetPlaceable.transform);
     }
@@ -153,27 +153,45 @@ public class PlaceableEntityController : PlayerComponent, IPlacableEntityControl
     #region Player Component
     protected override void Run(float deltaTime)
     {
+    }
+
+    protected override void LateRun()
+    {
         if (!IsPlacingSomething)
         {
             return;
         }
 
-        if(Input.GetKeyUp("q"))
+        if (_playerManager.InteractionController.LookingAtGameObject == null)
+        {
+            _targetPlaceable.gameObject.SetActive(false);
+            return;
+        }
+
+        if (_playerManager.InteractionController.LookingAtGameObject.GetComponentInParent<Carriage>() == null)
+        {
+            _targetPlaceable.gameObject.SetActive(false);
+            return;
+        }
+
+        transform.parent = _playerManager.InteractionController.LookingAtGameObject.GetComponentInParent<Carriage>().transform;
+        _targetPlaceable.gameObject.SetActive(true);
+        transform.position = _playerManager.InteractionController.LookingAtVector;
+
+        if (Input.GetKeyUp(KeyCode.Q))
         {
             if (_targetPlaceable.source.canRotate)
             {
                 transform.localEulerAngles -= Vector3.up * 22.5f;
             }
         }
-        else if (Input.GetKeyUp("r"))
+        else if (Input.GetKeyUp(KeyCode.R))
         {
             if (_targetPlaceable.source.canRotate)
             {
-                transform.localEulerAngles += Vector3.up * 22.5f    ;
+                transform.localEulerAngles += Vector3.up * 22.5f;
             }
         }
-
-        transform.position = _playerManager.InteractionController.LookingAtVector;
 
         // todo: optimise, we don't need to change these renderers ever frame only when the state changes
         _targetPlaceable.SetMaterial(IsPlaceable() ? _canPlaceMaterial : _cantPlaceMaterial);

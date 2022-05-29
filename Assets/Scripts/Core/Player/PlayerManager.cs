@@ -127,6 +127,7 @@ namespace UntoldTracks.Player
 
         private void LateUpdate()
         {
+            _placeableEntityController.InternalLateRun();
             _characterController.InternalLateRun();
         }
     }
