@@ -15,7 +15,6 @@ namespace UntoldTracks.InventorySystem
         private Item _item;
         [SerializeField]
         private int _count;
-        [SerializeField]
         private float _currentDurability;
         private Inventory _inventory;
         private int _index;

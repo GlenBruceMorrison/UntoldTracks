@@ -30,8 +30,15 @@ public interface IPlacableEntityController
     void SetTargetPlacable(PlaceableEntity entity);
 }
 
-public class PlaceableEntityController : PlayerComponent, IPlacableEntityController
+public interface IPlayerComponent
 {
+    void Init(PlayerManager playerManager);
+}
+
+public class PlaceableEntityController : MonoBehaviour, IPlacableEntityController, IPlayerComponent
+{
+    private PlayerManager _playerManager;
+
     private PlaceableEntity _targetPlaceable;
     [SerializeField] private float _rayLength = 0.2f;
     [SerializeField] private Material _canPlaceMaterial, _cantPlaceMaterial;
@@ -150,12 +157,13 @@ public class PlaceableEntityController : PlayerComponent, IPlacableEntityControl
         transform.localEulerAngles = Vector3.zero;
     }
 
-    #region Player Component
-    protected override void Run(float deltaTime)
+    #region Life Cycle
+    public void Init(PlayerManager playerManager)
     {
+        _playerManager = playerManager;
     }
-
-    protected override void LateRun()
+    
+    private void LateUpdate()
     {
         if (!IsPlacingSomething)
         {

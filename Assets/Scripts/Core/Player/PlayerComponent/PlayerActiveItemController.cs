@@ -12,12 +12,19 @@ namespace UntoldTracks.Player
         bool TryGetTool(out ToolEntity tool);
     }
 
-    public class PlayerActiveItemController : PlayerComponent, IPlayerActiveItem
+    public class PlayerActiveItemController : MonoBehaviour, IPlayerActiveItem, IPlayerComponent
     {
+        private PlayerManager _playerManager;
+
         public Transform playerHand;
         public GameObject activeItemObject;
 
-        #region Player Component
+        #region Life Cycle
+        public void Init(PlayerManager playerManager)
+        {
+            _playerManager = playerManager;
+        }
+
         private void OnEnable()
         {
             _playerManager.InventoryController.OnActiveItemChanged += HandleActiveItemChanged;

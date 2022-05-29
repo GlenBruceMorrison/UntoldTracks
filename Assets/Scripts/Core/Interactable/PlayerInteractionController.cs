@@ -38,9 +38,11 @@ namespace UntoldTracks.Player
     
     public delegate void FocusChange(IInteractable target);
 
-    public class PlayerInteractionController : PlayerComponent, IPlayerInteractionController
+    public class PlayerInteractionController : MonoBehaviour, IPlayerInteractionController, IPlayerComponent
     {
         #region Private
+        private PlayerManager _playerManager;
+        
         [SerializeField] private Camera _playerCamera;
         [SerializeField] private float _interactionDistance = 5;
 
@@ -79,14 +81,14 @@ namespace UntoldTracks.Player
             }
         }
         #endregion
-        
-        #region Player Component
-        protected override void Initiate()
+
+        #region Life Cycle
+        public void Init(PlayerManager playerManager)
         {
-            
+            _playerManager = playerManager;
         }
 
-        protected override void Run(float deltaTime)
+        private void Update()
         {
             if (_playerManager.FirstPersonController.IsPointerLocked())
             {
