@@ -8,10 +8,10 @@ public class TreeGroundCollisionChecker : MonoBehaviour
 {
     [SerializeField] private Tree tree;
     
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(collision?.gameObject?.name);
-        if (!collision.gameObject.CompareTag("Terrain")) return;
+        if (!other.gameObject.CompareTag("Terrain")) return;
+        Debug.Log(other?.gameObject?.name);
         tree.HandleTreeGrounded();
         this.GameObject().SetActive(false);
     }

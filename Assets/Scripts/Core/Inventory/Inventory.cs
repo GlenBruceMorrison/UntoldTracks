@@ -148,7 +148,7 @@ namespace UntoldTracks.InventorySystem
         /// </returns>
         public ItemQueryResult Give(ItemContainer container)
         {
-            var itemQueryResult = new ItemQueryResult(container.Item, 0);
+            var itemQueryResult = new ItemQueryResult(container.Item, container.Item.durability);
 
             // is is not stackable, then just give to the first empty container
             if (!container.Item.stackable)

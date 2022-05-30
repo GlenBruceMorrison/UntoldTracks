@@ -15,7 +15,7 @@ namespace UntoldTracks.InventorySystem
         private Item _item;
         [SerializeField]
         private int _count;
-        private float _currentDurability;
+        private int _currentDurability;
         private Inventory _inventory;
         private int _index;
         #endregion
@@ -53,7 +53,7 @@ namespace UntoldTracks.InventorySystem
             }
         }
 
-        public float CurrentDurability
+        public int CurrentDurability
         {
             get
             {
@@ -232,7 +232,7 @@ namespace UntoldTracks.InventorySystem
         /// </returns>
         public ItemQueryResult Give(ItemContainer container)
         {
-            var itemQueryResult = new ItemQueryResult(container.Item, 0);
+            var itemQueryResult = new ItemQueryResult(container.Item, container.CurrentDurability);
 
             // have a different item already, no point in continuing
             if (!HasItem(container.Item) && !IsEmpty())
@@ -383,7 +383,7 @@ namespace UntoldTracks.InventorySystem
             return true;
         }
 
-        public void SetDurability(float value)
+        public void SetDurability(int value)
         {
             _currentDurability = value;
         }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7022067132459059331}
   - component: {fileID: 6259087930260981542}
   - component: {fileID: 8158349918125487084}
+  - component: {fileID: 7482771025369674256}
   m_Layer: 0
   m_Name: Axe
   m_TagString: Untagged
@@ -25,14 +26,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7654065988326609465}
-  m_LocalRotation: {x: -0, y: 0.9435276, z: -0, w: 0.331294}
-  m_LocalPosition: {x: -10.541002, y: 2.367, z: 14.737388}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.43431, y: 0.43431, z: 0.43431}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 141.305, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6259087930260981542
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -83,3 +84,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7482771025369674256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7654065988326609465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5749d8be906e41a18907c08017989a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  container:
+    _item: {fileID: 11400000, guid: 0679f56cc01788346bf28445b0e0d310, type: 2}
+    _count: 1
+  animator: {fileID: 0}

@@ -20,9 +20,10 @@ public class ToolEntity : Entity
 
     public virtual void TriggerInteraction()
     {
+        Debug.Log("hit");
         var playerManager = GetComponentInParent<UntoldTracks.Player.PlayerManager>();
         playerManager.InteractionController.TriggerCurrentFocus();
-        container.DecreaseDurability(1);
+        //container.DecreaseDurability(1);
     }
 
     public virtual void HandleUnequip()

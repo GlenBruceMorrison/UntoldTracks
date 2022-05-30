@@ -85,7 +85,14 @@ namespace UntoldTracks.UI
                 playerManager.InventoryController.Inventory.Take(new ItemQuery(ingredient.Item, ingredient.Count));
             }
 
-            playerManager.InventoryController.Inventory.Give(selectedRecipe.produces);
+
+            var container = new ItemContainer(
+                selectedRecipe.produces.Item,
+                selectedRecipe.produces.Count);
+
+            container.SetDurability(selectedRecipe.produces.Item.durability);
+
+            playerManager.InventoryController.Inventory.Give(container);
 
             RenderRecipeBook();
         }

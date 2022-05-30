@@ -11,7 +11,7 @@ public class Axe : ToolEntity
     {
         if (input == InteractionInput.Primary)
         {
-            animator.Play("strike");
+            animator.Play("axe_swing");
         }
     }
 
