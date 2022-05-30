@@ -9,7 +9,7 @@ using UntoldTracks.Player;
 
 namespace UntoldTracks.UI
 {
-    public class PlayerManagerUI : MonoBehaviour
+    public class PlayerManagerUI : MonoBehaviour, IPlayerComponent
     {
         public PlayerManager playerManager;
 
@@ -102,6 +102,11 @@ namespace UntoldTracks.UI
             playerInventoryUI.gameObject.SetActive(false);
             linkedInventory.gameObject.SetActive(false);
             craftingUI.gameObject.SetActive(false);
+        }
+
+        public void Init(PlayerManager playerManager)
+        {
+            this.playerManager = playerManager;
         }
     }
 }

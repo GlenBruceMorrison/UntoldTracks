@@ -11,9 +11,11 @@ namespace UntoldTracks.InventorySystem
 
     public delegate void ActiveItemChanged(PlayerManager player, ItemContainer container);
 
-    public class PlayerInventoryController : PlayerComponent
+    public class PlayerInventoryController : MonoBehaviour, IPlayerComponent
     {
         #region private
+        private PlayerManager _playerManager;
+
         private const int _inventoryBarSize = 9;
         private const int _inventorySize = 25;
         
@@ -109,9 +111,14 @@ namespace UntoldTracks.InventorySystem
                 OnActiveItemChanged?.Invoke(_playerManager, ActiveItem);
             }
         }
-        
-        #region Player Component
-        protected override void Initiate()
+
+        #region Life Cycle
+        public void Init(PlayerManager playerManager)
+        {
+            _playerManager = playerManager;
+        }
+
+        private void Awake()
         {
             Close();
             
@@ -135,7 +142,7 @@ namespace UntoldTracks.InventorySystem
             _inventory.OnContainerModified -= HandleItemContainerUpdate;
         }
         
-        protected override void Run(float deltaTime)
+        private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Tab))
             {
@@ -158,15 +165,15 @@ namespace UntoldTracks.InventorySystem
                 SetActiveIndex(_activeItemIndex - 1);
             }
 
-            if (Input.GetKeyDown("0")) SetActiveIndex(8);
-            else if (Input.GetKeyDown("1")) SetActiveIndex(0);
-            else if (Input.GetKeyDown("2")) SetActiveIndex(1);
-            else if (Input.GetKeyDown("3")) SetActiveIndex(2);
-            else if (Input.GetKeyDown("4")) SetActiveIndex(3);
-            else if (Input.GetKeyDown("5")) SetActiveIndex(4);
-            else if (Input.GetKeyDown("6")) SetActiveIndex(5);
-            else if (Input.GetKeyDown("7")) SetActiveIndex(6);
-            else if (Input.GetKeyDown("8")) SetActiveIndex(7);
+            if (Input.GetKeyDown(KeyCode.Alpha0)) SetActiveIndex(8);
+            else if (Input.GetKeyDown(KeyCode.Alpha1)) SetActiveIndex(0);
+            else if (Input.GetKeyDown(KeyCode.Alpha2)) SetActiveIndex(1);
+            else if (Input.GetKeyDown(KeyCode.Alpha3)) SetActiveIndex(2);
+            else if (Input.GetKeyDown(KeyCode.Alpha4)) SetActiveIndex(3);
+            else if (Input.GetKeyDown(KeyCode.Alpha5)) SetActiveIndex(4);
+            else if (Input.GetKeyDown(KeyCode.Alpha6)) SetActiveIndex(5);
+            else if (Input.GetKeyDown(KeyCode.Alpha7)) SetActiveIndex(6);
+            else if (Input.GetKeyDown(KeyCode.Alpha8)) SetActiveIndex(7);
         }
         #endregion
     }

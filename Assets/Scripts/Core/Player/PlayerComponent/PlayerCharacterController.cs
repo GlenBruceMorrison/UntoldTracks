@@ -13,8 +13,10 @@ namespace UntoldTracks.CharacterController
         public void UnlockPointer();
     }
     
-    public class PlayerCharacterController : PlayerComponent, IFirstPersonController
+    public class PlayerCharacterController : MonoBehaviour, IFirstPersonController, IPlayerComponent
     {
+        private PlayerManager _playerManager;
+
         public ExampleCharacterController Character;
         public ExampleCharacterCamera CharacterCamera;
 
@@ -29,24 +31,26 @@ namespace UntoldTracks.CharacterController
             get { return Character.Motor.Velocity.x != 0 || Character.Motor.Velocity.z != 0; }
         }
 
-        protected override void Initiate()
+        #region Life Cycle
+        private void Start()
         {
             Cursor.lockState = CursorLockMode.Locked;
 
             // Tell camera to follow transform
             CharacterCamera.SetFollowTransform(Character.CameraFollowPoint);
-
-            // Ignore the character's collider(s) for camera obstruction checks
-            CharacterCamera.IgnoredColliders.Clear();
-            CharacterCamera.IgnoredColliders.AddRange(Character.GetComponentsInChildren<Collider>());
         }
 
-        protected override void Run(float deltaTime)
+        public void Init(PlayerManager playerManager)
+        {
+            _playerManager = playerManager;
+        }
+
+        private void Update()
         {
             HandleCharacterInput();
         }
 
-        protected override void LateRun()
+        private void LateUpdate()
         {
             // Handle rotating the camera along with physics movers
             if (CharacterCamera.RotateWithPhysicsMover && Character.Motor.AttachedRigidbody != null)
@@ -57,6 +61,7 @@ namespace UntoldTracks.CharacterController
 
             HandleCameraInput();
         }
+        #endregion
 
         private void HandleCameraInput()
         {

@@ -23,10 +23,6 @@ namespace KinematicCharacterController.Examples
 
             // Tell camera to follow transform
             CharacterCamera.SetFollowTransform(Character.CameraFollowPoint);
-
-            // Ignore the character's collider(s) for camera obstruction checks
-            CharacterCamera.IgnoredColliders.Clear();
-            CharacterCamera.IgnoredColliders.AddRange(Character.GetComponentsInChildren<Collider>());
         }
 
         private void Update()

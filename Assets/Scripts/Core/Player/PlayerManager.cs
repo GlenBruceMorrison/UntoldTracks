@@ -18,6 +18,8 @@ namespace UntoldTracks.Player
         private PlayerInventoryController _inventoryController;
         private PlayerActiveItemController _playerActiveItemController;
         private PlayerManagerUI _playerManagerUI;
+
+        private List<IPlayerComponent> _components = new List<IPlayerComponent>();
         #endregion
         
         #region Getters
@@ -79,55 +81,56 @@ namespace UntoldTracks.Player
         private void GetDependancies()
         {
             _inventoryController = GetComponentInChildren<PlayerInventoryController>();
-            if (_inventoryController == null) 
+            if (_inventoryController == null)
+            {
                 throw new System.Exception("This player manager must have a PlayerInventoryController script attached");
+            }
+            _components.Add(_inventoryController);
 
             _characterController = GetComponentInChildren<PlayerCharacterController>();
             if (_characterController == null)
+            {
                 throw new System.Exception("This player manager must have a PlayerCharacterController script attached");
+            }
+            _components.Add(_characterController);
 
             _interactionController = GetComponentInChildren<PlayerInteractionController>();
             if (_interactionController == null)
+            {
                 throw new System.Exception("This player manager must have a PlayerInteractionController script attached");
+            }
+            _components.Add(_interactionController);
 
             _playerActiveItemController = GetComponentInChildren<PlayerActiveItemController>();
             if (_playerActiveItemController == null)
-                throw new System.Exception("This player manager must have an PlayerActiveItem script attached"); 
+            { 
+                throw new System.Exception("This player manager must have an PlayerActiveItem script attached");
+            }
+            _components.Add(_playerActiveItemController);
 
             _playerManagerUI = GetComponentInChildren<PlayerManagerUI>();
-            if (_playerManagerUI == null) 
+            if (_playerManagerUI == null)
+            {
                 throw new System.Exception("This player manager must have a PlayerManagerUI script attached");
+            }
+            _components.Add(_playerManagerUI);
 
             _placeableEntityController = GetComponentInChildren<PlaceableEntityController>();
             if (_placeableEntityController == null)
+            {
                 throw new System.Exception("This player manager must have a PlaceableEntityController script attached");
+            }
+            _components.Add(_placeableEntityController);
+
+            InitManagers();
         }
 
         private void InitManagers()
         {
-            _inventoryController.InternalInit(this);
-            _interactionController.InternalInit(this);
-            _playerActiveItemController.InternalInit(this);
-            _placeableEntityController.InternalInit(this);
-            _characterController.InternalInit(this);
-            
-            _playerManagerUI.InitPlayerComponent(this);
-        }
-
-        private void Update()
-        {
-            var delta = Time.deltaTime;
-
-            _placeableEntityController.InternalRun(delta);
-            _characterController.InternalRun(delta);
-            _inventoryController.InternalRun(delta);
-            _interactionController.InternalRun(delta);
-            _playerActiveItemController.InternalRun(delta);
-        }
-
-        private void LateUpdate()
-        {
-            _characterController.InternalLateRun();
+            foreach (var manager in _components)
+            {
+                manager.Init(this);
+            }
         }
     }
 }

@@ -7,6 +7,8 @@ namespace KinematicCharacterController.Examples
 {
     public class ExampleCharacterCamera : MonoBehaviour
     {
+        public PhysicsMover parentMover;
+
         [Header("Framing")]
         public Camera Camera;
         public Vector2 FollowPointFraming = new Vector2(0f, 0f);
@@ -32,12 +34,6 @@ namespace KinematicCharacterController.Examples
         public float RotationSharpness = 10000f;
         public bool RotateWithPhysicsMover = false;
 
-        [Header("Obstruction")]
-        public float ObstructionCheckRadius = 0.2f;
-        public LayerMask ObstructionLayers = -1;
-        public float ObstructionSharpness = 10000f;
-        public List<Collider> IgnoredColliders = new List<Collider>();
-
         public Transform Transform { get; private set; }
         public Transform FollowTransform { get; private set; }
 
@@ -47,10 +43,6 @@ namespace KinematicCharacterController.Examples
         private bool _distanceIsObstructed;
         private float _currentDistance;
         private float _targetVerticalAngle;
-        private RaycastHit _obstructionHit;
-        private int _obstructionCount;
-        private RaycastHit[] _obstructions = new RaycastHit[MaxObstructions];
-        private float _obstructionTime;
         private Vector3 _currentFollowPosition;
 
         private const int MaxObstructions = 32;
@@ -118,51 +110,6 @@ namespace KinematicCharacterController.Examples
 
                 // Find the smoothed follow position
                 _currentFollowPosition = Vector3.Lerp(_currentFollowPosition, FollowTransform.position, 1f - Mathf.Exp(-FollowingSharpness * deltaTime));
-
-                // Handle obstructions
-                {
-                    RaycastHit closestHit = new RaycastHit();
-                    closestHit.distance = Mathf.Infinity;
-                    _obstructionCount = Physics.SphereCastNonAlloc(_currentFollowPosition, ObstructionCheckRadius, -Transform.forward, _obstructions, TargetDistance, ObstructionLayers, QueryTriggerInteraction.Ignore);
-                    for (int i = 0; i < _obstructionCount; i++)
-                    {
-                        bool isIgnored = false;
-                        for (int j = 0; j < IgnoredColliders.Count; j++)
-                        {
-                            if (IgnoredColliders[j] == _obstructions[i].collider)
-                            {
-                                isIgnored = true;
-                                break;
-                            }
-                        }
-                        for (int j = 0; j < IgnoredColliders.Count; j++)
-                        {
-                            if (IgnoredColliders[j] == _obstructions[i].collider)
-                            {
-                                isIgnored = true;
-                                break;
-                            }
-                        }
-
-                        if (!isIgnored && _obstructions[i].distance < closestHit.distance && _obstructions[i].distance > 0)
-                        {
-                            closestHit = _obstructions[i];
-                        }
-                    }
-
-                    // If obstructions detecter
-                    if (closestHit.distance < Mathf.Infinity)
-                    {
-                        _distanceIsObstructed = true;
-                        _currentDistance = Mathf.Lerp(_currentDistance, closestHit.distance, 1 - Mathf.Exp(-ObstructionSharpness * deltaTime));
-                    }
-                    // If no obstruction
-                    else
-                    {
-                        _distanceIsObstructed = false;
-                        _currentDistance = Mathf.Lerp(_currentDistance, TargetDistance, 1 - Mathf.Exp(-DistanceMovementSharpness * deltaTime));
-                    }
-                }
 
                 // Find the smoothed camera orbit position
                 Vector3 targetPosition = _currentFollowPosition - ((targetRotation * Vector3.forward) * _currentDistance);
