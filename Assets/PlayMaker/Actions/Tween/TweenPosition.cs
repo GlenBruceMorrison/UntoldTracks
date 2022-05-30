@@ -65,8 +65,6 @@ namespace HutongGames.PlayMaker.Actions
 
             InitStartPosition();
             InitEndPosition();
-
-            transform.position = StartPosition;
         }
 
         private void InitStartPosition()

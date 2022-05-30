@@ -3,20 +3,17 @@
 
 using System;
 using HutongGames.PlayMaker;
+using HutongGames.PlayMaker.Actions;
 using HutongGames.PlayMaker.TweenEnums;
 using UnityEditor;
 using UnityEngine;
-
-// Note: We're fully qualifying tween types to avoid conflicts with NGUI.
-// NGUI doesn't use namespaces for its tween scripts :(
-// Also Tween is a common name, and others might do the same! 
 
 namespace HutongGames.PlayMakerEditor
 {
     [CustomActionEditor(typeof(PlayMaker.Actions.TweenScale))]
 	public class TweenScaleEditor : TweenEditorBase
     {
-        private PlayMaker.Actions.TweenScale tweenAction;
+        private TweenScale tweenAction;
 
 	    public override void OnEnable()
 	    {
@@ -122,12 +119,6 @@ namespace HutongGames.PlayMakerEditor
         public override void OnSceneGUI()
         {
             if (Application.isPlaying) return;
-
-            tweenAction = target as PlayMaker.Actions.TweenScale;
-            if (tweenAction == null) // shouldn't happen!
-            {
-                return;
-            }
 
             // setup start and end positions
 

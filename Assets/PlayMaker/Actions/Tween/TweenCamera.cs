@@ -15,20 +15,14 @@ namespace HutongGames.PlayMaker.Actions
     {
         public enum CameraProperty { Aspect, BackgroundColor, FieldOfView, OrthoSize, PixelRect, ViewportRect }
 
-        [Tooltip("Camera property to tween.")]
         public CameraProperty property;
-
-        [Tooltip("Tween To/From values set below.")]
         public TweenDirection tweenDirection;
 
         // Serialize all potential tween targets
         // a little wasteful but not too bad...
 
-        [Tooltip("Context sensitive parameter. Depends on Property.")]
         public FsmColor targetColor;
-        [Tooltip("Context sensitive parameter. Depends on Property.")]
         public FsmFloat targetFloat;
-        [Tooltip("Context sensitive parameter. Depends on Property.")]
         public FsmRect targetRect;
 
         // tween setup 
@@ -153,12 +147,6 @@ namespace HutongGames.PlayMaker.Actions
             }
         }
 
-#if UNITY_EDITOR
-        public override string AutoName()
-        {
-            return "TweenCamera: " + property;
-        }
-#endif
     }
 
 }

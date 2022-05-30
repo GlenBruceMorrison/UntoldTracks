@@ -3,19 +3,16 @@
 
 using System;
 using HutongGames.PlayMaker;
+using HutongGames.PlayMaker.Actions;
 using UnityEditor;
 using UnityEngine;
-
-// Note: We're fully qualifying tween types to avoid conflicts with NGUI.
-// NGUI doesn't use namespaces for its tween scripts :(
-// Also Tween is a common name, and others might do the same! 
 
 namespace HutongGames.PlayMakerEditor
 {
     [CustomActionEditor(typeof(PlayMaker.Actions.TweenCamera))]
     public class TweenCameraEditor : TweenEditorBase
     {
-        private PlayMaker.Actions.TweenCamera tweenAction;
+        private TweenCamera tweenAction;
 
         public override void OnEnable()
         {
@@ -36,16 +33,16 @@ namespace HutongGames.PlayMakerEditor
 
             switch (tweenAction.property)
             {
-                case PlayMaker.Actions.TweenCamera.CameraProperty.BackgroundColor:
+                case TweenCamera.CameraProperty.BackgroundColor:
                     EditField("targetColor", "Color");
                     break;
-                case PlayMaker.Actions.TweenCamera.CameraProperty.Aspect:
-                case PlayMaker.Actions.TweenCamera.CameraProperty.FieldOfView:
-                case PlayMaker.Actions.TweenCamera.CameraProperty.OrthoSize:
+                case TweenCamera.CameraProperty.Aspect:
+                case TweenCamera.CameraProperty.FieldOfView:
+                case TweenCamera.CameraProperty.OrthoSize:
                     EditField("targetFloat", "Value");
                     break;
-                case PlayMaker.Actions.TweenCamera.CameraProperty.PixelRect:
-                case PlayMaker.Actions.TweenCamera.CameraProperty.ViewportRect:
+                case TweenCamera.CameraProperty.PixelRect:
+                case TweenCamera.CameraProperty.ViewportRect:
                     EditField("targetRect", "Rect");
                     break;
                 default:

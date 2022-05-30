@@ -16,14 +16,14 @@ namespace HutongGames.PlayMaker.Actions
     {
         [DisplayOrder(0)]
         [RequiredField]
+        [Tooltip("The GameObject to tween.")]
         [UIHint(UIHint.Variable)]
-        [Tooltip("The Game Object to tween.")]
         public FsmOwnerDefault gameObject;
 
         /// <summary>
         /// The cached GameObject. Call UpdateCache() first
         /// </summary>
-        protected GameObject cachedGameObject;
+        public GameObject cachedGameObject;
              
         /// <summary>
         /// The cached component. Call UpdateCache() first

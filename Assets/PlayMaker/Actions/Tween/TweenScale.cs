@@ -16,20 +16,16 @@ namespace HutongGames.PlayMaker.Actions
         [Tooltip("Setup where to tween from.")]
         public ScaleOptions fromOptions;
 
-        [Tooltip("Tween from this Target GameObject.")]
         public FsmGameObject fromTarget;
-        [Tooltip("Tween from this Scale.")]
         public FsmVector3 fromScale;
 
         [ActionSection("To")]
 
         [Title("Options")]
-        [Tooltip("Setup where to tween to.")]
+        [Tooltip("Setup where to tween from.")]
         public ScaleOptions toOptions;
 
-        [Tooltip("Tween to this Target GameObject.")]
         public FsmGameObject toTarget;
-        [Tooltip("Tween to this Scale.")]
         public FsmVector3 toScale;
 
         private Transform transform;

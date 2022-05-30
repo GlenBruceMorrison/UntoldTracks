@@ -2,20 +2,17 @@
 // See also: EasingFunctionLicense.txt
 
 using System;
+using HutongGames.PlayMaker.Actions;
 using HutongGames.PlayMaker.TweenEnums;
 using UnityEditor;
 using UnityEngine;
-
-// Note: We're fully qualifying tween types to avoid conflicts with NGUI.
-// NGUI doesn't use namespaces for its tween scripts :(
-// Also Tween is a common name, and others might do the same! 
 
 namespace HutongGames.PlayMakerEditor
 {
     [CustomActionEditor(typeof(PlayMaker.Actions.TweenUiPosition))]
 	public class TweenUiPositionEditor : TweenEditorBase
     {
-        private PlayMaker.Actions.TweenUiPosition tweenAction;
+        private TweenUiPosition tweenAction;
 
 	    public override void OnEnable()
 	    {

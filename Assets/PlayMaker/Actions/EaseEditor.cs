@@ -19,9 +19,7 @@ namespace HutongGames
 	    }
         */
 
-#if DEBUG_EASE_EDITOR
 	    private static EasingFunction.Ease debugged;
-#endif
 
         private const int maxCurvePoints = 200;
         private static readonly Vector3[] pointBuffer = new Vector3[maxCurvePoints];

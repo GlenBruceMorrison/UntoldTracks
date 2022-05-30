@@ -9,16 +9,14 @@ using HutongGames.PlayMaker.TweenEnums;
 namespace HutongGames.PlayMaker.Actions
 {
     [ActionCategory(ActionCategory.Tween)]
-    [Tooltip("Fades a GameObject with a Material, Sprite, Image, Text, Light, AudioSource, or CanvasGroup component." +
-             "\n\nNote: The Material Shader must support transparency. For example, in URP set the Surface Type to Transparent." +
-             "\n\nTip: When using the Standard shader, set Rendering Mode to Fade for best fading effect.")]
+    [Tooltip("Fades a GameObject with a Material, Sprite, Image, Text, Light, AudioSource, or CanvasGroup component.")]
     public class TweenFade : TweenActionBase
     {
-        private const string SupportedComponents = "MeshRenderer, Sprite, Image, Text, Light, AudioSource, or CanvasGroup component.";
+        private const string supportedComponents = "Material, Sprite, Image, Text, Light, AudioSource, or CanvasGroup component.";
 
         public enum TargetType { None, Material, Sprite, Image, Text, Light, AudioSource, CanvasGroup}
 
-        [Tooltip("A GameObject with a " + SupportedComponents)]
+        [Tooltip("A GameObject with a " + supportedComponents)]
         public FsmOwnerDefault gameObject;
 
         [Tooltip("Fade To or From value.")]
@@ -27,15 +25,11 @@ namespace HutongGames.PlayMaker.Actions
         [Tooltip("Value to fade to. E.g., alpha if fading an image, volume if fading audio...")]
         public FsmFloat value;
 
-        private GameObject cachedGameObject;
-        private Component cachedComponent;
-
-        public TargetType type {
-            get { return targetType; }
-        }
+        public GameObject cachedGameObject;
+        public Component cachedComponent;
 
         private TargetType targetType;
-        private Renderer renderer;
+        private Material material;
         private SpriteRenderer spriteRenderer;
         private Text text;
         private Image image;
@@ -43,8 +37,8 @@ namespace HutongGames.PlayMaker.Actions
         private CanvasGroup canvasGroup;
         private AudioSource audioSource;
 
-        private float startValue;
-        private float endValue;
+        private float StartValue;
+        private float EndValue;
 
         public override void Reset()
         {
@@ -95,10 +89,11 @@ namespace HutongGames.PlayMaker.Actions
         {
             targetType = TargetType.None;
 
-            renderer = cachedComponent as MeshRenderer;
+            var renderer = cachedComponent as MeshRenderer;
             if (renderer != null)
             {
                 targetType = TargetType.Material;
+                material = renderer.material;
                 return;
             }
 
@@ -150,20 +145,20 @@ namespace HutongGames.PlayMaker.Actions
 
             if (targetType == TargetType.None)
             {
-                LogWarning("GameObject needs a " + SupportedComponents);
+                LogWarning("GameObject needs a " + supportedComponents);
                 Enabled = false;
                 return;
             }
 
             if (tweenDirection == TweenDirection.From)
             {
-                startValue = value.Value;
-                endValue = GetTargetFade();
+                StartValue = value.Value;
+                EndValue = GetTargetFade();
             }
             else
             {
-                startValue = GetTargetFade();
-                endValue = value.Value;
+                StartValue = GetTargetFade();
+                EndValue = value.Value;
             }
 
             base.OnEnter();
@@ -176,7 +171,7 @@ namespace HutongGames.PlayMaker.Actions
             switch (targetType)
             {
                 case TargetType.None: return 1f;
-                case TargetType.Material: return renderer.material.color.a;
+                case TargetType.Material: return material.color.a;
                 case TargetType.Sprite: return spriteRenderer.color.a;
                 case TargetType.Image: return image.color.a;
                 case TargetType.Text: return text.color.a;
@@ -197,9 +192,9 @@ namespace HutongGames.PlayMaker.Actions
                 case TargetType.None: 
                     break;
                 case TargetType.Material:
-                    color = renderer.material.color;
+                    color = material.color;
                     color.a = fade;
-                    renderer.material.color = color;
+                    material.color = color;
                     break;
                 case TargetType.Sprite:
                     color = spriteRenderer.color;
@@ -234,35 +229,19 @@ namespace HutongGames.PlayMaker.Actions
         protected override void DoTween()
         {
             var lerp = easingFunction(0, 1, normalizedTime);
-            SetTargetFade( Mathf.Lerp(startValue, endValue, lerp));
+            SetTargetFade( Mathf.Lerp(StartValue, EndValue, lerp));
         }
 
 #if UNITY_EDITOR
 
         public override string ErrorCheck()
         {
-            var go = Fsm.GetOwnerDefaultTarget(gameObject);
-            if (go == null) return "";
-
             CheckCache();
 
             if (targetType == TargetType.None)
             {
-                return "@gameObject:GameObject needs a " + SupportedComponents;
+                return "GameObject needs a " + supportedComponents;
             }
-
-            /* Need better checking for this, also inline tips instead of errors
-            if (targetType == TargetType.Material)
-            {
-                if (renderer.sharedMaterial.HasProperty("_Mode"))
-                {
-                    var mode = renderer.sharedMaterial.GetFloat("_Mode");
-                    if (mode != 2)
-                    {
-                        return "@gameObject:Set Rendering Mode to Fade for best fading effect.";
-                    }
-                }
-            }*/
 
             return "";
         }

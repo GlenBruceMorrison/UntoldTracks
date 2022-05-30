@@ -195,12 +195,6 @@ namespace HutongGames.PlayMaker.Actions
             return showPreviewCurve;
         }
 
-        public static void SetEasingPreview(bool state)
-        {
-            showPreviewCurve = state;
-            EditorPrefs.SetBool(showPreviewPrefsKey, showPreviewCurve);
-        }
-
         public void DrawPreview(object fieldValue)
         {
             if (!showPreviewCurve) return;

@@ -3,20 +3,17 @@
 
 using System;
 using HutongGames.PlayMaker;
+using HutongGames.PlayMaker.Actions;
 using HutongGames.PlayMaker.TweenEnums;
 using UnityEditor;
 using UnityEngine;
-
-// Note: We're fully qualifying tween types to avoid conflicts with NGUI.
-// NGUI doesn't use namespaces for its tween scripts :(
-// Also Tween is a common name, and others might do the same! 
 
 namespace HutongGames.PlayMakerEditor
 {
     [CustomActionEditor(typeof(PlayMaker.Actions.TweenRotation))]
 	public class TweenRotationEditor : TweenEditorBase
     {
-        private PlayMaker.Actions.TweenRotation tweenAction;
+        private TweenRotation tweenAction;
 
 	    public override void OnEnable()
 	    {
@@ -90,12 +87,6 @@ namespace HutongGames.PlayMakerEditor
         {
             if (Application.isPlaying) return;
 
-            tweenAction = target as PlayMaker.Actions.TweenRotation;
-            if (tweenAction == null) // shouldn't happen!
-            {
-                return;
-            }
-
             // setup start and end positions
 
             var go = ActionHelpers.GetOwnerDefault(tweenAction, tweenAction.gameObject);
@@ -109,14 +100,14 @@ namespace HutongGames.PlayMakerEditor
             //var handleSize = HandleUtility.GetHandleSize(position);
 
             var startRotation = Quaternion.identity;
-            if (PlayMaker.Actions.TweenHelpers.GetTargetRotation(tweenAction.fromOptions, transform, 
+            if (TweenHelpers.GetTargetRotation(tweenAction.fromOptions, transform, 
                 tweenAction.fromRotation, tweenAction.fromTarget, out startRotation))
             {
                 ActionHelpers.DrawWireBounds(transform, startRotation, PlayMakerPrefs.TweenFromColor);
             }
 
             var endRotation = Quaternion.identity;
-            if (PlayMaker.Actions.TweenHelpers.GetTargetRotation(tweenAction.toOptions, transform, 
+            if (TweenHelpers.GetTargetRotation(tweenAction.toOptions, transform, 
                 tweenAction.toRotation, tweenAction.toTarget, out endRotation))
             {
                 ActionHelpers.DrawWireBounds(transform, endRotation, PlayMakerPrefs.TweenToColor);

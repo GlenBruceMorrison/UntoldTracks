@@ -3,20 +3,17 @@
 
 using System;
 using HutongGames.PlayMaker;
+using HutongGames.PlayMaker.Actions;
 using HutongGames.PlayMaker.TweenEnums;
 using UnityEditor;
 using UnityEngine;
-
-// Note: We're fully qualifying tween types to avoid conflicts with NGUI.
-// NGUI doesn't use namespaces for its tween scripts :(
-// Also Tween is a common name, and others might do the same! 
 
 namespace HutongGames.PlayMakerEditor
 {
     [CustomActionEditor(typeof(PlayMaker.Actions.TweenPosition))]
 	public class TweenPositionEditor : TweenEditorBase
     {
-        private PlayMaker.Actions.TweenPosition tweenAction;
+        private TweenPosition tweenAction;
 
 	    public override void OnEnable()
 	    {
@@ -90,12 +87,6 @@ namespace HutongGames.PlayMakerEditor
         {
             if (Application.isPlaying) return;
 
-            tweenAction = target as PlayMaker.Actions.TweenPosition;
-            if (tweenAction == null) // shouldn't happen!
-            {
-                return;
-            }
-
             // setup start and end positions
 
             var go = ActionHelpers.GetOwnerDefault(tweenAction, tweenAction.gameObject);
@@ -105,25 +96,25 @@ namespace HutongGames.PlayMakerEditor
             var startPos = new Vector3();
             var endPos = new Vector3();
 
-            if (!PlayMaker.Actions.TweenHelpers.GetTargetPosition(tweenAction.fromOption, transform, 
+            if (!TweenHelpers.GetTargetPosition(tweenAction.fromOption, transform, 
                 tweenAction.fromPosition, tweenAction.fromTarget, out startPos))
                 return;
 
-            if (!PlayMaker.Actions.TweenHelpers.GetTargetPosition(tweenAction.toOption, transform, 
+            if (!TweenHelpers.GetTargetPosition(tweenAction.toOption, transform, 
                 tweenAction.toPosition, tweenAction.toTarget, out endPos))
                 return;
 
             EditorGUI.BeginChangeCheck();
 
-            if (PlayMaker.Actions.TweenHelpers.CanEditTargetPosition(tweenAction.fromOption, tweenAction.fromPosition, tweenAction.fromTarget))
+            if (TweenHelpers.CanEditTargetPosition(tweenAction.fromOption, tweenAction.fromPosition, tweenAction.fromTarget))
             {
-                tweenAction.fromPosition.Value = PlayMaker.Actions.TweenHelpers.DoTargetPositionHandle(startPos, tweenAction.fromOption,
+                tweenAction.fromPosition.Value = TweenHelpers.DoTargetPositionHandle(startPos, tweenAction.fromOption,
                     transform, tweenAction.fromTarget);
             }
             
-            if (PlayMaker.Actions.TweenHelpers.CanEditTargetPosition(tweenAction.toOption, tweenAction.toPosition, tweenAction.toTarget))
+            if (TweenHelpers.CanEditTargetPosition(tweenAction.toOption, tweenAction.toPosition, tweenAction.toTarget))
             {
-                tweenAction.toPosition.Value = PlayMaker.Actions.TweenHelpers.DoTargetPositionHandle(endPos, tweenAction.toOption,
+                tweenAction.toPosition.Value = TweenHelpers.DoTargetPositionHandle(endPos, tweenAction.toOption,
                     transform, tweenAction.toTarget);
             }
 

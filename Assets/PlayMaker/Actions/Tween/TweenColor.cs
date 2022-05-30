@@ -8,13 +8,14 @@ using UnityEngine.UI;
 
 namespace HutongGames.PlayMaker.Actions
 {
+    /// <summary>
+    /// TODO: Make this expandable so you can register a component type and get/set callbacks
+    /// </summary>
     [ActionCategory(ActionCategory.Tween)]
     [Tooltip("Tween the color of a GameObject or a Color variable. The GameObject needs a Material, Sprite, Image, Text, or Light component.")]
     public class TweenColor : TweenPropertyBase<FsmColor>
     {
-        private const string SupportedComponents = "MeshRenderer, Sprite, Image, Text, Light.";
-
-        private const string OffsetTooltip = "How to apply the Offset Color. " +
+        private const string offsetTooltip = "How to apply the Offset Color. " +
                                              "Similar to Photoshop Blend modes. " +
                                              "\nNote: use the color alpha to fade the blend.";
 
@@ -22,7 +23,7 @@ namespace HutongGames.PlayMaker.Actions
         public enum TargetType { None, Material, Sprite, Image, Text, Light}
 
         [Tooltip("What to tween.")]
-        public Target target = Target.Variable;
+        public Target target;
 
         [Tooltip("A GameObject with a Material, Sprite, Image, Text, or Light component.")]
         public FsmOwnerDefault gameObject;
@@ -31,19 +32,14 @@ namespace HutongGames.PlayMaker.Actions
         [UIHint(UIHint.Variable)]
         public FsmColor variable;
 
-        [Tooltip(OffsetTooltip)]
+        [Tooltip(offsetTooltip)]
         public ColorBlendMode fromOffsetBlendMode;
 
-        [Tooltip(OffsetTooltip)]
+        [Tooltip(offsetTooltip)]
         public ColorBlendMode toOffsetBlendMode;
 
-        private GameObject cachedGameObject;
-        private Component cachedComponent;
-
-        public TargetType type
-        {
-            get { return targetType; }
-        }
+        public GameObject cachedGameObject;
+        public Component cachedComponent;
 
         private TargetType targetType;
         private Material material;
@@ -72,9 +68,6 @@ namespace HutongGames.PlayMaker.Actions
                 cachedComponent = null;
                 return;
             }
-
-            // Down the line we should make this expandable,
-            // e.g., register a component type and get/set callbacks
 
             cachedComponent = go.GetComponent<MeshRenderer>();
             if (cachedComponent != null) return;
@@ -212,7 +205,6 @@ namespace HutongGames.PlayMaker.Actions
             if (target == Target.Variable)
             {
                 variable.Value = color;
-                return;
             }
 
             switch (targetType)
@@ -262,28 +254,6 @@ namespace HutongGames.PlayMaker.Actions
             var lerp = easingFunction(0, 1, normalizedTime);
             SetTargetColor( Color.Lerp((Color) StartValue, (Color) EndValue, lerp));
         }
-
-
-#if UNITY_EDITOR
-
-        public override string ErrorCheck()
-        {
-            if (target == Target.Variable) return "";
-
-            var go = Fsm.GetOwnerDefaultTarget(gameObject);
-            if (go == null) return "";
-
-            CheckCache();
-
-            if (targetType == TargetType.None)
-            {
-                return "@gameObject:GameObject needs a " + SupportedComponents;
-            }
-
-            return "";
-        }
-
-#endif
     }
 
 }
