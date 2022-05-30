@@ -54,7 +54,7 @@ public class PlaceableEntity : Entity
         }
     }
     #endregion
-    
+
     #region Unity
     protected virtual void OnEnable()
     {

@@ -134,13 +134,15 @@ namespace UntoldTracks.InventorySystem
                     // fill other container with what we can
                     var queryResult = otherContainer.Container.Give(_selectedContainerUI.Container);
 
+                    var durabiltyValue = _selectedContainerUI.Container.CurrentDurability;
+
                     _selectedContainerUI.Container.Empty();
 
                     // if not everything was able to be added, give the remaining back to this container
                     var amountNotAdded = queryResult.amountAdded - _selectedContainerUI.Container.Count;
                     if (amountNotAdded > 0)
                     {
-                        _selectedContainerUI.Container.Give(new ItemContainer(_selectedContainerUI.Container.Item, queryResult.amountAdded));
+                        _selectedContainerUI.Container.Give(new ItemContainer(queryResult.item, queryResult.amountAdded, durabiltyValue));
                     }
                 }
                 // if dropping into an empty container

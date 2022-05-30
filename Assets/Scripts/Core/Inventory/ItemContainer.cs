@@ -73,13 +73,13 @@ namespace UntoldTracks.InventorySystem
             _index = index;
         }
          
-        public ItemContainer(Item item, int count)
+        public ItemContainer(Item item, int count, int durability=-1)
         {
             _inventory = null;
             _index = -1;
             _item = item;
             _count = count;
-            _currentDurability = item.durability;
+            _currentDurability = durability == -1 ? item.durability : durability;
         }
         #endregion
 
