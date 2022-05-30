@@ -397,7 +397,7 @@ namespace UntoldTracks.InventorySystem
             }
             else
             {
-                OnModified?.Invoke(this);
+               OnModified?.Invoke(this);
             }
         }
 
