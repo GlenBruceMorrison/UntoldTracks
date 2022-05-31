@@ -87,7 +87,7 @@ public class ToolHolder : MonoBehaviour, IInteractable
                     _holding = container.Item;
 
                     // get the world representation of this item and spawn it in to the scene
-                    _holdiningWorldObject = Instantiate(container.Item.toolPrefab, transform);
+                    _holdiningWorldObject = Instantiate(container.Item.toolPrefab.gameObject, transform);
 
                     // remove this item from the players inventory
                     manager.InventoryController.Inventory.Take(new ItemQuery(container.Item, container.Count));

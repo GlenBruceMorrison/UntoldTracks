@@ -69,7 +69,7 @@ namespace UntoldTracks.Player
 
         private void SwitchToTool(ItemContainer container)
         {
-            activeItemObject = Instantiate(container.Item.toolPrefab, playerHand.transform);
+            activeItemObject = Instantiate(container.Item.toolPrefab.gameObject, playerHand.transform);
             activeItemObject.GetComponent<ToolEntity>().container = container;
             activeItemObject.transform.localPosition = Vector3.zero;
             activeItemObject.transform.localEulerAngles = Vector3.zero;

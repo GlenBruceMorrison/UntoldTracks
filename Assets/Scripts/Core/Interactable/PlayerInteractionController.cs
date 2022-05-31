@@ -184,10 +184,13 @@ namespace UntoldTracks.Player
         {
             if (Input.GetMouseButtonDown(0))
             {
+                // if we are looking at an interactable
                 if (_currentFocus != null)
                 {
+                    // if we have an item selected in the hot bar
                     if (_playerManager.InventoryController.HasActiveItem)
                     {
+                        // if that item handles interactions
                         if (_playerManager.InventoryController.ActiveItem.Item.hasCustomInteractionFrame)
                         {
                             if (_playerManager.PlayerActiveItemController.TryGetTool(out ToolEntity tool))
@@ -195,18 +198,24 @@ namespace UntoldTracks.Player
                                 tool.HandleInteractionDown(InteractionInput.Primary);
                             }
                         }
+                        // we will handle interactions
                         else
                         {
+                            // if this item is not a placable item
                             if (!_playerManager.InventoryController.ActiveItem.Item.isPlaceable)
                             {
+                                // perform standard interaction with the primary input
                                 Interact(_currentFocus);
                             }
                         }
                     }
                     else
                     {
+                        // perform standard interaction with the primary input
                         Interact(_currentFocus);
                     }
+
+                    return;
                 }
                 else
                 {

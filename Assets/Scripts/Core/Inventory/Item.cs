@@ -8,8 +8,9 @@ public class Item : ScriptableObject
     [Header("Display Data")]
     public string name;
     public Sprite sprite;
-    [TextArea()]
-    public string description;
+    [TextArea()] public string description;
+
+    [Space(20)]
 
     [Header("Stack Settings")]
     public bool stackable = true;
@@ -17,21 +18,20 @@ public class Item : ScriptableObject
     public bool degradable = false;
     public int durability = 0;
 
+    [Space(20)]
+
     [Header("Tool Settings")]
     public bool isTool;
+    public ToolEntity toolPrefab;
     public int toolStrength = 1;
-    public bool isBuildingTool = false;
     public bool hasCustomInteractionFrame = false;
-    public GameObject toolPrefab;
+
+    [Space(20)]
 
     [Header("Placeable Settings")]
     public bool isPlaceable = false;
     public PlaceableEntity placeablePrefab;
     public bool canRotate=true;
-
-    [Header("MISC")]
-    public bool isFuel = false;
-    public int fuelStrength = 1;
 }
 
 public class ItemInstance

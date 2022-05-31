@@ -1,17 +1,30 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
 public class PlaceableEntityConfig : MonoBehaviour
 {
-    private void Start()
+    [MenuItem("UntoldTracks/CreatePlacableItem")]
+    public void CreatePlaceableItem()
     {
-        Create();
+        // MyClass is inheritant from ScriptableObject base class
+        var example = ScriptableObject.CreateInstance<Item>();
+        example.isPlaceable = true;
+
+        // path has to start at "Assets"
+        string path = $"Assets/Data/Items/test.asset";
+        AssetDatabase.CreateAsset(example, path);
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+        EditorUtility.FocusProjectWindow();
+        Selection.activeObject = example;
     }
 
-    public void Create()
+    [MenuItem("UntoldTracks/CreatePlaceableEntity")]
+    static void Create()
     {
         // Root
         var root = new GameObject("PlaceableEntity");
@@ -35,7 +48,5 @@ public class PlaceableEntityConfig : MonoBehaviour
         // WorldObject
         var placableWorldObject = new GameObject("PlacableWorldObject");
         placableWorldObject.transform.parent = root.transform;
-        
-        
     }
 }
