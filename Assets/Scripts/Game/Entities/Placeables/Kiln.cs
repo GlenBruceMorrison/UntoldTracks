@@ -144,7 +144,7 @@ namespace UntoldTracks.Machines
                 return;
             }
 
-            var item = player.InventoryController.ActiveItem.Item;
+            var item = player.InventoryController.ActiveItemContainer.Item;
 
             foreach (var kilnItem in PossibleInputs)
             {

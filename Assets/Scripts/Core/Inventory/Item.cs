@@ -11,23 +11,19 @@ public class Item : ScriptableObject
     [TextArea()] public string description;
 
     [Space(20)]
-
     [Header("Stack Settings")]
     public bool stackable = true;
     public int stackSize = 20;
+
+    [Space(20)]
+    [Header("Equipable Settings")]
+    public bool isEquipable;
+    public EquipableEntity equipablePrefab;
+    public bool hasCustomInteractionFrame = false;
     public bool degradable = false;
     public int durability = 0;
 
     [Space(20)]
-
-    [Header("Tool Settings")]
-    public bool isTool;
-    public ToolEntity toolPrefab;
-    public int toolStrength = 1;
-    public bool hasCustomInteractionFrame = false;
-
-    [Space(20)]
-
     [Header("Placeable Settings")]
     public bool isPlaceable = false;
     public PlaceableEntity placeablePrefab;

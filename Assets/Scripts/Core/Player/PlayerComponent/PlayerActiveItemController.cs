@@ -8,8 +8,8 @@ namespace UntoldTracks.Player
 {
     public interface IPlayerActiveItem
     {
-        //GameObject ActiveItem { get; }
-        bool TryGetTool(out ToolEntity tool);
+        //GameObject ActiveItemContainer { get; }
+        bool TryGetTool(out EquipableEntity tool);
     }
 
     public class PlayerActiveItemController : MonoBehaviour, IPlayerActiveItem, IPlayerComponent
@@ -28,7 +28,7 @@ namespace UntoldTracks.Player
         private void OnEnable()
         {
             _playerManager.InventoryController.OnActiveItemChanged += HandleActiveItemChanged;
-            HandleActiveItemChanged(_playerManager, _playerManager.InventoryController.ActiveItem);
+            HandleActiveItemChanged(_playerManager, _playerManager.InventoryController.ActiveItemContainer);
         }
 
         private void OnDisable()
@@ -38,6 +38,9 @@ namespace UntoldTracks.Player
         }
         #endregion
 
+        /// <summary>
+        /// Destroys what the player is currently holding
+        /// </summary>
         private void EmptyHand()
         {
             if (activeItemObject == null)
@@ -48,6 +51,11 @@ namespace UntoldTracks.Player
             Destroy(activeItemObject);
         }
 
+        /// <summary>
+        /// Called when the player changes the active item via the hotbar
+        /// </summary>
+        /// <param name="player">The PlayerManager script that the change originates from</param>
+        /// <param name="container">The item container that is now the active item</param>
         private void HandleActiveItemChanged(PlayerManager player, ItemContainer container)
         {
             EmptyHand();
@@ -57,41 +65,57 @@ namespace UntoldTracks.Player
                 return;
             }
 
-            if (container.Item.isTool && container.Item.toolPrefab != null)
+            if (container.Item.isEquipable && container.Item.equipablePrefab != null)
             {
                 SwitchToTool(container);
             }
             else if (container.Item.isPlaceable && container.Item.placeablePrefab != null)
             {
-                SwitchToPlaceable(container.Item.placeablePrefab);
+                SwitchToPlaceable(container);
             }
         }
 
-        private void SwitchToTool(ItemContainer container)
+        /// <summary>
+        /// If the item is a tool this is called along with the relevant data
+        /// </summary>
+        /// <param name="toolData">The data for the container which is now active</param>
+        private void SwitchToTool(ItemContainer toolData)
         {
-            activeItemObject = Instantiate(container.Item.toolPrefab.gameObject, playerHand.transform);
-            activeItemObject.GetComponent<ToolEntity>().container = container;
+            var tool = Instantiate(toolData.Item.equipablePrefab, playerHand.transform);
+            activeItemObject = tool.gameObject;
+
+            tool.toolData = toolData;
             activeItemObject.transform.localPosition = Vector3.zero;
             activeItemObject.transform.localEulerAngles = Vector3.zero;
+
+            tool.EquipedByPlayer(_playerManager);
         }
 
-        private void SwitchToPlaceable(PlaceableEntity placeablePrefab)
+        /// <summary>
+        /// If the item is a placeable this is called along with the relevant data
+        /// </summary>
+        /// <param name="toolData">The data for the container which is now active</param>
+        private void SwitchToPlaceable(ItemContainer placaeableData)
         {
-            var obj = Instantiate(placeablePrefab, this.transform);
-            activeItemObject = obj.gameObject;
-            //_playerMananger.PlaceableEntityController.gameObject.SetActive(true);
-            _playerManager.PlaceableEntityController.SetTargetPlacable(obj);
+            var placeable = Instantiate(placaeableData.Item.placeablePrefab, this.transform);
+            activeItemObject = placeable.gameObject;
+            _playerManager.PlaceableEntityController.SetTargetPlacable(placeable);
         }
 
-        public bool TryGetTool(out ToolEntity tool)
+        /// <summary>
+        /// Attempts to get the tool the player is currently holding
+        /// </summary>
+        /// <param name="tool">The ToolEntity object to populate with the active tool</param>
+        /// <returns>Returns false if the player is not holding a tool</returns>
+        public bool TryGetTool(out EquipableEntity tool)
         {
-            if (playerHand.GetComponentInChildren<ToolEntity>() == null)
+            if (playerHand.GetComponentInChildren<EquipableEntity>() == null)
             {
                 tool = null;
                 return false;
             }
 
-            tool = playerHand.GetComponentInChildren<ToolEntity>();
+            tool = playerHand.GetComponentInChildren<EquipableEntity>();
             return true;
         }
     }

@@ -17,12 +17,11 @@ MonoBehaviour:
   description: A stone axe
   stackable: 0
   stackSize: 20
-  degradable: 1
-  durability: 10
-  isTool: 1
-  toolPrefab: {fileID: 7849621037555137295, guid: 96f8bed148728a149be5cc0d221b4abc, type: 3}
-  toolStrength: 1
+  isEquipable: 1
+  equipablePrefab: {fileID: 7849621037555137295, guid: 96f8bed148728a149be5cc0d221b4abc, type: 3}
   hasCustomInteractionFrame: 1
+  degradable: 1
+  durability: 50
   isPlaceable: 0
   placeablePrefab: {fileID: 0}
   canRotate: 1

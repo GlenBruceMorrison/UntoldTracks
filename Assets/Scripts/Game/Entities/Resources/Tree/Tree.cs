@@ -70,7 +70,7 @@ public class Tree : MonoBehaviour, IInteractable
                 switch (_currentState)
                 {
                     case TreeState.Idle:
-                        if (manager.InventoryController.ActiveItem.Item != _axeItemReference)
+                        if (manager.InventoryController.ActiveItemContainer.Item != _axeItemReference)
                         {
                             return;
                         }
@@ -87,7 +87,7 @@ public class Tree : MonoBehaviour, IInteractable
                             _currentState = TreeState.Falling;
                         }
 
-                        manager.InventoryController.ActiveItem.DecreaseDurability(1);
+                        manager.InventoryController.ActiveItemContainer.DecreaseDurability(1);
                         break;
                     case TreeState.Falling:
 

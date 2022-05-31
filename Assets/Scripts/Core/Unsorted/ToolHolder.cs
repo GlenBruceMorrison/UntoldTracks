@@ -69,14 +69,14 @@ public class ToolHolder : MonoBehaviour, IInteractable
                 if (_holdiningWorldObject != null)
                 {
                     Destroy(_holdiningWorldObject);
-                    manager.InventoryController.Inventory.Give(manager.InventoryController.ActiveItem);
+                    manager.InventoryController.Inventory.Give(manager.InventoryController.ActiveItemContainer);
                 }
                 break;
             case InteractionInput.Secondary:
-                var container = manager.InventoryController.ActiveItem;
+                var container = manager.InventoryController.ActiveItemContainer;
 
                 // check if we can actually store this or not
-                if (container.Item.toolPrefab)
+                if (container.Item.equipablePrefab)
                 {
                     if (_holdiningWorldObject != null)
                     {
@@ -87,7 +87,7 @@ public class ToolHolder : MonoBehaviour, IInteractable
                     _holding = container.Item;
 
                     // get the world representation of this item and spawn it in to the scene
-                    _holdiningWorldObject = Instantiate(container.Item.toolPrefab.gameObject, transform);
+                    _holdiningWorldObject = Instantiate(container.Item.equipablePrefab.gameObject, transform);
 
                     // remove this item from the players inventory
                     manager.InventoryController.Inventory.Take(new ItemQuery(container.Item, container.Count));

@@ -49,7 +49,7 @@ namespace UntoldTracks.InventorySystem
             }
         }
 
-        public ItemContainer ActiveItem
+        public ItemContainer ActiveItemContainer
         {
             get
             { 
@@ -61,7 +61,7 @@ namespace UntoldTracks.InventorySystem
         {
             get
             {
-                return !(ActiveItem == null || ActiveItem.IsEmpty());
+                return !(ActiveItemContainer == null || ActiveItemContainer.IsEmpty());
             }
         }
         #endregion
@@ -93,7 +93,7 @@ namespace UntoldTracks.InventorySystem
 
             _activeItemIndex = newIndex;
 
-            OnActiveItemChanged?.Invoke(_playerManager, ActiveItem);
+            OnActiveItemChanged?.Invoke(_playerManager, ActiveItemContainer);
 
             _playerManager.PlayerManagerUI.SetActiveItemIndex(_activeItemIndex);
         }
@@ -108,7 +108,7 @@ namespace UntoldTracks.InventorySystem
         {
             if (container.Index == _activeItemIndex)
             {
-                OnActiveItemChanged?.Invoke(_playerManager, ActiveItem);
+                OnActiveItemChanged?.Invoke(_playerManager, ActiveItemContainer);
             }
         }
 

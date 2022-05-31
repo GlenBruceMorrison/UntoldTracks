@@ -191,9 +191,9 @@ namespace UntoldTracks.Player
                     if (_playerManager.InventoryController.HasActiveItem)
                     {
                         // if that item handles interactions
-                        if (_playerManager.InventoryController.ActiveItem.Item.hasCustomInteractionFrame)
+                        if (_playerManager.InventoryController.ActiveItemContainer.Item.hasCustomInteractionFrame)
                         {
-                            if (_playerManager.PlayerActiveItemController.TryGetTool(out ToolEntity tool))
+                            if (_playerManager.PlayerActiveItemController.TryGetTool(out EquipableEntity tool))
                             {
                                 tool.HandleInteractionDown(InteractionInput.Primary);
                             }
@@ -202,7 +202,7 @@ namespace UntoldTracks.Player
                         else
                         {
                             // if this item is not a placable item
-                            if (!_playerManager.InventoryController.ActiveItem.Item.isPlaceable)
+                            if (!_playerManager.InventoryController.ActiveItemContainer.Item.isPlaceable)
                             {
                                 // perform standard interaction with the primary input
                                 Interact(_currentFocus);
@@ -221,9 +221,10 @@ namespace UntoldTracks.Player
                 {
                     if (_playerManager.InventoryController.HasActiveItem)
                     {
-                        if (_playerManager.InventoryController.ActiveItem.Item.hasCustomInteractionFrame)
+                        //if (_playerManager.InventoryController.ActiveItemContainer.Item.hasCustomInteractionFrame)
+                        if (_playerManager.InventoryController.ActiveItemContainer.Item.isEquipable)
                         {
-                            _playerManager.gameObject.GetComponentInChildren<ToolEntity>()
+                            _playerManager.gameObject.GetComponentInChildren<EquipableEntity>()
                                 .HandleInteractionDown(InteractionInput.Primary);
                         }
                         else if (_playerManager.PlaceableEntityController.IsPlacingSomething)
@@ -235,11 +236,23 @@ namespace UntoldTracks.Player
                 }
             }
 
-            if (Input.GetMouseButtonDown(1))
+            else if (Input.GetMouseButtonUp(0))
+            {
+                if (_playerManager.InventoryController.ActiveItemContainer?.Item != null)
+                {
+                    if (_playerManager.InventoryController.ActiveItemContainer.Item.isEquipable)
+                    {
+                        _playerManager.gameObject.GetComponentInChildren<EquipableEntity>()
+                                .HandleInteractionUp(InteractionInput.Primary);
+                    }
+                }
+            }
+
+            else if (Input.GetMouseButtonDown(1))
             {
                 if (_currentFocus != null)
                 {
-                    if (!(_playerManager.InventoryController.HasActiveItem && _playerManager.InventoryController.ActiveItem.Item.hasCustomInteractionFrame))
+                    if (!(_playerManager.InventoryController.HasActiveItem && _playerManager.InventoryController.ActiveItemContainer.Item.hasCustomInteractionFrame))
                     {
                         _currentFocus.HandleInput(_playerManager, InteractionInput.Secondary);
                     }

@@ -120,7 +120,7 @@ public class PlaceableEntityController : MonoBehaviour, IPlacableEntityControlle
         _playerManager.PlayerActiveItemController.activeItemObject = null;
 
         // remove this placable from the players inventory
-        _playerManager.InventoryController.Inventory.Take(new ItemQuery(_targetPlaceable.source, 1, _playerManager.InventoryController.ActiveItem.Index));
+        _playerManager.InventoryController.Inventory.Take(new ItemQuery(_targetPlaceable.source, 1, _playerManager.InventoryController.ActiveItemContainer.Index));
 
         // reset placable values
         _targetPlaceable.BeingPlaced = false;

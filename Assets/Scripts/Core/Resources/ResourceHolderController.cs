@@ -80,7 +80,7 @@ namespace UntoldTracks.Resource
                 }
                 */
 
-                var container = manager.InventoryController.ActiveItem;
+                var container = manager.InventoryController.ActiveItemContainer;
 
                 if (!holder.IsItemValid(container.Item))
                 {
@@ -92,7 +92,7 @@ namespace UntoldTracks.Resource
                     source.PlayOneShot(holder.harvestAudio);
                 }
 
-                durability -= container.Item.toolStrength;
+                durability -= 1;// container.Item.toolStrength;
 
                 if (durability > 0)
                 {

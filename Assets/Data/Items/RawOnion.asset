@@ -10,22 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae6880a8766e14bef8e7c995f2275825, type: 3}
-  m_Name: Apple
+  m_Name: RawOnion
   m_EditorClassIdentifier: 
-  name: Apple
-  sprite: {fileID: 21300000, guid: 331e0a46122604702a029a3a1a3bb83f, type: 3}
-  description: A fruit you can eat.
+  name: Raw Onion
+  sprite: {fileID: 21300000, guid: c84aa0510207f4807bd7d816d11d46e8, type: 3}
+  description: A raw onion.
   stackable: 1
   stackSize: 20
+  isEquipable: 1
+  equipablePrefab: {fileID: 3390441664538654275, guid: 397cc07aaa459714cbd7ed8262fac681, type: 3}
+  hasCustomInteractionFrame: 0
   degradable: 0
-  durability: 0
-  isTool: 1
-  toolStrength: 1
-  isBuildingTool: 0
-  hasCustomInteractionFrame: 1
-  toolPrefab: {fileID: 2549694547716022988, guid: 9e364c65fe8ea4b4f90c970802ba3b8c, type: 3}
+  durability: 1
   isPlaceable: 0
   placeablePrefab: {fileID: 0}
   canRotate: 1
-  isFuel: 0
-  fuelStrength: 1
