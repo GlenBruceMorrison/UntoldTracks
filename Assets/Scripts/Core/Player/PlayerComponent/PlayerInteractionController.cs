@@ -257,6 +257,15 @@ namespace UntoldTracks.Player
                         _currentFocus.HandleInput(_playerManager, InteractionInput.Secondary);
                     }
                 }
+
+                if (_playerManager.InventoryController.ActiveItemContainer?.Item != null)
+                {
+                    if (_playerManager.InventoryController.ActiveItemContainer.Item.isEquipable)
+                    {
+                        _playerManager.gameObject.GetComponentInChildren<EquipableEntity>()
+                                .HandleInteractionDown(InteractionInput.Secondary);
+                    }
+                }
             }
         }
 

@@ -17,15 +17,11 @@ MonoBehaviour:
   description: A cup used to gather liquids
   stackable: 0
   stackSize: 20
-  degradable: 1
-  durability: 10
-  isTool: 0
-  toolStrength: 1
-  isBuildingTool: 0
-  hasCustomInteractionFrame: 0
-  toolPrefab: {fileID: 0}
+  isEquipable: 1
+  equipablePrefab: {fileID: 7675175194660437533, guid: ef5a5478222707647b4422ea1a3a14fb, type: 3}
+  hasCustomInteractionFrame: 1
+  degradable: 0
+  durability: 3
   isPlaceable: 0
   placeablePrefab: {fileID: 0}
   canRotate: 1
-  isFuel: 0
-  fuelStrength: 1

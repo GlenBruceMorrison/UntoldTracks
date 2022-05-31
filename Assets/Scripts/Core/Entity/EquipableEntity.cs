@@ -8,7 +8,7 @@ using UntoldTracks.Player;
 public abstract class EquipableEntity : Entity
 {
     internal PlayerManager playerManager;
-    public ItemContainer toolData;
+    [HideInInspector] public ItemContainer toolData;
 
     public void EquipedByPlayer(PlayerManager playerManager)
     {

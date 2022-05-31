@@ -7,15 +7,15 @@ namespace UntoldTracks.InventorySystem
 {
     public delegate void ItemContainerModified(ItemContainer newValue);
 
+
     [System.Serializable]
     public class ItemContainer
     {
         #region private
-        [SerializeField]
-        private Item _item;
-        [SerializeField]
-        private int _count;
+        [SerializeField] private Item _item;
+        [SerializeField] private int _count;
         private int _currentDurability;
+
         private Inventory _inventory;
         private int _index;
         #endregion
@@ -385,6 +385,11 @@ namespace UntoldTracks.InventorySystem
 
         public void SetDurability(int value)
         {
+            if (value > Item.durability)
+            {
+                value = Item.durability;
+            }
+
             _currentDurability = value;
         }
 
