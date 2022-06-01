@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44661146, g: 0.4964525, b: 0.57483804, a: 1}
+  m_IndirectSpecularColor: {r: 0.4466108, g: 0.49645144, b: 0.5748364, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1813,7 +1813,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ad28055600c7d45a38e9b2f4e3976289, type: 2}
+  - {fileID: 2100000, guid: e76be9c029e744945b64c4755ba650de, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4287,6 +4287,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6818777332706840356, guid: 6e9030623d6d44a578466bcc7e4a5262, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7762399176114979300, guid: 6e9030623d6d44a578466bcc7e4a5262, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7762399176114979300, guid: 6e9030623d6d44a578466bcc7e4a5262, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7762399176114979300, guid: 6e9030623d6d44a578466bcc7e4a5262, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7762399176114979300, guid: 6e9030623d6d44a578466bcc7e4a5262, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7762399176114979300, guid: 6e9030623d6d44a578466bcc7e4a5262, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8544700175808296514, guid: 6e9030623d6d44a578466bcc7e4a5262, type: 3}
