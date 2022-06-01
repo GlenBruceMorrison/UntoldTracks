@@ -267,6 +267,14 @@ namespace UntoldTracks.Player
                     }
                 }
             }
+
+            else if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (_currentFocus != null)
+                {
+                    _currentFocus.HandleInput(_playerManager, InteractionInput.Action1);
+                }
+            }
         }
 
         private void Interact(IInteractable interactable)

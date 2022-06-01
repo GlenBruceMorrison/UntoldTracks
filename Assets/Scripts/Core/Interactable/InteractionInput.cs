@@ -3,6 +3,9 @@
     public enum InteractionInput
     {
         Primary,
-        Secondary
+        Secondary,
+        Action1,
+        Action2,
+        Action3
     }
 }

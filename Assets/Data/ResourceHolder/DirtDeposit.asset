@@ -16,7 +16,7 @@ MonoBehaviour:
   toolsToHarvest:
   - {fileID: 11400000, guid: 63772c9f6660d46a09bf0b6ace5f897f, type: 2}
   CanProduce:
-  - item: {fileID: 11400000, guid: 155c9ec6799234bea90390dba5f6def6, type: 2}
+  - item: {fileID: 11400000, guid: d55d977c862d7f042a70b48b382f4653, type: 2}
     rarity: 1
     baseAmount: 1
     canProductMultiple: 0

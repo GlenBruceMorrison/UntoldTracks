@@ -544,7 +544,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30c7b7043df44aa8aa04699b170b621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recipeBook: {fileID: 0}
+  baseRecipeBook: {fileID: 0}
+  overrideRecipeBook: {fileID: 0}
   recipeContainer: {fileID: 4302153875743971895}
   craftingWindow: {fileID: 3411688367576382280}
   craftingButton: {fileID: 1803998684848308464}

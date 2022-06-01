@@ -14,7 +14,7 @@ namespace UntoldTracks
 
         public List<InteractionDisplay> PossibleInputs => new List<InteractionDisplay>()
         {
-            new InteractionDisplay(InteractionInput.Primary, $"Work")
+            new InteractionDisplay(InteractionInput.Action1, $"Work")
         };
 
 
@@ -23,7 +23,7 @@ namespace UntoldTracks
 
         public void HandleInput(PlayerManager manager, InteractionInput input)
         {
-            if (input == InteractionInput.Primary)
+            if (input == InteractionInput.Action1)
             {
                 manager.PlayerManagerUI.OpenMainWindow(null, _data._recipeBook);
             }

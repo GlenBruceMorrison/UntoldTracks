@@ -18,7 +18,7 @@ public class ItemContainerWorldObject : MonoBehaviour, IInteractable
 
     public List<InteractionDisplay> PossibleInputs => new List<InteractionDisplay>()
     {
-        new InteractionDisplay(InteractionInput.Primary, $"Pick up {_container.Item.name}.")
+        new InteractionDisplay(InteractionInput.Action1, $"Take")
     };
 
     public string DisplayText
@@ -56,7 +56,8 @@ public class ItemContainerWorldObject : MonoBehaviour, IInteractable
 
     public void HandleInput(PlayerManager manager, InteractionInput input)
     {
-        if (input == InteractionInput.Primary)
+        Debug.Log(input);
+        if (input == InteractionInput.Action1)
         {
             manager.InventoryController.Inventory.Give(Container);
             Destroy(this.gameObject);

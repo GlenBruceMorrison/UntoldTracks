@@ -12,9 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae6880a8766e14bef8e7c995f2275825, type: 3}
   m_Name: Dirt
   m_EditorClassIdentifier: 
-  name: Acorn
+  name: Dirt
+  sprite: {fileID: 21300000, guid: 4dde3b222e8c04b53a8af2766f0d37eb, type: 3}
   description: Can grow into a tree
-  sprite: {fileID: 21300000, guid: 34000a6b341b94befa93b2456066daae, type: 3}
   stackable: 1
   stackSize: 20
-  isBuildingTool: 0
+  isEquipable: 0
+  equipablePrefab: {fileID: 0}
+  hasCustomInteractionFrame: 0
+  degradable: 0
+  durability: 0
+  isPlaceable: 0
+  placeablePrefab: {fileID: 0}
+  canRotate: 1

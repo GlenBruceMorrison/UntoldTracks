@@ -49,7 +49,7 @@ public class StorageContainer : PlaceableEntity, IInteractable
     {
         switch (input)
         {
-            case InteractionInput.Secondary:
+            case InteractionInput.Action1:
                 manager.InventoryController.Open(_inventory);
                 break;
         }

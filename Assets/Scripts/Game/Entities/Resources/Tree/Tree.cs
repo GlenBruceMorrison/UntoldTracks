@@ -122,6 +122,7 @@ public class Tree : MonoBehaviour, IInteractable
         foreach (var log in logs)
         {
             log.SetActive(true);
+            log.transform.parent = null;
         }
         
         OnGrounded?.Invoke();
