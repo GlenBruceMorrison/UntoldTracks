@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cup
   m_EditorClassIdentifier: 
   name: Cup
-  sprite: {fileID: 21300000, guid: a2db46e52394c4fb8a311af66b105ccc, type: 3}
+  sprite: {fileID: 21300000, guid: 1ee2e16ed3bb5434296d349e34c7531f, type: 3}
   description: A cup used to gather liquids
   stackable: 0
   stackSize: 20

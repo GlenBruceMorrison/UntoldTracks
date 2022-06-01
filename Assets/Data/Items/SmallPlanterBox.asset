@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SmallPlanterBox
   m_EditorClassIdentifier: 
   name: Small Planter Box
-  sprite: {fileID: 21300000, guid: 6266ed819e92549998054a092d3a35d4, type: 3}
+  sprite: {fileID: 21300000, guid: 04a75d9c7ff9444418d626ede8dde873, type: 3}
   description: 'Used to plant and grow small vegetables.
 
 '

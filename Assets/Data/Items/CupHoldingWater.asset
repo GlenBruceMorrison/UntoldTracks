@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CupHoldingWater
   m_EditorClassIdentifier: 
   name: Cup
-  sprite: {fileID: 21300000, guid: 6840f0e2c442e40798c1575323b456e2, type: 3}
+  sprite: {fileID: 21300000, guid: 3edbc4e8aac6247e6a7df68b790aa22e, type: 3}
   description: A cup holding some water
   stackable: 0
   stackSize: 20
