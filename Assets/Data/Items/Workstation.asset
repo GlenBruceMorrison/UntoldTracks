@@ -13,19 +13,15 @@ MonoBehaviour:
   m_Name: Workstation
   m_EditorClassIdentifier: 
   name: Workstation
-  sprite: {fileID: 21300000, guid: cff6ce3fc4e074ffe9ede202fd6f3d42, type: 3}
+  sprite: {fileID: 21300000, guid: 3aa3d988a8824457d83025f3ac071ca5, type: 3}
   description: 
   stackable: 0
   stackSize: 20
+  isEquipable: 0
+  equipablePrefab: {fileID: 0}
+  hasCustomInteractionFrame: 0
   degradable: 0
   durability: 0
-  isTool: 0
-  toolStrength: 1
-  isBuildingTool: 0
-  hasCustomInteractionFrame: 0
-  toolPrefab: {fileID: 0}
   isPlaceable: 1
   placeablePrefab: {fileID: 353044810429674381, guid: 716fb1528c6a748df9f03abd23a773c4, type: 3}
   canRotate: 1
-  isFuel: 0
-  fuelStrength: 1
