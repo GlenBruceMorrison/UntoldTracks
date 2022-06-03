@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UntoldTracks;
 using UntoldTracks.Player;
+using UntoldTracks.Managers;
 
 public class StorageContainer : PlaceableEntity, IInteractable
 {
@@ -17,7 +18,7 @@ public class StorageContainer : PlaceableEntity, IInteractable
 
     public List<InteractionDisplay> PossibleInputs => new List<InteractionDisplay>()
     {
-        new InteractionDisplay(InteractionInput.Secondary, $"Open")
+        new InteractionDisplay(InteractionInput.Action1, $"Open")
     };
 
     public string DisplayText
@@ -50,7 +51,7 @@ public class StorageContainer : PlaceableEntity, IInteractable
         switch (input)
         {
             case InteractionInput.Action1:
-                manager.InventoryController.Open(_inventory);
+                manager.PlayerManagerUI.OpenMainWindow();
                 break;
         }
     }

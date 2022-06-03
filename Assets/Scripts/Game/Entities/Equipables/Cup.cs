@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UntoldTracks;
 using UntoldTracks.InventorySystem;
+using UntoldTracks.Models;
 
 public class Cup : EquipableEntity
 {
     [SerializeField] Animator _animator;
 
     public ItemContainer currentCupState => toolData;
-    public Item waterCupData;
-    public Item emptyCupData;
+    public ItemModel waterCupData;
+    public ItemModel emptyCupData;
 
     private void Awake()
     {

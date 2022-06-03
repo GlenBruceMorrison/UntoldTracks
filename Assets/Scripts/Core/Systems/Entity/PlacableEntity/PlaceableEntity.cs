@@ -1,0 +1,163 @@
+﻿using System;
+using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
+using UntoldTracks.Models;
+
+public class PlaceableEntity : Entity
+{
+    #region Public Vars
+    public ItemModel source;
+    public List<Transform> raycastOrigins = new List<Transform>();
+    #endregion
+    
+    #region Private Vars
+    private PlacableEntityIndicator _placeableEntityIndicator;
+    private Collider[] _worldColliders;
+    private Collider _rootCollider;
+    private MeshRenderer _meshRenderer;
+    private Renderer[] _allRenderers;
+    private Material[] _allMaterials;
+    private bool _beingPlaced;
+    private bool _isTriggering = false;
+
+    [SerializeField]
+    private Transform _worldTransform;
+    #endregion
+    
+    #region Getters
+    [HideInInspector]
+    public Material[] AllMaterials
+    {
+        get
+        {
+            return _allMaterials;
+        }
+    }
+
+    public bool IsTriggering
+    {
+        get
+        {
+            return _isTriggering;
+        }
+    }
+
+    public bool BeingPlaced
+    {
+        get
+        {
+            return _beingPlaced;
+        }
+        set
+        {
+            SetBeingPlaced(value);
+        }
+    }
+    #endregion
+
+    #region Unity
+    protected virtual void OnEnable()
+    {
+        GrabAllRenderers();
+        _worldColliders = _worldTransform.GetComponentsInChildren<Collider>();
+        _placeableEntityIndicator = GetComponentInChildren<PlacableEntityIndicator>();
+        _rootCollider = this.gameObject.GetComponent<Collider>();
+        
+        if (_placeableEntityIndicator == null)
+        {
+            Debug.LogWarning("This object does not have a PlaceableEntityIndicator on it, disabling!");
+            this.gameObject.SetActive(false);
+        }
+        
+        _placeableEntityIndicator.TriggerStay.AddListener(HandleTriggerStay);
+        _placeableEntityIndicator.TriggerExit.AddListener(HandleTriggerExit);
+    }
+
+    protected virtual void OnDisable()
+    {
+        _placeableEntityIndicator.TriggerStay.RemoveListener(HandleTriggerStay);
+        _placeableEntityIndicator.TriggerExit.RemoveListener(HandleTriggerExit);
+    }
+    #endregion
+
+    #region EventHandlers
+    public void HandleTriggerStay()
+    {
+        _isTriggering = true;
+    }
+
+    public void HandleTriggerExit()
+    {
+        _isTriggering = false;
+    }
+    #endregion
+
+    #region Renderers
+    public void SetMaterial(Material material)
+    {
+        foreach (var t in _allRenderers)
+        {
+            t.material = material;
+        }
+    }
+ 
+    public void ResetMaterials()
+    {
+        for (var i = 0; i < _allRenderers.Length; i++)
+        {
+            _allRenderers[i].material = AllMaterials[i];
+        }
+    }
+
+    public void GrabAllRenderers()
+    {
+        _allRenderers = GetComponentsInChildren<Renderer>();
+        _allMaterials = new Material[_allRenderers.Length];
+
+        for (var i = 0; i < _allRenderers.Length; i++)
+        {
+            _allMaterials[i] = _allRenderers[i].material;
+        }
+    }
+    #endregion
+
+    #region Colliders
+    private void SetWorldColliders(bool state)
+    {
+        if (_rootCollider != null)
+        {
+            _rootCollider.enabled = state;
+        }
+                
+        if (_worldColliders.Any())
+        {
+            foreach (var worldCollider in _worldColliders)
+            {
+                worldCollider.enabled = state;
+            }
+        }
+    }
+    #endregion
+
+    private void SetBeingPlaced(bool state)
+    {
+        if (_beingPlaced == state)
+        {
+            return;
+        }
+            
+        _beingPlaced = state;
+            
+        if (_beingPlaced)
+        {
+            _placeableEntityIndicator.gameObject.SetActive(true);
+            SetWorldColliders(false);
+        }
+        else
+        {
+            _placeableEntityIndicator.gameObject.SetActive(false);
+            SetWorldColliders(true);
+        }
+    }
+}

@@ -6,16 +6,18 @@ using UntoldTracks.InventorySystem;
 using UnityEngine;
 using UnityEngine.Events;
 using UntoldTracks.Player;
+using UntoldTracks.Models;
+using UntoldTracks.Managers;
 
 namespace UntoldTracks.Machines
 {
     [System.Serializable]
     public class KilnInput
     {
-        public Item itemInput;
+        public ItemModel itemInput;
         public GameObject inputItemPrefab;
 
-        public Item itemOutput;
+        public ItemModel itemOutput;
         public GameObject outputItemPrefab;
 
         public GameObject coolingItemPrefab;
@@ -31,7 +33,7 @@ namespace UntoldTracks.Machines
         [SerializeField] private float _fuelDegradeRate;
         [SerializeField] private List<Transform> _fuelModels = new List<Transform>();
         
-        public Item fuel;
+        public ItemModel fuel;
         public Transform cookingItemContainer, giveItemTransform, takeItemTransform, cookingItemTransform;
 
         private KilnInput cookingItem;

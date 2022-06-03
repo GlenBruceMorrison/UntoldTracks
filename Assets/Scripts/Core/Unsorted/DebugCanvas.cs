@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UntoldTracks.Player;
+using UntoldTracks.Managers;
 
 public class DebugCanvas : MonoBehaviour
 {
@@ -29,17 +30,17 @@ public class DebugCanvas : MonoBehaviour
                 return;
             }
 
-            Log("Active item changed to " + ((container == null || container.Item == null) ? "Empty" : container.Item.name));
+            Log("Active item changed to " + ((container == null || container.Item == null) ? "Empty" : container.Item.displayName));
         };
 
         player.InventoryController.Inventory.OnContainerAdded += (container) =>
         {
-            Log($"{container.Count} {container.Item.name}(s) added to player's inventory");
+            Log($"{container.Count} {container.Item.displayName}(s) added to player's inventory");
         };
 
         player.InventoryController.Inventory.OnContainerRemoved += (container) =>
         {
-            Log($"{container.Count} {container.Item.name}(s) removed to player's inventory");
+            Log($"{container.Count} {container.Item.displayName}(s) removed to player's inventory");
         };
     }
 }

@@ -4,10 +4,12 @@ using UnityEngine;
 using UntoldTracks;
 using UntoldTracks.InventorySystem;
 using UntoldTracks.Player;
+using UntoldTracks.Models;
+using UntoldTracks.Managers;
 
 public class ToolHolder : MonoBehaviour, IInteractable
 {
-    private Item _holding;
+    private ItemModel _holding;
     private GameObject _holdiningWorldObject;
 
     public Sprite emptyIcon;
@@ -22,7 +24,7 @@ public class ToolHolder : MonoBehaviour, IInteractable
         {
             if (_holding != null)
             {
-                return $"Take {_holding.name}";
+                return $"Take {_holding.displayName}";
             }
 
             return "Holder";

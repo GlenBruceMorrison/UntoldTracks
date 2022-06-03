@@ -1,0 +1,13 @@
+{
+    "Inventory":{
+        "size": 12,
+        "items": [
+            {
+                "itemGUID" : "d55d977c862d7f042a70b48b382f4653",
+                "amount" : 5,
+                "durability" : 4,
+                "inventoryIndex" : 1
+            }
+        ]
+    }
+}

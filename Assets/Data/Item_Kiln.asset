@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae6880a8766e14bef8e7c995f2275825, type: 3}
+  m_Name: Item_Kiln
+  m_EditorClassIdentifier: 
+  name: Kiln
+  sprite: {fileID: 21300000, guid: fe26fb512412a40c28000001b040d0ab, type: 3}
+  description: A kiln
+  stackable: 0
+  stackSize: 1
+  isTool: 0
+  toolStrength: 1
+  isBuildingTool: 0
+  hasCustomInteractionFrame: 0
+  toolPrefab: {fileID: 0}
+  isPlaceable: 1
+  placeablePrefab: {fileID: 6196773792244837926, guid: 97ff2845c00d043c09ae53c8aee13a43, type: 3}
+  canRotate: 1
+  isFuel: 0
+  fuelStrength: 1

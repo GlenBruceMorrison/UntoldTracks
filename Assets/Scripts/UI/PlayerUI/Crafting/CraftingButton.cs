@@ -9,7 +9,7 @@ namespace UntoldTracks.UI
 {
     public class CraftingButton : MonoBehaviour, IPointerClickHandler
     {
-        public UnityAction OnClick;
+        public UnityEvent OnClick;
 
         public void OnPointerClick(PointerEventData eventData)
         {

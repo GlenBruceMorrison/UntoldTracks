@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UntoldTracks.Models;
 
 public class PlaceableEntityConfig : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class PlaceableEntityConfig : MonoBehaviour
     public void CreatePlaceableItem()
     {
         // MyClass is inheritant from ScriptableObject base class
-        var example = ScriptableObject.CreateInstance<Item>();
+        var example = ScriptableObject.CreateInstance<ItemModel>();
         example.isPlaceable = true;
 
         // path has to start at "Assets"

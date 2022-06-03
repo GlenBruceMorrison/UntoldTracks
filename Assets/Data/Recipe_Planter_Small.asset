@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41cf72670afae4f0da1bcdb2aedb3670, type: 3}
+  m_Name: Recipe_Planter_Small
+  m_EditorClassIdentifier: 
+  ingredients:
+  - _item: {fileID: 11400000, guid: eff34436baf014d4d835916ce777d3d9, type: 2}
+    _count: 10
+  - _item: {fileID: 11400000, guid: d55d977c862d7f042a70b48b382f4653, type: 2}
+    _count: 5
+  produces:
+    _item: {fileID: 11400000, guid: c4d1fe8a8c18c4a42b57c2bc79301b31, type: 2}
+    _count: 1

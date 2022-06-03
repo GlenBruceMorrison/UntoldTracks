@@ -7,6 +7,8 @@ using UnityEngine.Serialization;
 using UntoldTracks;
 using UntoldTracks.InventorySystem;
 using UntoldTracks.Player;
+using UntoldTracks.Models;
+using UntoldTracks.Managers;
 
 public class ResourceStack : PlaceableEntity, IInteractable
 {
@@ -16,13 +18,13 @@ public class ResourceStack : PlaceableEntity, IInteractable
     public Transform resourceContainer;
     public List<Transform> resource = new List<Transform>();
     public int Max => resource.Count;
-    public Item resourceItem;
-    public string DisplayText => $"RMB [Remove {resourceItem.name}]\nLMB [Add {resourceItem.name}]";
+    public ItemModel resourceItem;
+    public string DisplayText => $"RMB [Remove {resourceItem.displayName}]\nLMB [Add {resourceItem.displayName}]";
     public Sprite DisplaySprite => source.sprite;
 
     public List<InteractionDisplay> PossibleInputs => new List<InteractionDisplay>()
     {
-        new InteractionDisplay(InteractionInput.Primary, "Place"),
+        new InteractionDisplay(InteractionInput.Action1, "Place"),
         new InteractionDisplay(InteractionInput.Secondary, "Take")
     };
 
@@ -91,7 +93,7 @@ public class ResourceStack : PlaceableEntity, IInteractable
     {
         switch (input)
         {
-            case InteractionInput.Primary:
+            case InteractionInput.Action1:
                 if (!manager.InventoryController.Inventory.CanTake(resourceItem, 1))
                 {
                     return;

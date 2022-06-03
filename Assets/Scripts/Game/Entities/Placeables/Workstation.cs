@@ -4,6 +4,7 @@ using UnityEngine;
 using UntoldTracks;
 using UntoldTracks.InventorySystem;
 using UntoldTracks.Player;
+using UntoldTracks.Managers;
 
 public class Workstation : PlaceableEntity, IInteractable
 {

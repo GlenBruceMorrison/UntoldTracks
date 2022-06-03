@@ -6,12 +6,14 @@ using UnityEngine;
 using UnityEngine.Events;
 using UntoldTracks;
 using UntoldTracks.Player;
+using UntoldTracks.Models;
+using UntoldTracks.Managers;
 
 public class Tree : MonoBehaviour, IInteractable
 {
     public int health=5;
 
-    [SerializeField] private Item _axeItemReference;
+    [SerializeField] private ItemModel _axeItemReference;
 
     public GameObject tree;
     public List<GameObject> logs = new List<GameObject>();
@@ -131,4 +133,5 @@ public class Tree : MonoBehaviour, IInteractable
 
     public void HandleBecomeFocus(PlayerManager player) { }
     public void HandleLoseFocus(PlayerManager player) { }
+
 }

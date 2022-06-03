@@ -1,0 +1,13 @@
+[
+    {
+        "size": 12,
+        "items": [
+            {
+                "item_guid" : "DD69A2F841251D843B67F4E30C074944",
+                "amount" : 5,
+                "durability" : 4,
+                "inventoryIndex" : 1
+            }
+        ]
+    }
+]
