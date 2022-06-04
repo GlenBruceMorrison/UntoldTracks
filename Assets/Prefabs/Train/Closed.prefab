@@ -67,6 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9929803103c25433687be73cc304eb95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  model: {fileID: 11400000, guid: 72f815a192f8bc145848964b42da4c40, type: 2}
   train: {fileID: 0}
   Mover: {fileID: 2436175327103576001}
   pathCreator: {fileID: 0}
@@ -296,7 +297,8 @@ MonoBehaviour:
   _displayText: SSS
   _displaySprite: {fileID: 21300000, guid: 8afaa407d599641bd8a4e01a6c18157c, type: 3}
   _inputDisplay:
-  - input: 0
+  - validItems: {fileID: 0}
+    input: 0
     text: StartStop
   onInteraction:
     m_PersistentCalls:

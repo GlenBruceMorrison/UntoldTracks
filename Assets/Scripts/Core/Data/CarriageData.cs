@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 namespace UntoldTracks.Data
 {
     [System.Serializable]
-    public class GameData
+    public class CarriageData
     {
-        public PlayerData player;
-        public TrainData train;
+        public string carriageGUID;
     }
 }

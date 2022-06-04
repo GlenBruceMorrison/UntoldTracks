@@ -3,9 +3,12 @@ using PathCreation;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UntoldTracks.Models;
 
 public class Carriage : MonoBehaviour, IMoverController
 {
+    public CarriageModel model;
+
     public Train train;
     public PhysicsMover Mover;
     public PathCreator pathCreator;

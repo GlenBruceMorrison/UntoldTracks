@@ -44,7 +44,7 @@ namespace UntoldTracks.UI
 
         private void OnDisable()
         {
-            playerManager.InventoryController.Inventory.OnModified -= HandleInventoryModified;
+            //playerManager.InventoryController.Inventory.OnModified -= HandleInventoryModified;
         }
 
         private void HandleInventoryModified()

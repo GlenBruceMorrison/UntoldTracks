@@ -56,6 +56,7 @@ namespace UntoldTracks.Managers
                 var gameData = new GameData();
 
                 gameData.player = FindObjectOfType<PlayerManager>().Save();
+                gameData.train = FindObjectOfType<Train>().Save();
 
                 var json = JsonUtility.ToJson(gameData);
 

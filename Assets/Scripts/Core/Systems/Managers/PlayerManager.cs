@@ -74,7 +74,7 @@ namespace UntoldTracks.Managers
             }
         }
 
-        public void Init(PlayerData data)
+        public void Build(PlayerData data)
         {
             _characterController = GetComponentInChildren<PlayerCharacterController>();
 

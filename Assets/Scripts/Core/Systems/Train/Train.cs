@@ -1,15 +1,20 @@
 using PathCreation;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UntoldTracks.Data;
+using UntoldTracks.Models;
 
 public class Train : MonoBehaviour
 {
-    public int carriagesToSpawn = 10;
+    public TrainData data;
+    public TrainModel model;
+    public CarriageRegistry carriageRegistry;
+
     public int carriageLength = 9;
 
-    public List<Carriage> carriagePrefabs = new List<Carriage>();
     public PathCreator path;
 
     [HideInInspector] public List<Carriage> carriages = new List<Carriage>();
@@ -21,12 +26,45 @@ public class Train : MonoBehaviour
 
     public float distanceTravelled;
 
-    private void Awake()
+    public bool built = false;
+
+    public void Build(TrainData data)
     {
-        for (var i = 0; i < carriagesToSpawn; i++)
+        foreach (var carriage in data.carriages)
         {
-            AddTrain(carriagePrefabs[Random.Range(0, carriagePrefabs.Count)]);
+            var instance = carriageRegistry.FindByGUID(carriage.carriageGUID);
+            AddTrain(instance.view);
         }
+
+        if (data.isMoving)
+        {
+            moving = true;
+        }
+
+        currentSpeed = data.currentSpeed;
+        distanceTravelled = data.distanceTravelled;
+
+        built = true;
+    }
+
+    public TrainData Save()
+    {
+        var data = new TrainData()
+        {
+            distanceTravelled = distanceTravelled,
+            currentSpeed = currentSpeed,
+            isMoving = moving
+        };
+
+        foreach (var carriage in carriages)
+        {
+            data.carriages.Add(new CarriageData()
+            {
+                carriageGUID = carriage.model.Guid
+            });
+        }
+
+        return data;
     }
 
     private void AddTrain(Carriage prefab)
@@ -50,6 +88,11 @@ public class Train : MonoBehaviour
 
     private void Update()
     {
+        if (!built)
+        {
+            return;
+        }
+
         if (moving)
         {
             if (currentSpeed < maxSpeed)
