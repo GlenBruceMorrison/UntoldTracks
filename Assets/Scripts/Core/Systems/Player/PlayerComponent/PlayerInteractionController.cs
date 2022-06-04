@@ -130,6 +130,7 @@ namespace UntoldTracks.Player
             if (_currentFocus != null)
             {
                 _currentFocus.HandleLoseFocus(playerManager);
+                OnFocusChange?.Invoke(null);
             }
 
             _currentFocus = null;
@@ -141,6 +142,7 @@ namespace UntoldTracks.Player
             if (_currentFocus != null)
             {
                 _currentFocus.HandleLoseFocus(playerManager);
+                OnFocusChange?.Invoke(null);
             }
 
             //OnFocusChange?.Invoke(null);

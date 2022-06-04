@@ -15,15 +15,10 @@ namespace UntoldTracks.InventorySystem
         private ItemContainerUI _selectedContainerUI;
 
         #region Unity
-        private void Start()
+        public void Init(PlayerInventoryController playerInventoryController)
         {
-            //_playerInventoryController = GetComponentInParent<PlayerManager>().InventoryController;
-        }
-
-        private void OnEnable()
-        {
-            //_playerInventoryController.OnClose+=(HandleInventoryClosed);
-            //_playerInventoryController.OnOpen+=(HandleInventoryOpened);
+            _playerInventoryController = playerInventoryController;
+            _selectedContainerUI.LinkToContainer(new ItemContainer(null, 0, 0));
         }
 
         private void OnDisable()
@@ -32,7 +27,7 @@ namespace UntoldTracks.InventorySystem
             //_playerInventoryController.OnOpen-=(HandleInventoryOpened);
         }
 
-        private void Update()
+        public void Tick()
         {
             HandleHoldingContainer();
 
@@ -82,13 +77,13 @@ namespace UntoldTracks.InventorySystem
             return null;
         }
 
-        private void HandleInventoryOpened()
+        public void HandleInventoryOpened()
         {
             _selectedContainerUI.Container.Empty();
             _selectedContainerUI.gameObject.SetActive(true);
         }
 
-        private void HandleInventoryClosed()
+        public void HandleInventoryClosed()
         {
             if (!_selectedContainerUI.Container.IsEmpty())
             {

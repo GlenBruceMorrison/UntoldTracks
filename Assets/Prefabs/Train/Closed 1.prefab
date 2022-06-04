@@ -394,7 +394,8 @@ MonoBehaviour:
   _displayText: SSS
   _displaySprite: {fileID: 21300000, guid: 8afaa407d599641bd8a4e01a6c18157c, type: 3}
   _inputDisplay:
-  - input: 0
+  - validItems: {fileID: 0}
+    input: 0
     text: StartStop
   onInteraction:
     m_PersistentCalls:
@@ -704,6 +705,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: -6924393652729120199, guid: f067f9363d6274e1b86661990272da0a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: -4828044274862638774, guid: f067f9363d6274e1b86661990272da0a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 919132149155446097, guid: f067f9363d6274e1b86661990272da0a, type: 3}
       propertyPath: m_Name
       value: ClosedCarriage

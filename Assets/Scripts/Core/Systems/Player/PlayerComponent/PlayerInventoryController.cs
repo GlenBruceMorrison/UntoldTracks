@@ -17,7 +17,7 @@ namespace UntoldTracks.InventorySystem
         public PlayerManager playerManager;
 
         public const int _inventoryBarSize = 9;
-        public const int _inventorySize = 25;
+        public int _inventorySize = 29;
         
         private int _activeItemIndex = 0;
         [SerializeField] private Inventory _inventory;
@@ -36,6 +36,7 @@ namespace UntoldTracks.InventorySystem
         public void Init(InventoryData data)
         {
             _inventory = new Inventory(data, _itemRegistry);
+            _inventorySize = data.size;
             _inventory.OnContainerModified += HandleItemContainerUpdate;
         }
 

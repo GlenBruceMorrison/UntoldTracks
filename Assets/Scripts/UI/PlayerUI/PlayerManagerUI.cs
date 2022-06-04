@@ -20,6 +20,7 @@ namespace UntoldTracks.UI
         [SerializeField] private InventoryUI linkedInventory;
         [SerializeField] private CraftingUI craftingUI;
         [SerializeField] private PlayerInteractionControllerUI _interactionControllerUI;
+        [SerializeField] private ItemContainerDragHandler _itemContainerDragHandler;
 
         public bool isInventoryOpen = false;
 
@@ -37,8 +38,12 @@ namespace UntoldTracks.UI
         {
             playerManager = manager;
 
-            playerInventoryBarUI.LinkToInventory(manager.InventoryController.Inventory, 0, manager.InventoryController.SizeBase);
+            playerInventoryBarUI.LinkToInventory(manager.InventoryController.Inventory, 0, manager.InventoryController.BarSize);
             playerInventoryUI.LinkToInventory(manager.InventoryController.Inventory, manager.InventoryController.BarSize, manager.InventoryController.SizeBase);
+
+            _itemContainerDragHandler.Init(manager.InventoryController);
+
+            //manager.InventoryController.Inventory.OnModified += HandleInventoryModified;
             manager.InventoryController.OnActiveItemChanged += HandleActiveItemChanged;
             manager.InteractionController.OnFocusChange += HandleFocusChanged;
 
@@ -48,6 +53,12 @@ namespace UntoldTracks.UI
             linkedInventory.gameObject.SetActive(false);
             craftingUI.gameObject.SetActive(false);
             
+        }
+
+        private void HandleInventoryModified()
+        {
+            this.playerInventoryBarUI.Render();
+            this.playerInventoryUI.Render();
         }
 
         private void HandleFocusChanged(IInteractable target)
@@ -83,7 +94,9 @@ namespace UntoldTracks.UI
                 CloseMainWindow();
                 return;
             }
-            
+
+            _itemContainerDragHandler.HandleInventoryOpened();
+
             _isUiOpen = true;
             
             playerManager.FirstPersonController.UnlockPointer();
@@ -103,6 +116,8 @@ namespace UntoldTracks.UI
         {
             _isUiOpen = false;
 
+            _itemContainerDragHandler.HandleInventoryClosed();
+
             craftingUI.ClearRecipe();
             playerManager.FirstPersonController.LockPointer();
 
@@ -117,6 +132,8 @@ namespace UntoldTracks.UI
             {
                 return;
             }
+
+            _itemContainerDragHandler.Tick();
 
             if (Input.GetKeyDown(KeyCode.Tab))
             {
