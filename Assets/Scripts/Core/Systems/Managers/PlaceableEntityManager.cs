@@ -26,11 +26,15 @@ namespace UntoldTracks.Managers
 
                 if (entity == null || entity.placeablePrefab == null)
                 {
-                    Debug.LogError($"Error when loading this entity");
+                    Debug.LogError($"Error when loading this entity. Check it exists in the registry and that the item GUID is correct.");
                     continue;
                 }
 
-                var prefab = Instantiate(entity.placeablePrefab, transform);
+                var prefab = Instantiate(
+                    entity.placeablePrefab,
+                    placeable["entity"]["position"].ReadVector3(),
+                    placeable["entity"]["rotation"].ReadQuaternion());
+
                 var token = prefab.GetComponent<ITokenizable>();
 
                 if (token == null)

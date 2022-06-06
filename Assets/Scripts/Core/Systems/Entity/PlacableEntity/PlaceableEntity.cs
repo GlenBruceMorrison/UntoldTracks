@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using UntoldTracks.Models;
+using SimpleJSON;
 
 public class PlaceableEntity : Entity, ITokenizable
 {
@@ -159,8 +160,18 @@ public class PlaceableEntity : Entity, ITokenizable
         }
     }
 
-    private void Update()
+    public override void Load(JSONNode node)
     {
 
+    }
+
+    public override JSONObject Save()
+    {
+        var placeableJSON = new JSONObject();
+
+        placeableJSON.Add("itemGUID", source.Guid);
+        placeableJSON.Add("entity", base.Save());
+
+        return placeableJSON;
     }
 }

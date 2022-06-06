@@ -78,10 +78,8 @@ public class StorageContainer : PlaceableEntity, IInteractable, ITokenizable
 
     public override JSONObject Save()
     {
-        var node = new JSONObject();
+        var node = base.Save();
 
-        node["itemGUID"] = source.Guid;
-        node["entity"] = base.Save();
         node["inventory"] = _inventory.Save();
 
         return node;
