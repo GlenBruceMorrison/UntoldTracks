@@ -2,130 +2,39 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using UntoldTracks.Data;
+using SimpleJSON;
 
 public delegate void EntityMove(Vector3 old, Vector3 current);
 
-public class Entity : MonoBehaviour
+public class Entity : MonoBehaviour, ITokenizable
 {
-    /*
-    [System.Serializable]
-    public class EntityData
+    public virtual void Load(JSONNode node)
     {
-        public float posX, posY, posZ;
-        public float rotX, rotY, rotZ;
-        public float scaX, scaY, scaZ;
-    }
-    public EntityData entityData;
+        var position = node["entity"]["position"].ReadVector3();
+        var rotation = node["entity"]["rotation"].ReadVector3();
 
-    public event EntityMove OnEntityMove;
-
-    public Vector3 Position
-    {
-        get
-        {
-            return transform.position;
-        }
-        set
-        {
-            var oldPosition = Position;
-            transform.position = value;
-            OnEntityMove?.Invoke(oldPosition, Position);
-        }
-    }
-
-    public float X
-    {
-        get
-        {
-            return transform.position.x;
-        }
-        set
-        {
-            ChangePostion(new Vector3(value, transform.position.y, transform.position.z));
-        }
-    }
-
-    public float Y
-    {
-        get
-        {
-            return transform.position.y;
-        }
-        set
-        {
-            ChangePostion(new Vector3(transform.position.x, value, transform.position.z));
-        }
-    }
-
-    public float Z
-    {
-        get
-        {
-            return transform.position.z;
-        }
-        set
-        {
-            ChangePostion(new Vector3(transform.position.x, transform.position.y, value));
-        }
-    }
-
-    private void ChangePostion(Vector3 position)
-    {
-        var oldPosition = Position;
         transform.position = position;
-        OnEntityMove?.Invoke(oldPosition, Position);
+        transform.eulerAngles = rotation;
     }
-    public virtual void LoadFromJson(string jsonString)
+
+    public virtual JSONObject Save()
     {
+        var entityJSON = new JSONObject();
 
+        var positionJSON = new JSONObject();
+        positionJSON.Add("x", transform.position.x);
+        positionJSON.Add("y", transform.position.y);
+        positionJSON.Add("z", transform.position.z);
+
+        var rotationJSON = new JSONObject();
+        rotationJSON.Add("x", transform.rotation.x);
+        rotationJSON.Add("y", transform.rotation.y);
+        rotationJSON.Add("z", transform.rotation.z);
+
+        entityJSON.Add("position", positionJSON);
+        entityJSON.Add("rotation", rotationJSON);
+        
+        return entityJSON;
     }
-    
-    public virtual void SaveToStream(StreamWriter writer)
-    {
-        var saveData = ToJson();
-        writer.Write(saveData);
-    }
-    public virtual string ToJson()
-    {
-        EntityData data = new EntityData()
-        {
-            posX = X,
-            posY = Y,
-            posZ = Z
-        };
-
-        return JsonUtility.ToJson(data);
-    }
-
-    public virtual void Spawn()
-    {
-
-    }
-
-    public virtual void DeSpawn()
-    {
-
-    }
-
-    public virtual void Awake()
-    {
-        //FindObjectOfType<EntityManager>().entities.Add(this);
-        //entityData = new EntityData()
-        //{
-        //    posX = X,
-        //    posY = Y,
-        //    posZ = Z
-        //};
-    }
-
-    public object Tokenize()
-    {
-        return null;
-    }
-
-    public void LoadFromToken()
-    {
-
-    }
-    */
 }

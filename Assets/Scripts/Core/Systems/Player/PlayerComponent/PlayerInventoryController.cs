@@ -7,12 +7,13 @@ using UntoldTracks.Player;
 using UntoldTracks.UI;
 using UntoldTracks.Data;
 using UntoldTracks.Managers;
+using SimpleJSON;
 
 namespace UntoldTracks.InventorySystem
 {
     public delegate void ActiveItemChanged(PlayerManager player, ItemContainer container);
 
-    public class PlayerInventoryController
+    public class PlayerInventoryController : ITokenizable
     {
         public PlayerManager playerManager;
 
@@ -21,21 +22,21 @@ namespace UntoldTracks.InventorySystem
         
         private int _activeItemIndex = 0;
         [SerializeField] private Inventory _inventory;
-        [SerializeField] ItemRegistry _itemRegistry;
+        [SerializeField] SerializableRegistry _registry;
         [SerializeField] private ItemContainerUI containerDragHandler;
 
         public int SizeBase => _inventorySize;
         public int BarSize => _inventoryBarSize;
 
-        public PlayerInventoryController(PlayerManager manager, ItemRegistry itemRegistry)
+        public PlayerInventoryController(PlayerManager manager, SerializableRegistry registry)
         {
             playerManager = manager;
-            _itemRegistry = itemRegistry;
+            _registry = registry;
         }
 
         public void Init(InventoryData data)
         {
-            _inventory = new Inventory(data, _itemRegistry);
+            _inventory = new Inventory(data, _registry);
             _inventorySize = data.size;
             _inventory.OnContainerModified += HandleItemContainerUpdate;
         }
@@ -100,6 +101,18 @@ namespace UntoldTracks.InventorySystem
             {
                 OnActiveItemChanged?.Invoke(playerManager, ActiveItemContainer);
             }
+        }
+
+        public void Load(JSONNode node)
+        {
+            _inventory = new Inventory(node);
+            _inventorySize = node["size"];
+            _inventory.OnContainerModified += HandleItemContainerUpdate;
+        }
+
+        public JSONObject Save()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

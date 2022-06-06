@@ -14,6 +14,7 @@ namespace UntoldTracks.Data
         public float currentSpeed;
         public bool isMoving;
 
+        public PlaceableEntityData entities;
         public List<CarriageData> carriages = new();
     }
 }

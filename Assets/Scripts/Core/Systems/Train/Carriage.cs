@@ -1,11 +1,14 @@
 using KinematicCharacterController;
 using PathCreation;
+using SimpleJSON;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UntoldTracks.Data;
 using UntoldTracks.Models;
 
-public class Carriage : MonoBehaviour, IMoverController
+public class Carriage : MonoBehaviour, IMoverController, ITokenizable
 {
     public CarriageModel model;
 
@@ -31,5 +34,24 @@ public class Carriage : MonoBehaviour, IMoverController
     {
         goalPosition = pathCreator.path.GetPointAtDistance(DistanceTravelled, endOfPathInstruction);
         goalRotation = pathCreator.path.GetRotationAtDistance(DistanceTravelled, endOfPathInstruction);
+    }
+
+    public void Build(CarriageData data, SerializableRegistry registry)
+    {
+
+    }
+
+    public void Load(JSONNode node)
+    {
+        throw new NotImplementedException();
+    }
+
+    public JSONObject Save()
+    {
+        var carriageJSON = new JSONObject();
+
+        carriageJSON.Add("carriageGUID", model.Guid);
+
+        return carriageJSON;
     }
 }

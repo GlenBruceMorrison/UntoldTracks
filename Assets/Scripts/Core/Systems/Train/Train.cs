@@ -1,17 +1,19 @@
 using PathCreation;
+using SimpleJSON;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UntoldTracks.Data;
+using UntoldTracks.Managers;
 using UntoldTracks.Models;
 
-public class Train : MonoBehaviour
+public class Train : MonoBehaviour, ITokenizable
 {
     public TrainData data;
     public TrainModel model;
-    public CarriageRegistry carriageRegistry;
+    public SerializableRegistry registry;
 
     public int carriageLength = 9;
 
@@ -28,46 +30,7 @@ public class Train : MonoBehaviour
 
     public bool built = false;
 
-    public void Build(TrainData data)
-    {
-        foreach (var carriage in data.carriages)
-        {
-            var instance = carriageRegistry.FindByGUID(carriage.carriageGUID);
-            AddTrain(instance.view);
-        }
-
-        if (data.isMoving)
-        {
-            moving = true;
-        }
-
-        currentSpeed = data.currentSpeed;
-        distanceTravelled = data.distanceTravelled;
-
-        built = true;
-    }
-
-    public TrainData Save()
-    {
-        var data = new TrainData()
-        {
-            distanceTravelled = distanceTravelled,
-            currentSpeed = currentSpeed,
-            isMoving = moving
-        };
-
-        foreach (var carriage in carriages)
-        {
-            data.carriages.Add(new CarriageData()
-            {
-                carriageGUID = carriage.model.Guid
-            });
-        }
-
-        return data;
-    }
-
-    private void AddTrain(Carriage prefab)
+    private Carriage AddTrain(Carriage prefab)
     {
         var carriage = Instantiate(prefab);
 
@@ -79,6 +42,8 @@ public class Train : MonoBehaviour
         carriage.train = this;
 
         carriages.Add(carriage);
+
+        return carriage;
     }
 
     public void StartStop()
@@ -109,5 +74,42 @@ public class Train : MonoBehaviour
         }
 
         distanceTravelled += currentSpeed * Time.deltaTime;
+    }
+
+    public void Load(JSONNode node)
+    {
+        moving = node["isMoving"];
+        currentSpeed = node["currentSpeed"];
+        distanceTravelled = node["distanceTravelled"];
+
+        var carriageJSON = node["carriages"];
+
+        foreach (var item in carriageJSON.Children)
+        {
+            var guid = item["carriageGUID"].Value;
+            var model = GameManager.Instance.Registry.FindByGUID<CarriageModel>(guid);
+            var instance = AddTrain(model.prefab);
+        }
+
+        built = true;
+    }
+
+    public JSONObject Save()
+    {
+        var trainJSON = new JSONObject();
+
+        trainJSON.Add("distanceTravelled", distanceTravelled);
+        trainJSON.Add("currentSpeed", currentSpeed);
+        trainJSON.Add("isMoving", moving);
+
+        var carriagesJSON = new JSONArray();
+
+        foreach (var carriage in carriages)
+        {
+            carriagesJSON.Add(carriage.Save());
+        }
+        trainJSON.Add("carriages", carriagesJSON);
+
+        return trainJSON;
     }
 }

@@ -3,6 +3,8 @@ using UnityEngine.EventSystems;
 using UnityEngine;
 using System.Collections.Generic;
 using UntoldTracks.Models;
+using SimpleJSON;
+using UntoldTracks.Managers;
 
 namespace UntoldTracks.InventorySystem
 {
@@ -20,6 +22,7 @@ namespace UntoldTracks.InventorySystem
         private Inventory _inventory;
         private int _index;
         #endregion
+
 
         #region getters
         public ItemModel Item

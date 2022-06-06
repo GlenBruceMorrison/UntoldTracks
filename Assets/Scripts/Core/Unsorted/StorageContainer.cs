@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using UntoldTracks.InventorySystem;
 using UnityEngine;
 using UnityEngine.Serialization;
+
 using UntoldTracks;
 using UntoldTracks.Player;
 using UntoldTracks.Managers;
+using UntoldTracks.Data;
+using UntoldTracks.Models;
+using SimpleJSON;
 
-public class StorageContainer : PlaceableEntity, IInteractable
+public class StorageContainer : PlaceableEntity, IInteractable, ITokenizable
 {
     public int size;
     
     private Inventory _inventory;
-    [FormerlySerializedAs("_seed")] [SerializeField] private InventorySeed _inventorySeed;
+
     [SerializeField] private string _displayText;
     [SerializeField] private Sprite _displaySprite;
 
@@ -37,12 +41,11 @@ public class StorageContainer : PlaceableEntity, IInteractable
         }
     }
 
-    private void Awake()
+    private void Start()
     {
-        _inventory = new Inventory(size);
-        if (_inventorySeed != null)
+        if (_inventory == null)
         {
-            _inventorySeed.Seed(this._inventory);
+            _inventory = new Inventory(8);
         }
     }
 
@@ -51,7 +54,7 @@ public class StorageContainer : PlaceableEntity, IInteractable
         switch (input)
         {
             case InteractionInput.Action1:
-                manager.PlayerManagerUI.OpenMainWindow();
+                manager.PlayerManagerUI.OpenMainWindow(_inventory);
                 break;
         }
     }
@@ -65,5 +68,22 @@ public class StorageContainer : PlaceableEntity, IInteractable
     public void HandleLoseFocus(PlayerManager player)
     {
 
+    }
+
+    public override void Load(JSONNode node)
+    {
+        base.Load(node);
+        _inventory = new Inventory(node["inventory"]);
+    }
+
+    public override JSONObject Save()
+    {
+        var node = new JSONObject();
+
+        node["itemGUID"] = source.Guid;
+        node["entity"] = base.Save();
+        node["inventory"] = _inventory.Save();
+
+        return node;
     }
 }

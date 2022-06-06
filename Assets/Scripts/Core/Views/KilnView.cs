@@ -28,7 +28,7 @@ namespace UntoldTracks.Machines
         [HideInInspector] public bool readyToTake = false;
     }
 
-    public class Kiln : PlaceableEntity
+    public class KilnView : PlaceableEntity
     {
         [SerializeField] private float _fuelDegradeRate;
         [SerializeField] private List<Transform> _fuelModels = new List<Transform>();

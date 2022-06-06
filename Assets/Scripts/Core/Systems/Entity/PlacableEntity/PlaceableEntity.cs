@@ -4,14 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UntoldTracks.Models;
 
-public class PlaceableEntity : Entity
+public class PlaceableEntity : Entity, ITokenizable
 {
-    #region Public Vars
     public ItemModel source;
     public List<Transform> raycastOrigins = new List<Transform>();
-    #endregion
-    
-    #region Private Vars
+
     private PlacableEntityIndicator _placeableEntityIndicator;
     private Collider[] _worldColliders;
     private Collider _rootCollider;
@@ -23,9 +20,7 @@ public class PlaceableEntity : Entity
 
     [SerializeField]
     private Transform _worldTransform;
-    #endregion
-    
-    #region Getters
+
     [HideInInspector]
     public Material[] AllMaterials
     {
@@ -54,9 +49,19 @@ public class PlaceableEntity : Entity
             SetBeingPlaced(value);
         }
     }
-    #endregion
 
-    #region Unity
+    public void AfterBuild()
+    {
+        if (Physics.Raycast(transform.position + transform.up * 0.2f, Vector3.down, out RaycastHit hit))
+        {
+            var obj = hit.collider.gameObject;
+
+            transform.parent = obj.transform;
+
+            Debug.Log(transform.parent);
+        }
+    }
+
     protected virtual void OnEnable()
     {
         GrabAllRenderers();
@@ -79,9 +84,7 @@ public class PlaceableEntity : Entity
         _placeableEntityIndicator.TriggerStay.RemoveListener(HandleTriggerStay);
         _placeableEntityIndicator.TriggerExit.RemoveListener(HandleTriggerExit);
     }
-    #endregion
 
-    #region EventHandlers
     public void HandleTriggerStay()
     {
         _isTriggering = true;
@@ -91,9 +94,7 @@ public class PlaceableEntity : Entity
     {
         _isTriggering = false;
     }
-    #endregion
 
-    #region Renderers
     public void SetMaterial(Material material)
     {
         foreach (var t in _allRenderers)
@@ -120,9 +121,7 @@ public class PlaceableEntity : Entity
             _allMaterials[i] = _allRenderers[i].material;
         }
     }
-    #endregion
 
-    #region Colliders
     private void SetWorldColliders(bool state)
     {
         if (_rootCollider != null)
@@ -138,7 +137,6 @@ public class PlaceableEntity : Entity
             }
         }
     }
-    #endregion
 
     private void SetBeingPlaced(bool state)
     {
@@ -159,5 +157,10 @@ public class PlaceableEntity : Entity
             _placeableEntityIndicator.gameObject.SetActive(false);
             SetWorldColliders(true);
         }
+    }
+
+    private void Update()
+    {
+
     }
 }

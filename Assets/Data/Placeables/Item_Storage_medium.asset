@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b1bf95378ae19b44b3c772dcb965a8e, type: 3}
-  m_Name: Carriage_One
+  m_Script: {fileID: 11500000, guid: c11b03e14dcacfc48abeb59cd0c400ba, type: 3}
+  m_Name: Item_Storage_medium
   m_EditorClassIdentifier: 
-  _guid: 72f815a192f8bc145848964b42da4c40
-  view: {fileID: 2436175327103576000, guid: 96a577a36b087c14ca6620248f601104, type: 3}
+  _guid: 888b7f57d0ce5424eb9e827f0b29962c
+  view: {fileID: 490342279812142179, guid: 27dd40773163f4fdd8d0d82c636bee09, type: 3}

@@ -92,6 +92,9 @@ public class PlaceableEntityController : MonoBehaviour
         // remove this placable from the players inventory
         playerManager.InventoryController.Inventory.Take(new ItemQuery(_targetPlaceable.source, 1, playerManager.InventoryController.ActiveItemContainer.Index));
 
+        GameManager.Instance.TrainManager.placeableEntityManager.entities.Add(_targetPlaceable);
+        GameManager.Instance.TrainManager.placeableEntityManager.tokens.Add(_targetPlaceable);
+
         // reset placable values
         _targetPlaceable.BeingPlaced = false;
         _targetPlaceable = null;

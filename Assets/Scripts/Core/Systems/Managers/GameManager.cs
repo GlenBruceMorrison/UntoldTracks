@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using SimpleJSON;
+using System.Collections;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,22 +10,21 @@ using UntoldTracks.UI;
 
 namespace UntoldTracks.Managers
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : MonoBehaviour, ITokenizable
     {
         public PlayerManager playerPrefab;
 
         private static GameManager _instance;
-        
-        public PlayerManager _playerManager;
-        public EntityManager _entityManager;
-        public Train _trainManager;
 
-        public LoadingManager loader;
+        [SerializeField] public SerializableRegistry _registry;
+        [SerializeField] private PlayerManager _playerManager;
+        [SerializeField] private TrainManager _trainManager;
+        [SerializeField] private LoadingManager _loader;
 
         public static GameManager Instance => _instance;
-        public EntityManager EntityManager => _entityManager;
         public PlayerManager LocalPlayer => _playerManager;
-        public Train TrainManager => _trainManager;
+        public TrainManager TrainManager => _trainManager;
+        public SerializableRegistry Registry => _registry;
 
         private void Awake()
         {
@@ -37,14 +37,26 @@ namespace UntoldTracks.Managers
                 _instance = this;
             }
 
-            // load game data
-            var gameData = loader.LoadGameData(this);
+            Load(_loader.LoadData());
+        }
 
+        public void Load(JSONNode node)
+        {
             // init player
-            _playerManager = Instantiate(playerPrefab, new Vector3(gameData.player.posX, gameData.player.posY, gameData.player.posZ), Quaternion.identity);
-            
-            _playerManager.Build(gameData.player);
-            _trainManager.Build(gameData.train);
+            var playerPos = node["player"]["entity"]["position"].ReadVector3();
+            _playerManager = Instantiate(playerPrefab, playerPos, Quaternion.identity);
+
+            // load game
+            _playerManager.Load(node["player"]);
+            _trainManager.Load(node["train"]);
+        }
+
+        public JSONObject Save()
+        {
+            var root = new JSONObject();
+            root.Add("player", _playerManager.Save());
+            root.Add("train", _trainManager.Save());
+            return root;
         }
     }
 }

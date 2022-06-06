@@ -9,8 +9,7 @@ namespace UntoldTracks.Data
     [System.Serializable]
     public class PlayerData
     {
-        public float posX, posY, posZ;
-        public float rotX, rotY, rotZ;
+        public EntityData entity;
         public InventoryData inventory;
     }
 }

@@ -10,10 +10,11 @@ using UntoldTracks.Data;
 using UntoldTracks.Player;
 using UntoldTracks.Managers;
 using UntoldTracks.Models;
+using SimpleJSON;
 
 namespace UntoldTracks.Managers
 {
-    public class PlayerManager : MonoBehaviour
+    public class PlayerManager : MonoBehaviour, ITokenizable
     {
         [SerializeField] private PlayerInteractionController _interactionController;
         [SerializeField] private PlaceableEntityController _placeableEntityController;
@@ -22,7 +23,7 @@ namespace UntoldTracks.Managers
         [SerializeField] private PlayerHand _playerActiveItemController;
         [SerializeField] private PlayerManagerUI _playerManagerUI;
 
-        [SerializeField] private ItemRegistry _itemRegistry;
+        [SerializeField] private SerializableRegistry _registry;
         [SerializeField] private Camera _playerCamera;
         [SerializeField] private Transform _playerHand;
 
@@ -74,37 +75,60 @@ namespace UntoldTracks.Managers
             }
         }
 
-        public void Build(PlayerData data)
+        public PlayerData Save(string f)
+        {
+            var result = new PlayerData()
+            {
+                inventory = InventoryController.Inventory.SaveToData(),
+                entity = EntityData.FromTransform(transform)
+            };
+
+            return result;
+        }
+
+        public void Load(JSONNode node)
         {
             _characterController = GetComponentInChildren<PlayerCharacterController>();
 
             _interactionController = new PlayerInteractionController(this, _playerCamera);
-            _inventoryController = new PlayerInventoryController(this, _itemRegistry);
+            _inventoryController = new PlayerInventoryController(this, _registry);
             _playerActiveItemController = new PlayerHand(this, _playerHand);
 
-            _inventoryController.Init(data.inventory);
+            _inventoryController.Load(node["inventory"]);
             _playerActiveItemController.Init();
             _interactionController.Init();
 
             _playerManagerUI.Init(this);
         }
 
-        private void Update()
+        public JSONObject Save()
         {
-            _interactionController.Tick();
+            var playerJSON = new JSONObject();
+
+            var entityJSON = new JSONObject();
+
+            var positionJSON = new JSONObject();
+            positionJSON.Add("x", _characterController.transform.position.x);
+            positionJSON.Add("y", _characterController.transform.position.y);
+            positionJSON.Add("z", _characterController.transform.position.z);
+
+            var rotationJSON = new JSONObject();
+            rotationJSON.Add("x", transform.rotation.x);
+            rotationJSON.Add("y", transform.rotation.y);
+            rotationJSON.Add("z", transform.rotation.z);
+
+            entityJSON.Add("position", positionJSON);
+            entityJSON.Add("rotation", rotationJSON);
+
+            playerJSON.Add("entity", entityJSON);
+            playerJSON.Add("inventory", _inventoryController.Inventory.Save());
+
+            return playerJSON;
         }
 
-        public PlayerData Save()
+        private void Update()
         {
-            var result = new PlayerData()
-            {
-                inventory = InventoryController.Inventory.SaveToData(),
-                posX = _characterController.transform.position.x,
-                posY = _characterController.transform.position.y,
-                posZ = _characterController.transform.position.z
-            };
-
-            return result;
+            _interactionController?.Tick();
         }
     }
 }

@@ -5,10 +5,12 @@ using UntoldTracks.Player;
 using UntoldTracks.Models;
 using UntoldTracks.Managers;
 using UntoldTracks.Data;
+using SimpleJSON;
+using UnityEngine;
 
 namespace UntoldTracks.InventorySystem
 {
-    public class Inventory : IInventory
+    public class Inventory : IInventory, ITokenizable
     {
         #region private
         private PlayerManager _accessedBy;
@@ -62,9 +64,14 @@ namespace UntoldTracks.InventorySystem
             SetSize(size);
         }
 
-        public Inventory(InventoryData inventory, ItemRegistry itemRegistry)
+        public Inventory(JSONNode node)
         {
-            LoadFromData(inventory, itemRegistry);
+            Load(node);
+        }
+
+        public Inventory(InventoryData inventory, SerializableRegistry registry)
+        {
+            LoadFromData(inventory, registry);
         }
         #endregion
 
@@ -205,6 +212,71 @@ namespace UntoldTracks.InventorySystem
             return itemQueryResult;
         }
 
+        public void Load(JSONNode node)
+        {
+            _containers.Clear();
+
+            var result = new InventoryData()
+            {
+                size = node["size"]
+            };
+
+            var itemsNode = node["items"];
+            for (var i=0; i<result.size; i++)
+            {
+                var added = false;
+                foreach (var item in itemsNode.Children)
+                {
+                    if (item["inventoryIndex"] == i)
+                    {
+                        var targetItem = GameManager.Instance.Registry.FindByGUID<ItemModel>(item["itemGUID"]);
+
+                        if (targetItem != null)
+                        {
+                            _containers.Add(new ItemContainer(this, item["inventoryIndex"], targetItem, item["amount"], item["durability"]));
+                            added = true;
+                            continue;
+                        }
+                    }
+                }
+
+                if (!added)
+                {
+                    _containers.Add(new ItemContainer(this, i));
+                }
+            }
+        }
+
+        public JSONObject Save()
+        {
+            var inventoryJSON = new JSONObject();
+
+            inventoryJSON.Add("size", Size);
+
+            var itemsJSON = new JSONArray();
+
+            foreach (var container in _containers)
+            {
+                if (container?.Item == null)
+                {
+                    continue;
+                }
+
+                var item = new JSONObject();
+
+                item.Add("itemGUID", container.Item.Guid);
+                item.Add("inventoryIndex", container.Index);
+                item.Add("amount", container.Count);
+                item.Add("durability", container.CurrentDurability);
+
+                itemsJSON.Add(item);
+            }
+
+            inventoryJSON.Add("items", itemsJSON);
+
+            return inventoryJSON;
+        }
+
         public InventoryData SaveToData()
         {
             var result = new InventoryData()
@@ -233,7 +305,7 @@ namespace UntoldTracks.InventorySystem
             return result;
         }
 
-        public void LoadFromData(InventoryData inventory, ItemRegistry itemRegistry)
+        public void LoadFromData(InventoryData inventory, SerializableRegistry registry)
         {
             _containers.Clear();
 
@@ -243,7 +315,7 @@ namespace UntoldTracks.InventorySystem
 
                 if (itemFill != null)
                 {
-                    var targetItem = itemRegistry.FindByGUID(itemFill.itemGUID);
+                    var targetItem = registry.FindByGUID<ItemModel>(itemFill.itemGUID);
 
                     if (targetItem != null)
                     {

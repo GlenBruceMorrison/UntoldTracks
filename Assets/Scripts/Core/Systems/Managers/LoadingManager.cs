@@ -7,16 +7,25 @@ using UntoldTracks.Data;
 using UntoldTracks.InventorySystem;
 using UntoldTracks.Player;
 using UntoldTracks.Managers;
+using SimpleJSON;
+using static SimpleJSON.JSONNode;
+using System.Text;
+
+public interface ITokenizable
+{
+    void Load(JSONNode node);
+    JSONObject Save();
+}
 
 namespace UntoldTracks.Managers
 {
+
     public class LoadingManager : MonoBehaviour
     {
         private string _path = "";
         private string _persistantPath = "";
 
-        public ItemRegistry itemRegistry;
-
+        public SerializableRegistry registry;
 
         public void SetPath()
         {
@@ -27,17 +36,16 @@ namespace UntoldTracks.Managers
             _persistantPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar + "GameData.json";
         }
 
-        public GameData LoadGameData(GameManager manager)
+        public JSONNode LoadData()
         {
             SetPath();
             try
             {
                 using StreamReader reader = new StreamReader(_path);
                 string json = reader.ReadToEnd();
+                var root = JSON.Parse(json);
 
-                var gameData = JsonUtility.FromJson<GameData>(json);
-
-                return gameData;
+                return root;
             }
             catch (Exception ex)
             {
@@ -51,16 +59,11 @@ namespace UntoldTracks.Managers
         {
             try
             {
-                using StreamWriter reader = new StreamWriter(_path);
-
-                var gameData = new GameData();
-
-                gameData.player = FindObjectOfType<PlayerManager>().Save();
-                gameData.train = FindObjectOfType<Train>().Save();
-
-                var json = JsonUtility.ToJson(gameData);
-
-                reader.Write(json);
+                using StreamWriter writer = new(_path);
+                var builder = new StringBuilder();
+                var data = GameManager.Instance.Save();
+                data.WriteToStringBuilder(builder, 0, 0, JSONTextMode.Indent);
+                writer.Write(data.ToString());
             }
             catch (Exception ex)
             {
@@ -70,10 +73,9 @@ namespace UntoldTracks.Managers
 
         private void Update()
         {
-            if (Input.GetKeyDown("i"))
+            if (Input.GetKeyDown(KeyCode.I))
             {
                 SaveGameData();
-                Application.Quit();
             }
         }
     }

@@ -35,7 +35,7 @@ namespace UntoldTracks.UI
 
             for (int i = start; i < end; i++)
             {
-                _uiContainers[i-_startIndex].LinkToContainer(_inventory.Containers[i]);
+                _uiContainers[i- start].LinkToContainer(_inventory.Containers[i]);
             }
         }
     }
