@@ -71,6 +71,11 @@ public class Train : MonoBehaviour, ITokenizable
             {
                 currentSpeed -= (acc * 3) * Time.deltaTime;
             }
+
+            if (currentSpeed < 0)
+            {
+                currentSpeed = 0;
+            }
         }
 
         distanceTravelled += currentSpeed * Time.deltaTime;

@@ -5960,7 +5960,7 @@ MonoBehaviour:
   raycastOrigins:
   - {fileID: 2216528690549517725}
   _worldTransform: {fileID: 4023445642908901717}
-  _fuelDegradeRate: 1
+  _fuelDegradeRate: 0.1
   _fuelModels:
   - {fileID: 14288946457130015}
   - {fileID: 1571876143849299030}
