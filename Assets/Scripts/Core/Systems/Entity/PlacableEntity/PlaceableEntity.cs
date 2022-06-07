@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UntoldTracks.Models;
 using SimpleJSON;
+using UntoldTracks.Managers;
 
 public class PlaceableEntity : Entity, ITokenizable
 {
@@ -51,16 +52,16 @@ public class PlaceableEntity : Entity, ITokenizable
         }
     }
 
+    public override void Start()
+    {
+        base.Start();
+    }
+
     public void AfterBuild()
     {
-        if (Physics.Raycast(transform.position + transform.up * 0.2f, Vector3.down, out RaycastHit hit))
-        {
-            var obj = hit.collider.gameObject;
-
-            transform.parent = obj.transform;
-
-            Debug.Log(transform.parent);
-        }
+        transform.SetParent(
+            GameManager.Instance.TrainManager.train.GetClosestCarriage(transform).transform,
+            true);
     }
 
     protected virtual void OnEnable()
@@ -160,9 +161,10 @@ public class PlaceableEntity : Entity, ITokenizable
         }
     }
 
+    #region Token
     public override void Load(JSONNode node)
     {
-
+        base.Load(node);
     }
 
     public override JSONObject Save()
@@ -174,4 +176,5 @@ public class PlaceableEntity : Entity, ITokenizable
 
         return placeableJSON;
     }
+    #endregion
 }

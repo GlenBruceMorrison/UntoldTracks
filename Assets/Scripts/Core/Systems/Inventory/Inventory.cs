@@ -68,11 +68,6 @@ namespace UntoldTracks.InventorySystem
         {
             Load(node);
         }
-
-        public Inventory(InventoryData inventory, SerializableRegistry registry)
-        {
-            LoadFromData(inventory, registry);
-        }
         #endregion
 
         #region eventHandlers
@@ -212,6 +207,7 @@ namespace UntoldTracks.InventorySystem
             return itemQueryResult;
         }
 
+        #region Token
         public void Load(JSONNode node)
         {
             _containers.Clear();
@@ -276,59 +272,7 @@ namespace UntoldTracks.InventorySystem
 
             return inventoryJSON;
         }
-
-        public InventoryData SaveToData()
-        {
-            var result = new InventoryData()
-            {
-                size = Size
-            };
-
-            foreach(var container in _containers)
-            {
-                if (container?.Item == null)
-                {
-                    continue;
-                }
-
-                var data = new ItemContainerData()
-                {
-                    itemGUID = container.Item.Guid,
-                    inventoryIndex = container.Index,
-                    amount = container.Count,
-                    durability = container.CurrentDurability
-                };
-
-                result.items.Add(data);
-            }
-
-            return result;
-        }
-
-        public void LoadFromData(InventoryData inventory, SerializableRegistry registry)
-        {
-            _containers.Clear();
-
-            for (var i = 0; i < inventory.size; i++)
-            {
-                var itemFill = inventory.items.FirstOrDefault(x => x.inventoryIndex == i);
-
-                if (itemFill != null)
-                {
-                    var targetItem = registry.FindByGUID<ItemModel>(itemFill.itemGUID);
-
-                    if (targetItem != null)
-                    {
-                        _containers.Add(new ItemContainer(this, i, targetItem, itemFill.amount, itemFill.durability));
-                    }
-                }
-
-                if (_containers.Count < i+1)
-                {
-                    _containers.Add(new ItemContainer(this, i));
-                }
-            }
-        }
+        #endregion
 
         /// <summary>
         /// Whether this inventory contains the given item and amount.

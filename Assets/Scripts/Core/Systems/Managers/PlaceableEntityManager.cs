@@ -18,6 +18,7 @@ namespace UntoldTracks.Managers
         public List<PlaceableEntity> entities = new();
         public List<ITokenizable> tokens = new();
 
+        #region Token
         public void Load(JSONNode node)
         {
             foreach (var placeable in node["entities"].Children)
@@ -34,6 +35,10 @@ namespace UntoldTracks.Managers
                     entity.placeablePrefab,
                     placeable["entity"]["position"].ReadVector3(),
                     placeable["entity"]["rotation"].ReadQuaternion());
+
+                //prefab.transform.SetParent(
+                //   GameManager.Instance.TrainManager.train.GetClosestCarriage(prefab.transform).transform,
+                //    true);
 
                 var token = prefab.GetComponent<ITokenizable>();
 
@@ -64,5 +69,6 @@ namespace UntoldTracks.Managers
 
             return entitiesJSON;
         }
+        #endregion
     }
 }

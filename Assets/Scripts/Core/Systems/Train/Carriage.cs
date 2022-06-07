@@ -36,11 +36,7 @@ public class Carriage : MonoBehaviour, IMoverController, ITokenizable
         goalRotation = pathCreator.path.GetRotationAtDistance(DistanceTravelled, endOfPathInstruction);
     }
 
-    public void Build(CarriageData data, SerializableRegistry registry)
-    {
-
-    }
-
+    #region Token
     public void Load(JSONNode node)
     {
         throw new NotImplementedException();
@@ -54,4 +50,5 @@ public class Carriage : MonoBehaviour, IMoverController, ITokenizable
 
         return carriageJSON;
     }
+    #endregion
 }

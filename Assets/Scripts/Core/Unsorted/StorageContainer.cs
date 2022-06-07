@@ -41,7 +41,7 @@ public class StorageContainer : PlaceableEntity, IInteractable, ITokenizable
         }
     }
 
-    private void Start()
+    public override void Start()
     {
         if (_inventory == null)
         {

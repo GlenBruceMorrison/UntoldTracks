@@ -12,20 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae6880a8766e14bef8e7c995f2275825, type: 3}
   m_Name: Item_Stone_Stack
   m_EditorClassIdentifier: 
-  name: Rock Stack
+  _guid: 5c0369f27418a4ddd8999863017bcc66
+  displayName: Stone Holder
   sprite: {fileID: 21300000, guid: bb5151805d0584bbf830bfe7e09f1de0, type: 3}
   description: Can hold up to 24 rocks.
   stackable: 0
   stackSize: 20
+  isEquipable: 0
+  equipablePrefab: {fileID: 0}
+  hasCustomInteractionFrame: 0
   degradable: 0
   durability: 0
-  isTool: 0
-  toolStrength: 1
-  isBuildingTool: 0
-  hasCustomInteractionFrame: 0
-  toolPrefab: {fileID: 0}
   isPlaceable: 1
   placeablePrefab: {fileID: 5551966568824573350, guid: 31b9ff10cf83f434e9db0e3ab489502a, type: 3}
   canRotate: 1
-  isFuel: 0
-  fuelStrength: 1

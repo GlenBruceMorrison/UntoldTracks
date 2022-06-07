@@ -75,17 +75,7 @@ namespace UntoldTracks.Managers
             }
         }
 
-        public PlayerData Save(string f)
-        {
-            var result = new PlayerData()
-            {
-                inventory = InventoryController.Inventory.SaveToData(),
-                entity = EntityData.FromTransform(transform)
-            };
-
-            return result;
-        }
-
+        #region Token
         public void Load(JSONNode node)
         {
             _characterController = GetComponentInChildren<PlayerCharacterController>();
@@ -125,6 +115,7 @@ namespace UntoldTracks.Managers
 
             return playerJSON;
         }
+        #endregion
 
         private void Update()
         {

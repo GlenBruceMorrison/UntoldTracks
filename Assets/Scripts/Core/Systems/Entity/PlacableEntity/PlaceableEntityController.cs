@@ -131,11 +131,6 @@ public class PlaceableEntityController : MonoBehaviour
     }
 
     #region Life Cycle
-    public void Init(PlayerManager playerManager)
-    {
-        playerManager = playerManager;
-    }
-    
     private void LateUpdate()
     {
         if (!IsPlacingSomething)

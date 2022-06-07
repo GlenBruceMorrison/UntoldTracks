@@ -20,6 +20,16 @@ public class PlacableEntityIndicator : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        
+    }
+
+    private void OnDisable()
+    {
+        
+    }
+
     private void OnTriggerStay(Collider other)
     {
         TriggerStay?.Invoke();

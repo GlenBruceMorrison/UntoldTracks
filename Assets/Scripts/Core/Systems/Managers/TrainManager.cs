@@ -16,6 +16,7 @@ namespace UntoldTracks.Managers
         public SerializableRegistry registry;
         public PlaceableEntityManager placeableEntityManager;
 
+        #region Token
         public void Load(JSONNode node)
         {
             train.Load(node);
@@ -28,6 +29,24 @@ namespace UntoldTracks.Managers
             trainJSON.Add("placeableEntities", placeableEntityManager.Save());
 
             return trainJSON;
+        }
+        #endregion
+
+        private void Start()
+        {
+
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown("l"))
+            {
+
+                foreach (var entity in placeableEntityManager.entities)
+                {
+                    entity.AfterBuild();
+                }
+            }
         }
     }
 }

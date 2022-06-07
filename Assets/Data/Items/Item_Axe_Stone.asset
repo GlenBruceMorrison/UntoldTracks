@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Item_Axe_Stone
   m_EditorClassIdentifier: 
   _guid: 0679f56cc01788346bf28445b0e0d310
-  displayName: 
+  displayName: Stone Axe
   sprite: {fileID: 21300000, guid: 7d1630f90f21440c7acc7fae382a5b34, type: 3}
   description: A stone axe
   stackable: 0

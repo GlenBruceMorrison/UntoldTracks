@@ -76,6 +76,27 @@ public class Train : MonoBehaviour, ITokenizable
         distanceTravelled += currentSpeed * Time.deltaTime;
     }
 
+    public Carriage GetClosestCarriage(Transform transform)
+    {
+        Carriage bestTarget = null;
+        float closestDistanceSqr = Mathf.Infinity;
+        Vector3 currentPosition = transform.position;
+
+        foreach (var carriage in carriages)
+        {
+            Vector3 directionToTarget = carriage.transform.position - currentPosition;
+            float dSqrToTarget = directionToTarget.sqrMagnitude;
+            if (dSqrToTarget < closestDistanceSqr)
+            {
+                closestDistanceSqr = dSqrToTarget;
+                bestTarget = carriage;
+            }
+        }
+
+        return bestTarget;
+    }
+
+    #region Token
     public void Load(JSONNode node)
     {
         moving = node["isMoving"];
@@ -112,4 +133,5 @@ public class Train : MonoBehaviour, ITokenizable
 
         return trainJSON;
     }
+    #endregion
 }

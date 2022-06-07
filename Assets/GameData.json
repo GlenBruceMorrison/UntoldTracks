@@ -1,1 +1,87 @@
-{"player":{"entity":{"position":{"x":-41.9659767150879,"y":0.985115051269531,"z":-6.77857971191406},"rotation":{"x":0,"y":0,"z":0}},"inventory":{"size":29,"items":[{"itemGUID":"0679f56cc01788346bf28445b0e0d310","inventoryIndex":0,"amount":1,"durability":909},{"itemGUID":"0679f56cc01788346bf28445b0e0d310","inventoryIndex":1,"amount":1,"durability":915},{"itemGUID":"eff34436baf014d4d835916ce777d3d9","inventoryIndex":4,"amount":1,"durability":0},{"itemGUID":"ab9a2b823ee464e178835d14da252417","inventoryIndex":13,"amount":1,"durability":0}]}},"train":{"distanceTravelled":14.4674606323242,"currentSpeed":-0.0109996665269136,"isMoving":false,"carriages":[{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"}],"placeableEntities":{"entities":[{"itemGUID":"ab9a2b823ee464e178835d14da252417","entity":{"position":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0,"w":1}},"inventory":{"size":8,"items":[{"itemGUID":"0679f56cc01788346bf28445b0e0d310","inventoryIndex":0,"amount":1,"durability":915}]}},{"itemGUID":"ab9a2b823ee464e178835d14da252417","entity":{"position":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0,"w":1}},"inventory":{"size":8,"items":[{"itemGUID":"a0f4fbde1465341298bfd3fdf4d5f6a6","inventoryIndex":0,"amount":5,"durability":0},{"itemGUID":"a0f4fbde1465341298bfd3fdf4d5f6a6","inventoryIndex":1,"amount":5,"durability":0},{"itemGUID":"a0f4fbde1465341298bfd3fdf4d5f6a6","inventoryIndex":3,"amount":20,"durability":0}]}},{"itemGUID":"ab9a2b823ee464e178835d14da252417","entity":{"position":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0,"w":1}},"inventory":{"size":8,"items":[{"itemGUID":"a0f4fbde1465341298bfd3fdf4d5f6a6","inventoryIndex":2,"amount":4,"durability":0},{"itemGUID":"eff34436baf014d4d835916ce777d3d9","inventoryIndex":5,"amount":20,"durability":0}]}},{"itemGUID":"ab9a2b823ee464e178835d14da252417","entity":{"position":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0,"w":1}},"inventory":{"size":8,"items":[]}},{"itemGUID":"ab9a2b823ee464e178835d14da252417","entity":{"position":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0,"w":1}},"inventory":{"size":8,"items":[]}},{"itemGUID":"ab9a2b823ee464e178835d14da252417","entity":{"position":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0,"w":1}},"inventory":{"size":8,"items":[]}},{"itemGUID":"a12bd0b9165424fb4bbab9cbf229caba","entity":{"position":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0,"w":1}}},{"itemGUID":"a12bd0b9165424fb4bbab9cbf229caba","entity":{"position":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0,"w":1}}},{"itemGUID":"ab9a2b823ee464e178835d14da252417","entity":{"position":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0,"w":1}},"inventory":{"size":8,"items":[]}},{"itemGUID":"a12bd0b9165424fb4bbab9cbf229caba","entity":{"position":{"x":-36.8745574951172,"y":0.975115060806274,"z":-20.4026489257813},"rotation":{"x":0,"y":0,"z":0,"w":1}}},{"itemGUID":"a12bd0b9165424fb4bbab9cbf229caba","entity":{"position":{"x":-40.6785125732422,"y":0.975115180015564,"z":-21.2708339691162},"rotation":{"x":0,"y":0,"z":0,"w":1}}},{"itemGUID":"a12bd0b9165424fb4bbab9cbf229caba","entity":{"position":{"x":-38.1613311767578,"y":0.975114822387695,"z":-13.7803745269775},"rotation":{"x":-3.18546433675237E-08,"y":1,"z":2.50280066893538E-07,"w":0}}},{"itemGUID":"a12bd0b9165424fb4bbab9cbf229caba","entity":{"position":{"x":-42.6179428100586,"y":0.975114822387695,"z":-14.7270336151123},"rotation":{"x":3.1854629156669E-08,"y":1,"z":4.0543284285377E-09,"w":0}}},{"itemGUID":"a12bd0b9165424fb4bbab9cbf229caba","entity":{"position":{"x":-39.2549476623535,"y":0.975115299224854,"z":-11.2394227981567},"rotation":{"x":2.34587549385878E-08,"y":-0.636954665184021,"z":-1.93827176531158E-08,"w":-0.770901322364807}}},{"itemGUID":"ab9a2b823ee464e178835d14da252417","entity":{"position":{"x":-43.731315612793,"y":0.975114583969116,"z":-10.5921688079834},"rotation":{"x":3.07489997908306E-08,"y":-0.555848300457001,"z":8.08365019366875E-09,"w":-0.831283688545227}},"inventory":{"size":8,"items":[]}},{"itemGUID":"25af844cfdc9945e19db805f4caf61c1","entity":{"position":{"x":-44.3810195922852,"y":0.975115299224854,"z":-4.64513301849365},"rotation":{"x":-2.6846758149901E-10,"y":-0.00018630176782608,"z":1.42172851269606E-09,"w":-1.00000011920929}}},{"itemGUID":"d4895223a3464492896ddfe9360331c8","entity":{"position":{"x":-40.3304290771484,"y":0.975115537643433,"z":-4.3055739402771},"rotation":{"x":-1.76824475062176E-08,"y":0.995657861232758,"z":-1.65321811795849E-09,"w":0.0930889099836349}}}]}}}
+{
+    "player": {
+        "entity": {
+            "position": {
+                "x": -13.5942239761353,
+                "y": 0.98511528968811,
+                "z": 55.8858642578125
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            }
+        },
+        "inventory": {
+            "size": 29,
+            "items": [
+                {
+                    "itemGUID": "a0f4fbde1465341298bfd3fdf4d5f6a6",
+                    "inventoryIndex": 0,
+                    "amount": 3,
+                    "durability": 0
+                }
+            ]
+        }
+    },
+    "train": {
+        "distanceTravelled": 1029.63623046875,
+        "currentSpeed": -0.0475930497050285,
+        "isMoving": false,
+        "carriages": [
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            }
+        ],
+        "placeableEntities": {
+            "entities": [
+
+            ]
+        }
+    }
+}

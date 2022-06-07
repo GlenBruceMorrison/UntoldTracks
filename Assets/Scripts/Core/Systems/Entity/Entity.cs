@@ -9,12 +9,13 @@ public delegate void EntityMove(Vector3 old, Vector3 current);
 
 public class Entity : MonoBehaviour, ITokenizable
 {
+    #region Token
     public virtual void Load(JSONNode node)
     {
-        var position = node["entity"]["position"].ReadVector3();
+        //var position = node["entity"]["position"].ReadVector3();
         var rotation = node["entity"]["rotation"].ReadQuaternion();
 
-        transform.position = position;
+        //transform.position = position;
         transform.rotation = rotation;
     }
 
@@ -26,5 +27,11 @@ public class Entity : MonoBehaviour, ITokenizable
         entityJSON.Add("rotation", new JSONObject().WriteQuaternion(transform.rotation));
         
         return entityJSON;
+    }
+    #endregion
+
+    public virtual void Start()
+    {
+
     }
 }

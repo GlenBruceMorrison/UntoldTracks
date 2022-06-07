@@ -24,7 +24,20 @@ namespace UntoldTracks.Managers
         public static GameManager Instance => _instance;
         public PlayerManager LocalPlayer => _playerManager;
         public TrainManager TrainManager => _trainManager;
-        public SerializableRegistry Registry => _registry;
+        public SerializableRegistry Registry
+        {
+            get
+            {
+                if (_registry == null)
+                {
+                    Debug.LogError("REGISTRY IS NOT SET IN THE GAME MANAGER!");
+                    Debug.LogError("CHECK IF THE REGISTRY IS IN A VALID STATE IN THE PROJECT DIRECTORY");
+                    return null;
+                }
+
+                return _registry;
+            }
+        }
 
         private void Awake()
         {
@@ -40,6 +53,7 @@ namespace UntoldTracks.Managers
             Load(_loader.LoadData());
         }
 
+        #region Token
         public void Load(JSONNode node)
         {
             // init player
@@ -58,5 +72,6 @@ namespace UntoldTracks.Managers
             root.Add("train", _trainManager.Save());
             return root;
         }
+        #endregion
     }
 }

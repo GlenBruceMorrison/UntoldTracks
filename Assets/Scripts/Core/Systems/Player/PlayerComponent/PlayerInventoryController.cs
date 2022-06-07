@@ -22,7 +22,6 @@ namespace UntoldTracks.InventorySystem
         
         private int _activeItemIndex = 0;
         [SerializeField] private Inventory _inventory;
-        [SerializeField] SerializableRegistry _registry;
         [SerializeField] private ItemContainerUI containerDragHandler;
 
         public int SizeBase => _inventorySize;
@@ -31,14 +30,6 @@ namespace UntoldTracks.InventorySystem
         public PlayerInventoryController(PlayerManager manager, SerializableRegistry registry)
         {
             playerManager = manager;
-            _registry = registry;
-        }
-
-        public void Init(InventoryData data)
-        {
-            _inventory = new Inventory(data, _registry);
-            _inventorySize = data.size;
-            _inventory.OnContainerModified += HandleItemContainerUpdate;
         }
 
         public event ActiveItemChanged OnActiveItemChanged;
@@ -103,6 +94,7 @@ namespace UntoldTracks.InventorySystem
             }
         }
 
+        #region Token
         public void Load(JSONNode node)
         {
             _inventory = new Inventory(node);
@@ -114,5 +106,6 @@ namespace UntoldTracks.InventorySystem
         {
             throw new System.NotImplementedException();
         }
+        #endregion
     }
 }

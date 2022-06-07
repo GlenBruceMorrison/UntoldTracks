@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f05823f922c6d9d44baedc950570dfe6, type: 3}
+  m_Script: {fileID: 11500000, guid: bf9bef4a37663704585a3d1df94f27f4, type: 3}
   m_Name: Registry
   m_EditorClassIdentifier: 
   _assets:
