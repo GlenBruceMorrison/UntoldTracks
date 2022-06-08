@@ -7,6 +7,7 @@ using UnityEngine.Serialization;
 using UnityEngine.UI;
 using UntoldTracks.InventorySystem;
 using UntoldTracks.Player;
+using UntoldTracks.Models;
 
 namespace UntoldTracks.UI
 {
@@ -48,7 +49,7 @@ namespace UntoldTracks.UI
 
             targetItemSprite.enabled = true;
             targetItemSprite.sprite = recipe.produces.Item.sprite;
-            targetItemName.text = recipe.produces.Item.name;
+            targetItemName.text = recipe.produces.Item.displayName;
             targetItemDescription.text = recipe.produces.Item.description;
 
             foreach (var ingredient in recipe.ingredients)

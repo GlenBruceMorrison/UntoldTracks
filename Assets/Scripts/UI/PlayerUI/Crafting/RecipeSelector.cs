@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using UntoldTracks.Models;
 
 namespace UntoldTracks.UI
 {
@@ -32,7 +33,7 @@ namespace UntoldTracks.UI
             }
 
             sprite.sprite = recipe.produces.Item.sprite;
-            title.text = recipe.produces.Item.name;
+            title.text = recipe.produces.Item.displayName;
         }
 
         public void OnPointerClick(PointerEventData eventData)

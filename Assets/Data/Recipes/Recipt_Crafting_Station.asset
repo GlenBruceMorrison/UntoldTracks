@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41cf72670afae4f0da1bcdb2aedb3670, type: 3}
+  m_Name: Recipt_Crafting_Station
+  m_EditorClassIdentifier: 
+  ingredients:
+  - _item: {fileID: 11400000, guid: eff34436baf014d4d835916ce777d3d9, type: 2}
+    _count: 10
+  produces:
+    _item: {fileID: 11400000, guid: a12bd0b9165424fb4bbab9cbf229caba, type: 2}
+    _count: 1

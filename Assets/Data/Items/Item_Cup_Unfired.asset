@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae6880a8766e14bef8e7c995f2275825, type: 3}
+  m_Name: Item_Cup_Unfired
+  m_EditorClassIdentifier: 
+  _guid: 1a38daa7be4a94622800227ca88727b5
+  displayName: Unfired Cup
+  sprite: {fileID: 21300000, guid: a2db46e52394c4fb8a311af66b105ccc, type: 3}
+  description: Needs to be fired in a kiln before it can be used
+  stackable: 1
+  stackSize: 20
+  isEquipable: 0
+  equipablePrefab: {fileID: 0}
+  hasCustomInteractionFrame: 0
+  degradable: 0
+  durability: 0
+  isPlaceable: 0
+  placeablePrefab: {fileID: 0}
+  canRotate: 1

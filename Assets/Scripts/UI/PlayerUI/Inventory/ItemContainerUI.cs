@@ -11,36 +11,15 @@ namespace UntoldTracks.UI
         [SerializeField] private TMP_Text _txtCount;
         [SerializeField] private TMP_Text _txtDurability;
 
-        public ItemContainer Container { get; private set; }
+        private ItemContainer _container;
 
-        private void Awake()
+        public ItemContainer Container => _container;
+
+        public void LinkToContainer(ItemContainer container)
         {
-            if (Container == null)
-            {
-                Container = new ItemContainer(inventory:null, 0);
-            }
-
+            _container = container;
+            container.OnModified += HandleContainerModified;
             Render();
-        }
-
-        private void OnEnable()
-        {
-            if (Container == null)
-            {
-                return;
-            }
-
-            Container.OnModified += HandleContainerModified;
-        }
-
-        private void OnDisable()
-        {
-            if (Container == null)
-            {
-                return;
-            }
-
-            Container.OnModified -= HandleContainerModified;
         }
 
         private void HandleContainerModified(ItemContainer newValue)
@@ -50,7 +29,7 @@ namespace UntoldTracks.UI
 
         public void Render()
         {
-            if (Container == null || Container.IsEmpty())
+            if (_container == null || _container.IsEmpty())
             {
                 _imgItem.sprite = null;
                 _imgItem.enabled = false;
@@ -60,23 +39,10 @@ namespace UntoldTracks.UI
             }
 
             _imgItem.enabled = true;
-            _imgItem.sprite = Container.Item.sprite;
-            _txtCount.text = Container.Item.stackable ? Container.Count.ToString() : "";
+            _imgItem.sprite = _container.Item.sprite;
+            _txtCount.text = _container.Item.stackable ? _container.Count.ToString() : "";
 
-            _txtDurability.text = Container.Item.degradable ? $"{Container.CurrentDurability} / {Container.Item.durability}" : "";
-        }
-
-        public void LinkContainer(ItemContainer container)
-        {
-            if (Container != null)
-            {
-                Container.OnModified -= HandleContainerModified;
-            }
-
-            Container = container;
-            Container.OnModified += HandleContainerModified;
-
-            Render();
+            _txtDurability.text = _container.Item.degradable ? $"{_container.CurrentDurability} / {_container.Item.durability}" : "";
         }
     }
 }

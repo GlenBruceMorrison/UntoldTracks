@@ -10,7 +10,7 @@ namespace UntoldTracks.UI
         private int _startIndex = -1;
         private int _endIndex = -1;
 
-        protected List<ItemContainerUI> _uiContainers = new List<ItemContainerUI>();
+        protected ItemContainerUI[] _uiContainers;
 
         [SerializeField] private ItemContainerUI _uiContainerPrefab;
         [SerializeField] private Transform _containerRoot;
@@ -20,36 +20,22 @@ namespace UntoldTracks.UI
             _inventory = inventory;
             _startIndex = startIndex;
             _endIndex = endIndex;
-            
+
+            _uiContainers = _containerRoot.GetComponentsInChildren<ItemContainerUI>();
+
             Render();
+
+            inventory.OnModified += Render;
         }
 
         public void Render()
         {
-            foreach (var uiContainer in _uiContainers)
-            {
-                Destroy(uiContainer.gameObject);
-            }
-
-            _uiContainers = new List<ItemContainerUI>();
-
             var start = _startIndex == -1 ? 0 : _startIndex;
             var end = _endIndex == -1 ? _inventory.Size : _endIndex;
 
             for (int i = start; i < end; i++)
             {
-                var container = Instantiate(_uiContainerPrefab, _containerRoot.transform);
-                _uiContainers.Add(container);
-                container.LinkContainer(_inventory.Containers[i]);
-                container.Render();
-            }
-        }
-
-        public void RenderContainers()
-        {
-            foreach (var container in _uiContainers)
-            {
-                container.Render();
+                _uiContainers[i- start].LinkToContainer(_inventory.Containers[i]);
             }
         }
     }

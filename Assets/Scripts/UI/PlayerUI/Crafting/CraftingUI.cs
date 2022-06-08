@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UntoldTracks.InventorySystem;
 using UntoldTracks.Player;
+using UntoldTracks.Models;
+using UntoldTracks.Managers;
 
 namespace UntoldTracks.UI
 {
     public class CraftingUI : MonoBehaviour
     {
-        [SerializeField] private RecipeBook baseRecipeBook;
-        [SerializeField] private RecipeBook overrideRecipeBook;
+        [SerializeField] private List<Recipe> baseRecipes = new();
+        [SerializeField] private List<Recipe> overrideRecipes = new();
 
-        private RecipeBook CurrentRecipeBook
+        private List<Recipe> CurrentRecipes
         {
             get
             {
-                return overrideRecipeBook == null ? baseRecipeBook: overrideRecipeBook;
+                return overrideRecipes == null ? baseRecipes : overrideRecipes;
             }
         }
 
@@ -28,22 +30,21 @@ namespace UntoldTracks.UI
         public List<RecipeSelector> recipeSelectors = new List<RecipeSelector>();
         public RecipeSelector recipeSelectorPrefab;
 
-        public PlayerManager playerManager => GameObject.FindObjectOfType<PlayerManager>();
+        private PlayerManager playerManager;
 
         public Recipe selectedRecipe;
         
         
-        private void OnEnable()
+        public void Init(PlayerManager manager)
         {
+            playerManager = manager;
             playerManager.InventoryController.Inventory.OnModified += HandleInventoryModified;
             RenderRecipeBook();
-            craftingButton.OnClick += Craft;
         }
 
         private void OnDisable()
         {
-            playerManager.InventoryController.Inventory.OnModified -= HandleInventoryModified;
-            craftingButton.OnClick -= Craft;
+            //playerManager.InventoryController.Inventory.OnModified -= HandleInventoryModified;
         }
 
         private void HandleInventoryModified()
@@ -54,15 +55,15 @@ namespace UntoldTracks.UI
             }
         }
 
-        public void SetCraftingBook(RecipeBook recipeBook)
+        public void SetCraftingBook(List<Recipe> recipes)
         {
-            if (recipeBook != null)
+            if (recipes != null)
             {
-                overrideRecipeBook = recipeBook;
+                overrideRecipes = recipes;
             }
             else
             {
-                overrideRecipeBook = null;
+                overrideRecipes = null;
             }
 
             RenderRecipeBook();
@@ -106,7 +107,7 @@ namespace UntoldTracks.UI
 
             recipeSelectors = new List<RecipeSelector>();
 
-            foreach (var recipe in CurrentRecipeBook.recipes)
+            foreach (var recipe in CurrentRecipes)
             {
                 var newPanel = Instantiate(recipeSelectorPrefab, recipeContainer.transform);
                 recipeSelectors.Add(newPanel);
