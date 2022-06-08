@@ -197,22 +197,39 @@ namespace UntoldTracks.Machines
 
 
         #region Token
-        /*
         public override void Load(JSONNode node)
         {
             base.Load(node);
+
+            var itemGUID = node["currentRecipeInputGUID"];
+
+            if (itemGUID != "null")
+            {
+                current = recipes.FirstOrDefault(x => x.input.model.Guid.Equals(itemGUID));
+                if (current == null)
+                {
+                    Debug.LogError($"Could not find recipe with an input item that has a guid of {itemGUID}");
+                }
+                else
+                {
+                    current.input.representation.gameObject.SetActive(true);
+                }
+            }
+
+            _currentCookingTime = node["cookingTime"];
+            CurrentFuel = node["currentFuel"];
         }
 
         public override JSONObject Save()
         {
-            var placeableJSON = new JSONObject();
+            var node = base.Save();
 
-            placeableJSON.Add("itemGUID", source.Guid);
-            placeableJSON.Add("entity", base.Save());
+            node.Add("currentRecipeInputGUID", current == null ? "null" : current.input.model.Guid);
+            node.Add("cookingTime", _currentCookingTime);
+            node.Add("currentFuel", _currentFuel);
 
-            return placeableJSON;
+            return node;
         }
-        */
         #endregion
     }
 }

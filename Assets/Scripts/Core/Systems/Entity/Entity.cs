@@ -12,10 +12,10 @@ public class Entity : MonoBehaviour, ITokenizable
     #region Token
     public virtual void Load(JSONNode node)
     {
-        //var position = node["entity"]["position"].ReadVector3();
-        var rotation = node["entity"]["rotation"].ReadQuaternion();
+        var position = node["position"].ReadVector3();
+        var rotation = node["rotation"].ReadQuaternion();
 
-        //transform.position = position;
+        transform.position = position;
         transform.rotation = rotation;
     }
 

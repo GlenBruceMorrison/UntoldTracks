@@ -50,6 +50,7 @@ namespace UntoldTracks.Player
                 return;
             }
 
+            Debug.Log("Destroying active item");
             GameObject.Destroy(activeItemObject);
         }
 

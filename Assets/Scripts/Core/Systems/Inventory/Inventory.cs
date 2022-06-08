@@ -158,7 +158,7 @@ namespace UntoldTracks.InventorySystem
         /// </returns>
         public ItemQueryResult Give(ItemContainer container)
         {
-            var itemQueryResult = new ItemQueryResult(container.Item, container.Item.durability);
+            var itemQueryResult = new ItemQueryResult(container.Item, 0, container.Item.durability);
 
             // is is not stackable, then just give to the first empty container
             if (!container.Item.stackable)
@@ -218,28 +218,26 @@ namespace UntoldTracks.InventorySystem
             };
 
             var itemsNode = node["items"];
-            for (var i=0; i<result.size; i++)
+            for (var i = 0; i < result.size; i++)
             {
-                var added = false;
-                foreach (var item in itemsNode.Children)
-                {
-                    if (item["inventoryIndex"] == i)
-                    {
-                        var targetItem = GameManager.Instance.Registry.FindByGUID<ItemModel>(item["itemGUID"]);
+                AppendContainer();
+            }
 
-                        if (targetItem != null)
-                        {
-                            _containers.Add(new ItemContainer(this, item["inventoryIndex"], targetItem, item["amount"], item["durability"]));
-                            added = true;
-                            continue;
-                        }
-                    }
+            foreach (var item in itemsNode.Children)
+            {
+                var index = item["inventoryIndex"];
+                var amount = item["amount"];
+                var durability = item["durability"];
+                var targetItem = GameManager.Instance.Registry.FindByGUID<ItemModel>(item["itemGUID"]);
+
+                if (targetItem == null)
+                {
+                    Debug.LogError($"Could not find item of guid {item["itemGUID"]}, make sure it exists in the registry");
+                    continue;
                 }
 
-                if (!added)
-                {
-                    _containers.Add(new ItemContainer(this, i));
-                }
+                _containers[index] = new ItemContainer(this, index, targetItem, amount, durability);
+                _containers[index].OnModified += HandleContainerModified;
             }
         }
 

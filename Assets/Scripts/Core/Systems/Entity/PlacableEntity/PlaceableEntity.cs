@@ -169,12 +169,9 @@ public class PlaceableEntity : Entity, ITokenizable
 
     public override JSONObject Save()
     {
-        var placeableJSON = new JSONObject();
-
-        placeableJSON.Add("itemGUID", source.Guid);
-        placeableJSON.Add("entity", base.Save());
-
-        return placeableJSON;
+        var node = base.Save();
+        node.Add("itemGUID", source.Guid);
+        return node;
     }
     #endregion
 }

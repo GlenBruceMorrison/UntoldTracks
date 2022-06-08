@@ -239,7 +239,7 @@ namespace UntoldTracks.InventorySystem
         /// </returns>
         public ItemQueryResult Give(ItemContainer container)
         {
-            var itemQueryResult = new ItemQueryResult(container.Item, container.CurrentDurability);
+            var itemQueryResult = new ItemQueryResult(container.Item, 0, container.CurrentDurability);
 
             // have a different item already, no point in continuing
             if (!HasItem(container.Item) && !IsEmpty())
