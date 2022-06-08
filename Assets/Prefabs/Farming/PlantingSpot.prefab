@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4298974613981655719}
   - component: {fileID: 991415063200896903}
+  - component: {fileID: 4468645942596185781}
+  - component: {fileID: 4629839506961066046}
   m_Layer: 0
   m_Name: PlantingSpot
   m_TagString: Untagged
@@ -45,9 +47,65 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3cce8a8493607a419239acba4fe7a91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  possiblePlants: []
+  possiblePlants:
+  - {fileID: 23158121804119340}
   current: {fileID: 0}
   growthMultiplier: 1
+--- !u!65 &4468645942596185781
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490158978236265301}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.37639132, y: 0.14531171, z: 0.3721622}
+  m_Center: {x: 0.017916482, y: 0.050275825, z: -0.003276684}
+--- !u!114 &4629839506961066046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490158978236265301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 763ec8cc255f9458496d2813062ce8f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _displayText: 
+  _displaySprite: {fileID: 0}
+  _inputDisplay: []
+  onInteraction:
+    m_PersistentCalls:
+      m_Calls: []
+  onPrimaryInput:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 991415063200896903}
+        m_TargetAssemblyTypeName: PlantingSpot, Assembly-CSharp
+        m_MethodName: Plant
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onSecondaryInput:
+    m_PersistentCalls:
+      m_Calls: []
+  onLoseFocus:
+    m_PersistentCalls:
+      m_Calls: []
+  onGainFocus:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &7561172395144661300
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57,7 +115,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 358780880249718987, guid: e62cea66ce0060f48815da277b3b4b16, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3021461207134397396, guid: e62cea66ce0060f48815da277b3b4b16, type: 3}
       propertyPath: m_IsActive
@@ -74,6 +132,10 @@ PrefabInstance:
     - target: {fileID: 4384182439363791040, guid: e62cea66ce0060f48815da277b3b4b16, type: 3}
       propertyPath: m_Name
       value: OnionPlant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4384182439363791040, guid: e62cea66ce0060f48815da277b3b4b16, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4384182439363791046, guid: e62cea66ce0060f48815da277b3b4b16, type: 3}
       propertyPath: m_RootOrder
@@ -121,6 +183,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e62cea66ce0060f48815da277b3b4b16, type: 3}
+--- !u!114 &23158121804119340 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7547162213498942488, guid: e62cea66ce0060f48815da277b3b4b16, type: 3}
+  m_PrefabInstance: {fileID: 7561172395144661300}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d6751c791b81da4394d5c630811d035, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6068900152563630578 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4384182439363791046, guid: e62cea66ce0060f48815da277b3b4b16, type: 3}

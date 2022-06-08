@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae6880a8766e14bef8e7c995f2275825, type: 3}
+  m_Name: Item_Cooking_Pot
+  m_EditorClassIdentifier: 
+  _guid: 154d0d537dfb22a448f39a2786386a6c
+  displayName: Cooking Pot
+  sprite: {fileID: 21300000, guid: 197ed6e7d463041538e0e3e1a5b8d11e, type: 3}
+  description: A thing to cook shit
+  stackable: 0
+  stackSize: 20
+  isEquipable: 0
+  equipablePrefab: {fileID: 0}
+  hasCustomInteractionFrame: 0
+  degradable: 0
+  durability: 0
+  isPlaceable: 1
+  placeablePrefab: {fileID: 2008405263392183352, guid: 8016ebc595642cf489100c1492c20ad6, type: 3}
+  canRotate: 1

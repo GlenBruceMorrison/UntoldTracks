@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6ef27d3eae784dd7876924f4d75cff6, type: 3}
   m_Name: Crafting_Crafting_Table
   m_EditorClassIdentifier: Assembly-CSharp:UntoldTracks:CraftingStationData
+  _guid: c54a86aa96520db44a1fb5161833875d
   _item: {fileID: 11400000, guid: a12bd0b9165424fb4bbab9cbf229caba, type: 2}
-  _worldObject: {fileID: 353044810429674381, guid: 716fb1528c6a748df9f03abd23a773c4, type: 3}
   _recipes:
   - {fileID: 11400000, guid: 58a32c1e506a3478c8f5103328032a85, type: 2}
   - {fileID: 11400000, guid: 8f14218e5460d774f87e2b7d842a1850, type: 2}
@@ -22,3 +22,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1e1fe285fb4a14ac6997c3dae791b950, type: 2}
   - {fileID: 11400000, guid: f7de33ca36c0048a9b1ced12d48f2817, type: 2}
   - {fileID: 11400000, guid: 1438d136dcac3c84a87f8a9ef75d4fc0, type: 2}
+  - {fileID: 11400000, guid: 5abac1d309ce73f4d96d8e4b6c2b92de, type: 2}

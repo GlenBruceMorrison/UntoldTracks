@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Carriage_Two
   m_EditorClassIdentifier: 
   _guid: c271c28c5cba1274194beeb53adda1c6
-  view: {fileID: 2422277054837707432, guid: 560bb9d804b51114a9f4b9a2aef3ba66, type: 3}
+  prefab: {fileID: 2422277054837707432, guid: 560bb9d804b51114a9f4b9a2aef3ba66, type: 3}
