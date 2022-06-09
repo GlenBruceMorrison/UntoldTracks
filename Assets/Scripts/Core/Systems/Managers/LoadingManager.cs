@@ -25,10 +25,15 @@ namespace UntoldTracks.Managers
         private string _path = "";
         private string _persistantPath = "";
 
+        private string _resetPath = "";
+
         public SerializableRegistry registry;
 
         public void SetPath()
         {
+            // debug value to set path to out unity asset folder for reset save file
+            _resetPath = Application.dataPath + Path.AltDirectorySeparatorChar + "GameDataReset.json";
+
             // debug value to set path to out unity asset folder
             _path = Application.dataPath + Path.AltDirectorySeparatorChar + "GameData.json";
 
@@ -64,6 +69,22 @@ namespace UntoldTracks.Managers
                 var data = GameManager.Instance.Save();
                 data.WriteToStringBuilder(builder, 0, 0, JSONTextMode.Indent);
                 writer.Write(data.ToString());
+            }
+            catch (Exception ex)
+            {
+                Debug.LogException(ex);
+            }
+        }
+
+        public void ResetSave()
+        {
+            try
+            {
+                using StreamReader reader = new(_resetPath);
+                string jsonReset = reader.ReadToEnd();
+
+                using StreamWriter writer = new(_path);
+                writer.Write(jsonReset);
             }
             catch (Exception ex)
             {

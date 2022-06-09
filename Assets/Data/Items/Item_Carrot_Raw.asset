@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae6880a8766e14bef8e7c995f2275825, type: 3}
-  m_Name: Item_Axe_Stone
+  m_Name: Item_Carrot_Raw
   m_EditorClassIdentifier: 
-  _guid: 0679f56cc01788346bf28445b0e0d310
-  displayName: Stone Axe
-  sprite: {fileID: 21300000, guid: 7d1630f90f21440c7acc7fae382a5b34, type: 3}
-  description: A stone axe
-  stackable: 0
+  _guid: cb32fbec749ed234fa52d085c0efc389
+  displayName: Raw Carrot
+  sprite: {fileID: 21300000, guid: 620ee9689d2bd465ab8d1c0ce4ffc2db, type: 3}
+  description: A raw carrot.
+  stackable: 1
   stackSize: 20
   isEquipable: 1
-  equipablePrefab: {fileID: 7849621037555137295, guid: 96f8bed148728a149be5cc0d221b4abc, type: 3}
-  hasCustomInteractionFrame: 1
-  degradable: 1
-  durability: 20
+  equipablePrefab: {fileID: 3390441664538654275, guid: 331273f03572e3a4a95c5a4a69487c03, type: 3}
+  hasCustomInteractionFrame: 0
+  degradable: 0
+  durability: 1
   isPlaceable: 0
   placeablePrefab: {fileID: 0}
   canRotate: 1

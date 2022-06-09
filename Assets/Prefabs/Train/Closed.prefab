@@ -69,10 +69,8 @@ MonoBehaviour:
   model: {fileID: 11400000, guid: 72f815a192f8bc145848964b42da4c40, type: 2}
   train: {fileID: 0}
   Mover: {fileID: 2436175327103576001}
-  pathCreator: {fileID: 0}
   endOfPathInstruction: 0
   delay: -27
-  storageMediumModel: {fileID: 11400000, guid: 888b7f57d0ce5424eb9e827f0b29962c, type: 2}
 --- !u!114 &2436175327103576001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,7 +112,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6148963051504849088}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.19, y: -1.0421, z: -3.243}
+  m_LocalPosition: {x: 0.19, y: -0.978, z: -3.365}
   m_LocalScale: {x: 1.0567828, y: 0.07031574, z: 0.7692307}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -354,7 +352,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9126580915123942463}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.19, y: -1.0421, z: 3.24}
+  m_LocalPosition: {x: 0.19, y: -0.978, z: 3.406}
   m_LocalScale: {x: 1.0567828, y: 0.07031574, z: 0.7692307}
   m_ConstrainProportionsScale: 0
   m_Children: []

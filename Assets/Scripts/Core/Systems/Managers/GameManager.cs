@@ -53,6 +53,16 @@ namespace UntoldTracks.Managers
             Load(_loader.LoadData());
         }
 
+        public void Reset()
+        {
+            _loader.ResetSave();
+        }
+
+        public void SaveGameData()
+        {
+            _loader.SaveGameData();
+        }
+
         #region Token
         public void Load(JSONNode node)
         {

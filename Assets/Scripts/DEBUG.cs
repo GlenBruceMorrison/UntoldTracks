@@ -53,9 +53,14 @@ public class DEBUG : MonoBehaviour
                         }
                         break;
                     case 1:
-                        if (GUILayout.Button("Option"))
+                        if (GUILayout.Button("Reset Save"))
                         {
-                            GameManager.Instance.Save();
+                            GameManager.Instance.Reset();
+                        }
+
+                        if (GUILayout.Button("Save"))
+                        {
+                            GameManager.Instance.SaveGameData();
                         }
                         break;
                 }

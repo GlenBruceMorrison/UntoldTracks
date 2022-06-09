@@ -1,0 +1,120 @@
+{
+    "player": {
+        "entity": {
+            "position": {
+                "x": 0,
+                "y": 3,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            }
+        },
+        "inventory": {
+            "size": 29,
+            "items": []
+        }
+    },
+    "train": {
+        "distanceTravelled": 0,
+        "currentSpeed": 0,
+        "isMoving": false,
+        "carriages": [
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            },
+            {
+                "carriageGUID": "72f815a192f8bc145848964b42da4c40"
+            }
+        ],
+        "placeableEntities": {
+            "entities": []
+        },
+        "track": {
+            "points": []
+        }
+    }
+}
