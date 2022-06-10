@@ -1,0 +1,112 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4333905250428187047
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4333905250428187045}
+  - component: {fileID: 4333905250428187050}
+  - component: {fileID: 4333905250428187044}
+  - component: {fileID: 4333905250428187051}
+  m_Layer: 0
+  m_Name: Train
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4333905250428187045
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4333905250428187047}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.28, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4333905250428187050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4333905250428187047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c96580b3d3083044a440c1c73b117cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _train: {fileID: 4333905250428187044}
+  _placeableEntityManager: {fileID: 4333905250428187051}
+  _trackGenerator:
+    _points: []
+    _pointGeneratedCount: 10
+    _distanceBetweenPointsMin: 90
+    _distanceBetweenPointsMax: 140
+    _distanceBreadthMin: 0
+    _distanceBreadthMax: 30
+    _distanceHeightMin: 0
+    _distanceHeightMax: 0
+    min: {x: 0, y: 0, z: 0}
+    max: {x: 0, y: 0, z: 0}
+    _origin: {x: 0, y: 0, z: 0}
+--- !u!114 &4333905250428187044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4333905250428187047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f93be06affb364658b3cee356c1a721b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    distanceTravelled: 0
+    currentSpeed: 0
+    isMoving: 0
+    entities:
+      storageMedium: []
+    carriages: []
+  model: {fileID: 11400000, guid: 5e85bb7838ac9ac4997293a04cff3bc6, type: 2}
+  carriageLength: 9
+  carriages: []
+  _currentSpeed: 5
+  _maxSpeed: 15
+  _acc: 3
+  OnCarriageAdded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTrainBrake:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTrainStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTrainStop:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &4333905250428187051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4333905250428187047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84a89fff29c88b444a32e6ae697abdbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entities: []

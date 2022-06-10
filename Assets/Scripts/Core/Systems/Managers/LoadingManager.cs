@@ -27,8 +27,6 @@ namespace UntoldTracks.Managers
 
         private string _resetPath = "";
 
-        public SerializableRegistry registry;
-
         public void SetPath()
         {
             // debug value to set path to out unity asset folder for reset save file

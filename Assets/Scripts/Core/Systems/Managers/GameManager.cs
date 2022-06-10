@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 using UntoldTracks.Player;
 using UntoldTracks.UI;
 
@@ -12,14 +13,15 @@ namespace UntoldTracks.Managers
 {
     public class GameManager : MonoBehaviour, ITokenizable
     {
-        public PlayerManager playerPrefab;
-
         private static GameManager _instance;
-
         [SerializeField] public SerializableRegistry _registry;
-        [SerializeField] private PlayerManager _playerManager;
-        [SerializeField] private TrainManager _trainManager;
-        [SerializeField] private LoadingManager _loader;
+        private PlayerManager _playerManager;
+        private TrainManager _trainManager;
+        private LoadingManager _loader;
+
+        public PlayerManager playerPrefab;
+        public TrainManager trainPrefab;
+        public UnityAction OnGameLoaded;
 
         public static GameManager Instance => _instance;
         public PlayerManager LocalPlayer => _playerManager;
@@ -50,6 +52,8 @@ namespace UntoldTracks.Managers
                 _instance = this;
             }
 
+            _loader = GetComponent<LoadingManager>();
+
             Load(_loader.LoadData());
         }
 
@@ -70,9 +74,14 @@ namespace UntoldTracks.Managers
             var playerPos = node["player"]["entity"]["position"].ReadVector3();
             _playerManager = Instantiate(playerPrefab, playerPos, Quaternion.identity);
 
+            // init train
+            _trainManager = Instantiate(trainPrefab, new Vector3(0, 2.28f, 0), Quaternion.identity);
+
             // load game
             _playerManager.Load(node["player"]);
             _trainManager.Load(node["train"]);
+
+            OnGameLoaded?.Invoke();
         }
 
         public JSONObject Save()

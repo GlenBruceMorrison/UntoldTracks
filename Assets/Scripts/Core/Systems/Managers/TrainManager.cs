@@ -12,27 +12,51 @@ namespace UntoldTracks.Managers
 {
     public class TrainManager : MonoBehaviour, ITokenizable
     {
-        public Train train;
-        public SerializableRegistry registry;
-        public PlaceableEntityManager placeableEntityManager;
-        public TrackGenerator trackGenerator;
+        [SerializeField] private Train _train;
+        [SerializeField] private PlaceableEntityManager _placeableEntityManager;
+        [SerializeField] private TrackGenerator _trackGenerator;
+
+        public TrackGenerator TrackGenerator
+        {
+            get
+            {
+                return _trackGenerator;
+            }
+        }
+
+        public PlaceableEntityManager PlaceableEntityManager
+        {
+            get
+            {
+                return _placeableEntityManager;
+            }
+        }
+
+        public Train Train
+        {
+            get
+            { 
+                return _train;
+            }
+        }
 
         #region Token
         public void Load(JSONNode node)
         {
-            train.Load(node);
-            placeableEntityManager.Load(node["placeableEntities"]);
+            _trackGenerator.Load(node["track"]);
 
-            train.Initiate(trackGenerator);
-            trackGenerator.Load(node["track"]);
+            _train.Load(node);
+            _placeableEntityManager.Load(node["placeableEntities"]);
+
+            _train.Initiate(_trackGenerator);
         }
 
         public JSONObject Save()
         {
-            var trainJSON = train.Save();
+            var trainJSON = _train.Save();
 
-            trainJSON.Add("placeableEntities", placeableEntityManager.Save());
-            trainJSON.Add("track", trackGenerator.Save());
+            trainJSON.Add("placeableEntities", _placeableEntityManager.Save());
+            trainJSON.Add("track", _trackGenerator.Save());
 
             return trainJSON;
         }
@@ -43,7 +67,7 @@ namespace UntoldTracks.Managers
         {
             if (Input.GetKeyDown("l"))
             {
-                foreach (var entity in placeableEntityManager.entities)
+                foreach (var entity in _placeableEntityManager.entities)
                 {
                     entity.AfterBuild();
                 }

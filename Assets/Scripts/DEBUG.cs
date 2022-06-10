@@ -5,6 +5,7 @@ using UnityEngine;
 using UntoldTracks.Managers;
 using UntoldTracks.Models;
 using UntoldTracks.InventorySystem;
+using PathCreation;
 
 public class DEBUG : MonoBehaviour
 {
@@ -19,10 +20,17 @@ public class DEBUG : MonoBehaviour
 
     private bool show = true;
 
-    private void Start()
+    private LineRenderer _lineRenderer;
+
+    private void Awake()
     {
         //models = registry.GetAll<ItemModel>();
+        _lineRenderer = GetComponent<LineRenderer>();
+
+        _lineRenderer.positionCount = GameManager.Instance.TrainManager.TrackGenerator.Points.Count;
+        _lineRenderer.SetPositions(GameManager.Instance.TrainManager.TrackGenerator.Points.ToArray());
     }
+
 
     void OnGUI()
     {
@@ -62,7 +70,7 @@ public class DEBUG : MonoBehaviour
                         {
                             GameManager.Instance.SaveGameData();
                         }
-                        break;
+                    break;
                 }
 
             GUI.EndGroup();

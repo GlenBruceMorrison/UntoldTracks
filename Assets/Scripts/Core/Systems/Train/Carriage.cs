@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UntoldTracks.Data;
+using UntoldTracks.Managers;
 using UntoldTracks.Models;
 
 public class Carriage : MonoBehaviour, IMoverController, ITokenizable
@@ -45,7 +46,7 @@ public class Carriage : MonoBehaviour, IMoverController, ITokenizable
 
     public void UpdateMovement(out Vector3 goalPosition, out Quaternion goalRotation, float deltaTime)
     {
-        if (vertexPath == null)
+        if (GameManager.Instance.TrainManager.TrackGenerator.VertexPath == null)
         {
             Debug.LogError("VertexPath on this carriage is null!");
             goalPosition = transform.position;
@@ -53,14 +54,29 @@ public class Carriage : MonoBehaviour, IMoverController, ITokenizable
             return;
         }
 
-        goalPosition = vertexPath.GetPointAtDistance(DistanceTravelled, endOfPathInstruction);
-        goalRotation = vertexPath.GetRotationAtDistance(DistanceTravelled, endOfPathInstruction);
+        if (GameManager.Instance.TrainManager.TrackGenerator.VertexPath.length == 0)
+        {
+            Debug.LogError("Vertex path does not have any points.");
+            goalPosition = transform.position;
+            goalRotation = transform.rotation;
+            return;
+        }
+
+        goalPosition = GameManager.Instance.TrainManager.TrackGenerator.VertexPath
+            .GetPointAtDistance(DistanceTravelled, endOfPathInstruction);
+
+        goalRotation = GameManager.Instance.TrainManager.TrackGenerator.VertexPath
+            .GetRotationAtDistance(DistanceTravelled, endOfPathInstruction);
     }
 
     #region Token
     public void Load(JSONNode node)
     {
-        throw new NotImplementedException();
+        transform.position = GameManager.Instance.TrainManager.TrackGenerator.VertexPath
+            .GetPointAtDistance(DistanceTravelled, endOfPathInstruction);
+
+        transform.rotation = GameManager.Instance.TrainManager.TrackGenerator.VertexPath
+            .GetRotationAtDistance(DistanceTravelled, endOfPathInstruction);
     }
 
     public JSONObject Save()

@@ -31,14 +31,12 @@ namespace UntoldTracks.Managers
                     continue;
                 }
 
+                var position = placeable["position"].ReadVector3();
+
                 var prefab = Instantiate(
                     entity.placeablePrefab,
-                    placeable["entity"]["position"].ReadVector3(),
-                    placeable["entity"]["rotation"].ReadQuaternion());
-
-                //prefab.transform.SetParent(
-                //   GameManager.Instance.TrainManager.train.GetClosestCarriage(prefab.transform).transform,
-                //    true);
+                    position,
+                    placeable["rotation"].ReadQuaternion());
 
                 var token = prefab.GetComponent<ITokenizable>();
 
@@ -53,6 +51,14 @@ namespace UntoldTracks.Managers
                 entities.Add(prefab);
                 tokens.Add(token);
             }
+
+            GameManager.Instance.OnGameLoaded += () =>
+            {
+                foreach (var entity in entities)
+                {
+                    entity.AfterBuild();
+                }
+            };
         }
 
         public JSONObject Save()

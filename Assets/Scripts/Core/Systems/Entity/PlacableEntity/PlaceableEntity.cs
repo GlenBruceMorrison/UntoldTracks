@@ -9,7 +9,7 @@ using UntoldTracks.Managers;
 public class PlaceableEntity : Entity, ITokenizable
 {
     public ItemModel source;
-    public List<Transform> raycastOrigins = new List<Transform>();
+    public List<Transform> raycastOrigins = new();
 
     private PlacableEntityIndicator _placeableEntityIndicator;
     private Collider[] _worldColliders;
@@ -59,9 +59,7 @@ public class PlaceableEntity : Entity, ITokenizable
 
     public void AfterBuild()
     {
-        transform.SetParent(
-            GameManager.Instance.TrainManager.train.GetClosestCarriage(transform).transform,
-            true);
+        transform.SetParent(GameManager.Instance.TrainManager.Train.GetClosestCarriage(transform).transform, true);
     }
 
     protected virtual void OnEnable()

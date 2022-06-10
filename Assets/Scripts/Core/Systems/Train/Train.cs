@@ -71,18 +71,7 @@ public class Train : MonoBehaviour, ITokenizable
 
     public void Initiate(TrackGenerator generator)
     {
-        generator.OnCreation += HandleTrackCreated;
-        generator.OnSegmentAdded += HandleTrackSegmeneAdded;
-    }
 
-    private void HandleTrackSegmeneAdded(VertexPath path)
-    {
-        VertexPath = path;
-    }
-
-    private void HandleTrackCreated(VertexPath path)
-    {
-        VertexPath = path;
     }
 
     private Carriage AddTrain(Carriage prefab)
@@ -155,6 +144,8 @@ public class Train : MonoBehaviour, ITokenizable
 
         foreach (var carriage in carriages)
         {
+            Debug.Log(carriage.transform.position);
+
             Vector3 directionToTarget = carriage.transform.position - currentPosition;
             float dSqrToTarget = directionToTarget.sqrMagnitude;
             if (dSqrToTarget < closestDistanceSqr)
@@ -181,6 +172,8 @@ public class Train : MonoBehaviour, ITokenizable
             var guid = item["carriageGUID"].Value;
             var model = GameManager.Instance.Registry.FindByGUID<CarriageModel>(guid);
             var instance = AddTrain(model.prefab);
+
+            instance.Load(item["carriageGUID"]);
         }
 
         _built = true;
