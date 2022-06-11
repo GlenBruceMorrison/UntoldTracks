@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4333905250428187050}
   - component: {fileID: 4333905250428187044}
   - component: {fileID: 4333905250428187051}
+  - component: {fileID: 1544342556674295393}
   m_Layer: 0
   m_Name: Train
   m_TagString: Untagged
@@ -49,7 +50,6 @@ MonoBehaviour:
   _train: {fileID: 4333905250428187044}
   _placeableEntityManager: {fileID: 4333905250428187051}
   _trackGenerator:
-    _points: []
     _pointGeneratedCount: 10
     _distanceBetweenPointsMin: 90
     _distanceBetweenPointsMax: 140
@@ -57,8 +57,6 @@ MonoBehaviour:
     _distanceBreadthMax: 30
     _distanceHeightMin: 0
     _distanceHeightMax: 0
-    min: {x: 0, y: 0, z: 0}
-    max: {x: 0, y: 0, z: 0}
     _origin: {x: 0, y: 0, z: 0}
 --- !u!114 &4333905250428187044
 MonoBehaviour:
@@ -72,13 +70,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f93be06affb364658b3cee356c1a721b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data:
-    distanceTravelled: 0
-    currentSpeed: 0
-    isMoving: 0
-    entities:
-      storageMedium: []
-    carriages: []
   model: {fileID: 11400000, guid: 5e85bb7838ac9ac4997293a04cff3bc6, type: 2}
   carriageLength: 9
   carriages: []
@@ -110,3 +101,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entities: []
+--- !u!114 &1544342556674295393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4333905250428187047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b275c3b78f8717c4cbc60f74a3247f67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roadWidth: 3.41
+  thickness: 0.186
+  flattenSurface: 1
+  roadMaterial: {fileID: 2100000, guid: b5df4735192845740bd11076dc9cdc99, type: 2}
+  undersideMaterial: {fileID: 2100000, guid: c1d8d882244c5344fa86a8fd23246f81, type: 2}
+  textureTiling: 1
+  meshHolder: {fileID: 0}

@@ -48,6 +48,8 @@ namespace UntoldTracks.Managers
             _placeableEntityManager.Load(node["placeableEntities"]);
 
             _train.Initiate(_trackGenerator);
+
+            GetComponent<RoadMeshCreator>().Init(_trackGenerator.VertexPath);
         }
 
         public JSONObject Save()
