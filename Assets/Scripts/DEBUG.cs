@@ -25,10 +25,10 @@ public class DEBUG : MonoBehaviour
     private void Awake()
     {
         //models = registry.GetAll<ItemModel>();
-        _lineRenderer = GetComponent<LineRenderer>();
+        //_lineRenderer = GetComponent<LineRenderer>();
 
-        _lineRenderer.positionCount = GameManager.Instance.TrainManager.TrackGenerator.Points.Count;
-        _lineRenderer.SetPositions(GameManager.Instance.TrainManager.TrackGenerator.Points.ToArray());
+        //_lineRenderer.positionCount = GameManager.Instance.TrainManager.TrackGenerator.Points.Count;
+        //_lineRenderer.SetPositions(GameManager.Instance.TrainManager.TrackGenerator.Points.ToArray());
     }
 
 
