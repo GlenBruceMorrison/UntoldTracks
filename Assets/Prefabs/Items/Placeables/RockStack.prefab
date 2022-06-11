@@ -413,14 +413,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2940b3ef711234e98bc5dd15c23ee178, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 11400000, guid: d4895223a3464492896ddfe9360331c8, type: 2}
+  source: {fileID: 11400000, guid: 5a5ef0884da2e33499463fa010f2593a, type: 2}
   raycastOrigins:
   - {fileID: 307152114912133009}
   _worldTransform: {fileID: 4755122539710213221}
   _currentStored: 0
   resourceContainer: {fileID: 2526528095148005927}
   resource: []
-  resourceItem: {fileID: 11400000, guid: d4895223a3464492896ddfe9360331c8, type: 2}
+  resourceItem: {fileID: 11400000, guid: 67b43b85b116a3e46ae51b2774f94068, type: 2}
 --- !u!65 &87338836
 BoxCollider:
   m_ObjectHideFlags: 0

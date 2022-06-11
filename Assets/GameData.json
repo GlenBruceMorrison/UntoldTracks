@@ -1,1 +1,51 @@
-{"player":{"entity":{"position":{"x":14.5536499023438,"y":1.06511521339417,"z":39.9223251342773},"rotation":{"x":0,"y":0,"z":0}},"inventory":{"size":29,"items":[{"itemGUID":"0679f56cc01788346bf28445b0e0d310","inventoryIndex":0,"amount":1,"durability":2},{"itemGUID":"eff34436baf014d4d835916ce777d3d9","inventoryIndex":2,"amount":20,"durability":0},{"itemGUID":"eff34436baf014d4d835916ce777d3d9","inventoryIndex":3,"amount":1,"durability":0}]}},"train":{"distanceTravelled":42.5585250854492,"currentSpeed":0,"isMoving":false,"carriages":[{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"},{"carriageGUID":"72f815a192f8bc145848964b42da4c40"}],"placeableEntities":{"entities":[{"position":{"x":14.9315319061279,"y":1.05511510372162,"z":42.2028198242188},"rotation":{"x":-3.2665163018919E-08,"y":0.0197124928236008,"z":-9.91568285257927E-08,"w":-0.999805808067322},"itemGUID":"f247bc4b7355c4e7a896c3402dd659f0","currentRecipeInputGUID":"1a38daa7be4a94622800227ca88727b5","cookingTime":2.36902832984924,"currentFuel":8.76310634613037}]},"track":{"points":[[0,0,0],[25,0,120],[-19,0,213],[24,0,323],[-19,0,429],[26,0,551],[-3,0,677],[10,0,779],[-11,0,891],[8,0,1027]]}}}
+{
+    "player": {
+        "entity": {
+            "position": {
+                "x": 0,
+                "y": 3,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            }
+        },
+        "inventory": {
+            "size": 29,
+            "items": []
+        }
+    },
+    "train": {
+        "distanceTravelled": 0,
+        "currentSpeed": 0,
+        "isMoving": false,
+        "carriages": [
+            {
+                "carriageGUID": "058b7d2f59dd28c4ab2501c9ea98bb13"
+            },
+            {
+                "carriageGUID": "058b7d2f59dd28c4ab2501c9ea98bb13"
+            },
+            {
+                "carriageGUID": "058b7d2f59dd28c4ab2501c9ea98bb13"
+            },
+            {
+                "carriageGUID": "058b7d2f59dd28c4ab2501c9ea98bb13"
+            },
+            {
+                "carriageGUID": "058b7d2f59dd28c4ab2501c9ea98bb13"
+            },
+            {
+                "carriageGUID": "058b7d2f59dd28c4ab2501c9ea98bb13"
+            }
+        ],
+        "placeableEntities": {
+            "entities": []
+        },
+        "track": {
+            "points": []
+        }
+    }
+}

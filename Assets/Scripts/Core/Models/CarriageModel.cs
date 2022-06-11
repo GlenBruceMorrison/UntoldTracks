@@ -7,8 +7,8 @@ using UntoldTracks;
 namespace UntoldTracks.Models
 {
     [CreateAssetMenu(fileName = "Carriage", menuName = "Data/Carriage")]
-    public class CarriageModel : SerializableScriptableObjectPrefab<Carriage>
+    public class CarriageModel : SerializableScriptableObject
     {
-
+        public Carriage prefab;
     }
 }

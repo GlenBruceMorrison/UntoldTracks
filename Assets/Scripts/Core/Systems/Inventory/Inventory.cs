@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UntoldTracks.Player;
 using UntoldTracks.Models;
 using UntoldTracks.Managers;
-using UntoldTracks.Data;
 using SimpleJSON;
 using UnityEngine;
 
@@ -212,13 +211,10 @@ namespace UntoldTracks.InventorySystem
         {
             _containers.Clear();
 
-            var result = new InventoryData()
-            {
-                size = node["size"]
-            };
-
+            var size = node["size"];
             var itemsNode = node["items"];
-            for (var i = 0; i < result.size; i++)
+
+            for (var i = 0; i < size; i++)
             {
                 AppendContainer();
             }
@@ -228,7 +224,8 @@ namespace UntoldTracks.InventorySystem
                 var index = item["inventoryIndex"];
                 var amount = item["amount"];
                 var durability = item["durability"];
-                var targetItem = GameManager.Instance.Registry.FindByGUID<ItemModel>(item["itemGUID"]);
+                //var targetItem = GameManager.Instance.Registry.FindByGUID<ItemModel>(item["itemGUID"]);
+                var targetItem = ResourceService.Instance.FindByGUID<ItemModel>(item["itemGUID"]);
 
                 if (targetItem == null)
                 {

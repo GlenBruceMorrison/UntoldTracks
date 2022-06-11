@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-using UntoldTracks.Data;
 using UntoldTracks.Models;
 using UntoldTracks.InventorySystem;
 using UntoldTracks.Player;
@@ -23,7 +22,7 @@ namespace UntoldTracks.Managers
         {
             foreach (var placeable in node["entities"].Children)
             {
-                var entity = GameManager.Instance.Registry.FindByGUID<ItemModel>(placeable["itemGUID"]);
+                var entity = ResourceService.Instance.FindByGUID<ItemModel>(placeable["itemGUID"]);
 
                 if (entity == null || entity.placeablePrefab == null)
                 {
@@ -52,13 +51,10 @@ namespace UntoldTracks.Managers
                 tokens.Add(token);
             }
 
-            GameManager.Instance.OnGameLoaded += () =>
+            foreach (var entity in entities)
             {
-                foreach (var entity in entities)
-                {
-                    entity.AfterBuild();
-                }
-            };
+                entity.AfterBuild();
+            }
         }
 
         public JSONObject Save()

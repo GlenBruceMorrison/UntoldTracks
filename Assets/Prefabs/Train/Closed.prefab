@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9929803103c25433687be73cc304eb95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 11400000, guid: 72f815a192f8bc145848964b42da4c40, type: 2}
+  model: {fileID: 11400000, guid: 058b7d2f59dd28c4ab2501c9ea98bb13, type: 2}
   train: {fileID: 0}
   Mover: {fileID: 2436175327103576001}
   endOfPathInstruction: 0

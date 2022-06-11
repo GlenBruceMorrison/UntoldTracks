@@ -65,12 +65,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33733fb0079c947cdae7b68fb6b4625c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 11400000, guid: ab9a2b823ee464e178835d14da252417, type: 2}
+  source: {fileID: 11400000, guid: 57d4d6c170097444e8c1f911fc874bb7, type: 2}
   raycastOrigins:
   - {fileID: 6527207167236394272}
   _worldTransform: {fileID: 1141402864105315612}
   size: 24
-  _starterTemplate: []
   _displayText: Large Crate
   _displaySprite: {fileID: 21300000, guid: d0b2789bc9c284488a8c59ec60bd0e09, type: 3}
 --- !u!65 &7736581124262521199

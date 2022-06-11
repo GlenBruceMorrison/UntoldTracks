@@ -199,5 +199,5 @@ MonoBehaviour:
     _item: {fileID: 0}
     _count: 0
   _animator: {fileID: 0}
-  waterCupData: {fileID: 11400000, guid: aff5686fd6ee93849a82e15c70f98fa9, type: 2}
-  emptyCupData: {fileID: 11400000, guid: dd69a2f841251d843b67f4e30c074944, type: 2}
+  waterCupData: {fileID: 11400000, guid: fe38d7a204b0fdf489ca89090bd18209, type: 2}
+  emptyCupData: {fileID: 11400000, guid: cea5eff20d0f0e342972bdcb4e6e66a9, type: 2}

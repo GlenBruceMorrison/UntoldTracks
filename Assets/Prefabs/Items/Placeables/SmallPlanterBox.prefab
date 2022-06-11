@@ -359,7 +359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b19406351a02e450495d760594b79ce2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 11400000, guid: c4d1fe8a8c18c4a42b57c2bc79301b31, type: 2}
+  source: {fileID: 11400000, guid: 8220296dc70903344a2f6a49626bf19a, type: 2}
   raycastOrigins:
   - {fileID: 4774982983383348645}
   _worldTransform: {fileID: 456693142068692684}
@@ -1267,10 +1267,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlantingSpot
       objectReference: {fileID: 0}
-    - target: {fileID: 1490158978236265301, guid: 59e40a4abc9ea0643be7a37a68d67a4c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4298974613981655719, guid: 59e40a4abc9ea0643be7a37a68d67a4c, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1313,10 +1309,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4298974613981655719, guid: 59e40a4abc9ea0643be7a37a68d67a4c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4923225147974574333, guid: 59e40a4abc9ea0643be7a37a68d67a4c, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -6,13 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
-using UntoldTracks.Data;
 using UntoldTracks.Managers;
 using UntoldTracks.Models;
 
 public class Train : MonoBehaviour, ITokenizable
 {
-    public TrainData data;
     public TrainModel model;
     public int carriageLength = 9;
 
@@ -144,8 +142,6 @@ public class Train : MonoBehaviour, ITokenizable
 
         foreach (var carriage in carriages)
         {
-            Debug.Log(carriage.transform.position);
-
             Vector3 directionToTarget = carriage.transform.position - currentPosition;
             float dSqrToTarget = directionToTarget.sqrMagnitude;
             if (dSqrToTarget < closestDistanceSqr)
@@ -170,7 +166,14 @@ public class Train : MonoBehaviour, ITokenizable
         foreach (var item in carriageJSON.Children)
         {
             var guid = item["carriageGUID"].Value;
-            var model = GameManager.Instance.Registry.FindByGUID<CarriageModel>(guid);
+            var model = ResourceService.Instance.FindByGUID<CarriageModel>(guid);
+
+            if (model == null)
+            {
+                Debug.LogError($"Could not find carriage of ID {guid}");
+                continue;
+            }
+
             var instance = AddTrain(model.prefab);
 
             instance.Load(item["carriageGUID"]);

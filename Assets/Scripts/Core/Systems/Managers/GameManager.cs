@@ -14,32 +14,16 @@ namespace UntoldTracks.Managers
     public class GameManager : MonoBehaviour, ITokenizable
     {
         private static GameManager _instance;
-        [SerializeField] public SerializableRegistry _registry;
         private PlayerManager _playerManager;
         private TrainManager _trainManager;
         private LoadingManager _loader;
 
         public PlayerManager playerPrefab;
         public TrainManager trainPrefab;
-        public UnityAction OnGameLoaded;
 
         public static GameManager Instance => _instance;
         public PlayerManager LocalPlayer => _playerManager;
         public TrainManager TrainManager => _trainManager;
-        public SerializableRegistry Registry
-        {
-            get
-            {
-                if (_registry == null)
-                {
-                    Debug.LogError("REGISTRY IS NOT SET IN THE GAME MANAGER!");
-                    Debug.LogError("CHECK IF THE REGISTRY IS IN A VALID STATE IN THE PROJECT DIRECTORY");
-                    return null;
-                }
-
-                return _registry;
-            }
-        }
 
         private void Awake()
         {
@@ -80,8 +64,6 @@ namespace UntoldTracks.Managers
             // load game
             _playerManager.Load(node["player"]);
             _trainManager.Load(node["train"]);
-
-            OnGameLoaded?.Invoke();
         }
 
         public JSONObject Save()

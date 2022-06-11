@@ -16,19 +16,3 @@ public class SerializableScriptableObject : ScriptableObject
     }
 #endif
 }
-
-[CreateAssetMenu]
-public class CarriageDD : SerializableScriptableObjectPrefab<Carriage>
-{
-
-}
-
-public class SerializableScriptableObjectPrefab<T> : SerializableScriptableObject where T : MonoBehaviour
-{
-    public T prefab;
-
-    public T GetPrefab<T>(SerializableRegistry registry) where T : SerializableScriptableObject
-    {
-        return registry.FindByGUID<T>(Guid);
-    }
-}

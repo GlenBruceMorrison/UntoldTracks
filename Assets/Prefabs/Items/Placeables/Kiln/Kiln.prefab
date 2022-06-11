@@ -174,10 +174,10 @@ MonoBehaviour:
   cookingTimeRequired: 20
   input:
     representation: {fileID: 7261495985881167751}
-    model: {fileID: 11400000, guid: 1a38daa7be4a94622800227ca88727b5, type: 2}
+    model: {fileID: 11400000, guid: 01a575bc5cdcbe64fa7fa7ab42b18cf2, type: 2}
   output:
     representation: {fileID: 7465814676433373446}
-    model: {fileID: 11400000, guid: dd69a2f841251d843b67f4e30c074944, type: 2}
+    model: {fileID: 11400000, guid: cea5eff20d0f0e342972bdcb4e6e66a9, type: 2}
 --- !u!1 &2521499624175123694
 GameObject:
   m_ObjectHideFlags: 0
@@ -5956,7 +5956,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c39b75fd48d8d49a69f80c0544e47a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 11400000, guid: f247bc4b7355c4e7a896c3402dd659f0, type: 2}
+  source: {fileID: 11400000, guid: 7c421e4f291c74a48850fe1594e32739, type: 2}
   raycastOrigins:
   - {fileID: 2216528690549517725}
   _worldTransform: {fileID: 4023445642908901717}
@@ -6082,7 +6082,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  fuelModel: {fileID: 11400000, guid: eff34436baf014d4d835916ce777d3d9, type: 2}
+  fuelModel: {fileID: 11400000, guid: 44aa8cb308c354d4699a1452767870d5, type: 2}
   current: {fileID: 0}
   recipes:
   - {fileID: 1732260368295920303}

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41cf72670afae4f0da1bcdb2aedb3670, type: 3}
+  m_Name: Recipe_Kiln
+  m_EditorClassIdentifier: 
+  _guid: 385a2ada8e2a6084fa182bf094b8ed57
+  ingredients:
+  - _item: {fileID: 11400000, guid: 67b43b85b116a3e46ae51b2774f94068, type: 2}
+    _count: 5
+  produces:
+    _item: {fileID: 11400000, guid: 7c421e4f291c74a48850fe1594e32739, type: 2}
+    _count: 1

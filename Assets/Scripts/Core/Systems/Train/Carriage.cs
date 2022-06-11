@@ -5,7 +5,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UntoldTracks.Data;
 using UntoldTracks.Managers;
 using UntoldTracks.Models;
 
@@ -72,11 +71,9 @@ public class Carriage : MonoBehaviour, IMoverController, ITokenizable
     #region Token
     public void Load(JSONNode node)
     {
-        transform.position = GameManager.Instance.TrainManager.TrackGenerator.VertexPath
-            .GetPointAtDistance(DistanceTravelled, endOfPathInstruction);
-
-        transform.rotation = GameManager.Instance.TrainManager.TrackGenerator.VertexPath
-            .GetRotationAtDistance(DistanceTravelled, endOfPathInstruction);
+        transform.SetPositionAndRotation(
+            GameManager.Instance.TrainManager.TrackGenerator.VertexPath.GetPointAtDistance(DistanceTravelled, endOfPathInstruction),
+            GameManager.Instance.TrainManager.TrackGenerator.VertexPath.GetRotationAtDistance(DistanceTravelled, endOfPathInstruction));
     }
 
     public JSONObject Save()

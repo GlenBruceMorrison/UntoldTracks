@@ -5125,7 +5125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 5
-  _axeItemReference: {fileID: 11400000, guid: 0679f56cc01788346bf28445b0e0d310, type: 2}
+  _axeItemReference: {fileID: 11400000, guid: 2e5fbfa2539fd9a43b921c737c73aacb, type: 2}
   tree: {fileID: 7618435736677060852}
   logs:
   - {fileID: 4985883953657926768}
@@ -5136,7 +5136,8 @@ MonoBehaviour:
   grounded: 0
   _displaySprite: {fileID: 21300000, guid: 172774604c1bee84185a69041576525b, type: 3}
   _possibleInputs:
-  - input: 0
+  - validItems: {fileID: 0}
+    input: 0
     text: Chop
   _treeGroundCollisionChecker: {fileID: 0}
   _currentState: 0

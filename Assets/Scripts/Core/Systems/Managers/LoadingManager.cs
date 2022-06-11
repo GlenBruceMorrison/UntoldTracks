@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using UntoldTracks.Data;
 using UntoldTracks.InventorySystem;
 using UntoldTracks.Player;
 using UntoldTracks.Managers;
@@ -44,7 +43,7 @@ namespace UntoldTracks.Managers
             SetPath();
             try
             {
-                using StreamReader reader = new StreamReader(_path);
+                using StreamReader reader = new(_path);
                 string json = reader.ReadToEnd();
                 var root = JSON.Parse(json);
 
