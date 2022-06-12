@@ -1,61 +1,88 @@
-﻿using UnityEngine;
 using System.Collections;
-using System.Linq;
-using TMPro;
-using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using UnityEngine.UI;
+using UntoldTracks;
 
-namespace UntoldTracks.UI
+public class PlayerInteractionControllerUI : MonoBehaviour
 {
-    public class PlayerInteractionControllerUI : MonoBehaviour
+    public Camera _interactionCamera;
+
+    [SerializeField] private Transform pnlTextHolder;
+
+    private bool _showing => pnlTextHolder.gameObject.activeInHierarchy;
+    private IInteractable _target;
+
+    public List<InteractionInputDisplay> inputDisplays = new();
+
+    public void MoveToInteraction(IInteractable target)
     {
-        [SerializeField] private TMP_Text txtInteraction;
-        [SerializeField] private Image imgInteraction;
-        [SerializeField] private Transform pnlTextHolder;
+        ClearAllInput();
 
-        public List<InteractionInputDisplay> inputDisplays = new List<InteractionInputDisplay>();
-
-        public void DisplayInteractable(IInteractable interactable)
+        if (target == null)
         {
-            if (interactable.DisplaySprite != null)
+            _target = null;
+            return;
+        }
+
+        if (_target != null)
+        {
+            _target.OnInteractionStateUpdate -= HandleInteractionStateUpdate;
+        }
+
+        _target = target;
+
+        _target.OnInteractionStateUpdate += HandleInteractionStateUpdate;
+
+        HandleInteractionStateUpdate();
+    }
+
+    public void HandleInteractionStateUpdate()
+    {
+        ClearAllInput();
+
+        if (_target.PossibleInputs == null)
+        {
+            return;
+        }
+
+        foreach (var input in _target.PossibleInputs)
+        {
+            var inputDisplay = inputDisplays.FirstOrDefault(x => x.inputType == input.input);
+
+            if (inputDisplay == null)
             {
-                imgInteraction.sprite = interactable.DisplaySprite;
-                imgInteraction.gameObject.SetActive(true);
+                break;
             }
 
-            ClearAllInput();
-
-            if (interactable.PossibleInputs != null)
-            { 
-                foreach (var input in interactable.PossibleInputs)
-                {
-                    var inputDisplay = inputDisplays.FirstOrDefault(x => x.inputType == input.input);
-                
-                    if (inputDisplay != null)
-                    {
-                        inputDisplay.gameObject.SetActive(true);
-                        inputDisplay.SetText(input.text);
-                    }
-                }
-            }
+            pnlTextHolder.gameObject.SetActive(true);
+            inputDisplay.gameObject.SetActive(true);
+            inputDisplay.SetText(input.text);
         }
+    }
 
-        public void HideInteractable()
+    public void HideInteractable()
+    {
+        pnlTextHolder.gameObject.SetActive(false);
+
+        ClearAllInput();
+    }
+
+    public void ClearAllInput()
+    {
+        foreach (var input in inputDisplays)
         {
-            imgInteraction.sprite = null;
-
-            imgInteraction.gameObject.SetActive(false);
-
-            ClearAllInput();
+            input.ClearText();
+            input.gameObject.SetActive(false);
         }
+    }
 
-        public void ClearAllInput()
-        {
-            foreach(var input in inputDisplays)
-            {
-                input.ClearText();
-                input.gameObject.SetActive(false);
-            }
-        }
+    public void LateUpdate()
+    {
+        if (!_showing || _target == null) return;
+
+        transform.position = _target.InteractionAnchor;
+        transform.LookAt(transform.position + _interactionCamera.transform.rotation * Vector3.forward, _interactionCamera.transform.rotation * Vector3.up);
     }
 }

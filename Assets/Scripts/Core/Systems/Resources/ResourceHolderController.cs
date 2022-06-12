@@ -19,6 +19,10 @@ namespace UntoldTracks.Resource
         public int durability;
         //public int capacity = 10;
 
+        public Vector3 InteractionAnchor => transform.position;
+
+
+        public event InteractionStateUpdate OnInteractionStateUpdate;
         public List<InteractionDisplay> PossibleInputs => new List<InteractionDisplay>()
         {
             new InteractionDisplay(InteractionInput.Primary, $"Harvest {holder.name}.")
@@ -42,13 +46,6 @@ namespace UntoldTracks.Resource
             }
         }
 
-        public Sprite DisplaySprite
-        {
-            get
-            {
-                return IsDepleted ? null : _displaySprite;
-            }
-        }
 
         public ResourceHolder holder;
 

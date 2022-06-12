@@ -9,6 +9,7 @@ using UntoldTracks.InventorySystem;
 using UntoldTracks.Player;
 using UntoldTracks.Models;
 using UntoldTracks.Managers;
+using UnityEngine.Events;
 
 public class ResourceStack : PlaceableEntity, IInteractable
 {
@@ -20,13 +21,16 @@ public class ResourceStack : PlaceableEntity, IInteractable
     public int Max => resource.Count;
     public ItemModel resourceItem;
     public string DisplayText => $"RMB [Remove {resourceItem.displayName}]\nLMB [Add {resourceItem.displayName}]";
-    public Sprite DisplaySprite => source.sprite;
 
+    public Vector3 InteractionAnchor => transform.position;
     public List<InteractionDisplay> PossibleInputs => new List<InteractionDisplay>()
     {
         new InteractionDisplay(InteractionInput.Action1, "Place"),
         new InteractionDisplay(InteractionInput.Secondary, "Take")
     };
+
+
+    public event InteractionStateUpdate OnInteractionStateUpdate;
 
     private void Awake()
     {

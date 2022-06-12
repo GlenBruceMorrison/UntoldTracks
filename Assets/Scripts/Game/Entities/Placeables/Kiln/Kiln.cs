@@ -19,7 +19,8 @@ namespace UntoldTracks.Machines
         [SerializeField] private float _currentFuel;
         [SerializeField] private float _currentCookingTime;
 
-        public UnityEvent OnFuelAdded, OnFuelEmptied, OnBurningStart, OnBurningStop;
+        public UnityEvent OnFuelAdded, OnBurningStart, OnBurningStop;
+        public UnityAction OnFuelBurned, OnItemTaken, OnItemAdded, OnItemCooked;
 
         public ItemModel fuelModel;
 
@@ -28,6 +29,14 @@ namespace UntoldTracks.Machines
         public List<KilnRecipe> recipes = new();
 
         public bool cooking = false;
+
+        public bool HoldingCookedItem
+        {
+            get
+            {
+                return current != null && current.IsCooked(_currentCookingTime);
+            }
+        }
 
         public int MaxFuel
         {
@@ -45,11 +54,20 @@ namespace UntoldTracks.Machines
             }
             set
             {
+                var previousVisible = Mathf.FloorToInt(_currentFuel);
+
                 _currentFuel = value;
 
                 if (_currentFuel > MaxFuel)
                 {
                     _currentFuel = MaxFuel;
+                }
+
+                var nextVisible = Mathf.FloorToInt(_currentFuel);
+
+                if (nextVisible < previousVisible)
+                {
+                    OnFuelBurned?.Invoke();
                 }
 
                 for (var i = 0; i < MaxFuel; i++)
@@ -64,7 +82,6 @@ namespace UntoldTracks.Machines
             return _currentFuel + amount < MaxFuel;
         }
 
-        
         public void AddFuel(PlayerManager player)
         {
             if (!CanAddFuel(1))
@@ -108,6 +125,8 @@ namespace UntoldTracks.Machines
             }
 
             Reset();
+
+            OnItemTaken?.Invoke();
         }
 
         public void GiveItem(PlayerManager player)
@@ -151,6 +170,8 @@ namespace UntoldTracks.Machines
             _currentCookingTime = 0;
             current.input.representation.gameObject.SetActive(true);
             cooking = true;
+
+            OnItemAdded?.Invoke();
             OnBurningStart?.Invoke();
         }
 
@@ -167,8 +188,9 @@ namespace UntoldTracks.Machines
             {
                 if (cooking)
                 {
-                    cooking = false;
+                    cooking = false;       
                     OnBurningStop?.Invoke();
+                    OnItemCooked?.Invoke();
                 }
             }
             else

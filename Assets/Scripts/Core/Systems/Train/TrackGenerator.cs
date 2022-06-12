@@ -35,6 +35,14 @@ public class TrackGenerator : ITokenizable
         }
     }
 
+    public BezierPath BezierPath
+    {
+        get
+        {
+            return _bezierPath;
+        }
+    }
+
     public List<Vector3> Points
     {
         get

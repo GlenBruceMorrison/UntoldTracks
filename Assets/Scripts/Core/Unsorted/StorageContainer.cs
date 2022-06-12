@@ -9,6 +9,7 @@ using UntoldTracks.Player;
 using UntoldTracks.Managers;
 using UntoldTracks.Models;
 using SimpleJSON;
+using UnityEngine.Events;
 
 public class StorageContainer : PlaceableEntity, IInteractable, ITokenizable
 {
@@ -19,6 +20,7 @@ public class StorageContainer : PlaceableEntity, IInteractable, ITokenizable
     [SerializeField] private string _displayText;
     [SerializeField] private Sprite _displaySprite;
 
+    public Vector3 InteractionAnchor => transform.position;
     public List<InteractionDisplay> PossibleInputs => new List<InteractionDisplay>()
     {
         new InteractionDisplay(InteractionInput.Action1, $"Open")
@@ -32,13 +34,8 @@ public class StorageContainer : PlaceableEntity, IInteractable, ITokenizable
         }
     }
 
-    public Sprite DisplaySprite
-    {
-        get
-        {
-            return _displaySprite;
-        }
-    }
+
+    public event InteractionStateUpdate OnInteractionStateUpdate;
 
     public override void Start()
     {

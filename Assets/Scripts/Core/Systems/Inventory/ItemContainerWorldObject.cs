@@ -5,38 +5,21 @@ using UnityEngine;
 using UntoldTracks.Player;
 using UntoldTracks;
 using UntoldTracks.Managers;
+using UnityEngine.Events;
 
 public class ItemContainerWorldObject : MonoBehaviour, IInteractable
 {
     [SerializeField]
     private ItemContainer _container;
 
-    [SerializeField]
-    private string _displayText;
-
-    [SerializeField]
-    private Sprite _displaySprite;
-
-    public List<InteractionDisplay> PossibleInputs => new List<InteractionDisplay>()
+    public Vector3 InteractionAnchor => transform.position;
+    public List<InteractionDisplay> PossibleInputs => new()
     {
         new InteractionDisplay(InteractionInput.Action1, $"Take")
     };
 
-    public string DisplayText
-    {
-        get
-        {
-            return _displayText;
-        }
-    }
 
-    public Sprite DisplaySprite
-    {
-        get
-        {
-            return _displaySprite;
-        }
-    }
+    public event InteractionStateUpdate OnInteractionStateUpdate;
 
     public ItemContainer Container 
     {
@@ -57,7 +40,6 @@ public class ItemContainerWorldObject : MonoBehaviour, IInteractable
 
     public void HandleInput(PlayerManager manager, InteractionInput input)
     {
-        Debug.Log(input);
         if (input == InteractionInput.Action1)
         {
             manager.InventoryController.Inventory.Give(Container);

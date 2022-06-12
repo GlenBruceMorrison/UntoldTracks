@@ -19,8 +19,8 @@ namespace UntoldTracks.UI
         [SerializeField] private PlayerInventoryBarUI playerInventoryBarUI;
         [SerializeField] private InventoryUI linkedInventory;
         [SerializeField] private CraftingUI craftingUI;
-        [SerializeField] private PlayerInteractionControllerUI _interactionControllerUI;
         [SerializeField] private ItemContainerDragHandler _itemContainerDragHandler;
+        [SerializeField] private PlayerInteractionControllerUI _interactionCanvas;
 
         public bool isInventoryOpen = false;
 
@@ -65,11 +65,11 @@ namespace UntoldTracks.UI
         {
             if (target == null)
             {
-                _interactionControllerUI.HideInteractable();
+                _interactionCanvas.HideInteractable();
                 return;
             }
 
-            _interactionControllerUI.DisplayInteractable(target);
+            _interactionCanvas.MoveToInteraction(target);
         }
 
         private void HandleActiveItemChanged(PlayerManager player, ItemContainer container)

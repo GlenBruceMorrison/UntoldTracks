@@ -16,16 +16,18 @@ public class Tree : MonoBehaviour, IInteractable
     [SerializeField] private ItemModel _axeItemReference;
 
     public GameObject tree;
-    public List<GameObject> logs = new List<GameObject>();
+    public List<GameObject> logs = new();
 
     public bool grounded = false;
 
     [SerializeField] private Sprite _displaySprite;
-    [SerializeField] private List<InteractionDisplay> _possibleInputs = new List<InteractionDisplay>();
+    [SerializeField] private List<InteractionDisplay> _possibleInputs = new();
     [SerializeField] private TreeGroundCollisionChecker _treeGroundCollisionChecker;
 
     [SerializeField] private TreeState _currentState;
 
+
+    public Vector3 InteractionAnchor => transform.position + Vector3.up;
     private Rigidbody _rigidbody;
     private Collider _collider;
 
@@ -37,7 +39,10 @@ public class Tree : MonoBehaviour, IInteractable
     }
 
     public UnityEvent OnFalling, OnGrounded, OnHit;
-    
+
+
+    public event InteractionStateUpdate OnInteractionStateUpdate;
+
     public Sprite DisplaySprite
     {
         get
@@ -131,7 +136,23 @@ public class Tree : MonoBehaviour, IInteractable
         _currentState = TreeState.Grounded;
     }
 
-    public void HandleBecomeFocus(PlayerManager player) { }
+    public void HandleBecomeFocus(PlayerManager player)
+    {
+        if (player.InventoryController.ActiveItemContainer.Item == _axeItemReference)
+        {
+            if (health > 0)
+            {
+                _possibleInputs = new List<InteractionDisplay>()
+                {
+                    new InteractionDisplay(InteractionInput.Primary, "Chop")
+                };
+                return;
+            }
+        }
+
+        _possibleInputs = new();
+    }
+
     public void HandleLoseFocus(PlayerManager player) { }
 
 }

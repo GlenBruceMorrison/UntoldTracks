@@ -5294,7 +5294,7 @@ GameObject:
   m_Component:
   - component: {fileID: 842171957083433765}
   - component: {fileID: 2308307191068827764}
-  - component: {fileID: 5803708136797039971}
+  - component: {fileID: 4216036400578975592}
   m_Layer: 0
   m_Name: FuelInteractable
   m_TagString: Untagged
@@ -5310,7 +5310,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5290604949387475578}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.027147714, y: -0.17337784, z: -0.44242954}
+  m_LocalPosition: {x: 0.042, y: -0.17337784, z: -0.342}
   m_LocalScale: {x: 0.76923066, y: 0.4034615, z: 0.27723074}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5329,8 +5329,8 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.885059, y: 1, z: 1}
-  m_Center: {x: 0.086205155, y: 0, z: 0}
---- !u!114 &5803708136797039971
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4216036400578975592
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5339,42 +5339,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5290604949387475578}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 763ec8cc255f9458496d2813062ce8f3, type: 3}
+  m_Script: {fileID: 11500000, guid: f1961bb6b4e7e624994ee0e9099446c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _displayText: Add Fuel
-  _displaySprite: {fileID: 21300000, guid: d5b6f161ff04c4a1cb1df9c364511066, type: 3}
-  _inputDisplay:
-  - validItems: {fileID: 0}
-    input: 0
-    text: Add Fuel
-  onInteraction:
-    m_PersistentCalls:
-      m_Calls: []
-  onPrimaryInput:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6196773792244837926}
-        m_TargetAssemblyTypeName: UntoldTracks.Machines.Kiln, Assembly-CSharp
-        m_MethodName: AddFuel
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onSecondaryInput:
-    m_PersistentCalls:
-      m_Calls: []
-  onLoseFocus:
-    m_PersistentCalls:
-      m_Calls: []
-  onGainFocus:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &5928361617832519148
 GameObject:
   m_ObjectHideFlags: 0
@@ -5554,7 +5521,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2017591142850430301}
   - component: {fileID: 2720549296930014907}
-  - component: {fileID: 75165011235921596}
+  - component: {fileID: 8416084129939049841}
   m_Layer: 0
   m_Name: InputInteractable
   m_TagString: Untagged
@@ -5570,7 +5537,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6472492649018858845}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.027147714, y: 0.328, z: -0.44242954}
+  m_LocalPosition: {x: 0.012, y: 0.328, z: -0.315}
   m_LocalScale: {x: 0.76923066, y: 0.4034615, z: 0.27723074}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5590,7 +5557,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.885059, y: 1, z: 1}
   m_Center: {x: 0.086205155, y: 0, z: 0}
---- !u!114 &75165011235921596
+--- !u!114 &8416084129939049841
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5599,42 +5566,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6472492649018858845}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 763ec8cc255f9458496d2813062ce8f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 96ced9e5b3cc564469328a384bacbbf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _displayText: Add
-  _displaySprite: {fileID: 21300000, guid: a2db46e52394c4fb8a311af66b105ccc, type: 3}
-  _inputDisplay:
-  - validItems: {fileID: 0}
-    input: 0
-    text: Add Fuel
-  onInteraction:
-    m_PersistentCalls:
-      m_Calls: []
-  onPrimaryInput:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6196773792244837926}
-        m_TargetAssemblyTypeName: UntoldTracks.Machines.Kiln, Assembly-CSharp
-        m_MethodName: GiveItem
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onSecondaryInput:
-    m_PersistentCalls:
-      m_Calls: []
-  onLoseFocus:
-    m_PersistentCalls:
-      m_Calls: []
-  onGainFocus:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &6663098323535911684
 GameObject:
   m_ObjectHideFlags: 0
@@ -6082,6 +6016,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnFuelBurned:
+    m_PersistentCalls:
+      m_Calls: []
   fuelModel: {fileID: 11400000, guid: 44aa8cb308c354d4699a1452767870d5, type: 2}
   current: {fileID: 0}
   recipes:

@@ -51,10 +51,10 @@ MonoBehaviour:
   _placeableEntityManager: {fileID: 4333905250428187051}
   _trackGenerator:
     _pointGeneratedCount: 10
-    _distanceBetweenPointsMin: 90
-    _distanceBetweenPointsMax: 140
-    _distanceBreadthMin: 0
-    _distanceBreadthMax: 30
+    _distanceBetweenPointsMin: 146
+    _distanceBetweenPointsMax: 309
+    _distanceBreadthMin: 34
+    _distanceBreadthMax: 104
     _distanceHeightMin: 0
     _distanceHeightMax: 0
     _origin: {x: 0, y: 0, z: 0}
@@ -118,5 +118,5 @@ MonoBehaviour:
   flattenSurface: 1
   roadMaterial: {fileID: 2100000, guid: b5df4735192845740bd11076dc9cdc99, type: 2}
   undersideMaterial: {fileID: 2100000, guid: c1d8d882244c5344fa86a8fd23246f81, type: 2}
-  textureTiling: 1
+  textureTiling: 34
   meshHolder: {fileID: 0}

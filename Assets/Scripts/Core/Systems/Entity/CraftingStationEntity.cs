@@ -5,6 +5,7 @@ using UntoldTracks.InventorySystem;
 using UntoldTracks.Player;
 using UntoldTracks.Models;
 using UntoldTracks.Managers;
+using UnityEngine.Events;
 
 namespace UntoldTracks
 {
@@ -12,14 +13,16 @@ namespace UntoldTracks
     {
         public StationModel _data;
         public string DisplayText => _data._item.displayName;
-        public Sprite DisplaySprite => _data._item.sprite;
 
-        public List<InteractionDisplay> PossibleInputs => new List<InteractionDisplay>()
+        public List<InteractionDisplay> PossibleInputs => new()
         {
             new InteractionDisplay(InteractionInput.Action1, $"Work")
         };
 
+        public Vector3 InteractionAnchor => transform.position + Vector3.up;
 
+
+        public event InteractionStateUpdate OnInteractionStateUpdate;
         public void HandleBecomeFocus(PlayerManager player) { }
         public void HandleLoseFocus(PlayerManager player) { }
 

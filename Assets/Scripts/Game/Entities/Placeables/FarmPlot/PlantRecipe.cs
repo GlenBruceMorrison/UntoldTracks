@@ -2,6 +2,7 @@
 using UnityEngine;
 using UntoldTracks.Models;
 using System.Linq;
+using UnityEngine.Events;
 
 public class PlantRecipe : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class PlantRecipe : MonoBehaviour
     public float timePassed;
 
     public float varianceMultiplier = 0.2f;
+
+    public UnityAction OnPlantGrown;
 
     public bool IsPickable
     {
@@ -54,6 +57,9 @@ public class PlantRecipe : MonoBehaviour
             {
                 UpdateGrowthStage();
             }
+
+            if (IsPickable)
+                OnPlantGrown?.Invoke();
         }
     }
 
