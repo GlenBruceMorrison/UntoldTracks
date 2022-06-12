@@ -117,6 +117,7 @@ public class Tree : MonoBehaviour, IInteractable
         _rigidbody.isKinematic = false;
         OnFalling?.Invoke();
         _treeGroundCollisionChecker.enabled = true;
+        HandleInteractionChange();
     }
 
     public void HandleTreeGrounded()
@@ -138,7 +139,12 @@ public class Tree : MonoBehaviour, IInteractable
 
     public void HandleBecomeFocus(PlayerManager player)
     {
-        if (player.InventoryController.ActiveItemContainer.Item == _axeItemReference)
+        HandleInteractionChange();
+    }
+
+    public void HandleInteractionChange()
+    {
+        if (GameManager.Instance.LocalPlayer.InventoryController.ActiveItemContainer.Item == _axeItemReference)
         {
             if (health > 0)
             {
@@ -146,11 +152,13 @@ public class Tree : MonoBehaviour, IInteractable
                 {
                     new InteractionDisplay(InteractionInput.Primary, "Chop")
                 };
+                OnInteractionStateUpdate?.Invoke();
                 return;
             }
         }
 
         _possibleInputs = new();
+        OnInteractionStateUpdate?.Invoke();
     }
 
     public void HandleLoseFocus(PlayerManager player) { }

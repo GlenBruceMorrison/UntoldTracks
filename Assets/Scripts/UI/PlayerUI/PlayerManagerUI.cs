@@ -52,7 +52,6 @@ namespace UntoldTracks.UI
             playerInventoryUI.gameObject.SetActive(false);
             linkedInventory.gameObject.SetActive(false);
             craftingUI.gameObject.SetActive(false);
-            
         }
 
         private void HandleInventoryModified()
@@ -75,6 +74,7 @@ namespace UntoldTracks.UI
         private void HandleActiveItemChanged(PlayerManager player, ItemContainer container)
         {
             playerInventoryBarUI.SetActiveIndex(container.Index);
+            //_interactionCanvas.HandleInteractionStateUpdate();
         }
 
         public void OpenCraftingWindow(List<Recipe> recipes)

@@ -6,6 +6,7 @@ using UnityEngine.Serialization;
 using UntoldTracks.InventorySystem;
 using UntoldTracks.UI;
 using UntoldTracks.Managers;
+using System;
 
 namespace UntoldTracks.Player
 {
@@ -56,7 +57,12 @@ namespace UntoldTracks.Player
 
         public void Init()
         {
+            GameManager.Instance.LocalPlayer.InventoryController.OnActiveItemChanged += HandleActiveItemChanged;
+        }
 
+        private void HandleActiveItemChanged(PlayerManager player, ItemContainer container)
+        {
+            _currentFocus = null;
         }
 
         public void Tick()

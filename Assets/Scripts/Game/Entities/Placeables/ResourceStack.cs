@@ -17,13 +17,13 @@ public class ResourceStack : PlaceableEntity, IInteractable
     private int _currentStored = 0;
     
     public Transform resourceContainer;
-    public List<Transform> resource = new List<Transform>();
+    public List<Transform> resource = new();
     public int Max => resource.Count;
     public ItemModel resourceItem;
     public string DisplayText => $"RMB [Remove {resourceItem.displayName}]\nLMB [Add {resourceItem.displayName}]";
 
     public Vector3 InteractionAnchor => transform.position;
-    public List<InteractionDisplay> PossibleInputs => new List<InteractionDisplay>()
+    public List<InteractionDisplay> PossibleInputs => new()
     {
         new InteractionDisplay(InteractionInput.Action1, "Place"),
         new InteractionDisplay(InteractionInput.Secondary, "Take")

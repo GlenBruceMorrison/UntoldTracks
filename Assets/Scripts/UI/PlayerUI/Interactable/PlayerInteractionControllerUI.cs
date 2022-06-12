@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UntoldTracks;
+using UntoldTracks.Managers;
 
 public class PlayerInteractionControllerUI : MonoBehaviour
 {
@@ -11,10 +12,10 @@ public class PlayerInteractionControllerUI : MonoBehaviour
 
     [SerializeField] private Transform pnlTextHolder;
 
-    private bool _showing => pnlTextHolder.gameObject.activeInHierarchy;
     private IInteractable _target;
 
     public List<InteractionInputDisplay> inputDisplays = new();
+
 
     public void MoveToInteraction(IInteractable target)
     {
@@ -41,6 +42,11 @@ public class PlayerInteractionControllerUI : MonoBehaviour
     public void HandleInteractionStateUpdate()
     {
         ClearAllInput();
+
+        if (_target == null)
+        {
+            return;
+        }
 
         if (_target.PossibleInputs == null)
         {
@@ -80,7 +86,7 @@ public class PlayerInteractionControllerUI : MonoBehaviour
 
     public void LateUpdate()
     {
-        if (!_showing || _target == null) return;
+        if (_target == null) return;
 
         transform.position = _target.InteractionAnchor;
         transform.LookAt(transform.position + _interactionCamera.transform.rotation * Vector3.forward, _interactionCamera.transform.rotation * Vector3.up);

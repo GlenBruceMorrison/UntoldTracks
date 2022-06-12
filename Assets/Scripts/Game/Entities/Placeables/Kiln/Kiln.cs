@@ -172,7 +172,11 @@ namespace UntoldTracks.Machines
             cooking = true;
 
             OnItemAdded?.Invoke();
-            OnBurningStart?.Invoke();
+
+            if (_currentFuel > 0)
+            {
+                OnBurningStart?.Invoke();
+            }
         }
 
         private void Update()

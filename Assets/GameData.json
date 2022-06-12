@@ -1,1 +1,51 @@
-{"player":{"entity":{"position":{"x":9.8481912612915,"y":1.06511533260345,"z":12.7338066101074},"rotation":{"x":0,"y":0,"z":0}},"inventory":{"size":29,"items":[{"itemGUID":"2e5fbfa2539fd9a43b921c737c73aacb","inventoryIndex":0,"amount":1,"durability":20},{"itemGUID":"8220296dc70903344a2f6a49626bf19a","inventoryIndex":1,"amount":1,"durability":0},{"itemGUID":"9e4d0b862bf50654ba36745948d64512","inventoryIndex":2,"amount":20,"durability":0},{"itemGUID":"8220296dc70903344a2f6a49626bf19a","inventoryIndex":3,"amount":1,"durability":0},{"itemGUID":"8220296dc70903344a2f6a49626bf19a","inventoryIndex":5,"amount":1,"durability":0},{"itemGUID":"8220296dc70903344a2f6a49626bf19a","inventoryIndex":8,"amount":1,"durability":0},{"itemGUID":"44aa8cb308c354d4699a1452767870d5","inventoryIndex":14,"amount":1,"durability":0},{"itemGUID":"44aa8cb308c354d4699a1452767870d5","inventoryIndex":18,"amount":20,"durability":0},{"itemGUID":"7c421e4f291c74a48850fe1594e32739","inventoryIndex":20,"amount":1,"durability":0},{"itemGUID":"44aa8cb308c354d4699a1452767870d5","inventoryIndex":22,"amount":20,"durability":0},{"itemGUID":"7c421e4f291c74a48850fe1594e32739","inventoryIndex":24,"amount":1,"durability":0},{"itemGUID":"44aa8cb308c354d4699a1452767870d5","inventoryIndex":26,"amount":20,"durability":0},{"itemGUID":"01a575bc5cdcbe64fa7fa7ab42b18cf2","inventoryIndex":27,"amount":17,"durability":0},{"itemGUID":"7c421e4f291c74a48850fe1594e32739","inventoryIndex":28,"amount":1,"durability":0}]}},"train":{"distanceTravelled":0,"currentSpeed":0,"isMoving":false,"carriages":[{"carriageGUID":"058b7d2f59dd28c4ab2501c9ea98bb13"},{"carriageGUID":"058b7d2f59dd28c4ab2501c9ea98bb13"},{"carriageGUID":"058b7d2f59dd28c4ab2501c9ea98bb13"},{"carriageGUID":"058b7d2f59dd28c4ab2501c9ea98bb13"},{"carriageGUID":"058b7d2f59dd28c4ab2501c9ea98bb13"},{"carriageGUID":"058b7d2f59dd28c4ab2501c9ea98bb13"}],"placeableEntities":{"entities":[{"position":{"x":11.1157150268555,"y":1.05511510372162,"z":18.230562210083},"rotation":{"x":-4.44089209850063E-15,"y":5.96046447753906E-08,"z":1.4432899320127E-15,"w":-1},"itemGUID":"7c421e4f291c74a48850fe1594e32739","currentRecipeInputGUID":"01a575bc5cdcbe64fa7fa7ab42b18cf2","cookingTime":20.0045928955078,"currentFuel":7.99955129623413},{"position":{"x":11.1240139007568,"y":1.05511522293091,"z":11.755033493042},"rotation":{"x":-2.79021321603068E-08,"y":0.923879623413086,"z":2.0525060762111E-08,"w":-0.38268318772316},"itemGUID":"8220296dc70903344a2f6a49626bf19a"},{"position":{"x":13.8244295120239,"y":1.05511522293091,"z":15.1863918304443},"rotation":{"x":5.84549830762171E-09,"y":0.311825275421143,"z":1.78113808146918E-08,"w":0.950139462947845},"itemGUID":"8220296dc70903344a2f6a49626bf19a"},{"position":{"x":7.85255527496338,"y":1.05511510372162,"z":13.6450366973877},"rotation":{"x":5.84549830762171E-09,"y":0.311825275421143,"z":1.78113808146918E-08,"w":0.950139462947845},"itemGUID":"8220296dc70903344a2f6a49626bf19a"},{"position":{"x":10.4108438491821,"y":1.05511510372162,"z":15.3812026977539},"rotation":{"x":-8.46115710828599E-09,"y":0.892343878746033,"z":1.6727943474848E-08,"w":0.451356291770935},"itemGUID":"8220296dc70903344a2f6a49626bf19a"}]},"track":{"points":[[0,0,0],[100,0,219],[-69,0,424],[73,0,718],[-100,0,992],[41,0,1155],[-62,0,1307],[75,0,1580],[-38,0,1734],[70,0,1912]]}}}
+{
+    "player": {
+        "entity": {
+            "position": {
+                "x": 0,
+                "y": 3,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            }
+        },
+        "inventory": {
+            "size": 29,
+            "items": []
+        }
+    },
+    "train": {
+        "distanceTravelled": 0,
+        "currentSpeed": 0,
+        "isMoving": false,
+        "carriages": [
+            {
+                "carriageGUID": "058b7d2f59dd28c4ab2501c9ea98bb13"
+            },
+            {
+                "carriageGUID": "058b7d2f59dd28c4ab2501c9ea98bb13"
+            },
+            {
+                "carriageGUID": "25812bb6abce2c147b4b0f934f21a483"
+            },
+            {
+                "carriageGUID": "25812bb6abce2c147b4b0f934f21a483"
+            },
+            {
+                "carriageGUID": "058b7d2f59dd28c4ab2501c9ea98bb13"
+            },
+            {
+                "carriageGUID": "058b7d2f59dd28c4ab2501c9ea98bb13"
+            }
+        ],
+        "placeableEntities": {
+            "entities": []
+        },
+        "track": {
+            "points": []
+        }
+    }
+}

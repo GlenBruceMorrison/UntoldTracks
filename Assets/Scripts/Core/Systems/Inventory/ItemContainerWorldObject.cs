@@ -11,12 +11,13 @@ public class ItemContainerWorldObject : MonoBehaviour, IInteractable
 {
     [SerializeField]
     private ItemContainer _container;
-
-    public Vector3 InteractionAnchor => transform.position;
-    public List<InteractionDisplay> PossibleInputs => new()
+    public List<InteractionDisplay> _possibleInputs = new()
     {
         new InteractionDisplay(InteractionInput.Action1, $"Take")
     };
+
+    public Vector3 InteractionAnchor => transform.position;
+    public List<InteractionDisplay> PossibleInputs => _possibleInputs;
 
 
     public event InteractionStateUpdate OnInteractionStateUpdate;
