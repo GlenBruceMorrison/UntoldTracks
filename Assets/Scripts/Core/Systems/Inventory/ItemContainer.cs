@@ -79,7 +79,7 @@ namespace UntoldTracks.InventorySystem
             _count = count;
             _currentDurability = durability;
         }
-         
+
         public ItemContainer(ItemModel item, int count, int durability=-1)
         {
             _inventory = null;
@@ -410,6 +410,42 @@ namespace UntoldTracks.InventorySystem
             else
             {
                OnModified?.Invoke(this);
+            }
+        }
+
+        public void DropContainerOnUs(ItemContainer container)
+        {
+            // if the items are the same
+            if (HasItem(container.Item))
+            {
+                var origionalCount = container.Count;
+
+                // fill other container with what we can
+                var queryResult = Give(container);
+
+                var durabiltyValue = container.CurrentDurability;
+
+                container.Empty();
+
+                // if not everything was able to be added, give the remaining back to this container
+                var amountNotAdded = origionalCount - queryResult.amountAdded;
+                if (amountNotAdded > 0)
+                {
+                    container.Give(new ItemContainer(queryResult.item, queryResult.amountAdded, durabiltyValue));
+                }
+            }
+            // if dropping into an empty container
+            else if (IsEmpty())
+            {
+                // fill space
+                Give(container);
+                container.Empty();
+            }
+            // if items are different
+            else if (!HasItem(container.Item))
+            {
+                //swap items
+                Swap(container);
             }
         }
 
