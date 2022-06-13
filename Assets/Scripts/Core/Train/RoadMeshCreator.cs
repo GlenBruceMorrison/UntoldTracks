@@ -3,7 +3,8 @@ using PathCreation;
 using PathCreation.Utility;
 using UnityEngine;
 
-public class RoadMeshCreator : MonoBehaviour {
+public class RoadMeshCreator : MonoBehaviour
+{
     [Header ("Road settings")]
     public float roadWidth = .4f;
     [Range (0, .5f)]
@@ -24,7 +25,7 @@ public class RoadMeshCreator : MonoBehaviour {
 
     public VertexPath path;
 
-    public void Init (VertexPath path)
+    public void Init(VertexPath path)
     {
         this.path = path;
         AssignMeshComponents();

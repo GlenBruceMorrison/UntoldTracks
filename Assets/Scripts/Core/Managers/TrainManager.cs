@@ -62,17 +62,5 @@ namespace UntoldTracks.Managers
             return trainJSON;
         }
         #endregion
-
-
-        private void Update()
-        {
-            if (Input.GetKeyDown("l"))
-            {
-                foreach (var entity in _placeableEntityManager.entities)
-                {
-                    entity.AfterBuild();
-                }
-            }
-        }
     }
 }

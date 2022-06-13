@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4333905250428187050}
   - component: {fileID: 4333905250428187044}
   - component: {fileID: 4333905250428187051}
-  - component: {fileID: 1544342556674295393}
+  - component: {fileID: 6284099521812245688}
   m_Layer: 0
   m_Name: Train
   m_TagString: Untagged
@@ -50,6 +50,7 @@ MonoBehaviour:
   _train: {fileID: 4333905250428187044}
   _placeableEntityManager: {fileID: 4333905250428187051}
   _trackGenerator:
+    _points: []
     _pointGeneratedCount: 10
     _distanceBetweenPointsMin: 146
     _distanceBetweenPointsMax: 309
@@ -101,7 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entities: []
---- !u!114 &1544342556674295393
+--- !u!114 &6284099521812245688
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,13 +111,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4333905250428187047}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b275c3b78f8717c4cbc60f74a3247f67, type: 3}
+  m_Script: {fileID: 11500000, guid: 55c872b9ce7839e428cfcccae3538a8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roadWidth: 3.41
-  thickness: 0.186
+  roadWidth: 1.5
+  thickness: 0.15
   flattenSurface: 1
-  roadMaterial: {fileID: 2100000, guid: b5df4735192845740bd11076dc9cdc99, type: 2}
-  undersideMaterial: {fileID: 2100000, guid: c1d8d882244c5344fa86a8fd23246f81, type: 2}
-  textureTiling: 34
+  roadMaterial: {fileID: 2100000, guid: 69561553b86bde34da494d1ffed3ba45, type: 2}
+  undersideMaterial: {fileID: 2100000, guid: 69561553b86bde34da494d1ffed3ba45, type: 2}
+  textureTiling: 1
   meshHolder: {fileID: 0}

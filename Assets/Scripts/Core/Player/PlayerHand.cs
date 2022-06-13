@@ -26,20 +26,6 @@ namespace UntoldTracks.Player
             HandleActiveItemChanged(playerManager, playerManager.InventoryController.ActiveItemContainer);
         }
 
-        /*
-        private void OnEnable()
-        {
-            playerManager.InventoryController.OnActiveItemChanged += HandleActiveItemChanged;
-            HandleActiveItemChanged(playerManager, playerManager.InventoryController.ActiveItemContainer);
-        }
-
-        private void OnDisable()
-        {
-            playerManager.InventoryController.OnActiveItemChanged -= HandleActiveItemChanged;
-            EmptyHand();
-        }
-        */
-
         /// <summary>
         /// Destroys what the player is currently holding
         /// </summary>
