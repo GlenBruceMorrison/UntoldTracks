@@ -51,13 +51,11 @@ MonoBehaviour:
   _placeableEntityManager: {fileID: 4333905250428187051}
   _trackGenerator:
     _points: []
-    _pointGeneratedCount: 10
-    _distanceBetweenPointsMin: 146
-    _distanceBetweenPointsMax: 309
-    _distanceBreadthMin: 34
-    _distanceBreadthMax: 104
-    _distanceHeightMin: 0
-    _distanceHeightMax: 0
+    _pointsToGenerate: 20
+    _distanceBetweenPointsMin: 60
+    _distanceBetweenPointsMax: 140
+    _distanceBreadthMin: 0
+    _distanceBreadthMax: 50
     _origin: {x: 0, y: 0, z: 0}
 --- !u!114 &4333905250428187044
 MonoBehaviour:

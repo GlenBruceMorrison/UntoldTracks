@@ -62,5 +62,11 @@ namespace UntoldTracks.Managers
             return trainJSON;
         }
         #endregion
+
+        private void OnDrawGizmos()
+        {
+
+            Gizmos.DrawCube(_trackGenerator.LastPoint, Vector3.one);
+        }
     }
 }

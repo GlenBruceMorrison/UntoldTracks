@@ -6,6 +6,9 @@ using UnityEngine;
 public class ResourceService : Singleton<ResourceService>
 {
     [SerializeField] private List<SerializableScriptableObject> _assets;
+    [SerializeField] private List<GeneratableBase> _generatables;
+
+    public List<GeneratableBase> Generatables => _generatables;
 
     public T FindByGUID<T>(string guid) where T : SerializableScriptableObject
     {
@@ -26,5 +29,6 @@ public class ResourceService : Singleton<ResourceService>
     {
         base.Awake();
         _assets = Resources.LoadAll<SerializableScriptableObject>("Data").ToList();
+        _generatables = Resources.LoadAll<GeneratableBase>("Generation").ToList();
     }
 }
