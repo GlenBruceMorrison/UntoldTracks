@@ -62,7 +62,7 @@ namespace UntoldTracks.CharacterController
             // Create the look input vector for the camera
             float mouseLookAxisUp = Input.GetAxisRaw(MouseYInput);
             float mouseLookAxisRight = Input.GetAxisRaw(MouseXInput);
-            Vector3 lookInputVector = new Vector3(mouseLookAxisRight, mouseLookAxisUp, 0f);
+            Vector3 lookInputVector = new(mouseLookAxisRight, mouseLookAxisUp, 0f);
 
             // Prevent moving the camera while the cursor isn't locked
             if (Cursor.lockState != CursorLockMode.Locked)
@@ -88,15 +88,16 @@ namespace UntoldTracks.CharacterController
 
         private void HandleCharacterInput()
         {
-            PlayerCharacterInputs characterInputs = new PlayerCharacterInputs();
-
-            // Build the CharacterInputs struct
-            characterInputs.MoveAxisForward = Input.GetAxisRaw(VerticalInput);
-            characterInputs.MoveAxisRight = Input.GetAxisRaw(HorizontalInput);
-            characterInputs.CameraRotation = CharacterCamera.Transform.rotation;
-            characterInputs.JumpDown = Input.GetKeyDown(KeyCode.Space);
-            characterInputs.CrouchDown = Input.GetKeyDown(KeyCode.C);
-            characterInputs.CrouchUp = Input.GetKeyUp(KeyCode.C);
+            PlayerCharacterInputs characterInputs = new()
+            {
+                // Build the CharacterInputs struct
+                MoveAxisForward = Input.GetAxisRaw(VerticalInput),
+                MoveAxisRight = Input.GetAxisRaw(HorizontalInput),
+                CameraRotation = CharacterCamera.Transform.rotation,
+                JumpDown = Input.GetKeyDown(KeyCode.Space),
+                CrouchDown = Input.GetKeyDown(KeyCode.C),
+                CrouchUp = Input.GetKeyUp(KeyCode.C)
+            };
 
             // Apply inputs to character
             Character.SetInputs(ref characterInputs);

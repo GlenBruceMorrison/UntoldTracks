@@ -51,7 +51,7 @@ MonoBehaviour:
   _placeableEntityManager: {fileID: 4333905250428187051}
   _trackGenerator:
     _points: []
-    _pointsToGenerate: 20
+    _pointsToGenerate: 4
     _distanceBetweenPointsMin: 60
     _distanceBetweenPointsMax: 140
     _distanceBreadthMin: 0

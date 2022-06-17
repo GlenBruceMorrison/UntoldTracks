@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3366357091587590897}
   - component: {fileID: 3057020961336155466}
   - component: {fileID: 353044810429674381}
-  - component: {fileID: 956001626}
   m_Layer: 0
   m_Name: prefab_crafting_station
   m_TagString: Untagged
@@ -33,7 +32,6 @@ Transform:
   m_Children:
   - {fileID: 2758877394241618677}
   - {fileID: 4021291956437967109}
-  - {fileID: 7682468422150905548}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -70,83 +68,6 @@ MonoBehaviour:
   - {fileID: 4021291956437967109}
   _worldTransform: {fileID: 2758877394241618677}
   _data: {fileID: 11400000, guid: 074e7acd5763a7b48acf6a671585f271, type: 2}
---- !u!65 &956001626
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1006569243475268645}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.1055069, z: 2.0654907}
-  m_Center: {x: 0, y: 0.57999253, z: -0.0034780502}
---- !u!1 &2116588593964783003
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7682468422150905548}
-  - component: {fileID: 8420254781647504593}
-  - component: {fileID: 2563823098976995750}
-  m_Layer: 2
-  m_Name: PlacementCollider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7682468422150905548
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2116588593964783003}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.79, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3366357091587590897}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &8420254781647504593
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2116588593964783003}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.1769336, z: 2.058442}
-  m_Center: {x: 0, y: -0.19589108, z: -0.0047392845}
---- !u!114 &2563823098976995750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2116588593964783003}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0aee05877257ce041a2b50a948de638a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TriggerStay:
-    m_PersistentCalls:
-      m_Calls: []
-  TriggerExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &8587360829107749534
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,6 +176,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36f236c9686de463eac32458acc6939a, type: 3}
+--- !u!1 &659297622556943925 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7399866426812414126, guid: 36f236c9686de463eac32458acc6939a, type: 3}
+  m_PrefabInstance: {fileID: 8041125452434775707}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &454442492968196654
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 659297622556943925}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6317805809608689028, guid: 27b6ede33e1114df3895018d36d13b60, type: 3}
 --- !u!4 &2758877394241618677 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5322780465174322286, guid: 36f236c9686de463eac32458acc6939a, type: 3}

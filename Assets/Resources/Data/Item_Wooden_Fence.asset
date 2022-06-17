@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae6880a8766e14bef8e7c995f2275825, type: 3}
+  m_Name: Item_Wooden_Fence
+  m_EditorClassIdentifier: 
+  _guid: b24305d3b579e374d93e2e604bc9a6b9
+  displayName: Wooden Fence
+  sprite: {fileID: 21300000, guid: 5efa228a286dd45a9991204fd1acdd0f, type: 3}
+  description: awdawdawd awd awd awd awd awdawda wd
+  stackable: 0
+  stackSize: 20
+  isEquipable: 0
+  equipablePrefab: {fileID: 0}
+  hasCustomInteractionFrame: 0
+  degradable: 0
+  durability: 0
+  isPlaceable: 1
+  placeablePrefab: {fileID: 3049078234038528597, guid: 2164bc09539d2f245a433fce036fbc2c, type: 3}
+  canRotate: 1

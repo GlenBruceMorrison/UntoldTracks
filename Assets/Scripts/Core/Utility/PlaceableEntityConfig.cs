@@ -39,7 +39,7 @@ public class PlaceableEntityConfig : MonoBehaviour
         var placableriggger = placableIndicator.AddComponent<BoxCollider>();
         placableriggger.isTrigger = true;
         placableIndicator.layer = 2;
-        placableIndicator.AddComponent<PlacableEntityIndicator>();
+        placableIndicator.AddComponent<ColliderEvents>();
         placableriggger.transform.parent = root.transform;
 
         // Raycasts

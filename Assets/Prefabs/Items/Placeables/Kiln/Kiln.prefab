@@ -5697,70 +5697,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1 &7641647753419484305
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4674911382504310748}
-  - component: {fileID: 7092841668382288741}
-  - component: {fileID: 6321461593478547638}
-  m_Layer: 2
-  m_Name: PlacementColliders
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4674911382504310748
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7641647753419484305}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.056, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4843906964964810635}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7092841668382288741
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7641647753419484305}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.3213671, y: 2.1672468, z: 1.3319037}
-  m_Center: {x: 0.002634108, y: 1.1106229, z: 0.007902384}
---- !u!114 &6321461593478547638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7641647753419484305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0aee05877257ce041a2b50a948de638a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TriggerStay:
-    m_PersistentCalls:
-      m_Calls: []
-  TriggerExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &7904418528084339160
 GameObject:
   m_ObjectHideFlags: 0
@@ -5858,7 +5794,6 @@ Transform:
   m_Children:
   - {fileID: 2216528690549517725}
   - {fileID: 2776459808838580531}
-  - {fileID: 4674911382504310748}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5923,9 +5858,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnFuelEmptied:
-    m_PersistentCalls:
-      m_Calls: []
   OnBurningStart:
     m_PersistentCalls:
       m_Calls:
@@ -6016,9 +5948,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnFuelBurned:
-    m_PersistentCalls:
-      m_Calls: []
   fuelModel: {fileID: 11400000, guid: 44aa8cb308c354d4699a1452767870d5, type: 2}
   current: {fileID: 0}
   recipes:
@@ -6410,6 +6339,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2330239533875951432, guid: c2d0973dbeb644d4ead2818ea69d1b8a, type: 3}
   m_PrefabInstance: {fileID: 1693506275709736477}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4367918596028759023 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3106775855243668978, guid: c2d0973dbeb644d4ead2818ea69d1b8a, type: 3}
+  m_PrefabInstance: {fileID: 1693506275709736477}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &8618119278353217286
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4367918596028759023}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.01
+  m_Height: 3.67
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.33, z: 0}
 --- !u!1001 &1768210703798228515
 PrefabInstance:
   m_ObjectHideFlags: 0

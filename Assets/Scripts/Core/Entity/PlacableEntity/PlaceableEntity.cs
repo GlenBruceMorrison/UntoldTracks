@@ -10,15 +10,12 @@ public class PlaceableEntity : Entity, ITokenizable
 {
     public ItemModel source;
     public List<Transform> raycastOrigins = new();
-
-    private PlacableEntityIndicator _placeableEntityIndicator;
-    private Collider[] _worldColliders;
-    private Collider _rootCollider;
-    private MeshRenderer _meshRenderer;
     private Renderer[] _allRenderers;
     private Material[] _allMaterials;
     private bool _beingPlaced;
     private bool _isTriggering = false;
+
+    private ColliderEvents _colliderEvents;
 
     [SerializeField]
     private Transform _worldTransform;
@@ -65,24 +62,36 @@ public class PlaceableEntity : Entity, ITokenizable
     protected virtual void OnEnable()
     {
         GrabAllRenderers();
-        _worldColliders = _worldTransform.GetComponentsInChildren<Collider>();
-        _placeableEntityIndicator = GetComponentInChildren<PlacableEntityIndicator>();
-        _rootCollider = this.gameObject.GetComponent<Collider>();
-        
-        if (_placeableEntityIndicator == null)
+
+        if (_worldTransform != null)
         {
-            Debug.LogWarning("This object does not have a PlaceableEntityIndicator on it, disabling!");
-            this.gameObject.SetActive(false);
+            _colliderEvents = _worldTransform.GetComponent<ColliderEvents>();
+
+            if (_colliderEvents == null)
+            {
+                _colliderEvents = _worldTransform.gameObject.AddComponent<ColliderEvents>();
+            }
+
+            if (_colliderEvents != null)
+            {
+                _colliderEvents.TriggerStay += (HandleTriggerStay);
+                _colliderEvents.TriggerExit += (HandleTriggerExit);
+            }
+            else
+            {
+                throw new Exception("Could not get a ColliderEvents for this placeable, events not subscribed to");
+            }
         }
-        
-        _placeableEntityIndicator.TriggerStay.AddListener(HandleTriggerStay);
-        _placeableEntityIndicator.TriggerExit.AddListener(HandleTriggerExit);
+        else
+        {
+            throw new Exception("This placeable does not have a world object assigned in this script");
+        }
     }
 
     protected virtual void OnDisable()
     {
-        _placeableEntityIndicator.TriggerStay.RemoveListener(HandleTriggerStay);
-        _placeableEntityIndicator.TriggerExit.RemoveListener(HandleTriggerExit);
+        _colliderEvents.TriggerStay -= (HandleTriggerStay);
+        _colliderEvents.TriggerExit -= (HandleTriggerExit);
     }
 
     public void HandleTriggerStay()
@@ -122,22 +131,6 @@ public class PlaceableEntity : Entity, ITokenizable
         }
     }
 
-    private void SetWorldColliders(bool state)
-    {
-        if (_rootCollider != null)
-        {
-            _rootCollider.enabled = state;
-        }
-                
-        if (_worldColliders.Any())
-        {
-            foreach (var worldCollider in _worldColliders)
-            {
-                worldCollider.enabled = state;
-            }
-        }
-    }
-
     private void SetBeingPlaced(bool state)
     {
         if (_beingPlaced == state)
@@ -149,13 +142,13 @@ public class PlaceableEntity : Entity, ITokenizable
             
         if (_beingPlaced)
         {
-            _placeableEntityIndicator.gameObject.SetActive(true);
-            SetWorldColliders(false);
+            _worldTransform.gameObject.SetLayerRecursively("Ignore Raycast");
+            gameObject.ChildCollidersToTriggers(true);
         }
         else
         {
-            _placeableEntityIndicator.gameObject.SetActive(false);
-            SetWorldColliders(true);
+            Utility.SetLayerRecursively(_worldTransform.gameObject, LayerMask.NameToLayer("Default"));
+            gameObject.ChildCollidersToTriggers(false);
         }
     }
 

@@ -3,21 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlacableEntityIndicator : MonoBehaviour
+public class ColliderEvents : MonoBehaviour
 {
     private Collider _collider;
 
-    public UnityEvent TriggerStay, TriggerExit;
+    public UnityAction TriggerStay, TriggerExit;
 
     private void Awake()
     {
         _collider = GetComponent<Collider>();
-
-        if (!_collider.isTrigger)
-        {
-            Debug.LogWarning("This collider is supposed to be a trigger, so setting it to a trigger");
-            _collider.isTrigger = true;
-        }
     }
 
     private void OnEnable()
