@@ -5310,7 +5310,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5290604949387475578}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.042, y: -0.17337784, z: -0.342}
+  m_LocalPosition: {x: 0.042, y: -0.17337784, z: -0.463}
   m_LocalScale: {x: 0.76923066, y: 0.4034615, z: 0.27723074}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5537,7 +5537,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6472492649018858845}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.012, y: 0.328, z: -0.315}
+  m_LocalPosition: {x: 0.012, y: 0.328, z: -0.451}
   m_LocalScale: {x: 0.76923066, y: 0.4034615, z: 0.27723074}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5828,6 +5828,9 @@ MonoBehaviour:
   source: {fileID: 11400000, guid: 7c421e4f291c74a48850fe1594e32739, type: 2}
   raycastOrigins:
   - {fileID: 2216528690549517725}
+  ignoreWhenPlacing:
+  - {fileID: 2308307191068827764}
+  - {fileID: 2720549296930014907}
   _worldTransform: {fileID: 4023445642908901717}
   _fuelDegradeRate: 0.1
   _fuelModels:
@@ -6357,7 +6360,7 @@ CapsuleCollider:
   m_Radius: 1.01
   m_Height: 3.67
   m_Direction: 1
-  m_Center: {x: 0, y: 0.33, z: 0}
+  m_Center: {x: 0, y: 0.45, z: 0}
 --- !u!1001 &1768210703798228515
 PrefabInstance:
   m_ObjectHideFlags: 0

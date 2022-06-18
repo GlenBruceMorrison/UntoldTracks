@@ -38,6 +38,7 @@ public class PlaceableEntityController : MonoBehaviour
 
         if (!_targetPlaceable.raycastOrigins.Any())
         {
+            Debug.LogError("This placeable does not have any raycast origins attatched, it will never be placeable");
             return false;
         }
 
@@ -83,6 +84,7 @@ public class PlaceableEntityController : MonoBehaviour
         _targetPlaceable.transform.parent = playerManager.InteractionController.LookingAtGameObject.transform;
 
         // remove can place and cant place material indicators
+        Debug.Log("Rseting MAts");
         _targetPlaceable.ResetMaterials();
 
         // remove this as the players active item
@@ -104,14 +106,14 @@ public class PlaceableEntityController : MonoBehaviour
 
     public void SetTargetPlacable(PlaceableEntity entity)
     {
-        ResetTransform(this.transform);
+        ResetTransform(transform);
 
         _targetPlaceable = entity;
 
         if (_targetPlaceable == null)
         {
             Debug.LogError("A targetPlaceable is not set, so we are going to disable");
-            this.gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
 
         // todo: optimize

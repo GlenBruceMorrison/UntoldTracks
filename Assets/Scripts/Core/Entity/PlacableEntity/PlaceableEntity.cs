@@ -16,6 +16,7 @@ public class PlaceableEntity : Entity, ITokenizable
     private bool _isTriggering = false;
 
     private ColliderEvents _colliderEvents;
+    public List<Collider> ignoreWhenPlacing = new();
 
     [SerializeField]
     private Transform _worldTransform;
@@ -49,6 +50,11 @@ public class PlaceableEntity : Entity, ITokenizable
         }
     }
 
+    private void Awake()
+    {
+        GrabAllRenderers();
+    }
+
     public override void Start()
     {
         base.Start();
@@ -61,8 +67,6 @@ public class PlaceableEntity : Entity, ITokenizable
 
     protected virtual void OnEnable()
     {
-        GrabAllRenderers();
-
         if (_worldTransform != null)
         {
             _colliderEvents = _worldTransform.GetComponent<ColliderEvents>();
@@ -143,11 +147,13 @@ public class PlaceableEntity : Entity, ITokenizable
         if (_beingPlaced)
         {
             _worldTransform.gameObject.SetLayerRecursively("Ignore Raycast");
+            ignoreWhenPlacing.ForEach(x => x.gameObject.SetActive(false));
             gameObject.ChildCollidersToTriggers(true);
         }
         else
         {
             Utility.SetLayerRecursively(_worldTransform.gameObject, LayerMask.NameToLayer("Default"));
+            ignoreWhenPlacing.ForEach(x => x.gameObject.SetActive(true));
             gameObject.ChildCollidersToTriggers(false);
         }
     }
