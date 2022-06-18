@@ -2,9 +2,9 @@
     "player": {
         "entity": {
             "position": {
-                "x": 0,
-                "y": 3,
-                "z": 0
+                "x": -30.7552337646484,
+                "y": 0.738206386566162,
+                "z": -15.2910490036011
             },
             "rotation": {
                 "x": 0,
@@ -29,13 +29,13 @@
                 "carriageGUID": "058b7d2f59dd28c4ab2501c9ea98bb13"
             },
             {
-                "carriageGUID": "25812bb6abce2c147b4b0f934f21a483"
+                "carriageGUID": "a53fcc744c4837341b6a1fa880d070ec"
             },
             {
-                "carriageGUID": "25812bb6abce2c147b4b0f934f21a483"
+                "carriageGUID": "a53fcc744c4837341b6a1fa880d070ec"
             },
             {
-                "carriageGUID": "058b7d2f59dd28c4ab2501c9ea98bb13"
+                "carriageGUID": "a53fcc744c4837341b6a1fa880d070ec"
             },
             {
                 "carriageGUID": "058b7d2f59dd28c4ab2501c9ea98bb13"
@@ -45,7 +45,8 @@
             "entities": []
         },
         "track": {
-            "points": []
+            "points": [
+            ]
         }
     }
 }

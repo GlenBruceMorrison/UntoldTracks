@@ -1,0 +1,903 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Ocean_1
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: 16629e6f345891348b53ecc2ace028bb, type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: refractionExpanded
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: vertexPaintingExpanded
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamExpanded
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: foamShadowsExpanded
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: intersectionEffectsExpanded
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: planarReflectionsExpanded
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: causticsExpanded
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: reflectionStrength
+    value: 0.551
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: reflectionFresnel
+    value: 7
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: causticsStrength
+    value: 2.09
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: causticsTexture
+    value: 
+    objectReference: {fileID: 2800000, guid: f2c40b951cee11943a1f6d5ec1b42f2c, type: 3}
+  - target: {fileID: 0}
+    propertyPath: causticsSplit
+    value: 0.318
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: causticsSpeed
+    value: 0.219
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: causticsScale
+    value: 2.41
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: causticsShadowMask
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: causticsLightMatrix.e00
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: causticsLightMatrix.e01
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: causticsLightMatrix.e02
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: causticsLightMatrix.e03
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: causticsLightMatrix.e10
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: causticsLightMatrix.e11
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: causticsLightMatrix.e12
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: causticsLightMatrix.e13
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: causticsLightMatrix.e20
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: causticsLightMatrix.e21
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: causticsLightMatrix.e22
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: causticsLightMatrix.e23
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: causticsLightMatrix.e30
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: causticsLightMatrix.e31
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: causticsLightMatrix.e32
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: causticsLightMatrix.e33
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: useLegacyCaustics
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: causticsDepth
+    value: 0.6
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: useColorGradient
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key0.r
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key0.g
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key0.b
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key0.a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key1.r
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key1.g
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key1.b
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key1.a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key2.r
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key2.g
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key2.b
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key2.a
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key3.r
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key3.g
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key3.b
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key3.a
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key4.r
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key4.g
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key4.b
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key4.a
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key5.r
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key5.g
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key5.b
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key5.a
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key6.r
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key6.g
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key6.b
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key6.a
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key7.r
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key7.g
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key7.b
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.key7.a
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.ctime0
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.ctime1
+    value: 65535
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.ctime2
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.ctime3
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.ctime4
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.ctime5
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.ctime6
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.ctime7
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.atime0
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.atime1
+    value: 65535
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.atime2
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.atime3
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.atime4
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.atime5
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.atime6
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.atime7
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.m_Mode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.m_NumColorKeys
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradient.m_NumAlphaKeys
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorGradientTexture
+    value: 
+    objectReference: {fileID: 2800000, guid: ec10065272e3a5c4184d17d3424bd5ef, type: 3}
+  - target: {fileID: 0}
+    propertyPath: shallowColor.r
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: shallowColor.g
+    value: 0.7725491
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: shallowColor.b
+    value: 0.62352943
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: shallowColor.a
+    value: 0.5019608
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: deepColor.r
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: deepColor.g
+    value: 0.14969736
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: deepColor.b
+    value: 0.2735849
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: deepColor.a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colorDepth
+    value: 2.51
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: horizonColor.r
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: horizonColor.g
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: horizonColor.b
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: horizonColor.a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: horizonDistance
+    value: 20
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: shoreFade
+    value: 0.823
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: shoreColor.r
+    value: 0.3250267
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: shoreColor.g
+    value: 0.76713693
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: shoreColor.b
+    value: 0.8301887
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: shoreColor.a
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: shoreStrength
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: shoreBlend
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: shoreDepth
+    value: 1.55
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: waveColor.r
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: waveColor.g
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: waveColor.b
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: waveColor.a
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: underwaterColor.r
+    value: 0.20380884
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: underwaterColor.g
+    value: 0.30968496
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: underwaterColor.b
+    value: 0.517647
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: underwaterColor.a
+    value: 0.329
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: underwaterColorStrength
+    value: 0.329
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: underwaterRefractionStrength
+    value: 0.1315
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamTexture
+    value: 
+    objectReference: {fileID: 2800000, guid: fcabffd57a8d737448ad0269a9d3092d, type: 3}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamSampling.x
+    value: 0.866
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamSampling.y
+    value: 1.01
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamCutoff
+    value: 0.866
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamDistortion
+    value: 1.01
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamBlend
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamColor1.r
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamColor1.g
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamColor1.b
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamColor1.a
+    value: 0.6509804
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamColor2.r
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamColor2.g
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamColor2.b
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamColor2.a
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamMovement.x
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamMovement.y
+    value: 0.035
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamMovement.z
+    value: 0.99
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamMovement.w
+    value: 1.592
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamDirection1
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamDirection2
+    value: 0.99
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamSpeed1
+    value: 0.035
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamSpeed2
+    value: 1.592
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamTilingAndOffset.x
+    value: 0.813
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamTilingAndOffset.y
+    value: 0.827
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamTilingAndOffset.z
+    value: 0.884
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamTilingAndOffset.w
+    value: 1.492
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamOffsetX
+    value: 0.813
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamOffsetY
+    value: 0.827
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamScale1
+    value: 0.884
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamScale2
+    value: 1.492
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: enableSurfaceFoam
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamHeightMask
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamHeightMaskSmoothness
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: enableHeightMask
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: foamShadowStrength
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: foamShadowDepth
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: surfaceFoamShadowProjection
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: intersectionFoamShadowProjection
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: foamMovement
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: intersectionFoamDepth
+    value: 0.378
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: intersectionFoamTexture
+    value: 
+    objectReference: {fileID: 2800000, guid: 772031b03d9d46e4ab03e15c8e17718c, type: 3}
+  - target: {fileID: 0}
+    propertyPath: intersectionFoamColor.r
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: intersectionFoamColor.g
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: intersectionFoamColor.b
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: intersectionFoamColor.a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: intersectionFoamMovement.x
+    value: 0.631
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: intersectionFoamMovement.y
+    value: 0.059
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: intersectionFoamDirection
+    value: 0.631
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: intersectionFoamSpeed
+    value: 0.059
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: intersectionFoamScale
+    value: 0.265
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: intersectionFoamSampling.x
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: intersectionFoamSampling.y
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: intersectionFoamCutoff
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: intersectionFoamDistortion
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: enableIntersectionEffects
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: intersectionFoamBlend
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: intersectionWaterBlend
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: shoreFoamSpeed
+    value: -0.74
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: shoreFoamWidth
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: shoreFoamFrequency
+    value: 29.2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: shoreFoamBreakupStrength
+    value: 2.74
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: shoreFoamBreakupScale
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lighting
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightingSmoothness
+    value: 0.364
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightingSpecularColor.r
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightingSpecularColor.g
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightingSpecularColor.b
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightingSpecularColor.a
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightingDiffuseColor.r
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightingDiffuseColor.g
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightingDiffuseColor.b
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightingDiffuseColor.a
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightingHardness
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: normalsTexture
+    value: 
+    objectReference: {fileID: 2800000, guid: 746d7c598bbd4e346af730641ebd6cde, type: 3}
+  - target: {fileID: 0}
+    propertyPath: normalsMovement.x
+    value: 0.185
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: normalsMovement.y
+    value: 1.05
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: normalsStrength
+    value: 0.7
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: normalsScale
+    value: 1.05
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: normalsSpeed
+    value: 0.185
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: refractionStrength
+    value: 0.28
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: waveVisuals.x
+    value: 0.147
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: waveVisuals.y
+    value: 20
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: waveVisuals.z
+    value: 2.22
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: waveSteepness
+    value: 0.147
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: waveLength
+    value: 20
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: waveSpeed
+    value: 2.22
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: waveDirections.x
+    value: 0.158
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: waveDirections.y
+    value: 0.64
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: waveDirections.z
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: waveDirections.w
+    value: 0.33
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: waveDirection1
+    value: 0.158
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: waveDirection2
+    value: 0.64
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: waveDirection3
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: waveDirection4
+    value: 0.33
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: waterUVs
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: hideComponents
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: enableFoamShadows
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: enableRefraction
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: meshRenderer
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: meshFilter
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: material
+    value: 
+    objectReference: {fileID: 2100000, guid: 55017f1a01259744a8e40a41b5c5920d, type: 2}
+  m_ExcludedProperties: []
