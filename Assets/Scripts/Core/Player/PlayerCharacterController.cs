@@ -20,9 +20,27 @@ namespace UntoldTracks.CharacterController
         private const string HorizontalInput = "Horizontal";
         private const string VerticalInput = "Vertical";
 
+        private bool _isLocked = false;
+
         public bool IsMoving
         {
-            get { return Character.Motor.Velocity.x != 0 || Character.Motor.Velocity.z != 0; }
+            get
+            {
+                return Character.Motor.Velocity.x != 0 || Character.Motor.Velocity.z != 0;
+            }
+        }
+
+        public bool IsPointerLocked()
+        {
+            return !(Cursor.lockState == CursorLockMode.Locked);
+        }
+
+        public bool IsFrozen
+        {
+            get
+            {
+                return _isLocked && IsPointerLocked();
+            }
         }
 
         #region Life Cycle
@@ -41,7 +59,10 @@ namespace UntoldTracks.CharacterController
 
         private void Update()
         {
-            HandleCharacterInput();
+            if (!_isLocked)
+            {
+                HandleCharacterInput();
+            }
         }
 
         private void LateUpdate()
@@ -103,11 +124,6 @@ namespace UntoldTracks.CharacterController
             Character.SetInputs(ref characterInputs);
         }
 
-        public bool IsPointerLocked()
-        {
-            return !(Cursor.lockState == CursorLockMode.Locked);
-        }
-
         public void LockPointer()
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -116,6 +132,18 @@ namespace UntoldTracks.CharacterController
         public void UnlockPointer()
         {
             Cursor.lockState = CursorLockMode.None;
+        }
+
+        public void Freeze()
+        {
+            UnlockPointer();
+            _isLocked = true;
+        }
+
+        public void UnFreeze()
+        {
+            LockPointer();
+            _isLocked = false;
         }
     }
 }

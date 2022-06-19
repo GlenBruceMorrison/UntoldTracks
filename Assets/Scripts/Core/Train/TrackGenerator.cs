@@ -100,8 +100,6 @@ public class TrackGenerator : ITokenizable
         {
             var point = path.GetPoint(i);
 
-            Debug.Log(point);
-
             _points.Add(point);
             _bezierPath.AddSegmentToEnd(point);
         }

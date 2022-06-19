@@ -55,6 +55,22 @@ public class Train : MonoBehaviour, ITokenizable
         {
             return _currentSpeed;
         }
+        set
+        {
+            _currentSpeed = value;
+        }
+    }
+
+    public int MaxSpeed
+    {
+        get
+        {
+            return _maxSpeed;
+        }
+        set
+        {
+            _maxSpeed = value;
+        }
     }
 
     public float DistanceTravelled
@@ -88,6 +104,28 @@ public class Train : MonoBehaviour, ITokenizable
         OnCarriageAdded?.Invoke();
 
         return carriage;
+    }
+
+    public void Move()
+    {
+        if (_moving)
+        {
+            return;
+        }
+
+        _moving = true;
+        OnTrainStart?.Invoke();
+    }
+
+    public void Brake()
+    {
+        if (!_moving)
+        {
+            return;
+        }
+
+        _moving = false;
+        OnTrainBrake?.Invoke();
     }
 
     public void StartStop()
