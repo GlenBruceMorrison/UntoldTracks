@@ -6,6 +6,23 @@ using UntoldTracks.Models;
 using SimpleJSON;
 using UntoldTracks.Managers;
 
+[System.Serializable]
+public class RayCaster
+{
+    public Transform origin;
+    public Direction direction = Direction.Down;
+}
+
+public enum Direction
+{
+    Up,
+    Left,
+    Right,
+    Down,
+    Forward,
+    Backward
+}
+
 public class PlaceableEntity : Entity, ITokenizable
 {
     public ItemModel source;
@@ -156,6 +173,22 @@ public class PlaceableEntity : Entity, ITokenizable
             ignoreWhenPlacing.ForEach(x => x.gameObject.SetActive(true));
             gameObject.ChildCollidersToTriggers(false);
         }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+
+        Gizmos.color = Color.red;
+        foreach (var ray in raycastOrigins)
+        {
+            Gizmos.DrawLine(
+                ray.transform.position,
+                ray.transform.position + (-ray.up*0.2f)
+            );
+        }
+
+        Gizmos.color = new Color(1, 0, 0, 0.5f);
+        Gizmos.DrawCube(transform.position, new Vector3(7, 0.01f, 7));
     }
 
     #region Token

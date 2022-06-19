@@ -7,6 +7,8 @@ using UntoldTracks.Managers;
 
 public class PlaceableEntityController : MonoBehaviour
 {
+    [SerializeField] private bool _limitPlacingToCarriage = true;
+
     public PlayerManager playerManager;
 
     private PlaceableEntity _targetPlaceable;
@@ -51,16 +53,17 @@ public class PlaceableEntityController : MonoBehaviour
         // loop through each ray on the active placable
         foreach (var origin in _targetPlaceable.raycastOrigins)
         {
-            Debug.DrawRay(origin.position, Vector3.down * _rayLength);
-
             // chek if that ray has succesfully hit something
-            var hit = Physics.Raycast(origin.position, Vector3.down, _rayLength);
+            var hit = Physics.Raycast(origin.position, -origin.up, _rayLength);
 
             // if not then return this as not placable
             if (!hit)
             {
+                Debug.DrawRay(origin.position, -origin.up * _rayLength, Color.red);
                 return false;
             }
+
+            Debug.DrawRay(origin.position, -origin.up * _rayLength, Color.green);
         }
 
         return true;
@@ -146,13 +149,17 @@ public class PlaceableEntityController : MonoBehaviour
             return;
         }
 
-        if (playerManager.InteractionController.LookingAtGameObject.GetComponentInParent<Carriage>() == null)
+        if (_limitPlacingToCarriage)
         {
-            _targetPlaceable.gameObject.SetActive(false);
-            return;
+            if (playerManager.InteractionController.LookingAtGameObject.GetComponentInParent<Carriage>() == null)
+            {
+                _targetPlaceable.gameObject.SetActive(false);
+                return;
+            }
+
+            transform.parent = playerManager.InteractionController.LookingAtGameObject.GetComponentInParent<Carriage>().transform;
         }
 
-        transform.parent = playerManager.InteractionController.LookingAtGameObject.GetComponentInParent<Carriage>().transform;
         _targetPlaceable.gameObject.SetActive(true);
         transform.position = playerManager.InteractionController.LookingAtVector;
 
