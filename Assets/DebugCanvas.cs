@@ -50,6 +50,12 @@ public class DebugCanvas : MonoBehaviour
         ItemCommands();
         GameCommands();
         TrainCommands();
+        IslandCommands();
+    }
+
+    private void IslandCommands()
+    {
+
     }
 
     private void TrainCommands()

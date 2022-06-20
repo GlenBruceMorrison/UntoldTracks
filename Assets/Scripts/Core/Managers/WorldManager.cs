@@ -18,7 +18,8 @@ namespace UntoldTracks.Managers
             GameManager.Instance.TrainManager.TrackGenerator.ExtendTrack(0);
             GameManager.Instance.TrainManager.TrackGenerator.ExtendTrack(0);
 
-            var generatable = ResourceService.Instance.Generatables[UnityEngine.Random.Range(0, 2)];
+            //var generatable = ResourceService.Instance.Generatables[UnityEngine.Random.Range(0, 2)];
+            var generatable = ResourceService.Instance.Generatables[1];
 
             Debug.Log("Spawning at " + GameManager.Instance.TrainManager.TrackGenerator.LastPoint);
 
@@ -35,6 +36,11 @@ namespace UntoldTracks.Managers
             {
                 SpawnGeneratable();
             }
+        }
+
+        private void Start()
+        {
+            SpawnGeneratable();
         }
 
         #region Token

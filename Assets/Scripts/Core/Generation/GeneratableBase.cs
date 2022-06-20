@@ -47,8 +47,8 @@ public class GeneratableBase : MonoBehaviour
             return VertexPath.GetPoint(VertexPath.NumPoints-1);
         }
     }
-
-    private void Awake()
+       
+    private void OnEnable()
     {
         if (GetComponentInChildren<PathCreator>() == null)
             Debug.LogError("WE NEED A PATH CREATOR AS A CHILD OF THIS GENERATABLE. THE TRAIN NEEDS THIS TO KNOW WHAT TO FOLLOW");
