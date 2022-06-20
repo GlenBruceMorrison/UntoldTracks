@@ -10,9 +10,10 @@ using UntoldTracks.Models;
 
 public class DebugCanvas : MonoBehaviour
 {
+    private bool _active = false;
+    
     public TMP_InputField inputField;
     public TMP_Text suggestiveText;
-
 
     public string Input
     {
@@ -24,6 +25,24 @@ public class DebugCanvas : MonoBehaviour
     {
         get => suggestiveText.text;
         set => suggestiveText.text = value;
+    }
+
+    private void GainFocus()
+    {
+        _active = true;
+        Debug.Log("GainFocus");
+        GameManager.Instance.LocalPlayer.FirstPersonController.Freeze();
+        inputField.Select();
+        inputField.ActivateInputField();
+    }
+
+    private void LooseFocus()
+    {
+        _active = false;
+        Debug.Log("LooseFocus");
+        GameManager.Instance.LocalPlayer.FirstPersonController.UnFreeze();
+        inputField.text = "";
+        inputField.DeactivateInputField();
     }
 
     private void Awake()
@@ -115,10 +134,8 @@ public class DebugCanvas : MonoBehaviour
     }
 
     public void CommandEval(DebugCommandBase command, string[] keywords, int index)
-    {   
-        GameManager.Instance.LocalPlayer.FirstPersonController.UnFreeze();
-        inputField.text = "";
-        inputField.DeactivateInputField();
+    {
+        LooseFocus();
 
         if (keywords.Length == index)
         {
@@ -186,9 +203,10 @@ public class DebugCanvas : MonoBehaviour
 
         if (UnityEngine.Input.GetKeyDown(KeyCode.Return))
         {
-            GameManager.Instance.LocalPlayer.FirstPersonController.Freeze();
-            inputField.Select();
-            inputField.ActivateInputField();
+            if (!_active)
+            {
+                GainFocus();
+            }
         }
     }
 
