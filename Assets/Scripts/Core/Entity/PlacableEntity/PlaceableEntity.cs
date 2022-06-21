@@ -25,18 +25,26 @@ public enum Direction
 
 public class PlaceableEntity : Entity, ITokenizable
 {
+    [Header("The ItemModel that this is created from")]
     public ItemModel source;
+
+    [Header("Raycasts that have to be hit for this to be placeable")]
     public List<Transform> raycastOrigins = new();
+
+    [Header("Colliders that are turned off when in placeable state")]
+    public List<Collider> ignoreWhenPlacing = new();
+
+    [Header("The model prefab")]
+    [SerializeField]
+    private Transform _worldTransform;
+
     private Renderer[] _allRenderers;
     private Material[] _allMaterials;
     private bool _beingPlaced;
     private bool _isTriggering = false;
 
     private ColliderEvents _colliderEvents;
-    public List<Collider> ignoreWhenPlacing = new();
 
-    [SerializeField]
-    private Transform _worldTransform;
 
     [HideInInspector]
     public Material[] AllMaterials
@@ -175,7 +183,7 @@ public class PlaceableEntity : Entity, ITokenizable
         }
     }
 
-    void OnDrawGizmosSelected()
+    void OnDrawGizmos()
     {
 
         Gizmos.color = Color.red;

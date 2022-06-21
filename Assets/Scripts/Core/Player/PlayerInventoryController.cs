@@ -89,7 +89,10 @@ namespace UntoldTracks.InventorySystem
         {
             if (container.Index == _activeItemIndex)
             {
-                OnActiveItemChanged?.Invoke(playerManager, ActiveItemContainer);
+                if (container.CurrentDurability == 0)
+                {
+                    OnActiveItemChanged?.Invoke(playerManager, ActiveItemContainer);
+                }
             }
         }
 

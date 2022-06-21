@@ -58,6 +58,17 @@ public class GeneratableBase : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.DrawCube(transform.position + GetSpawnOffset, Vector3.one);
+        if (_pathCreator == null)
+        {
+            _pathCreator = GetComponentInChildren<PathCreator>();
+        }
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawCube(GetFirstPoint, Vector3.one * 30);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawCube(GetLastPoint, Vector3.one * 30);
+
+        //Gizmos.DrawCube(transform.position + GetSpawnOffset, Vector3.one);
     }
 }

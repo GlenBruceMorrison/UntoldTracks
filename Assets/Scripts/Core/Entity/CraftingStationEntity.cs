@@ -11,6 +11,7 @@ namespace UntoldTracks
 {
     public class CraftingStationEntity : PlaceableEntity, IInteractable
     {
+        [Header("Recipes that this crafting station can produce")]
         public StationModel _data;
         public string DisplayText => _data._item.displayName;
 
