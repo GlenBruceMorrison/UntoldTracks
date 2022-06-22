@@ -117,11 +117,14 @@ public class TrackGenerator : ITokenizable
         if (pointsJSON == null | pointsJSON.Children == null || pointsJSON.Count <= 0)
         {
             _points.Add(_origin);
+            _points.Add(_origin + Vector3.forward*400);
 
-            for (int i = 1; i < _pointsToGenerate; i++)
+            for (int i = 2; i < _pointsToGenerate; i++)
             {
                 _points.Add(GenerateTrackPoint());
             }
+
+            _points.ToList().ForEach(x => Debug.Log(x));
         }
         else
         {

@@ -29,10 +29,10 @@ namespace UntoldTracks.Managers
         public void SetPath()
         {
             // debug value to set path to out unity asset folder for reset save file
-            _resetPath = Application.dataPath + Path.AltDirectorySeparatorChar + "GameDataReset.json";
+            _resetPath = Application.dataPath + Path.AltDirectorySeparatorChar + "Data" + Path.AltDirectorySeparatorChar + "GameSaves" + Path.AltDirectorySeparatorChar + "GameDataReset.json";
 
             // debug value to set path to out unity asset folder
-            _path = Application.dataPath + Path.AltDirectorySeparatorChar + "GameData.json";
+            _path = Application.dataPath + Path.AltDirectorySeparatorChar + "Data" + Path.AltDirectorySeparatorChar + "GameSaves" + Path.AltDirectorySeparatorChar + "GameData.json";
 
             // production path to set data to the actual computer
             _persistantPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar + "GameData.json";
@@ -61,6 +61,7 @@ namespace UntoldTracks.Managers
         {
             try
             {
+                Debug.Log(_path);
                 using StreamWriter writer = new(_path);
                 var builder = new StringBuilder();
                 var data = GameManager.Instance.Save();

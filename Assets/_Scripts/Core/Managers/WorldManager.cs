@@ -21,8 +21,6 @@ namespace UntoldTracks.Managers
             //var generatable = ResourceService.Instance.Generatables[UnityEngine.Random.Range(0, 2)];
             var generatable = ResourceService.Instance.Generatables[1];
 
-            Debug.Log("Spawning at " + GameManager.Instance.TrainManager.TrackGenerator.LastPoint);
-
             var instance = Instantiate(generatable, GameManager.Instance.TrainManager.TrackGenerator.LastPoint, Quaternion.identity);
 
             instance.transform.position += instance.GetSpawnOffset;

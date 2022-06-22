@@ -265,7 +265,6 @@ public class DebugCanvas : MonoBehaviour
         {
             _subCommands.Add(command);
             command.SetParentCommand(this);
-            Debug.Log(command._fullPath);
         }
 
         public DebugCommandBase GetSubCommand(string id)
