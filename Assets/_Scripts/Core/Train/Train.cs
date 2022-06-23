@@ -144,16 +144,6 @@ public class Train : MonoBehaviour, ITokenizable
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            GameManager.Instance.TrainManager.TrackGenerator.ExtendTrack();
-        }
-
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            GameManager.Instance.TrainManager.TrackGenerator.ExtendTrack(0);
-        }
-
         if (!_built)
         {
             return;

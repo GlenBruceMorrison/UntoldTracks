@@ -168,7 +168,7 @@ namespace UntoldTracks.Player
                         // if that item handles interactions
                         if (playerManager.InventoryController.ActiveItemContainer.Item.hasCustomInteractionFrame)
                         {
-                            if (playerManager.PlayerActiveItemController.TryGetTool(out EquipableEntity tool))
+                            if (playerManager.PlayerActiveItemController.TryGetTool(out EquipableEntityBase tool))
                             {
                                 tool.HandleInteractionDown(InteractionInput.Primary);
                             }
@@ -199,7 +199,7 @@ namespace UntoldTracks.Player
                         //if (playerManager.InventoryController.ActiveItemContainer.Item.hasCustomInteractionFrame)
                         if (playerManager.InventoryController.ActiveItemContainer.Item.isEquipable)
                         {
-                            playerManager.gameObject.GetComponentInChildren<EquipableEntity>()
+                            playerManager.gameObject.GetComponentInChildren<EquipableEntityBase>()
                                 .HandleInteractionDown(InteractionInput.Primary);
                         }
                         else if (playerManager.PlaceableEntityController.IsPlacingSomething)
@@ -217,7 +217,7 @@ namespace UntoldTracks.Player
                 {
                     if (playerManager.InventoryController.ActiveItemContainer.Item.isEquipable)
                     {
-                        playerManager.gameObject.GetComponentInChildren<EquipableEntity>()
+                        playerManager.gameObject.GetComponentInChildren<EquipableEntityBase>()
                                 .HandleInteractionUp(InteractionInput.Primary);
                     }
                 }
@@ -237,7 +237,7 @@ namespace UntoldTracks.Player
                 {
                     if (playerManager.InventoryController.ActiveItemContainer.Item.isEquipable)
                     {
-                        playerManager.gameObject.GetComponentInChildren<EquipableEntity>()
+                        playerManager.gameObject.GetComponentInChildren<EquipableEntityBase>()
                                 .HandleInteractionDown(InteractionInput.Secondary);
                     }
                 }

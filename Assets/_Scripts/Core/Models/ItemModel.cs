@@ -21,7 +21,7 @@ namespace UntoldTracks.Models
         [Space(20)]
         [Header("Equipable Settings")]
         public bool isEquipable;
-        public EquipableEntity equipablePrefab;
+        public EquipableEntityBase equipablePrefab;
         public bool hasCustomInteractionFrame = false;
         public bool degradable = false;
         public int durability = 0;

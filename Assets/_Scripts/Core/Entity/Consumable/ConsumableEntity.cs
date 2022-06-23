@@ -6,7 +6,7 @@ using UntoldTracks.InventorySystem;
 using UntoldTracks.Models;
 using UntoldTracks.Managers;
 
-public abstract class ConsumableEntity : EquipableEntity
+public abstract class ConsumableEntity : EquipableEntityBase
 {
     public int healthRestored;
     public int hungerRestored;

@@ -19,7 +19,7 @@ MonoBehaviour:
   stackable: 0
   stackSize: 20
   isEquipable: 1
-  equipablePrefab: {fileID: 8830055939140677978, guid: 21123f1508c47814d895f37282fbdc7e, type: 3}
+  equipablePrefab: {fileID: 7811654258666149724, guid: 21123f1508c47814d895f37282fbdc7e, type: 3}
   hasCustomInteractionFrame: 1
   degradable: 1
   durability: 20

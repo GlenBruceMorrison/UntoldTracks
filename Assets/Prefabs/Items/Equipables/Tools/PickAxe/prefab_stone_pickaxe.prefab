@@ -92,7 +92,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 556275416538294639}
-  - component: {fileID: 8830055939140677978}
+  - component: {fileID: 7811654258666149724}
+  - component: {fileID: -2022487922530656801}
   m_Layer: 2
   m_Name: prefab_stone_pickaxe
   m_TagString: Untagged
@@ -116,7 +117,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8830055939140677978
+--- !u!114 &7811654258666149724
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,6 +132,31 @@ MonoBehaviour:
   toolData:
     _item: {fileID: 0}
     _count: 0
+  _animator: {fileID: 1374037816162849336}
+  _preSwingAnimation: {fileID: 7400000, guid: 18ec678faf370be42a93f374e86d1d13, type: 2}
+  _swingAnimation: {fileID: 7400000, guid: 24ba668c739f98a4aa01ddfd6d427434, type: 2}
+  _postSwingAnimation: {fileID: 7400000, guid: 34bcf4b66ebedda469b18de074296a41, type: 2}
+  _idleAnimation: {fileID: 7400000, guid: 15192c3ec3a74b14fb290367185b8647, type: 2}
+--- !u!95 &-2022487922530656801
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51041353066980754}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b6d0e6ae5e50c6e49afa041583b474c2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7079049846520523444
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,8 +290,8 @@ MonoBehaviour:
   Trigger1:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8830055939140677978}
-        m_TargetAssemblyTypeName: EquipableEntity, Assembly-CSharp
+      - m_Target: {fileID: 7811654258666149724}
+        m_TargetAssemblyTypeName: EquipableEntityBase, Assembly-CSharp
         m_MethodName: TriggerInteraction
         m_Mode: 1
         m_Arguments:
@@ -278,34 +304,10 @@ MonoBehaviour:
         m_CallState: 2
   Trigger2:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8830055939140677978}
-        m_TargetAssemblyTypeName: PickAxe, Assembly-CSharp
-        m_MethodName: ReadyForAnotherSwing
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   Trigger3:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8830055939140677978}
-        m_TargetAssemblyTypeName: PickAxe, Assembly-CSharp
-        m_MethodName: SwingOver
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!4 &3007638771561315427 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d92714ef1cc3d41ea8875a181a4b0d4a, type: 3}

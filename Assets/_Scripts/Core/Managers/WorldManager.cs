@@ -19,7 +19,7 @@ namespace UntoldTracks.Managers
             GameManager.Instance.TrainManager.TrackGenerator.ExtendTrack(0);
 
             //var generatable = ResourceService.Instance.Generatables[UnityEngine.Random.Range(0, 2)];
-            var generatable = ResourceService.Instance.Generatables[1];
+            var generatable = ResourceService.Instance.Generatables[UnityEngine.Random.Range(0, ResourceService.Instance.Generatables.Count)];
 
             var instance = Instantiate(generatable, GameManager.Instance.TrainManager.TrackGenerator.LastPoint, Quaternion.identity);
 

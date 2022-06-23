@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UntoldTracks;
 
-public class Shovel : EquipableEntity
+public class Shovel : EquipableEntityBase
 {
     private Animator _animator;
 

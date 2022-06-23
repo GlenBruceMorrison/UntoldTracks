@@ -96,15 +96,15 @@ namespace UntoldTracks.Player
         /// </summary>
         /// <param name="tool">The ToolEntity object to populate with the active tool</param>
         /// <returns>Returns false if the player is not holding a tool</returns>
-        public bool TryGetTool(out EquipableEntity tool)
+        public bool TryGetTool(out EquipableEntityBase tool)
         {
-            if (playerHand.GetComponentInChildren<EquipableEntity>() == null)
+            if (playerHand.GetComponentInChildren<EquipableEntityBase>() == null)
             {
                 tool = null;
                 return false;
             }
 
-            tool = playerHand.GetComponentInChildren<EquipableEntity>();
+            tool = playerHand.GetComponentInChildren<EquipableEntityBase>();
             return true;
         }
     }

@@ -38,6 +38,18 @@ public static class Utility
         obj.GetComponentsInChildren<Collider>().ToList().ForEach(x => x.isTrigger = isTrigger);
     }
 
+    public static bool IsPlaying(this Animator animator, AnimationClip clip)
+    {
+        return animator.GetCurrentAnimatorStateInfo(0).IsName(clip.name);
+    }
+
+    public static float GetCurrentAnimatorTime(this Animator animator, int layer = 0)
+    {
+        var animState = animator.GetCurrentAnimatorStateInfo(layer);
+        float currentTime = animState.normalizedTime % 1;
+        return currentTime;
+    }
+    
     /// <summary>
     ///  Gets the most cimilar string to a given string from a list
     /// </summary>

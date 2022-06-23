@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UntoldTracks;
 
-public class Axe : EquipableEntity
+public class Axe : EquipableEntityBase
 {
     private Animator _animator;
 

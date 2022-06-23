@@ -52,8 +52,9 @@ MonoBehaviour:
   _train: {fileID: 4333905250428187044}
   _placeableEntityManager: {fileID: 4333905250428187051}
   _trackGenerator:
-    _points: []
-    _pointsToGenerate: 4
+    _points:
+    - {x: 0, y: 0, z: 0}
+    _pointsToGenerate: 1
     _distanceBetweenPointsMin: 60
     _distanceBetweenPointsMax: 140
     _distanceBreadthMin: 0

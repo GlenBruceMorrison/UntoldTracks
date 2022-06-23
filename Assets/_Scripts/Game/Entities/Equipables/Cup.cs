@@ -5,7 +5,7 @@ using UntoldTracks;
 using UntoldTracks.InventorySystem;
 using UntoldTracks.Models;
 
-public class Cup : EquipableEntity
+public class Cup : EquipableEntityBase
 {
     [SerializeField] Animator _animator;
 
