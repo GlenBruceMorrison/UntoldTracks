@@ -5,14 +5,14 @@ using UntoldTracks;
 
 public class PickAxe : ToolEntityBase
 {
-    public override void HandleInteractionDown(InteractionInput input)
+    public override void HandleInteractionDown(InteractionData interaction)
     {
-        base.HandleInteractionDown(input);
+        base.HandleInteractionDown(interaction);
     }
 
-    public override void HandleInteractionUp(InteractionInput input)
+    public override void HandleInteractionUp(InteractionData interaction)
     {
-        base.HandleInteractionUp(input);
+        base.HandleInteractionUp(interaction);
     }
 
     public override void HandleEquip()

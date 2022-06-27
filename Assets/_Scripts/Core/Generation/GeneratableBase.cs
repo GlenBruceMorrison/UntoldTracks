@@ -1,74 +1,64 @@
+using System;
 using PathCreation;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
+using UnityEditor.Animations;
 using UnityEngine;
+using Vector3 = UnityEngine.Vector3;
 
 public class GeneratableBase : MonoBehaviour
 {
     private PathCreator _pathCreator;
+    private BezierPath _bezierPath;
 
     public BezierPath BezierPath
     {
         get
         {
-            return _pathCreator.bezierPath;
+            if (_pathCreator == null)
+            {
+                _pathCreator = GetComponentInChildren<PathCreator>();
+            }
+            
+            return _pathCreator.EditorData.bezierPath;
         }
     }
 
-    public VertexPath VertexPath
+    public VertexPath VertexPath => new VertexPath(BezierPath, transform);
+    public Vector3 GetSpawnOffset => transform.position - GetFirstTrackInWorldSpace;
+    public Vector3 GetFirstTrackInLocalSpace => BezierPath.GetPoint(0);
+    public Vector3 GetFirstTrackInWorldSpace => GetPointInWorldSpace(0);
+    public Vector3 GetLastTrackInWorldSpace => GetPointInWorldSpace(BezierPath.NumPoints-1);
+    public Vector3 GetPointInWorldSpace(int index) => transform.position + BezierPath.Points[index];
+
+    public void AddTrackToStart(Vector3 offset, BezierPath.ControlMode mode = BezierPath.ControlMode.Automatic)
     {
-        get
-        {
-            return _pathCreator.path;
-        }
+        var previousFirstPoint = GetFirstTrackInWorldSpace;
+        
+        //BezierPath.ControlPointMode = mode;
+        BezierPath.AddSegmentToStart(GetFirstTrackInLocalSpace + offset);
+        
+        var trackOffset = (previousFirstPoint - GetFirstTrackInWorldSpace);
+        
+        //Debug.Log($"Increasing position by [{previousFirstPoint} - {GetFirstPointWorldPosition}] to {transform.position + trackOffset}, GetFirstPointWorldPosition {GetFirstPointWorldPosition}");
+        
+        transform.position += trackOffset;
     }
 
-    public Vector3 GetSpawnOffset
-    {
-        get
-        {
-            return transform.position - GetFirstPoint;
-        }
-    }
-
-    public Vector3 GetFirstPoint
-    {
-        get
-        {
-            return VertexPath.GetPoint(0);
-        }
-    }
-
-    public Vector3 GetLastPoint
-    {
-        get
-        {
-            return VertexPath.GetPoint(VertexPath.NumPoints-1);
-        }
-    }
-       
     private void OnEnable()
     {
         if (GetComponentInChildren<PathCreator>() == null)
             Debug.LogError("WE NEED A PATH CREATOR AS A CHILD OF THIS GENERATABLE. THE TRAIN NEEDS THIS TO KNOW WHAT TO FOLLOW");
-
-        _pathCreator = GetComponentInChildren<PathCreator>();
     }
-
+    
     void OnDrawGizmos()
     {
-        if (_pathCreator == null)
-        {
-            _pathCreator = GetComponentInChildren<PathCreator>();
-        }
-
         Gizmos.color = Color.green;
-        Gizmos.DrawCube(GetFirstPoint, Vector3.one * 30);
+        Gizmos.DrawCube(GetFirstTrackInWorldSpace, new Vector3(5, 5, 0.1f));
 
         Gizmos.color = Color.red;
-        Gizmos.DrawCube(GetLastPoint, Vector3.one * 30);
-
-        //Gizmos.DrawCube(transform.position + GetSpawnOffset, Vector3.one);
+        Gizmos.DrawCube(GetLastTrackInWorldSpace, new Vector3(5, 5, 0.1f));
     }
 }

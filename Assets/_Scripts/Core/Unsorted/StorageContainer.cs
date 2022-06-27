@@ -45,9 +45,9 @@ public class StorageContainer : PlaceableEntity, IInteractable, ITokenizable
         }
     }
 
-    public void HandleInput(PlayerManager manager, InteractionInput input)
+    public void HandleInput(PlayerManager manager, InteractionData interaction)
     {
-        switch (input)
+        switch (interaction.Input)
         {
             case InteractionInput.Action1:
                 manager.PlayerManagerUI.OpenMainWindow(_inventory);

@@ -6,140 +6,198 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEditor;
 
 using UntoldTracks.Managers;
 using UntoldTracks.Models;
+using static PathCreation.BezierPath;
+
+public interface ITrack
+{
+    public VertexPath VertexPath { get; }
+}
 
 [System.Serializable]
-public class TrackGenerator : ITokenizable
+public class TrackGenerator : MonoBehaviour, ITokenizable, ITrack
 {
-    private BezierPath _bezierPath;
-    private VertexPath _vertexPath;
-    [SerializeField] private List<Vector3> _points;
+    #region Debug
+    private void OnDrawGizmos()
+    {
+        if (BezierPath == null) return;
 
-    [SerializeField] private int _pointsToGenerate = 10;
-    [SerializeField] private int _distanceBetweenPointsMin, _distanceBetweenPointsMax;
-    [SerializeField] private int _distanceBreadthMin, _distanceBreadthMax;
+        if (!showTrackPoints) return;
 
-    [SerializeField] private Vector3 _origin;
+        for (int i = 0; i < BezierPath.Points.Count; i++)
+        {
+            var pos = BezierPath.Points[i];
+            Gizmos.DrawCube(pos, new Vector3(0.3f, 10, 0.3f));
+            Handles.Label(pos + Vector3.up * 15, i.ToString());
+            Handles.Label( pos + (Vector3.up * 10), $"({pos.x}, {pos.y}, {pos.z})");
+        }
 
-    public UnityAction<VertexPath> OnNewPointGenerated;
+        if (VertexPath == null) return;
+        
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawCube(LastTrackPositionInWorldSpace, new Vector3(0.3f, 20, 0.3f));
+        
+        var direction = VertexPath.GetTangent(VertexPath.NumPoints-1) * 5;
+        Gizmos.DrawRay(LastTrackPositionInWorldSpace, direction);
+        
+        var directionTwo = VertexPath.GetNormal(VertexPath.NumPoints-1) * 5;
+        Gizmos.DrawRay(LastTrackPositionInWorldSpace, directionTwo);
+    }
 
-    public VertexPath VertexPath => _vertexPath;
-    public BezierPath BezierPath => _bezierPath;
+    [SerializeField] public bool showTrackPoints = true;
+    #endregion    
+    
+    public int intitialTrackCount = 4;
+    public int distanceBetweenPointsMin = 200;
+    public int distanceBetweenPointsMax = 400;
+    public int distanceBreadthMin = 200;
+    public int distanceBreadthMax = 400;
 
-    /// <summary>
-    /// The running list of Vector3 points that have been generated so far
-    /// </summary>
-    public List<Vector3> Points => _points;
+    public float initialTrackHeight = 0;
+
+    public List<Vector3> initialGenerationPoints = new()
+    {
+        new Vector3(0, 0, 0),
+        new Vector3(0, 0, 300)
+    };
+
+    public VertexPath VertexPath { get; private set; }
+    public BezierPath BezierPath { get; private set; }
+
+    public List<Vector3> Tracks => BezierPath.Points;
 
     /// <summary>
     /// The Vector3 value of the last point we generated
     /// </summary>
-    public Vector3 LastPoint => _points.Last();
+    public Vector3 LastTrackPositionInWorldSpace => transform.position + BezierPath.Points[BezierPath.NumPoints-1];
 
     /// <summary>
     /// The number of points that have been generated so far, can be used to determine 
     /// how far we have come
     /// </summary>
-    public int NumberOfPointsGenerated => _points.Count();
+    public int NumberOfTracks => BezierPath.NumPoints;
 
+    #region Points Generation
     /// <summary>
     /// Generate a point based on the variables
     /// </summary>
-    public Vector3 GenerateTrackPoint()
+    public Vector3 GenerateTrackPoint(Vector3 lastPoint)
     {
-        var breadth = UnityEngine.Random.Range(_distanceBreadthMin, _distanceBreadthMax);
+        var breadth = UnityEngine.Random.Range(distanceBreadthMin, distanceBreadthMax);
 
-        var x = LastPoint.x > 0 ? -breadth : breadth;
-        var z = LastPoint.z + UnityEngine.Random.Range(_distanceBetweenPointsMin, _distanceBetweenPointsMax);
+        var x = lastPoint.x > 0 ? -breadth : breadth;
+        var z = lastPoint.z + UnityEngine.Random.Range(distanceBetweenPointsMin, distanceBetweenPointsMax);
 
         return new Vector3(x, 0, z);
     }
 
-    /// <summary>
-    /// Extends the current track by a generated point
-    /// </summary>
-    public void ExtendTrack()
+    private List<Vector3> GenerateInitialTracks(int toGenerate)
     {
-        ExtendTrack(new List<Vector3> { GenerateTrackPoint() });
-    }
+        var points = initialGenerationPoints;
+        var lastPoint = points.Last();
 
-    /// <summary>
-    /// Extends the current track by a generated point but keeps the x value at 0
-    /// </summary>
-    public void ExtendTrack(int x)
-    {
-        var pos = GenerateTrackPoint();
-        ExtendTrack(new List<Vector3> { new Vector3(x, pos.y, pos.z) });
-    }
-
-    /// <summary>
-    /// Extends the current to a specific point
-    /// </summary>
-    public void ExtendTrack(List<Vector3> points)
-    {
-        foreach(var point in points)
+        for (int i = initialGenerationPoints.Count; i < toGenerate; i++)
         {
-            _points.Add(point);
-            _bezierPath.AddSegmentToEnd(point);
+            var point = GenerateTrackPoint(lastPoint);
+            points.Add(point);
+            lastPoint = point;
         }
 
-        _vertexPath = new VertexPath(_bezierPath, GameManager.Instance.TrainManager.transform);
-        OnNewPointGenerated?.Invoke(_vertexPath);
-        GameObject.FindObjectOfType<RoadMeshCreator>().Init(VertexPath);
+        return points;
+    }
+    #endregion
+
+    #region Track Generation
+    public void GenerateBezier(List<Vector3> points)
+    {
+        BezierPath = new BezierPath(
+            points,
+            false,
+            PathSpace.xyz)
+        {
+            GlobalNormalsAngle = 90
+        };
+
+        RegenerateVertex();
     }
 
-    /// <summary>
-    /// Extends the current to a specific point
-    /// </summary>
+    public void GenerateBezier()
+    {
+        var points = GenerateInitialTracks( intitialTrackCount);
+
+        points.ForEach(x => Debug.Log((x)));
+        
+        GenerateBezier(points);
+    }
+
+    public void RegenerateVertex()
+    {
+        VertexPath = new VertexPath(BezierPath, transform);
+        GameObject.FindObjectOfType<RoadMeshCreator>().Init(VertexPath);
+    }
+    #endregion
+
+    #region Track Extensions
+    public void ExtendTrack()
+    {
+        ExtendTrack(new List<Vector3> { GenerateTrackPoint(LastTrackPositionInWorldSpace) });
+    }
+
+    public void ExtendTrack(Vector3 point, ControlMode controlMode = ControlMode.Automatic)
+    {
+        var nextTrack = new Vector3(point.x, point.y, LastTrackPositionInWorldSpace.z + point.z);
+        ExtendTrack(new List<Vector3>(){nextTrack});
+    }
+
+    public void ExtendTrack(List<Vector3> points, ControlMode controlMode = ControlMode.Automatic)
+    {
+        BezierPath.ControlPointMode = controlMode;
+        foreach(var point in points)
+        {
+            BezierPath.AddSegmentToEnd(point);
+        }
+        BezierPath.ControlPointMode = ControlMode.Automatic;
+
+        RegenerateVertex();
+    }
+
     public void ExtendTrack(VertexPath path)
     {
         for(var i=0;i<path.NumPoints;i++)
         {
             var point = path.GetPoint(i);
 
-            _points.Add(point);
-            _bezierPath.AddSegmentToEnd(point);
+            BezierPath.AddSegmentToEnd(point);
         }
 
-        _vertexPath = new VertexPath(_bezierPath, GameManager.Instance.TrainManager.transform);
-        OnNewPointGenerated?.Invoke(_vertexPath);
-        GameObject.FindObjectOfType<RoadMeshCreator>().Init(VertexPath);
+        RegenerateVertex();
     }
+    #endregion
 
     #region Token
     public void Load(JSONNode node)
     {
         var pointsJSON = node["points"];
 
+        // create new track data if it does not exist
         if (pointsJSON == null | pointsJSON.Children == null || pointsJSON.Count <= 0)
         {
-            _points.Add(_origin);
-            _points.Add(_origin + Vector3.forward*400);
-
-            for (int i = 2; i < _pointsToGenerate; i++)
-            {
-                _points.Add(GenerateTrackPoint());
-            }
-
-            _points.ToList().ForEach(x => Debug.Log(x));
-        }
-        else
-        {
-            foreach (var item in pointsJSON.Children)
-            {
-                _points.Add(item.ReadVector3());
-            }
+            GenerateBezier();
+            return;
         }
 
-        _bezierPath = new BezierPath(_points, false, PathSpace.xyz)
-        {
-            GlobalNormalsAngle = 90
-        };
+        // Load track data
+        var points = new List<Vector3>();
 
-        _vertexPath = new VertexPath(_bezierPath, GameManager.Instance.TrainManager.transform);
+        foreach (var item in pointsJSON.Children)
+        {
+            points.Add(item.ReadVector3());
+        }
+
+        GenerateBezier(points);
     }
 
     public JSONObject Save()
@@ -148,7 +206,7 @@ public class TrackGenerator : ITokenizable
 
         var trackPointsJSON = new JSONArray();
 
-        foreach (var point in _points)
+        foreach (var point in Tracks)
         {
             trackPointsJSON.Add(point);
         }

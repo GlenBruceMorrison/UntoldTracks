@@ -247,14 +247,21 @@ namespace KinematicCharacterController
             InitialSimulationPosition = TransientPosition;
             InitialSimulationRotation = TransientRotation;
 
-            MoverController.UpdateMovement(out _internalTransientPosition, out _internalTransientRotation, deltaTime);
-
-            if (deltaTime > 0f)
+            if (MoverController != null)
             {
-                Velocity = (TransientPosition - InitialSimulationPosition) / deltaTime;
-                                
-                Quaternion rotationFromCurrentToGoal = TransientRotation * (Quaternion.Inverse(InitialSimulationRotation));
-                AngularVelocity = (Mathf.Deg2Rad * rotationFromCurrentToGoal.eulerAngles) / deltaTime;
+                MoverController.UpdateMovement(out _internalTransientPosition, out _internalTransientRotation, deltaTime);
+
+                if (deltaTime > 0f)
+                {
+                    Velocity = (TransientPosition - InitialSimulationPosition) / deltaTime;
+
+                    Quaternion rotationFromCurrentToGoal = TransientRotation * (Quaternion.Inverse(InitialSimulationRotation));
+                    AngularVelocity = (Mathf.Deg2Rad * rotationFromCurrentToGoal.eulerAngles) / deltaTime;
+                }
+            }
+            else
+            {
+                Debug.LogError("Mover Controller is null on this object, so can't process movement");
             }
         }
     }

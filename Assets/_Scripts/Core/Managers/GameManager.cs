@@ -20,7 +20,7 @@ namespace UntoldTracks.Managers
 
         public PlayerManager playerPrefab;
         public TrainManager trainPrefab;
-
+        
         public static GameManager Instance => _instance;
         public PlayerManager LocalPlayer => _playerManager;
         public TrainManager TrainManager => _trainManager;
@@ -59,7 +59,7 @@ namespace UntoldTracks.Managers
             _playerManager = Instantiate(playerPrefab, playerPos, Quaternion.identity);
 
             // init train
-            _trainManager = Instantiate(trainPrefab, new Vector3(0, 2.28f, 0), Quaternion.identity);
+            _trainManager = Instantiate(trainPrefab, new Vector3(0, 0, 0), Quaternion.identity);
 
             // load game
             _playerManager.Load(node["player"]);

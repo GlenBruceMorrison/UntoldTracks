@@ -24,9 +24,9 @@ namespace UntoldTracks
 
 
         public event InteractionStateUpdate OnInteractionStateUpdate;
-        public void HandleInput(PlayerManager manager, InteractionInput input)
+        public void HandleInput(PlayerManager manager, InteractionData interaction)
         {
-            switch (input)
+            switch (interaction.Input)
             {
                 case InteractionInput.Primary:
                     onPrimaryInput?.Invoke(manager);

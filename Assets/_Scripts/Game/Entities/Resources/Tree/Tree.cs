@@ -25,6 +25,7 @@ public class Tree : MonoBehaviour, IInteractable
 
     [SerializeField] private TreeState _currentState;
 
+    [SerializeField] private Transform _chipParticles;
 
     public Vector3 InteractionAnchor => transform.position + Vector3.up;
     private Rigidbody _rigidbody;
@@ -68,9 +69,9 @@ public class Tree : MonoBehaviour, IInteractable
         _treeGroundCollisionChecker.enabled = false;
     }
 
-    public void HandleInput(PlayerManager manager, InteractionInput input)
+    public void HandleInput(PlayerManager manager, InteractionData interaction)
     {
-        switch (input)
+        switch (interaction.Input)
         {
             case InteractionInput.Primary:
                 switch (_currentState)
@@ -80,6 +81,9 @@ public class Tree : MonoBehaviour, IInteractable
                         {
                             return;
                         }
+                        _chipParticles.transform.LookAt(interaction.Origin);
+                        _chipParticles.eulerAngles += new Vector3(0, -90, 0);
+                        _chipParticles.transform.position = interaction.InteractionPoint;
 
                         if (health > 0)
                         {
@@ -107,7 +111,7 @@ public class Tree : MonoBehaviour, IInteractable
                 // no function required
                 break;
             default:
-                throw new ArgumentOutOfRangeException(nameof(input), input, null);
+                throw new ArgumentOutOfRangeException(nameof(interaction.Input), interaction.Input, null);
         }
     }
 

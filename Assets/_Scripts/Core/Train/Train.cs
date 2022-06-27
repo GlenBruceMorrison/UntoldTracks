@@ -16,29 +16,18 @@ public class Train : MonoBehaviour, ITokenizable
 
     [HideInInspector] public List<Carriage> carriages = new();
 
+    private bool _initiated = false;
+
     [SerializeField] private float _currentSpeed = 5;
     [SerializeField] private int _maxSpeed = 15;
     [SerializeField] private float _acc;
+    [SerializeField] private bool _moving;
+    [SerializeField] private float _distanceTravelled;
 
-    private VertexPath _vertexPath;
-    private bool _moving;
-    private float _distanceTravelled;
-    private bool _built = false;
-
-    public VertexPath VertexPath
+    public ITrack Track
     {
-        get
-        {
-            return _vertexPath;
-        }
-        private set
-        {
-            _vertexPath = value;
-            foreach (var carriage in carriages)
-            {
-                carriage.vertexPath = value;
-            }
-        }
+        get;
+        private set;
     }
 
     public bool Moving
@@ -79,30 +68,52 @@ public class Train : MonoBehaviour, ITokenizable
         {
             return _distanceTravelled;
         }
+        set
+        {
+            _distanceTravelled = value;
+        }
     }
+
+    public Vector3 GetPointAtPosition => throw new NotImplementedException();
 
     public UnityEvent OnCarriageAdded, OnTrainBrake, OnTrainStart, OnTrainStop;
 
-    public void Initiate(TrackGenerator generator)
+    private void Start()
     {
+        /*
+        if (FindObjectOfType<PlayerManager>() == null)
+        {
+            var pathCreator = FindObjectOfType<PathCreator>();
 
+            pathCreator.pathUpdated += () => VertexPath = new VertexPath(pathCreator.bezierPath, pathCreator.transform);
+
+            var vert = new VertexPath(pathCreator.bezierPath, pathCreator.transform);
+
+            _vertexPath = vert;
+
+            for (int i = 0; i < 10; i++)
+            {
+                var carriageModel = ResourceService.Instance.GetRandomOfType<CarriageModel>();
+                AddTrain(carriageModel.prefab);
+            }
+            _built = true;
+        }
+        */
     }
 
-    private Carriage AddTrain(Carriage prefab)
+    public void Init(ITrack track)
+    {
+        Track = track ?? throw new ArgumentNullException(nameof(track));
+        _initiated = true;
+    }
+
+    public Carriage AddCarriage(Carriage prefab)
     {
         var carriage = Instantiate(prefab);
-
-        carriage.transform.parent = transform;
-        carriage.vertexPath = _vertexPath;
-
-        carriage.delay = -(carriages.Count * carriageLength);
-
-        carriage.train = this;
-
+        var delay = -(carriages.Count * carriageLength);
+        carriage.Init(this, delay);
         carriages.Add(carriage);
-
         OnCarriageAdded?.Invoke();
-
         return carriage;
     }
 
@@ -144,7 +155,7 @@ public class Train : MonoBehaviour, ITokenizable
 
     private void Update()
     {
-        if (!_built)
+        if (!_initiated)
         {
             return;
         }
@@ -163,10 +174,10 @@ public class Train : MonoBehaviour, ITokenizable
                 _currentSpeed -= (_acc * 3) * Time.deltaTime;
             }
 
-            if (_currentSpeed < 0)
-            {
-                _currentSpeed = 0;
-            }
+            //if (_currentSpeed < 0)
+            //{
+            //    _currentSpeed = 0;
+            //}
         }
 
         _distanceTravelled += _currentSpeed * Time.deltaTime;
@@ -212,12 +223,12 @@ public class Train : MonoBehaviour, ITokenizable
                 continue;
             }
 
-            var instance = AddTrain(model.prefab);
+            var instance = AddCarriage(model.prefab);
 
             instance.Load(item["carriageGUID"]);
         }
 
-        _built = true;
+        _initiated = true;
     }
 
     public JSONObject Save()

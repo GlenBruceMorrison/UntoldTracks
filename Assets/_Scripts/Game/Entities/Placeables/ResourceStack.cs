@@ -92,9 +92,9 @@ public class ResourceStack : PlaceableEntity, IInteractable
     public void HandleBecomeFocus(PlayerManager player) { }
     public void HandleLoseFocus(PlayerManager player) { }
 
-    public void HandleInput(PlayerManager manager, InteractionInput input)
+    public void HandleInput(PlayerManager manager, InteractionData interaction)
     {
-        switch (input)
+        switch (interaction.Input)
         {
             case InteractionInput.Action1:
                 if (!manager.InventoryController.Inventory.CanTake(resourceItem, 1))

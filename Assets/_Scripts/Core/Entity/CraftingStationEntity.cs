@@ -27,9 +27,9 @@ namespace UntoldTracks
         public void HandleBecomeFocus(PlayerManager player) { }
         public void HandleLoseFocus(PlayerManager player) { }
 
-        public void HandleInput(PlayerManager manager, InteractionInput input)
+        public void HandleInput(PlayerManager manager, InteractionData interaction)
         {
-            if (input == InteractionInput.Action1)
+            if (interaction.Input == InteractionInput.Action1)
             {
                 manager.PlayerManagerUI.OpenMainWindow(null, _data.Recipes);
             }

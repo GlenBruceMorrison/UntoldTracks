@@ -12,15 +12,15 @@ public class Axe : EquipableEntityBase
         _animator = GetComponentInChildren<Animator>();
     }
 
-    public override void HandleInteractionDown(InteractionInput input)
+    public override void HandleInteractionDown(InteractionData interaction)
     {
-        if (input == InteractionInput.Primary)
+        if (interaction.Input == InteractionInput.Primary)
         {
             _animator.Play("axe_swing");
         }
     }
 
-    public override void HandleInteractionUp(InteractionInput input)
+    public override void HandleInteractionUp(InteractionData interaction)
     {
 
     }

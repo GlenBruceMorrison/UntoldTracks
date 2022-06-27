@@ -170,7 +170,7 @@ namespace UntoldTracks.Player
                         {
                             if (playerManager.PlayerActiveItemController.TryGetTool(out EquipableEntityBase tool))
                             {
-                                tool.HandleInteractionDown(InteractionInput.Primary);
+                                tool.HandleInteractionDown(new InteractionData(InteractionInput.Primary, _lookingAtPosition, playerManager.FirstPersonController.transform.position));
                             }
                         }
                         // we will handle interactions
@@ -200,7 +200,7 @@ namespace UntoldTracks.Player
                         if (playerManager.InventoryController.ActiveItemContainer.Item.isEquipable)
                         {
                             playerManager.gameObject.GetComponentInChildren<EquipableEntityBase>()
-                                .HandleInteractionDown(InteractionInput.Primary);
+                                .HandleInteractionDown(new InteractionData(InteractionInput.Primary, _lookingAtPosition, playerManager.FirstPersonController.transform.position));
                         }
                         else if (playerManager.PlaceableEntityController.IsPlacingSomething)
                         {
@@ -218,7 +218,7 @@ namespace UntoldTracks.Player
                     if (playerManager.InventoryController.ActiveItemContainer.Item.isEquipable)
                     {
                         playerManager.gameObject.GetComponentInChildren<EquipableEntityBase>()
-                                .HandleInteractionUp(InteractionInput.Primary);
+                                .HandleInteractionUp(new InteractionData(InteractionInput.Primary, _lookingAtPosition, playerManager.FirstPersonController.transform.position));
                     }
                 }
             }
@@ -229,7 +229,7 @@ namespace UntoldTracks.Player
                 {
                     if (!(playerManager.InventoryController.HasActiveItem && playerManager.InventoryController.ActiveItemContainer.Item.hasCustomInteractionFrame))
                     {
-                        _currentFocus.HandleInput(playerManager, InteractionInput.Secondary);
+                        _currentFocus.HandleInput(playerManager, new InteractionData(InteractionInput.Secondary, _lookingAtPosition, playerManager.FirstPersonController.transform.position));
                     }
                 }
 
@@ -238,7 +238,7 @@ namespace UntoldTracks.Player
                     if (playerManager.InventoryController.ActiveItemContainer.Item.isEquipable)
                     {
                         playerManager.gameObject.GetComponentInChildren<EquipableEntityBase>()
-                                .HandleInteractionDown(InteractionInput.Secondary);
+                                .HandleInteractionDown(new InteractionData(InteractionInput.Secondary, _lookingAtPosition, playerManager.FirstPersonController.transform.position));
                     }
                 }
             }
@@ -247,14 +247,14 @@ namespace UntoldTracks.Player
             {
                 if (_currentFocus != null)
                 {
-                    _currentFocus.HandleInput(playerManager, InteractionInput.Action1);
+                    _currentFocus.HandleInput(playerManager, new InteractionData(InteractionInput.Action1, _lookingAtPosition, playerManager.FirstPersonController.transform.position));
                 }
             }
         }
 
         private void Interact(IInteractable interactable)
         {
-            interactable.HandleInput(playerManager, InteractionInput.Primary);
+            interactable.HandleInput(playerManager, new InteractionData(InteractionInput.Primary, _lookingAtPosition, playerManager.FirstPersonController.transform.position));
         }
 
         public void TriggerCurrentFocus()
@@ -264,7 +264,7 @@ namespace UntoldTracks.Player
                 return;
             }
 
-            _currentFocus.HandleInput(playerManager, InteractionInput.Primary);
+            _currentFocus.HandleInput(playerManager, new InteractionData(InteractionInput.Primary, _lookingAtPosition, playerManager.FirstPersonController.transform.position));
         }
     }
 }

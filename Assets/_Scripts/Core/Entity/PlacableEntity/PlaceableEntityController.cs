@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Linq;
 using JetBrains.Annotations;
+using UnityEngine.Serialization;
 using UntoldTracks.Player;
 using UntoldTracks.InventorySystem;
 using UntoldTracks.Managers;
 
 public class PlaceableEntityController : MonoBehaviour
 {
-    [SerializeField] private bool _limitPlacingToCarriage = true;
+    public bool limitPlacingToCarriage = true;
 
     public PlayerManager playerManager;
 
@@ -149,7 +150,7 @@ public class PlaceableEntityController : MonoBehaviour
             return;
         }
 
-        if (_limitPlacingToCarriage)
+        if (limitPlacingToCarriage)
         {
             if (playerManager.InteractionController.LookingAtGameObject.GetComponentInParent<Carriage>() == null)
             {

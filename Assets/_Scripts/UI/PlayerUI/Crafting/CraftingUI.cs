@@ -57,15 +57,7 @@ namespace UntoldTracks.UI
 
         public void SetCraftingBook(List<Recipe> recipes)
         {
-            if (recipes != null)
-            {
-                overrideRecipes = recipes;
-            }
-            else
-            {
-                overrideRecipes = null;
-            }
-
+            overrideRecipes = recipes ?? null;
             RenderRecipeBook();
         }
 

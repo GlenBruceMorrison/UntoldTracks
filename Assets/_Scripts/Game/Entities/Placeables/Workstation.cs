@@ -20,7 +20,7 @@ public class Workstation : PlaceableEntity, IInteractable
 
     public event InteractionStateUpdate OnInteractionStateUpdate;
 
-    public void HandleInput(PlayerManager manager, InteractionInput input)
+    public void HandleInput(PlayerManager manager, InteractionData interaction)
     {
 
     }

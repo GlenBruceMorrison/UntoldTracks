@@ -170,9 +170,9 @@ public partial class PlantingSpot : Entity, IInteractable
         OnInteractionStateUpdate?.Invoke();
     }
 
-    public void HandleInput(PlayerManager manager, InteractionInput input)
+    public void HandleInput(PlayerManager manager, InteractionData interaction)
     {
-        if (input != InteractionInput.Action1) return;
+        if (interaction.Input != InteractionInput.Action1) return;
         Plant(manager);
     }
 

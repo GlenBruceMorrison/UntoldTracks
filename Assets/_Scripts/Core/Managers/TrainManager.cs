@@ -19,6 +19,11 @@ namespace UntoldTracks.Managers
         {
             get
             {
+                if (_trackGenerator == null)
+                {
+                    _trackGenerator = GetComponent<TrackGenerator>();
+                }
+
                 return _trackGenerator;
             }
         }
@@ -42,14 +47,14 @@ namespace UntoldTracks.Managers
         #region Token
         public void Load(JSONNode node)
         {
-            _trackGenerator.Load(node["track"]);
+            TrackGenerator.Load(node["track"]);
+
+            _train.Init(TrackGenerator);
 
             _train.Load(node);
             _placeableEntityManager.Load(node["placeableEntities"]);
 
-            _train.Initiate(_trackGenerator);
-
-            GetComponent<RoadMeshCreator>().Init(_trackGenerator.VertexPath);
+            GetComponentInChildren<RoadMeshCreator>().Init(TrackGenerator.VertexPath);
         }
 
         public JSONObject Save()
@@ -62,11 +67,5 @@ namespace UntoldTracks.Managers
             return trainJSON;
         }
         #endregion
-
-        private void OnDrawGizmos()
-        {
-
-            Gizmos.DrawCube(_trackGenerator.LastPoint, Vector3.one);
-        }
     }
 }

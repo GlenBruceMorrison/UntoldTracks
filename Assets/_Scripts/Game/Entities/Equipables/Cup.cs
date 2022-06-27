@@ -23,9 +23,9 @@ public class Cup : EquipableEntityBase
 
     }
 
-    public override void HandleInteractionDown(InteractionInput input)
+    public override void HandleInteractionDown(InteractionData interaction)
     {
-        switch (input)
+        switch (interaction.Input)
         {
             // On primary drink
             case InteractionInput.Primary:
@@ -49,7 +49,7 @@ public class Cup : EquipableEntityBase
         }
     }
 
-    public override void HandleInteractionUp(InteractionInput input)
+    public override void HandleInteractionUp(InteractionData interaction)
     {
 
     }

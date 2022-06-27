@@ -25,6 +25,12 @@ public class ResourceService : Singleton<ResourceService>
         return _assets.OfType<T>().ToList();
     }
 
+    public T GetRandomOfType<T>() where T : SerializableScriptableObject
+    {
+        var assets = GetAll<T>();
+        return assets[Random.Range(0, assets.Count)];
+    }
+
     protected override void Awake()
     {
         base.Awake();

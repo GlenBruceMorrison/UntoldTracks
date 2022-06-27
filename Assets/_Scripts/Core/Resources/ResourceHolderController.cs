@@ -10,11 +10,9 @@ namespace UntoldTracks.Resource
 {
     public class ResourceHolderController : MonoBehaviour, IInteractable
     {
-        [SerializeField]
-        private string _displayText;
+        [SerializeField]  private string _displayText;
 
-        [SerializeField]
-        private Sprite _displaySprite;
+        [SerializeField] private Sprite _displaySprite;
 
         public int durability;
         //public int capacity = 10;
@@ -57,9 +55,9 @@ namespace UntoldTracks.Resource
         public void HandleLoseFocus(PlayerManager player) { }
         public void HandleBecomeFocus(PlayerManager player) { }
 
-        public void HandleInput(PlayerManager manager, InteractionInput input)
+        public void HandleInput(PlayerManager manager, InteractionData interaction)
         {
-            if (input == InteractionInput.Primary)
+            if (interaction.Input == InteractionInput.Primary)
             {
                 /*
                 if (capacity < 1)

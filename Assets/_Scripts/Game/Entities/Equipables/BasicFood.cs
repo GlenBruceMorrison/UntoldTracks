@@ -18,16 +18,16 @@ public class BasicFood : ConsumableEntity
 
     }
 
-    public override void HandleInteractionDown(InteractionInput input)
+    public override void HandleInteractionDown(InteractionData interaction)
     {
-        if (input == InteractionInput.Primary)
+        if (interaction.Input == InteractionInput.Primary)
             _animator.Play(consumeAnimationName);
     }
 
-    public override void HandleInteractionUp(InteractionInput input)
+    public override void HandleInteractionUp(InteractionData interaction)
     {
         Debug.Log("up");
-        if (input == InteractionInput.Primary)
+        if (interaction.Input == InteractionInput.Primary)
             _animator.Play(idleAnimationName);
     }
 }

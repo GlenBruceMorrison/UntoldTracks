@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3435291567034888103}
   m_LocalRotation: {x: 0.07517594, y: -0.25843558, z: 0.9036236, w: 0.3332027}
-  m_LocalPosition: {x: -0.00075, y: -0.00114, z: 0.00537}
+  m_LocalPosition: {x: 0.00188, y: -0.00218, z: 0.00327}
   m_LocalScale: {x: 0.01259872, y: 0.012598722, z: 0.012598723}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -169,7 +169,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.2
+      scalar: 2.3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -285,7 +285,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 20
+      scalar: 23.51
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -608,7 +608,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.4
+      scalar: 0.55
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -662,13 +662,13 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 0
-    angle: 25
+    angle: 57.5
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
-    m_Position: {x: -0.000023103812, y: -0.0007381196, z: 0.00000041799044}
-    m_Rotation: {x: 350.6041, y: 76.73618, z: 101.46229}
+    m_Position: {x: 0, y: 0, z: 0}
+    m_Rotation: {x: -51.39, y: 1.2, z: 0}
     m_Scale: {x: 1, y: 0.99999994, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
@@ -736,7 +736,7 @@ ParticleSystem:
     m_SpriteRenderer: {fileID: 0}
     m_UseMeshMaterialIndex: 0
     m_UseMeshColors: 1
-    alignToDirection: 1
+    alignToDirection: 0
     m_Texture: {fileID: 0}
     m_TextureClipChannel: 3
     m_TextureClipThreshold: 0
@@ -744,8 +744,8 @@ ParticleSystem:
     m_TextureColorAffectsParticles: 1
     m_TextureAlphaAffectsParticles: 1
     m_TextureBilinearFiltering: 0
-    randomDirectionAmount: 1
-    sphericalDirectionAmount: 0
+    randomDirectionAmount: 0
+    sphericalDirectionAmount: 1
     randomPositionAmount: 0
     radius:
       value: 0.6
@@ -977,7 +977,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 37
+        scalar: 30.46
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -4896,14 +4896,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7117469976807202841}
-  m_LocalRotation: {x: 0.07517594, y: -0.25843558, z: 0.9036236, w: 0.3332027}
-  m_LocalPosition: {x: -0.00081, y: -0.00269, z: 0.00805}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.00107, y: -0.00557, z: 0.01086}
   m_LocalScale: {x: 0.01259872, y: 0.012598722, z: 0.012598723}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7545262101661913819}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &2880621959896314791
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -5479,7 +5479,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.4
+      scalar: 0.55
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -5532,14 +5532,14 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 0
-    angle: 25
+    type: 4
+    angle: 57.5
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
-    m_Position: {x: -0.000023103812, y: -0.0007381196, z: 0.00000041799044}
-    m_Rotation: {x: 350.6041, y: 76.73618, z: 101.46229}
+    m_Position: {x: 0, y: 0, z: 0}
+    m_Rotation: {x: -51.39, y: 1.2, z: 0}
     m_Scale: {x: 1, y: 0.99999994, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
@@ -5607,7 +5607,7 @@ ParticleSystem:
     m_SpriteRenderer: {fileID: 0}
     m_UseMeshMaterialIndex: 0
     m_UseMeshColors: 1
-    alignToDirection: 1
+    alignToDirection: 0
     m_Texture: {fileID: 0}
     m_TextureClipChannel: 3
     m_TextureClipThreshold: 0
@@ -5615,11 +5615,11 @@ ParticleSystem:
     m_TextureColorAffectsParticles: 1
     m_TextureAlphaAffectsParticles: 1
     m_TextureBilinearFiltering: 0
-    randomDirectionAmount: 1
+    randomDirectionAmount: 0
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.5
+      value: 0.0001
       mode: 0
       spread: 0
       speed:
@@ -5848,7 +5848,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 37
+        scalar: 15.6
         minScalar: 30
         maxCurve:
           serializedVersion: 2

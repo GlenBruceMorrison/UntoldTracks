@@ -39,9 +39,9 @@ public class ItemContainerWorldObject : MonoBehaviour, IInteractable
 
     }
 
-    public void HandleInput(PlayerManager manager, InteractionInput input)
+    public void HandleInput(PlayerManager manager, InteractionData interaction)
     {
-        if (input == InteractionInput.Action1)
+        if (interaction.Input == InteractionInput.Action1)
         {
             manager.InventoryController.Inventory.Give(Container);
             Destroy(this.gameObject);

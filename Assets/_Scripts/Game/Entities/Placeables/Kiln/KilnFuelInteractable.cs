@@ -63,9 +63,9 @@ namespace UntoldTracks.Machines
             UpdateInteractionState();
         }
 
-        public void HandleInput(PlayerManager manager, InteractionInput input)
+        public void HandleInput(PlayerManager manager, InteractionData interaction)
         {
-            if (input != InteractionInput.Action1) return;
+            if (interaction.Input != InteractionInput.Action1) return;
             _kiln.AddFuel(manager);
         }
 

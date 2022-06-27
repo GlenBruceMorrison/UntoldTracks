@@ -35,7 +35,7 @@ namespace UntoldTracks
         /// </summary>
         /// <param name="manager">The PlayerMananger object that the interaction came from</param>
         /// <param name="input">The input type cliked when interacting</param>
-        public void HandleInput(PlayerManager manager, InteractionInput input);
+        public void HandleInput(PlayerManager manager, InteractionData interaction);
 
         /// <summary>
         /// Called when the player looks at this interactable

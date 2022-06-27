@@ -661,8 +661,8 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 10
-    angle: 14.6
+    type: 4
+    angle: 22.8
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
@@ -745,7 +745,7 @@ ParticleSystem:
     m_TextureAlphaAffectsParticles: 0
     m_TextureBilinearFiltering: 0
     randomDirectionAmount: 1
-    sphericalDirectionAmount: 0.19
+    sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
       value: 0.96

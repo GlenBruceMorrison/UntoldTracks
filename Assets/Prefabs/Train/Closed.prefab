@@ -101,11 +101,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9929803103c25433687be73cc304eb95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 11400000, guid: 058b7d2f59dd28c4ab2501c9ea98bb13, type: 2}
-  train: {fileID: 0}
+  _model: {fileID: 11400000, guid: 058b7d2f59dd28c4ab2501c9ea98bb13, type: 2}
   Mover: {fileID: 2436175327103576001}
-  endOfPathInstruction: 0
-  delay: -27
 --- !u!114 &2436175327103576001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,7 +242,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8195321858105604498}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.986, y: 0.37, z: 3.189}
+  m_LocalPosition: {x: -0.825, y: 0.034, z: 3.189}
   m_LocalScale: {x: 0.7692307, y: 0.7692308, z: 0.19115384}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -280,7 +277,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 90039758085b64787baf4ff9efeaf42c, type: 2}
+  - {fileID: 2100000, guid: c7b7442e610a28e42981b941d9a5e41b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

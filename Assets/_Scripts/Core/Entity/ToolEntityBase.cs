@@ -26,15 +26,15 @@ public abstract class ToolEntityBase : EquipableEntityBase
         InputService.Instance.OnPrimaryUp -= HandlePrimaryUp;
     }
 
-    public override void HandleInteractionDown(InteractionInput input)
+    public override void HandleInteractionDown(InteractionData interaction)
     {
-        if (input == InteractionInput.Primary)
+        if (interaction.Input == InteractionInput.Primary)
         {
             _animator.SetInteger("state", 1);
         }
     }
 
-    public override void HandleInteractionUp(InteractionInput input)
+    public override void HandleInteractionUp(InteractionData interaction)
     {
         _animator.SetInteger("state", 0);
     }

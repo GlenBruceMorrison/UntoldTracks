@@ -10,77 +10,78 @@ using UntoldTracks.Models;
 
 public class Carriage : MonoBehaviour, IMoverController, ITokenizable
 {
-    public CarriageModel model;
-    public Train train;
+    [SerializeField] private CarriageModel _model;
+
+    private Train _train;
+    private bool _isInitiated;
+    private float _delay = 0;
+
     public PhysicsMover Mover;
-    public VertexPath vertexPath;
-    public EndOfPathInstruction endOfPathInstruction;
-    public float delay = 0;
 
     public float DistanceTravelled
     {
         get
         {
-            return train.DistanceTravelled - delay;
+            return _train.DistanceTravelled - _delay;
         }
     }
 
-    public float Speed
+    public void Init(Train train, float delay)
     {
-        get
-        {
-            return train.CurrentSpeed;
-        }
-    }
-
-    private void Start()
-    {
+        _train = train != null ? train : throw new ArgumentNullException(nameof(train));
+        transform.parent = train.transform;
+        _delay = delay;
         Mover.MoverController = this;
-    }
 
-    public void StartStop()
-    {
-        train.StartStop();
+        transform.SetPositionAndRotation(
+            _train.Track.VertexPath.GetPointAtDistance(DistanceTravelled, EndOfPathInstruction.Stop),
+            _train.Track.VertexPath.GetRotationAtDistance(DistanceTravelled, EndOfPathInstruction.Stop));
+            
+        _isInitiated = true;
     }
 
     public void UpdateMovement(out Vector3 goalPosition, out Quaternion goalRotation, float deltaTime)
     {
-        if (GameManager.Instance.TrainManager.TrackGenerator.VertexPath == null)
+        if (!_isInitiated)
         {
-            Debug.LogError("VertexPath on this carriage is null!");
+            Debug.LogError("not initiated!");
             goalPosition = transform.position;
             goalRotation = transform.rotation;
             return;
         }
 
-        if (GameManager.Instance.TrainManager.TrackGenerator.VertexPath.length == 0)
-        {
-            Debug.LogError("Vertex path does not have any points.");
-            goalPosition = transform.position;
-            goalRotation = transform.rotation;
-            return;
-        }
-
-        goalPosition = GameManager.Instance.TrainManager.TrackGenerator.VertexPath
-            .GetPointAtDistance(DistanceTravelled, endOfPathInstruction);
-
-        goalRotation = GameManager.Instance.TrainManager.TrackGenerator.VertexPath
-            .GetRotationAtDistance(DistanceTravelled, endOfPathInstruction);
+        goalPosition = _train.Track.VertexPath.GetPointAtDistance(DistanceTravelled, EndOfPathInstruction.Stop);
+        goalRotation = _train.Track.VertexPath.GetRotationAtDistance(DistanceTravelled, EndOfPathInstruction.Stop);
     }
+
+    public void StartStop()
+    {
+        _train.StartStop();
+    }
+    
+    /*
+    void OnPathChanged()
+    {
+        distanceTravelled = pathCreator.path.GetClosestDistanceAlongPath(transform.position);
+    }
+    */
 
     #region Token
     public void Load(JSONNode node)
     {
-        transform.SetPositionAndRotation(
-            GameManager.Instance.TrainManager.TrackGenerator.VertexPath.GetPointAtDistance(DistanceTravelled, endOfPathInstruction),
-            GameManager.Instance.TrainManager.TrackGenerator.VertexPath.GetRotationAtDistance(DistanceTravelled, endOfPathInstruction));
+
     }
 
     public JSONObject Save()
     {
         var carriageJSON = new JSONObject();
 
-        carriageJSON.Add("carriageGUID", model.Guid);
+        if (_model == null)
+        {
+            throw new Exception("There is no model attatched to this carriage, it cannot be saved!");
+        }
+
+        carriageJSON.Add("carriageGUID", _model.Guid);
 
         return carriageJSON;
     }

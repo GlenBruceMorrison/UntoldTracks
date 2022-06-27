@@ -24,7 +24,7 @@ public class RockVein : MonoBehaviour, IInteractable
     [SerializeField] int _health = 3;
 
     public UnityEvent OnRockPicked, OnRockExplode;
-
+    
     public bool AnyHealth
     {
         get
@@ -48,9 +48,9 @@ public class RockVein : MonoBehaviour, IInteractable
         }
     }
 
-    public void HandleInput(PlayerManager manager, InteractionInput input)
+    public void HandleInput(PlayerManager manager, InteractionData interaction)
     {
-        switch (input)
+        switch (interaction.Input)
         {
             case InteractionInput.Primary:
                 if (manager.InventoryController.ActiveItemContainer.Item != _axeItemReference)
@@ -62,6 +62,10 @@ public class RockVein : MonoBehaviour, IInteractable
 
                 if (AnyHealth)
                 {
+                    _particleSystemChip.transform.LookAt(interaction.Origin);
+                    _particleSystemChip.transform.eulerAngles += new Vector3(0, 0, 0);
+                    _particleSystemChip.transform.position = interaction.InteractionPoint;
+                    
                     HandleRockChipped();
                 }
                 else

@@ -20,6 +20,6 @@ public abstract class ConsumableEntity : EquipableEntityBase
     }
 
     public override abstract void HandleEquip();
-    public override abstract void HandleInteractionDown(InteractionInput input);
-    public override abstract void HandleInteractionUp(InteractionInput input);
+    public override abstract void HandleInteractionDown(InteractionData interaction);
+    public override abstract void HandleInteractionUp(InteractionData interaction);
 }

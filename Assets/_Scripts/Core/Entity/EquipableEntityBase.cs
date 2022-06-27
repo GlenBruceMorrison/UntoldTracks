@@ -6,6 +6,30 @@ using UntoldTracks.InventorySystem;
 using UntoldTracks.Player;
 using UntoldTracks.Managers;
 
+public class InteractionData
+{
+    public InteractionInput Input { get; set; }
+    public Vector3 InteractionPoint { get; set; }
+    public Vector3 Origin { get; set; }
+    public Vector3 Direction { get; set; }
+    public float Distance { get; set; }
+    public float Tangent { get; set; }
+    
+    public InteractionData(InteractionInput input, Vector3 interactionPoint, Vector3 origin)
+    {
+        Input = input;
+        InteractionPoint = interactionPoint;
+        Origin = origin;
+
+        var diff = origin - interactionPoint;
+
+        Direction = diff.normalized;
+        Distance = diff.magnitude;
+
+        Debug.Log($"{origin} - {interactionPoint} = {Direction}");
+    }
+}
+
 public abstract class EquipableEntityBase : Entity
 {
     internal PlayerManager playerManager;
@@ -32,13 +56,13 @@ public abstract class EquipableEntityBase : Entity
     /// Called when a player presses down on an input button
     /// </summary>
     /// <param name="input">The input type was triggered</param>
-    public abstract void HandleInteractionDown(InteractionInput input);
+    public abstract void HandleInteractionDown(InteractionData interaction);
 
     /// <summary>
     /// Called when the player releases an input button
     /// </summary>
     /// <param name="input">The input type was triggered</param>
-    public abstract void HandleInteractionUp(InteractionInput input);
+    public abstract void HandleInteractionUp(InteractionData interaction);
     
     /// <summary>
     /// Called when this tool becomes the active item via the hotbar

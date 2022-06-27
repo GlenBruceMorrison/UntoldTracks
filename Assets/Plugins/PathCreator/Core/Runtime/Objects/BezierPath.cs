@@ -61,11 +61,11 @@ namespace PathCreation
             float controlHeight = .5f;
             float controlWidth = 1f;
             points = new List<Vector3> {
- centre + Vector3.left * width,
- centre + Vector3.left * controlWidth + dir * controlHeight,
- centre + Vector3.right * controlWidth - dir * controlHeight,
- centre + Vector3.right * width
- };
+                centre + Vector3.left * width,
+                centre + Vector3.left * controlWidth + dir * controlHeight,
+                centre + Vector3.right * controlWidth - dir * controlHeight,
+                centre + Vector3.right * width
+            };
 
             perAnchorNormalsAngle = new List<float>() { 0, 0 };
 
@@ -129,6 +129,14 @@ namespace PathCreation
         #endregion
 
         #region Public methods and accessors
+
+        public List<Vector3> Points
+        {
+            get
+            {
+                return points;
+            }
+        }
 
         /// Get world space position of point
         public Vector3 this[int i]

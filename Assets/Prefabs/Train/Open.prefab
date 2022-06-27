@@ -108,11 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9929803103c25433687be73cc304eb95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 11400000, guid: 25812bb6abce2c147b4b0f934f21a483, type: 2}
-  train: {fileID: 0}
+  _model: {fileID: 11400000, guid: a53fcc744c4837341b6a1fa880d070ec, type: 2}
   Mover: {fileID: 2422277054837707415}
-  endOfPathInstruction: 0
-  delay: 0
 --- !u!114 &2422277054837707415
 MonoBehaviour:
   m_ObjectHideFlags: 0
