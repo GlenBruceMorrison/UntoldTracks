@@ -4,6 +4,8 @@ using UnityEngine;
 using KinematicCharacterController;
 using System;
 using TMPro;
+using UnityEngine.Events;
+using UntoldTracks.Managers;
 
 namespace KinematicCharacterController.Examples
 {
@@ -46,26 +48,9 @@ namespace KinematicCharacterController.Examples
         FollowUpdate Delta { get; }
     }
 
-    public class FollowUpdate
+    public class PlayerBody : MonoBehaviour, ICharacterController
     {
-        public Vector3 deltaMove;
-        public Quaternion deltaRotation;
-    }
-    
-    public class ExampleCharacterController : MonoBehaviour, ICharacterController
-    {
-        public IFollow follow;
-
-        private void Update()
-        {
-            if (Input.GetKeyDown("v"))
-            {
-                follow = GameObject.Find("Closed(Clone)").GetComponent<IFollow>();
-            }
-        }
-
-        public PhysicsMover parentMover;
-
+        public UnityAction OnPostCharacterUpdate;
         public KinematicCharacterMotor Motor;
 
         [Header("Stable Movement")] public float MaxStableMoveSpeed = 10f;
@@ -456,6 +441,7 @@ namespace KinematicCharacterController.Examples
         /// </summary>
         public void AfterCharacterUpdate(float deltaTime)
         {
+            OnPostCharacterUpdate?.Invoke();
             Stick();
             switch (CurrentCharacterState)
             {
@@ -518,18 +504,19 @@ namespace KinematicCharacterController.Examples
 
         public void Stick()
         {
+            GameManager.Instance.TrainManager.Train.Run();
+            
             RaycastHit[] hits;
             hits = Physics.RaycastAll(transform.position, -transform.up, 10.0F);
 
             for (int i = 0; i < hits.Length; i++)
             {
                 var hit = hits[i];
-                var follower = hit.transform.GetComponent<IFollow>();
+                var follower = hit.transform.GetComponent<Carriage>();
 
                 if (follower != null)
                 {
-                    Debug.Log("Found Follow");
-                    Motor.SetPosition((Motor.TransientPosition + follower.Delta.deltaMove), true);
+                    Motor.SetPosition((Motor.TransientPosition + follower.deltaMove), true);
                     break;
                 }
             }

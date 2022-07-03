@@ -9,9 +9,7 @@ namespace UntoldTracks.CharacterController
 {
     public class PlayerCharacterController : MonoBehaviour
     {
-        public PlayerManager playerManager;
-
-        public ExampleCharacterController Character;
+        public PlayerBody Character;
         public ExampleCharacterCamera CharacterCamera;
 
         private const string MouseXInput = "Mouse X";
@@ -50,11 +48,6 @@ namespace UntoldTracks.CharacterController
 
             // Tell camera to follow transform
             CharacterCamera.SetFollowTransform(Character.CameraFollowPoint);
-        }
-
-        public void Init(PlayerManager playerManager)
-        {
-            this.playerManager = playerManager;
         }
 
         private void Update()

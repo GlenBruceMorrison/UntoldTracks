@@ -54,12 +54,12 @@ namespace UntoldTracks.Managers
         #region Token
         public void Load(JSONNode node)
         {
+            // init train
+            _trainManager = Instantiate(trainPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            
             // init player
             var playerPos = node["player"]["entity"]["position"].ReadVector3();
             _playerManager = Instantiate(playerPrefab, playerPos, Quaternion.identity);
-
-            // init train
-            _trainManager = Instantiate(trainPrefab, new Vector3(0, 0, 0), Quaternion.identity);
 
             // load game
             _playerManager.Load(node["player"]);

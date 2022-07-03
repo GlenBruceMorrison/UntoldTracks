@@ -4,18 +4,21 @@ using SimpleJSON;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using KinematicCharacterController.Examples;
 using UnityEngine;
 using UntoldTracks.Managers;
 using UntoldTracks.Models;
 
-public class Carriage : MonoBehaviour, IMoverController, ITokenizable
+
+public class Carriage : MonoBehaviour, ITokenizable
 {
     [SerializeField] private CarriageModel _model;
 
     private Train _train;
     private bool _isInitiated;
     private float _delay = 0;
-
+    public Vector3 lastPos, deltaMove;
+    //public FollowUpdate Delta => U();
     public PhysicsMover Mover;
 
     public float DistanceTravelled
@@ -31,27 +34,33 @@ public class Carriage : MonoBehaviour, IMoverController, ITokenizable
         _train = train != null ? train : throw new ArgumentNullException(nameof(train));
         transform.parent = train.transform;
         _delay = delay;
-        Mover.MoverController = this;
 
         transform.SetPositionAndRotation(
             _train.Track.VertexPath.GetPointAtDistance(DistanceTravelled, EndOfPathInstruction.Stop),
             _train.Track.VertexPath.GetRotationAtDistance(DistanceTravelled, EndOfPathInstruction.Stop));
-            
+
+        lastPos = transform.position;
         _isInitiated = true;
     }
 
-    public void UpdateMovement(out Vector3 goalPosition, out Quaternion goalRotation, float deltaTime)
+    public void U()
     {
-        if (!_isInitiated)
+        var nextPos = _train.Track.VertexPath.GetPointAtDistance(DistanceTravelled, EndOfPathInstruction.Stop);
+        
+        transform.position = nextPos;
+        transform.rotation = _train.Track.VertexPath.GetRotationAtDistance(DistanceTravelled, EndOfPathInstruction.Stop);
+
+        if (lastPos != nextPos)
         {
-            Debug.LogError("not initiated!");
-            goalPosition = transform.position;
-            goalRotation = transform.rotation;
-            return;
+            deltaMove = transform.position - lastPos;
+        }
+        else
+        {
+            Debug.Log("no change");
+            Debug.Log($"{lastPos} != {nextPos}");
         }
 
-        goalPosition = _train.Track.VertexPath.GetPointAtDistance(DistanceTravelled, EndOfPathInstruction.Stop);
-        goalRotation = _train.Track.VertexPath.GetRotationAtDistance(DistanceTravelled, EndOfPathInstruction.Stop);
+        lastPos = nextPos;
     }
 
     public void StartStop()

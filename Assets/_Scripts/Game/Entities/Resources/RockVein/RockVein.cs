@@ -8,10 +8,11 @@ using UntoldTracks.Player;
 using UntoldTracks.Models;
 using UntoldTracks.Managers;
 using UntoldTracks.InventorySystem;
+using UntoldTracks.Resource;
 
 public class RockVein : MonoBehaviour, IInteractable
 {
-    [SerializeField] private ItemContainer _produces;
+    public ResourceHolder resourceHolder;
 
     [SerializeField] private ItemModel _axeItemReference;
 
@@ -72,7 +73,12 @@ public class RockVein : MonoBehaviour, IInteractable
                 {
                     HandleRockBroken();
                     HandleInteractionChange();
-                    manager.InventoryController.Inventory.Give(_produces);
+                    
+                    var produced = resourceHolder.Harvest();
+                    foreach (var product in produced)
+                    {
+                        manager.InventoryController.Inventory.Give(product);
+                    }
                 }
                 break;
         }

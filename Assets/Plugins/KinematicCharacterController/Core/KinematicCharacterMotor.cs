@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using KinematicCharacterController;
 using UnityEngine;
 
-namespace KinematicCharacterController
-{
     public enum RigidbodyInteractionType
     {
         None,
@@ -160,7 +159,6 @@ namespace KinematicCharacterController
         /// <summary>
         /// The capsule collider of this motor
         /// </summary>
-        [ReadOnly]
         public CapsuleCollider Capsule;
 
         [Header("Capsule Settings")]
@@ -2675,4 +2673,3 @@ namespace KinematicCharacterController
             return nbHits;
         }
     }
-}

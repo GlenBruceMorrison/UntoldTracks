@@ -8,23 +8,12 @@ using UntoldTracks.Models;
 
 namespace UntoldTracks.Resource
 {
-    [CreateAssetMenu(fileName = "Item", menuName = "Data/ResourceHolder")]
+    [CreateAssetMenu(fileName = "Item", menuName = "Data/Resource")]
     public class ResourceHolder : ScriptableObject
     {
-        public int durability = 5;
-        public List<ItemModel> toolsToHarvest = new List<ItemModel>();
-
         public List<ResourceContainer> CanProduce = new List<ResourceContainer>();
 
-        public AudioClip harvestAudio;
-        public AudioClip fullyHarvestedAudio;
-
         public UnityAction OnHarvested;
-
-        public bool IsItemValid(ItemModel item)
-        {
-            return toolsToHarvest.Contains(item);
-        }
 
         // maybe should be an inventory for return type???
         public List<ItemContainer> Harvest()
@@ -49,7 +38,7 @@ namespace UntoldTracks.Resource
                             container.Give(new ItemContainer(resource.item, Random.Range(1, resource.baseAmount)));
                         }
                     }
-
+                    
                     result.Add(container);
                 }
             }

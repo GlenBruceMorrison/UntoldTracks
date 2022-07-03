@@ -9856,6 +9856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33dafc02405700341899648b7823150e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resourceHolder: {fileID: 11400000, guid: cf1de4b3bbdc44c3a98330e01231663f, type: 2}
   _produces:
     _item: {fileID: 11400000, guid: 67b43b85b116a3e46ae51b2774f94068, type: 2}
     _count: 3
