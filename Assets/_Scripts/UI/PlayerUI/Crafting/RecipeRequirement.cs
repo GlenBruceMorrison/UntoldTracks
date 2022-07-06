@@ -15,12 +15,14 @@ namespace UntoldTracks.UI
         public Image backdrop;
         public Image ingredientImage;
         public TMP_Text ingredientCount;
+        public TMP_Text ingredientName;
 
         public void Render(ItemContainer container, Inventory source)
         {
             ingredientImage.sprite = container.Item.sprite;
             var sourceCount = source.GetItemCount(container.Item);
 
+            ingredientName.text = container.Item.displayName;
             ingredientCount.text = $"{sourceCount}/{container.Count}";
 
             backdrop.color = sourceCount > container.Count ? colourEnough : colourNotEnough;

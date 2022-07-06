@@ -1,4 +1,5 @@
-﻿using SimpleJSON;
+﻿using System;
+using SimpleJSON;
 using System.Collections;
 using System.IO;
 using System.Text;
@@ -11,8 +12,34 @@ using UntoldTracks.UI;
 
 namespace UntoldTracks.Managers
 {
+    public static class App
+    {
+        public static GameManager MainManager
+        {
+            get
+            {
+                if (GameManager.Instance == null)
+                {
+                    throw new SystemException("Cannot find GameManager instance");
+                }
+                
+                if (!GameManager.Instance.GameLoaded)
+                {
+                    throw new SystemException("Trying to access GameManager before the game has been loaded");
+                }
+                
+                return GameManager.Instance;
+            }
+        }
+        
+        public static PlayerManager PlayerMananger => MainManager.LocalPlayer;
+        public static TrainManager TrainManager => MainManager.TrainManager;
+    }
+
     public class GameManager : MonoBehaviour, ITokenizable
     {
+        public bool GameLoaded { get; private set; }
+        
         private static GameManager _instance;
         private PlayerManager _playerManager;
         private TrainManager _trainManager;
@@ -64,6 +91,8 @@ namespace UntoldTracks.Managers
             // load game
             _playerManager.Load(node["player"]);
             _trainManager.Load(node["train"]);
+
+            GameLoaded = true;
         }
 
         public JSONObject Save()

@@ -48,7 +48,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
@@ -4042,13 +4042,13 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    minVertexDistance: 0.2
+    minVertexDistance: 0.12
     textureMode: 0
     ribbonCount: 1
     shadowBias: 0.5
     worldSpace: 0
     dieWithParticles: 1
-    sizeAffectsWidth: 1
+    sizeAffectsWidth: 0
     sizeAffectsLifetime: 0
     inheritParticleColor: 1
     generateLightingData: 0
@@ -4120,7 +4120,7 @@ ParticleSystem:
     widthOverTrail:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.03
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -9857,9 +9857,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resourceHolder: {fileID: 11400000, guid: cf1de4b3bbdc44c3a98330e01231663f, type: 2}
-  _produces:
-    _item: {fileID: 11400000, guid: 67b43b85b116a3e46ae51b2774f94068, type: 2}
-    _count: 3
   _axeItemReference: {fileID: 11400000, guid: 2897631067c25b647a91da37f3e793b5, type: 2}
   _renderer: {fileID: 8718136801805035956}
   _collider: {fileID: 6860667987088781150}

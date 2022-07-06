@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Crafting_Crafting_Table
   m_EditorClassIdentifier: Assembly-CSharp:UntoldTracks:CraftingStationData
   _guid: 074e7acd5763a7b48acf6a671585f271
-  _item: {fileID: 11400000, guid: a12bd0b9165424fb4bbab9cbf229caba, type: 2}
+  _item: {fileID: 11400000, guid: 30336d0a1a762774f912df1bee57cb54, type: 2}
   _recipes:
   - {fileID: 11400000, guid: 8cf057a8d6d37bb408688a3682e4dca8, type: 2}
+  - {fileID: 11400000, guid: ee2e61f0711a84ab29f901fbe3c261a4, type: 2}
+  - {fileID: 11400000, guid: a43c642f0bb21a144970b174f5c8fddf, type: 2}
   - {fileID: 11400000, guid: e1e3ca9869fd4604aaeb430c2a7d6f7b, type: 2}
   - {fileID: 11400000, guid: 0731cd58f15fbe3409ae64178de490a6, type: 2}
-  - {fileID: 11400000, guid: 0c3e9bf832186644b849f809b79d05c6, type: 2}
+  - {fileID: 11400000, guid: 1cda2abed6ed0954ab0599f5f1161683, type: 2}
   - {fileID: 11400000, guid: 385a2ada8e2a6084fa182bf094b8ed57, type: 2}
-  - {fileID: 11400000, guid: a43c642f0bb21a144970b174f5c8fddf, type: 2}
   - {fileID: 11400000, guid: 989457801e4001b4b8718e09954351b8, type: 2}

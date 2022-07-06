@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae6880a8766e14bef8e7c995f2275825, type: 3}
-  m_Name: Item_PickAxe_Stone
+  m_Name: Item_Pickaxe_Stone
   m_EditorClassIdentifier: 
   _guid: 2897631067c25b647a91da37f3e793b5
   displayName: Stone Pickaxe
