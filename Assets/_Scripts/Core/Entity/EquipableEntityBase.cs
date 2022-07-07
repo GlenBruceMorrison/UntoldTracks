@@ -26,7 +26,7 @@ public class InteractionData
         Direction = diff.normalized;
         Distance = diff.magnitude;
 
-        Debug.Log($"{origin} - {interactionPoint} = {Direction}");
+        //Debug.Log($"{origin} - {interactionPoint} = {Direction}");
     }
 }
 

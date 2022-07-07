@@ -7,6 +7,7 @@ using UntoldTracks;
 using UntoldTracks.Player;
 using UntoldTracks.Models;
 using UntoldTracks.Managers;
+using Random = UnityEngine.Random;
 
 public class Tree : MonoBehaviour, IInteractable
 {
@@ -67,6 +68,8 @@ public class Tree : MonoBehaviour, IInteractable
         _currentState = TreeState.Idle;
 
         _treeGroundCollisionChecker.enabled = false;
+
+        transform.localEulerAngles = new Vector3(0, Random.Range(0, 360), 0.5f);
     }
 
     public void HandleInput(PlayerManager manager, InteractionData interaction)

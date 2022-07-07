@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 490342279812142183}
   - component: {fileID: 3149761998241233156}
   - component: {fileID: 490342279812142179}
+  - component: {fileID: 455784923533339148}
   m_Layer: 0
   m_Name: Small Chest
   m_TagString: Untagged
@@ -66,10 +67,25 @@ MonoBehaviour:
   source: {fileID: 11400000, guid: 57d4d6c170097444e8c1f911fc874bb7, type: 2}
   raycastOrigins:
   - {fileID: 6527207167236394272}
+  ignoreWhenPlacing:
+  - {fileID: 455784923533339148}
   _worldTransform: {fileID: 4205372790357256063}
   size: 24
   _displayText: Large Crate
   _displaySprite: {fileID: 21300000, guid: d0b2789bc9c284488a8c59ec60bd0e09, type: 3}
+--- !u!65 &455784923533339148
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490342279812142178}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.9923974, y: 0.7406533, z: 0.78303623}
+  m_Center: {x: -0.072321355, y: 0.35373688, z: -0.15035194}
 --- !u!1 &8592379601593570126
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,8 @@ using UntoldTracks.Models;
 using SimpleJSON;
 using UntoldTracks.Managers;
 
+using UnityEngine;
+
 [System.Serializable]
 public class RayCaster
 {
@@ -87,7 +89,7 @@ public class PlaceableEntity : Entity, ITokenizable
 
     public void AfterBuild()
     {
-        transform.SetParent(GameManager.Instance.TrainManager.Train.GetClosestCarriage(transform).transform, true);
+        transform.SetParent(App.TrainManager.Train.GetClosestCarriage(transform).transform, true);
     }
 
     protected virtual void OnEnable()
@@ -172,13 +174,13 @@ public class PlaceableEntity : Entity, ITokenizable
         if (_beingPlaced)
         {
             _worldTransform.gameObject.SetLayerRecursively("Ignore Raycast");
-            ignoreWhenPlacing.ForEach(x => x.gameObject.SetActive(false));
+            ignoreWhenPlacing.ForEach(x => x.enabled = false);
             gameObject.ChildCollidersToTriggers(true);
         }
         else
         {
             Utility.SetLayerRecursively(_worldTransform.gameObject, LayerMask.NameToLayer("Default"));
-            ignoreWhenPlacing.ForEach(x => x.gameObject.SetActive(true));
+            ignoreWhenPlacing.ForEach(x => x.enabled = true);
             gameObject.ChildCollidersToTriggers(false);
         }
     }

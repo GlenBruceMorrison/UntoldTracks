@@ -153,7 +153,7 @@ public class Train : MonoBehaviour, ITokenizable
         }
     }
 
-    private void Update()
+    public void Run()
     {
         if (!_initiated)
         {
@@ -174,6 +174,7 @@ public class Train : MonoBehaviour, ITokenizable
                 _currentSpeed -= (_acc * 3) * Time.deltaTime;
             }
 
+            // don't allow backward movement
             //if (_currentSpeed < 0)
             //{
             //    _currentSpeed = 0;
@@ -181,6 +182,8 @@ public class Train : MonoBehaviour, ITokenizable
         }
 
         _distanceTravelled += _currentSpeed * Time.deltaTime;
+        
+        carriages.ForEach(x => x.U());
     }
 
     public Carriage GetClosestCarriage(Transform transform)

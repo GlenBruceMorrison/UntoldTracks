@@ -14,9 +14,11 @@ namespace UntoldTracks.Managers
 {
     public class PlayerManager : MonoBehaviour, ITokenizable
     {
+        [SerializeField] private PlayerCharacterController _bodyPrefab;
+        
         [SerializeField] private PlayerInteractionController _interactionController;
         [SerializeField] private PlaceableEntityController _placeableEntityController;
-        [SerializeField] private PlayerCharacterController _characterController;
+        [SerializeField] private PlayerCharacterController _body;
         [SerializeField] private PlayerInventoryController _inventoryController;
         [SerializeField] private PlayerHand _playerActiveItemController;
         [SerializeField] private PlayerManagerUI _playerManagerUI;
@@ -35,7 +37,7 @@ namespace UntoldTracks.Managers
         {
             get
             {
-                return _characterController;
+                return _body;
             }
         }
 
@@ -74,8 +76,6 @@ namespace UntoldTracks.Managers
         #region Token
         public void Load(JSONNode node)
         {
-            _characterController = GetComponentInChildren<PlayerCharacterController>();
-
             _interactionController = new PlayerInteractionController(this, _playerCamera);
             _inventoryController = new PlayerInventoryController(this);
             _playerActiveItemController = new PlayerHand(this, _playerHand);
@@ -93,9 +93,9 @@ namespace UntoldTracks.Managers
             var characterControllerJSONObject = new JSONObject();
 
             var positionJSON = new JSONObject();
-            positionJSON.Add("x", _characterController.transform.position.x);
-            positionJSON.Add("y", _characterController.transform.position.y);
-            positionJSON.Add("z", _characterController.transform.position.z);
+            positionJSON.Add("x", _body.transform.position.x);
+            positionJSON.Add("y", _body.transform.position.y);
+            positionJSON.Add("z", _body.transform.position.z);
 
             var rotationJSON = new JSONObject();
             rotationJSON.Add("x", transform.rotation.x);

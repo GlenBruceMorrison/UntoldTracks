@@ -47,8 +47,8 @@ MonoBehaviour:
   model: {fileID: 11400000, guid: 5e85bb7838ac9ac4997293a04cff3bc6, type: 2}
   carriageLength: 9
   carriages: []
-  _currentSpeed: 5
-  _maxSpeed: 22
+  _currentSpeed: 2
+  _maxSpeed: 2
   _acc: 3
   _moving: 0
   _distanceTravelled: 0
@@ -132,11 +132,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ffbccef5414e345b192ee93f835ff1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intitialTrackCount: 4
+  showTrackPoints: 1
+  intitialTrackCount: 40
   distanceBetweenPointsMin: 100
   distanceBetweenPointsMax: 300
   distanceBreadthMin: 0
-  distanceBreadthMax: 30
+  distanceBreadthMax: 0
   initialTrackHeight: 0
   initialGenerationPoints:
   - {x: 0, y: 0, z: 0}

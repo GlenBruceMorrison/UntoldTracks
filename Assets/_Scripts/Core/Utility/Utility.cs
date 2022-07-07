@@ -43,6 +43,18 @@ public static class Utility
         return animator.GetCurrentAnimatorStateInfo(0).IsName(clip.name);
     }
 
+    public static List<Transform> GetChildren(this Transform transform)
+    {
+        var children = new List<Transform>();
+        
+        foreach (Transform fuel in transform)
+        {
+            children.Add(fuel);
+        }
+
+        return children;
+    }
+
     public static float GetCurrentAnimatorTime(this Animator animator, int layer = 0)
     {
         var animState = animator.GetCurrentAnimatorStateInfo(layer);
