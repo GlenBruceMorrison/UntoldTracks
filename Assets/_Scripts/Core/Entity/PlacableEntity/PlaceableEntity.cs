@@ -6,6 +6,8 @@ using UntoldTracks.Models;
 using SimpleJSON;
 using UntoldTracks.Managers;
 
+using UnityEngine;
+
 [System.Serializable]
 public class RayCaster
 {
